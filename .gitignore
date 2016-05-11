@@ -24,6 +24,7 @@ tomcat
 
 # Maven 
 target/
+TwitterMonitor/target/
 
 # eclipse project file
 .settings/
