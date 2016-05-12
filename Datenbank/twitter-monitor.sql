@@ -28,14 +28,14 @@ CREATE TABLE IF NOT EXISTS `benachrichtigungs_typ` (
 
 -- Struktur von Tabelle twitter-monitor.benachrichtigungen
 CREATE TABLE IF NOT EXISTS `benachrichtigungen` (
-  `benachichtigungs_id` int(11) NOT NULL AUTO_INCREMENT,
+  `benachrichtigungs_id` int(11) NOT NULL AUTO_INCREMENT,
   `benutzer_id` int(11) NOT NULL,
   `benachrichtigungs_typ_kz` char(3) NOT NULL,
   `titel` mediumtext NOT NULL,
   `text` mediumtext NOT NULL,
   `erstellt_am` datetime,
   `versendet_am` datetime,
-  PRIMARY KEY (`benachichtigungs_id`),
+  PRIMARY KEY (`benachrichtigungs_id`),
   FOREIGN KEY (`benachrichtigungs_typ_kz`) REFERENCES `benachrichtigungs_typ` (`kz`),
   FOREIGN KEY (`benutzer_id`) REFERENCES `benutzer` (`benutzer_id`)
 );
