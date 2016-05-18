@@ -6,7 +6,7 @@ USE `twitter_monitor`;
 CREATE TABLE IF NOT EXISTS `benutzer` (
   `benutzer_id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(60) NOT NULL,
-  `passwort` varchar(60) NOT NULL,
+  `passwort` mediumtext NOT NULL,
   `registrierdatum` datetime,
   PRIMARY KEY (`benutzer_id`)
 );
@@ -54,6 +54,8 @@ CREATE TABLE IF NOT EXISTS `benutzer_x_einstellungen` (
 CREATE TABLE IF NOT EXISTS `keywords` (
   `keyword` varchar(50) NOT NULL,
   `benutzer_id` int(11) NOT NULL,
+  `aktiv` char(1) DEFAULT `T` NOT NULL,
+  `erstellt_am` datetime,
   PRIMARY KEY (`keyword`),
   FOREIGN KEY (`benutzer_id`) REFERENCES `benutzer` (`benutzer_id`)
 );
