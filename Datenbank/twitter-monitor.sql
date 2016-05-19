@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `benutzer_x_einstellungen` (
 CREATE TABLE IF NOT EXISTS `keywords` (
   `keyword` varchar(50) NOT NULL,
   `benutzer_id` int(11) NOT NULL,
-  `aktiv` char(1) DEFAULT `T` NOT NULL,
+  `aktiv` char(1) DEFAULT 'T' NOT NULL,
   `erstellt_am` datetime,
   PRIMARY KEY (`keyword`),
   FOREIGN KEY (`benutzer_id`) REFERENCES `benutzer` (`benutzer_id`)
