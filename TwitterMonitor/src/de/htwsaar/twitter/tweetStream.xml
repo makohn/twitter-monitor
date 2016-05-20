@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+	<context:annotation-config></context:annotation-config>
+	
+
+	<jee:jndi-lookup jndi-name="jdbc/spring" id="dataSource"
+		expected-type="javax.sql.DataSource">
+	</jee:jndi-lookup>
+
+	<bean id="tweetDao" class="de.htwsaar.twitter.TweetDao">
+		
+	<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<bean id="tweetListener" class="de.htwsaar.twitter.TweetListener">
+		<constructor-arg name="dao" ref="tweetDao"></constructor-arg>
+	</bean>
+
+	<bean id="stream" class="de.htwsaar.twitter.TweetService">
+		<constructor-arg name="tweetListener" ref="tweetListener"></constructor-arg>
+		<constructor-arg name="dao" ref="tweetDao"></constructor-arg>
+	</bean>
+
+	
+
+</beans>
