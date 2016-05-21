@@ -14,7 +14,7 @@
 		expected-type="javax.sql.DataSource">
 	</jee:jndi-lookup>
 
-	<bean id="tweetDao" class="de.htwsaar.twitter.TweetDao">
+	<bean id="tweetDao" class="de.htwsaar.db.TweetDao">
 		
 	<property name="dataSource" ref="dataSource"></property>
 	</bean>

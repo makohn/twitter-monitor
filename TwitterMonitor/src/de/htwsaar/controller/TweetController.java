@@ -1,9 +1,12 @@
-package de.htwsaar.twitter;
+package de.htwsaar.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import de.htwsaar.twitter.Tweet;
+import de.htwsaar.twitter.TweetService;
 
 @Controller
 public class TweetController {

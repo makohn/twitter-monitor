@@ -1,4 +1,4 @@
-package de.htwsaar.twitter;
+package de.htwsaar.db;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +9,8 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
+import de.htwsaar.twitter.Tweet;
 
 public class TweetDao {
 	

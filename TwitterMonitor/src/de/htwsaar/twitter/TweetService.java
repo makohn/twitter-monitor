@@ -2,6 +2,7 @@ package de.htwsaar.twitter;
 
 import java.util.List;
 
+import de.htwsaar.db.TweetDao;
 import twitter4j.FilterQuery;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
@@ -10,7 +11,7 @@ import twitter4j.conf.ConfigurationBuilder;
 /**
  * @author philipp
  * 
- * Der TweetService ist dafür verantwortlich einen Filter zu erstellen, zu konfigurieren und den
+ * Der TweetService ist dafï¿½r verantwortlich einen Filter zu erstellen, zu konfigurieren und den
  * Stream zu initialisieren, indem der Filter darauf angewendet wird. 
  *
  */
