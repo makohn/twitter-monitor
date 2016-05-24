@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `keywords` (
 CREATE TABLE IF NOT EXISTS `tweet_autor` (
   `autor_id` bigint NOT NULL,
   `name` varchar(15) NOT NULL,
-  `screen_name` varchar(20) NOT NULL,
+  `screen_name` varchar(20),
   `anzahl_follower` int(11),
   `anzahl_tweets` int(11),
   PRIMARY KEY (`autor_id`)
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `tweet_autor` (
 CREATE TABLE IF NOT EXISTS `tweets` (
   `tweet_id` bigint NOT NULL,
   `autor_id` bigint NOT NULL,
-  `text` text NOT NULL,
+  `text` varchar(160) NOT NULL,
   `anzahl_likes` int(11),
   `anzahl_retweets` int(11),
   `standort` text,
@@ -83,10 +83,19 @@ CREATE TABLE IF NOT EXISTS `tweets` (
   FOREIGN KEY (`autor_id`) REFERENCES `tweet_autor` (`autor_id`)
 );
 
+-- Struktur von Tabelle twitter-monitor.tweet_bilder
+CREATE TABLE IF NOT EXISTS `tweet_bilder` (
+    `tweet_id` bigint NOT NULL,
+    `url` varchar(100) NOT NULL,
+    PRIMARY KEY (`tweet_id`, `url`),
+    FOREIGN KEY (`tweet_id`) REFERENCES `tweets` (`tweet_id`)
+);
+
 -- Struktur von Tabelle twitter-monitor.tweets_x_keywords
 CREATE TABLE IF NOT EXISTS `tweets_x_keywords` (
   `tweet_id` bigint NOT NULL,
   `keyword` varchar(50) NOT NULL,
+  PRIMARY KEY (`tweet_id`, `keyword`),
   FOREIGN KEY (`keyword`) REFERENCES `keywords` (`keyword`),
   FOREIGN KEY (`tweet_id`) REFERENCES `tweets` (`tweet_id`)
 );
