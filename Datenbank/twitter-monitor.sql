@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `benutzer` (
   `benutzer_id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(60) NOT NULL,
   `passwort` text NOT NULL,
-  `registrierdatum` datetime,
+  `registrierdatum` datetime default current_timestamp,
   PRIMARY KEY (`benutzer_id`)
 );
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `benachrichtigungen` (
   `benachrichtigungs_typ_kz` char(3) NOT NULL,
   `titel` text NOT NULL,
   `text` text NOT NULL,
-  `erstellt_am` datetime,
+  `erstellt_am` datetime default current_timestamp,
   `versendet_am` datetime,
   PRIMARY KEY (`benachrichtigungs_id`),
   FOREIGN KEY (`benachrichtigungs_typ_kz`) REFERENCES `benachrichtigungs_typ` (`kz`),
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `keywords` (
   `keyword` varchar(50) NOT NULL,
   `benutzer_id` int(11) NOT NULL,
   `aktiv` char(1) DEFAULT 'T' NOT NULL,
-  `erstellt_am` datetime,
+  `erstellt_am` datetime default current_timestamp,
   PRIMARY KEY (`keyword`),
   FOREIGN KEY (`benutzer_id`) REFERENCES `benutzer` (`benutzer_id`)
 );
@@ -95,6 +95,7 @@ CREATE TABLE IF NOT EXISTS `tweet_bilder` (
 CREATE TABLE IF NOT EXISTS `tweets_x_keywords` (
   `tweet_id` bigint NOT NULL,
   `keyword` varchar(50) NOT NULL,
+  `prio` tinyint,
   PRIMARY KEY (`tweet_id`, `keyword`),
   FOREIGN KEY (`keyword`) REFERENCES `keywords` (`keyword`),
   FOREIGN KEY (`tweet_id`) REFERENCES `tweets` (`tweet_id`)
