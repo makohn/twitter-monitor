@@ -6,7 +6,7 @@ USE `twitter_monitor`;
 CREATE TABLE IF NOT EXISTS `benutzer` (
   `benutzer_id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(60) NOT NULL,
-  `passwort` mediumtext NOT NULL,
+  `passwort` text NOT NULL,
   `registrierdatum` datetime,
   PRIMARY KEY (`benutzer_id`)
 );
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `benutzer` (
 -- Struktur von Tabelle twitter-monitor.einstellungen
 CREATE TABLE IF NOT EXISTS `einstellungen` (
   `kz` char(3) NOT NULL,
-  `beschreibung` mediumtext NOT NULL,
+  `beschreibung` text NOT NULL,
   `standardwert` int(11) NOT NULL,
   PRIMARY KEY (`kz`)
 );
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `einstellungen` (
 -- Struktur von Tabelle twitter-monitor.benachrichtigungs_typ
 CREATE TABLE IF NOT EXISTS `benachrichtigungs_typ` (
   `kz` char(3) NOT NULL,
-  `beschreibung` mediumtext NOT NULL,
+  `beschreibung` text NOT NULL,
   PRIMARY KEY (`kz`)
 );
 
@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS `benachrichtigungen` (
   `benachrichtigungs_id` int(11) NOT NULL AUTO_INCREMENT,
   `benutzer_id` int(11) NOT NULL,
   `benachrichtigungs_typ_kz` char(3) NOT NULL,
-  `titel` mediumtext NOT NULL,
-  `text` mediumtext NOT NULL,
+  `titel` text NOT NULL,
+  `text` text NOT NULL,
   `erstellt_am` datetime,
   `versendet_am` datetime,
   PRIMARY KEY (`benachrichtigungs_id`),
@@ -62,9 +62,9 @@ CREATE TABLE IF NOT EXISTS `keywords` (
 
 -- Struktur von Tabelle twitter-monitor.tweet_autor
 CREATE TABLE IF NOT EXISTS `tweet_autor` (
-  `autor_id` int(11) NOT NULL,
-  `name` mediumtext NOT NULL,
-  `screen_name` mediumtext NOT NULL,
+  `autor_id` bigint NOT NULL,
+  `name` varchar(15) NOT NULL,
+  `screen_name` varchar(20) NOT NULL,
   `anzahl_follower` int(11),
   `anzahl_tweets` int(11),
   PRIMARY KEY (`autor_id`)
@@ -72,12 +72,12 @@ CREATE TABLE IF NOT EXISTS `tweet_autor` (
 
 -- Struktur von Tabelle twitter-monitor.tweets
 CREATE TABLE IF NOT EXISTS `tweets` (
-  `tweet_id` int(11) NOT NULL,
-  `autor_id` int(11) NOT NULL,
-  `text` mediumtext NOT NULL,
+  `tweet_id` bigint NOT NULL,
+  `autor_id` bigint NOT NULL,
+  `text` text NOT NULL,
   `anzahl_likes` int(11),
   `anzahl_retweets` int(11),
-  `standort` mediumtext,
+  `standort` text,
   `erstellt_am` datetime,
   PRIMARY KEY (`tweet_id`),
   FOREIGN KEY (`autor_id`) REFERENCES `tweet_autor` (`autor_id`)
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `tweets` (
 
 -- Struktur von Tabelle twitter-monitor.tweets_x_keywords
 CREATE TABLE IF NOT EXISTS `tweets_x_keywords` (
-  `tweet_id` int(11) NOT NULL,
+  `tweet_id` bigint NOT NULL,
   `keyword` varchar(50) NOT NULL,
   FOREIGN KEY (`keyword`) REFERENCES `keywords` (`keyword`),
   FOREIGN KEY (`tweet_id`) REFERENCES `tweets` (`tweet_id`)
