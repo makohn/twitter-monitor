@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `keywords` (
   `benutzer_id` int(11) NOT NULL,
   `aktiv` char(1) DEFAULT 'T' NOT NULL,
   `erstellt_am` datetime default current_timestamp,
-  PRIMARY KEY (`keyword`,`benutzer_id`,),
+  PRIMARY KEY (`keyword`,`benutzer_id`),
   FOREIGN KEY (`benutzer_id`) REFERENCES `benutzer` (`benutzer_id`)
 );
 
