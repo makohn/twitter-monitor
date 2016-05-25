@@ -1,6 +1,10 @@
 package de.htwsaar.twitter;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import de.htwsaar.db.TweetDao;
 import twitter4j.FilterQuery;
@@ -17,12 +21,14 @@ import twitter4j.conf.ConfigurationBuilder;
  *
  */
 
+@Service
 public class TweetService {
 
 	private TwitterStream stream;
 	private TweetListener tweetListener;
 	private TweetDao dao;
 
+	@Autowired
 	public TweetService(TweetListener tweetListener, TweetDao dao) {
 		this.tweetListener = tweetListener;
 		this.dao = dao;
@@ -86,5 +92,10 @@ public class TweetService {
 
 	public List<Tweet> getTweets() {
 		return dao.getTweets();
+	}
+	
+	public void handleKeyWords(ArrayList<String> keyWords, int userId){
+		// Hier wird dao.insertKeys(keyWords, Id) oder etwas dergleichen stehen, muss noch getestet werden
+		// danach evtl. restartStream()
 	}
 }

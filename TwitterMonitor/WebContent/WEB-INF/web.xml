@@ -37,7 +37,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-		classpath:de/htwsaar/twitter/tweetStream.xml
+		classpath:de/htwsaar/config/*.xml
 		</param-value>
 	</context-param>
 </web-app>
