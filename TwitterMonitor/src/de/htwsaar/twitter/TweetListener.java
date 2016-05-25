@@ -12,6 +12,7 @@ import twitter4j.StatusListener;
  * Der TweetListener hoert den Stream nach neuen Tweets ab und schreibt (zunaechst ausnahmslos alle) Tweets in
  * die Datenbank.
  */
+
 public class TweetListener implements StatusListener {
 			
 	private TweetDao dao;
