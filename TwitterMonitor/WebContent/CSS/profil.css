@@ -1,0 +1,198 @@
+#header {
+    
+    background-color: #ffc50e;
+   
+    min-height: 50px;
+    
+}
+body{
+            
+}
+
+#logo{
+                        float: left;
+                        background-image: url(../picture/Hummingbird.png);
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        margin-top: 30px;
+                        margin-left: 30px;
+                        min-height: 80px;
+                        min-width: 250px;
+                    
+}
+nav                     {
+                        
+                        background-color: black;
+                        min-width: 100%;
+                        min-height: 140px;
+                        max-height: 40px;
+                        }
+
+
+
+nav ul li:hover > ul    {
+		                  display: block;
+                          
+                        }
+
+nav ul                  {
+                        background: rgba(0, 0, 0, 0); 
+                        padding: 0 0px;
+                        border-color: white;
+                        border-top-width:thin;
+                        border-top-style:outset;
+                        border-bottom-width:thin;
+                        border-bottom-style:outset;
+                        list-style: none;
+                        position: relative;
+                        display: inline-table;
+                        margin-left: 200px;
+                        margin-top: 70px;
+                        
+                        }
+
+nav ul:after            {
+		                  content: ""; clear: both; display: block; 
+            
+	                       }
+
+nav ul li               {
+                        z-index: 5;
+	                     float: left;
+                    
+    
+                        
+                        }
+
+
+nav ul li:hover a       {
+                        z-index: 4;
+			             color: #EED880;
+                        border-radius: 20px;
+		                }
+	
+nav ul li a             {
+                        z-index: 4;
+                            display: block; padding: 5px 40px;
+                            color: white; text-decoration: none;
+                        
+    
+                        }
+                                                            /* navigation end  */                                                                
+	
+
+
+a                       {
+                        color: #EED880;
+                        text-decoration: none;
+                        }
+
+#page                   {
+                        
+                        min-height: 1000px;
+                        min-width: 100%;
+                        }
+
+#tweet_panel            {
+                        position: relative;
+                        float: left;
+                        display: inline-block;
+                        margin-left: 100px;;
+                        margin-right: auto;
+                        border-top-left-radius: 20px;
+                        border-top-right-radius: 20px;
+                        background-color: white;
+                        margin-top: 100px;
+                        
+                        min-width: 60%;
+                        max-width: 500px;
+                        }
+
+#tweet_time            {
+                        float: left;
+                        color: #4266b2;
+                        padding-top: 20px;
+                        padding-left: 10px;
+                        min-height: 40px;
+                        min-width: 180px;
+                        
+                        }
+
+#tweet_pic              {
+                        float: left;
+                        
+                        min-height: 400px;
+                        min-width: 100%;
+                        border-top-left-radius: 20px;
+                        border-top-right-radius: 20px;
+                        background-image: url(https://pbs.twimg.com/media/Ci91VUrWUAAYbK0.jpg:large);
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        }
+#tweet_text             {
+                        clear: left;
+                        color: #694425;
+                        float: left;
+                        min-width: 100%;
+                        min-height: 50px;
+                        padding-left: 30px;
+                        line-height: 25px;
+                        
+                        }
+#tweet_rating           {
+                        float: right;
+                        padding-top: 20px;
+                        padding-right: 10px;
+                        min-height: 40px;
+                        
+    
+}
+
+#sidebar                {
+                        float: right;
+                       
+                        padding-left: 15px;
+                        
+                        padding-top: 40px;
+                        margin-top: 100px;
+                         border-color: gray ;
+                        border-left-style: solid;
+                        border-left-width:thin;
+                        
+    
+                        min-height: 400px;
+                        min-width: 300px;
+                        max-width: 200px;
+                        
+                        
+    
+}
+
+#username{
+            font-size: 25px;
+                        
+}
+#welcome_text{
+            padding: 20px;
+            min-height: 100px;
+}
+label{
+    float: left;
+    min-width: 100%;
+    color: lightgray;
+    
+    
+    
+}
+input[type=search], select {
+    float: left;
+    width: 80%;
+    
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+

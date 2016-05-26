@@ -1,0 +1,174 @@
+header {
+    
+    background-color: #00AFF2;
+    padding-top: 20px;
+    
+    
+    min-height: 100px;
+    
+}
+body{
+    background-color: #F4F4F4;        
+}
+
+nav                     {
+                        
+                        background-color: black;
+                        min-width: 100%;
+                        max-height: 40px;
+                        }
+
+
+nav ul li:hover > ul    {
+		                  display: block;
+                          
+                        }
+
+nav ul                  {
+                        background: rgba(0, 0, 0, 0); 
+                        padding: 0 0px;
+                        border-radius: 10px;  
+                        list-style: none;
+                        position: relative;
+                        display: inline-table;
+                        margin-left: 200px;
+                        margin-top: 5px;
+                        
+                        }
+
+nav ul:after            {
+		                  content: ""; clear: both; display: block; 
+            
+	                       }
+
+nav ul li               {
+                        z-index: 5;
+	                     float: left;
+                    
+    
+                        
+                        }
+
+
+nav ul li:hover a       {
+                        z-index: 4;
+			             color: white;
+                        border-radius: 20px;
+		                }
+	
+nav ul li a             {
+                        z-index: 4;
+                            display: block; padding: 5px 40px;
+                            color: #EED880; text-decoration: none;
+                        
+    
+                        }
+                                                            /* navigation end  */                                                                
+	
+
+
+a                       {
+                        color: #EED880;
+                        text-decoration: none;
+                        }
+
+#page                   {
+                        
+                        min-height: 1000px;
+                        min-width: 100%;
+                        }
+
+#tweet_panel            {
+                        position: relative;
+                        display: inline-block;
+                        margin-left: 300px;;
+                        margin-right: auto;
+                        border-top-left-radius: 20px;
+                        border-top-right-radius: 20px;
+                        border-bottom-left-radius: 20px;
+                        background-color: white;
+                        margin-top: 100px;
+                        
+                        min-width: 60%;
+                        max-width: 500px;
+                        }
+
+#tweet_time            {
+                        float: left;
+                        color: #4266b2;
+                        padding-top: 20px;
+                        padding-left: 10px;
+                        
+                        min-width: 180px;
+                        
+                        }
+
+#tweet_pic              {
+                        float: left;
+                        background-image:url("https://pbs.twimg.com/media/CjENRsUWkAArqP4.jpg");
+                        background-repeat:no-repeat;
+                        background-size: contains;
+                        min-height:400px;
+                        min-width: 100%;
+                        border-radius: 20px;
+                        
+                     
+                        }
+#tweet_text             {
+                        clear: left;
+                        color: #694425;
+                        float: left;
+                        min-width: 90%;
+                        max-width: 90%;
+                        min-height: 50px;
+                        margin-left:20px;
+                        margin-bottom:20px;
+                        line-height: 25px;
+                        
+                        }
+#tweet_rating           {
+                        float: right;
+                        padding-top: 20px;
+                        padding-right: 10px;
+                        min-height: 40px;
+                        
+    
+}
+
+#sidebar                {
+                        position: fixed;
+                        padding-left: 15px;
+                        
+                        padding-top: 40px;
+                        margin-top: 100px;
+                        float: left;
+                        background-color: gainsboro;
+                        border-top-right-radius: 20px; 
+                        border-bottom-right-radius: 20px;
+                        min-height: 400px;
+                        min-width: 100px;
+                        max-width: 200px;
+                        
+                        
+    
+}
+label{
+    float: left;
+    min-width: 100%;
+    color: white;
+    
+    
+    
+}
+input[type=search], select {
+    float: left;
+    width: 80%;
+    
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+

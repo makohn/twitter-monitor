@@ -1,0 +1,152 @@
+header {
+    
+    background-color: #00AFF2;
+    
+    padding-left: 50px;
+    
+    min-height: 230px;
+    min-width: 100%;
+}
+
+#logo{
+    position: relative;
+    float: left;
+    margin-top: 20px;
+}
+        
+#login_panel{
+    background-color: white;
+    border-radius: 20px;
+    position: relative;
+    float: right;
+    margin-top: 30px;
+    margin-right: 100px;
+    min-width: 300px;
+    min-height: 160px;
+    
+    
+}
+#login_label{
+    position: relative;
+    float: left;
+    color: #00AFF2;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: bolder;
+    
+    
+    
+}
+#benutzer_label{
+    position: relative;
+    float: left;
+    clear:left;
+    margin-top: 20px;
+    margin-left: 10px;
+    
+}
+#textfield_benutzer{
+    position: relative;
+    float: left;
+    margin-top: 20px;
+    margin-left: 10px;
+    
+}
+#password_label{
+    position: relative;
+    float: left;
+    clear: left;
+    margin-top: 15px;
+    margin-left: 10px;
+    
+}
+#textfield_password{
+    position: relative;
+    float: left;
+    margin-top: 15px;
+     margin-left: 10px;
+}
+#new_account{
+    position: relative;
+    float: left;
+    color: #00AFF2;
+    clear: left;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+#loginButton{
+    float: left;
+    color: white;
+    background-color: #00AFF2;
+    border-radius: 15px;
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 5px;
+    margin-left: 15px;
+    min-width: 30px;
+    min-height: 30px;
+    
+}
+#page {
+    min-width: 100%
+    min-height: 2200px;
+    
+}
+#animation{
+    position: relative;
+     
+    background-color: black;
+    min-width: 100%;
+    min-height: 1000px;
+}
+#animation2{
+    position: relative;
+    min-width: 100%;
+    min-height: 1000px;
+     background-color: white;
+}
+
+#bird_pic{
+    display: none;
+    background-image: url(birdcarrypost.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    min-height: 500px;
+    min-width: 400px;
+    max-width: 400px;
+    margin-top: 60px;
+    margin-left: 120px;
+    
+}
+#runningMail_pic{
+    display: none;
+    background-image: url(runningmailbox.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    min-height: 300px;
+    min-width: 300px;
+    margin-top: 360px;
+    margin-left: 560px;
+}
+#text_comic{
+    color: white;
+    position: absolute;
+    margin-top: 300px;
+    margin-left: 500px;
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+    line-height: 10px;
+}
+
+footer{
+    
+   min-height: 200px;
+    min-width: 100%;
+    background-color: gainsboro;
+}
+
