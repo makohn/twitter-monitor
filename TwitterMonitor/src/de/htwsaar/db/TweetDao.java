@@ -7,22 +7,21 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import de.htwsaar.twitter.Author;
 import de.htwsaar.twitter.Tweet;
 
 public class TweetDao {
 
-	private NamedParameterJdbcTemplate jdbc;
+	private JdbcTemplate jdbc;
 
-	public TweetDao() {
-	}
+	public TweetDao() {}
 
 	@Autowired
 	public void setDataSource(DataSource jdbc) {
-		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
+		this.jdbc = new JdbcTemplate(jdbc);
 	}
 
 	/**
@@ -33,7 +32,9 @@ public class TweetDao {
 	 */
 	public List<Tweet> getTweets() {
 
-		return jdbc.query("select * from tweets", new RowMapper<Tweet>() {
+		String query = "select * from tweets";
+		
+		return jdbc.query(query, new RowMapper<Tweet>() {
 
 			public Tweet mapRow(ResultSet rs, int rowNum) throws SQLException {
 
@@ -52,6 +53,21 @@ public class TweetDao {
 
 		});
 	}
+	
+	public List<String> getUrlsOfTweet(long tweetId) {
+		
+		String query = "select * from tweet_bilder where tweet_id = ?";
+		
+		Object[] args = new Object[1];
+		args[0] = tweetId;
+		
+		return jdbc.query(query, args, new RowMapper<String>() {
+			
+			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return rs.getString("url");
+			}
+		});
+	}
 
 	/**
 	 * This method inserts tweets into the database.
@@ -59,11 +75,38 @@ public class TweetDao {
 	 * @usedIn TweetListener
 	 * @return
 	 */
-	public boolean insert(Tweet tweet) {
+	public void insertTweet(Tweet tweet) {
 
-		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(tweet);
-
-		return jdbc.update("insert into tweets (tweet_id, autor_id, text) values (:tweetId, :authorId, :text)",
-				params) == 1;
+		String insert = "insert into tweets (tweet_id, autor_id, text) values (?, ?, ?)";
+		
+		jdbc.update(insert, tweet.getTweetId(), tweet.getAuthorId(), tweet.getText());
+		
+		for (String url : tweet.getUrls())				// das könnte man mit einem Batch-update effektiver machen
+			insertUrlOfTweet(tweet.getTweetId(), url);
+	}
+	
+	/**
+	 * This method inserts authors into the database.
+	 * 
+	 * @param author
+	 */
+	public void insertAuthor(Author author)	{
+		
+		String insert = "update or insert into tweet_autor (autor_id, name, screen_name, anzahl_follower, anzahl_tweets) values (?, ?, ?, ?, ?)";
+		
+		jdbc.update(insert, author.getId(), author.getName(), author.getScreen_name(), author.getFollowerCount(), author.getFavoriteCount());
+	}
+	
+	/**
+	 * This method inserts URLs into the database.
+	 * 
+	 * @param tweetId
+	 * @param url
+	 */
+	public void insertUrlOfTweet(long tweetId, String url) {
+		
+		String insert = "insert into tweet_bilder (tweet_id, url) values (?, ?)";
+		
+		jdbc.update(insert, tweetId, url);
 	}
 }

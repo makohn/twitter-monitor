@@ -23,11 +23,11 @@
 		<constructor-arg name="dao" ref="tweetDao"></constructor-arg>
 	</bean>
 
-	<bean id="stream" class="de.htwsaar.twitter.TweetService">
+	<bean id="tweetStream" class="de.htwsaar.twitter.StreamService">
 		<constructor-arg name="tweetListener" ref="tweetListener"></constructor-arg>
 		<constructor-arg name="dao" ref="tweetDao"></constructor-arg>
 	</bean>
 
-	
+
 
 </beans>

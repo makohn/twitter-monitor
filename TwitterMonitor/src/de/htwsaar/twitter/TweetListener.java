@@ -22,10 +22,14 @@ public class TweetListener implements StatusListener {
 
 	@Override
 	public void onStatus(Status status) {
-		Tweet latestTweet = new Tweet(status);	
 		
-		System.out.println(latestTweet.toString());	
-		dao.insert(latestTweet);
+		Tweet latestTweet = new Tweet(status);
+		Author author = new Author(status);
+		
+		System.out.println(latestTweet.toString());
+		
+		dao.insertAuthor(author);
+		dao.insertTweet(latestTweet);
 		
 	}
 
