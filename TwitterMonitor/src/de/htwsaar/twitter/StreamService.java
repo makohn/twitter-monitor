@@ -1,11 +1,5 @@
 package de.htwsaar.twitter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import de.htwsaar.db.TweetDao;
 import twitter4j.FilterQuery;
 import twitter4j.TwitterStream;
@@ -15,21 +9,19 @@ import twitter4j.conf.ConfigurationBuilder;
 /**
  * @author philipp
  * 
- *         Der TweetService ist dafuer verantwortlich einen Filter zu erstellen,
- *         zu konfigurieren und den Stream zu initialisieren, indem der Filter
+ *         Der StreamService ist dafuer verantwortlich einen einen Stream und einen
+ *         Filter zu erstellen, zu konfigurieren und den Stream zu initialisieren, indem der Filter
  *         darauf angewendet wird.
  *
  */
 
-@Service
-public class TweetService {
+public class StreamService {
 
 	private TwitterStream stream;
 	private TweetListener tweetListener;
 	private TweetDao dao;
 
-	@Autowired
-	public TweetService(TweetListener tweetListener, TweetDao dao) {
+	public StreamService(TweetListener tweetListener, TweetDao dao) {
 		this.tweetListener = tweetListener;
 		this.dao = dao;
 
@@ -68,7 +60,7 @@ public class TweetService {
 		// Erstelle Filter ..
 		FilterQuery filter = new FilterQuery();
 		filter.track(keywordsArray);
-		filter.language("de", "en");
+		filter.language("de");
 
 		// weitere Konfigurationen ...
 
@@ -88,14 +80,5 @@ public class TweetService {
 	public void restartStream() {
 		stopStream();
 		startStream();
-	}
-
-	public List<Tweet> getTweets() {
-		return dao.getTweets();
-	}
-	
-	public void handleKeyWords(ArrayList<String> keyWords, int userId){
-		// Hier wird dao.insertKeys(keyWords, Id) oder etwas dergleichen stehen, muss noch getestet werden
-		// danach evtl. restartStream()
 	}
 }
