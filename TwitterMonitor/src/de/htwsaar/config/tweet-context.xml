@@ -12,5 +12,6 @@
 	<bean id="tweetListener" class="de.htwsaar.twitter.TweetListener">
 		<constructor-arg name="dao" ref="tweetDao"></constructor-arg>
 	</bean>
+	
 
 </beans>
