@@ -94,7 +94,7 @@ public class TweetDao {
 	 */
 	public void insertAuthor(Author author)	{
 		
-		String insert = "update or insert into tweet_autor (autor_id, name, screen_name, anzahl_follower, anzahl_tweets) values (?, ?, ?, ?, ?)";
+		String insert = "insert into tweet_autor (autor_id, name, screen_name, anzahl_follower, anzahl_tweets) values (?, ?, ?, ?, ?)";
 		
 		jdbc.update(insert, author.getId(), author.getName(), author.getScreen_name(), author.getFollowerCount(), author.getFavoriteCount());
 	}

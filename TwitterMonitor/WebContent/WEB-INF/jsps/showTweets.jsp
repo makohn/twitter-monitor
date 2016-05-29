@@ -12,9 +12,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Focus on</title>
         
-        <link rel="stylesheet"  type="text/css" href="CSS/showTweets.css">
+        <link rel="stylesheet"  type="text/css" href="Resources/CSS/showTweets.css">
        
-        <script type="text/javascript" src="jquery-2.1.4.js"></script>
+        <script type="text/javascript" src="Resources/JS/jquery-2.1.4.js"></script>
         
         
 
@@ -32,9 +32,16 @@
                 <li><a href="home.php">Home</a></li>
                 <li><a href="#">Tweets</a></li>
                 <li><a href="#">Kategorien</a></li>
-                <li><a href="profil.jsp">Profil</a></li>
+                <li><a href="${pageContext.request.contextPath}/profil">Profil</a></li>
                 <li><a href="#">Einstellungen</a></li>
             </ul>
+             <ul2>
+                <li><a href="home.php">Home</a></li>
+                <li><a href="#">Tweets</a></li>
+                <li><a href="#">Kategorien</a></li>
+                <li><a href="#">Profil</a></li>
+                <li><a href="#">Einstellungen</a></li>
+            </ul2>
         </nav>
         <div id="page">
                   <div id="sidebar">
