@@ -11,7 +11,7 @@ body{
 
 #logo{
                         float: left;
-                        background-image: url(../picture/Hummingbird.png);
+                        background-image: url(../Picture/Hummingbird.png);
                         background-size: contain;
                         background-repeat: no-repeat;
                         margin-top: 30px;

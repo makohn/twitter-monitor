@@ -13,7 +13,7 @@ body{
 #logo{
                         display: none;
                         float: left;
-                        background-image: url(../picture/Hummingbird.png);
+                        background-image: url(../Picture/Hummingbird.png);
                         background-size: contain;
                         background-repeat: no-repeat;
                         margin-top: 30px;
@@ -92,7 +92,7 @@ nav ul2                    {
                         float: left;
                         margin-left: 10%;
                         margin-top: 40px;
-                        background-image: url(../picture/menuIcon.png);
+                        background-image: url(../Picture/menuIcon.png);
                         min-width: 50px;
                         min-height: 50px;
                         z-index: 4;
