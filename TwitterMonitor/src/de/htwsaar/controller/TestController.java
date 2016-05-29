@@ -19,6 +19,6 @@ public class TestController {
 		
 		testModel.addAttribute("name", "John Purcell");
 		
-		return "TestFile";
+		return "home";
 	}
 }

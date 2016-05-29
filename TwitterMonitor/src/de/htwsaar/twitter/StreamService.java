@@ -1,5 +1,8 @@
 package de.htwsaar.twitter;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import de.htwsaar.db.TweetDao;
 import twitter4j.FilterQuery;
 import twitter4j.TwitterStream;
@@ -15,12 +18,14 @@ import twitter4j.conf.ConfigurationBuilder;
  *
  */
 
+@Service
 public class StreamService {
 
 	private TwitterStream stream;
 	private TweetListener tweetListener;
 	private TweetDao dao;
 
+	@Autowired
 	public StreamService(TweetListener tweetListener, TweetDao dao) {
 		this.tweetListener = tweetListener;
 		this.dao = dao;

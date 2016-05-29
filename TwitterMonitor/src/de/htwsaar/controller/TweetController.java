@@ -23,7 +23,7 @@ public class TweetController
 		this.tweetService = tweetService;
 	}
 
-	@RequestMapping("/tweets_v3")
+	@RequestMapping("/showTweets")
 	public String showAdd(Model model)
 	{
 		int tweetListSize = 20;
@@ -46,7 +46,7 @@ public class TweetController
 
 		model.addAttribute("tweets", tweets);
 
-		return "tweets_v3";
+		return "showTweets";
 	}
 
 }

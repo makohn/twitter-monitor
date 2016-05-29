@@ -9,10 +9,12 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import de.htwsaar.twitter.Author;
 import de.htwsaar.twitter.Tweet;
 
+@Component("tweetDao")
 public class TweetDao {
 
 	private JdbcTemplate jdbc;
@@ -81,7 +83,7 @@ public class TweetDao {
 		
 		jdbc.update(insert, tweet.getTweetId(), tweet.getAuthorId(), tweet.getText());
 		
-		for (String url : tweet.getUrls())				// das könnte man mit einem Batch-update effektiver machen
+		for (String url : tweet.getUrls())				// das kï¿½nnte man mit einem Batch-update effektiver machen
 			insertUrlOfTweet(tweet.getTweetId(), url);
 	}
 	
