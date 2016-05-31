@@ -8,8 +8,8 @@ import twitter4j.Status;
 
 public class Tweet {
 	
-	private int tweetId; 
-	private int authorId;
+	private long tweetId; 
+	private long authorId;
 	private String text; 
 	private Date createdAt; 
 	private String place;
@@ -35,19 +35,19 @@ public class Tweet {
 		
 	}
 
-	public int getTweetId() {
+	public long getTweetId() {
 		return tweetId;
 	}
 
-	public void setTweetId(int tweetId) {
+	public void setTweetId(long tweetId) {
 		this.tweetId = tweetId;
 	}
 
-	public int getAuthorId() {
+	public long getAuthorId() {
 		return authorId;
 	}
 
-	public void setAuthorId(int authorId) {
+	public void setAuthorId(long authorId) {
 		this.authorId = authorId;
 	}
 

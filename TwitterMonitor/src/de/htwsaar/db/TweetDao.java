@@ -42,8 +42,8 @@ public class TweetDao {
 
 				Tweet tweet = new Tweet();
 
-				tweet.setTweetId(rs.getInt("tweet_id"));
-				tweet.setAuthorId(rs.getInt("autor_id"));
+				tweet.setTweetId(rs.getLong("tweet_id"));
+				tweet.setAuthorId(rs.getLong("autor_id"));
 				tweet.setText(rs.getString("text"));
 				tweet.setCreatedAt(rs.getDate("erstellt_am"));
 				tweet.setPlace(rs.getString("standort"));
@@ -83,7 +83,7 @@ public class TweetDao {
 		
 		jdbc.update(insert, tweet.getTweetId(), tweet.getAuthorId(), tweet.getText());
 		
-		for (String url : tweet.getUrls())				// das k�nnte man mit einem Batch-update effektiver machen
+		for (String url : tweet.getUrls())				// das koennte man mit einem Batch-update effektiver machen
 			insertUrlOfTweet(tweet.getTweetId(), url);
 	}
 	

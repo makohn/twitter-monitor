@@ -65,7 +65,7 @@ public class StreamService {
 		// Erstelle Filter ..
 		FilterQuery filter = new FilterQuery();
 		filter.track(keywordsArray);
-		filter.language("de");
+		filter.language("de", "en");
 
 		// weitere Konfigurationen ...
 
