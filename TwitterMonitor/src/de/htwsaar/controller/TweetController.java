@@ -27,22 +27,21 @@ public class TweetController
 	public String showAdd(Model model)
 	{
 		int tweetListSize = 20;
-		List<Tweet> tweetsRow = tweetService.getTweets();
-		ArrayList<Tweet> tweets1 = new ArrayList<Tweet>();
-		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
 		
-		for (int i=tweetListSize-1;i > 0;i--)
-		{
-			tweets1.add(tweetsRow.get(tweetsRow.size()-i));
-		}
-		for (Tweet tweet : tweets1)
-		{
-			tweets.add(tweet);
-			if (tweetListSize == tweets.size())
-			{
-				break;
-			}
-		}
+		ArrayList<Tweet> tweets = (ArrayList<Tweet>) tweetService.getTweets();
+		
+//		for (int i=tweetListSize-1;i > 0;i--)
+//		{
+//			tweets1.add(tweetsRow.get(tweetsRow.size()-i));
+//		}
+//		for (Tweet tweet : tweets1)
+//		{
+//			tweets.add(tweet);
+//			if (tweetListSize == tweets.size())
+//			{
+//				break;
+//			}
+//		}
 
 		model.addAttribute("tweets", tweets);
 
