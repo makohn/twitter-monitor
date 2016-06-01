@@ -9,7 +9,7 @@ public class Author {
 	private String screenName;
 	private int followerCount;
 	private int favoriteCount;	
-	
+	private String pictureUrl;
 	
 	/**
 	 * Generates Author objects based on status params received in the stream
@@ -22,6 +22,7 @@ public class Author {
 		this.screenName = status.getUser().getScreenName();
 		this.followerCount = status.getUser().getFollowersCount();
 		this.favoriteCount = status.getUser().getFavouritesCount();
+		this.pictureUrl = status.getUser().getOriginalProfileImageURL();
 	}
 	
 	/**
@@ -62,6 +63,15 @@ public class Author {
 		this.favoriteCount = favoriteCount;
 	}
 	
+
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
+
 	@Override
 	public String toString() {
 		return "Author [id=" + id + ", name=" + name + ", screen_name=" + screenName + ", followerCount="
