@@ -2,6 +2,7 @@ package de.htwsaar.twitter;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import twitter4j.MediaEntity;
 import twitter4j.Status;
@@ -15,9 +16,12 @@ public class Tweet {
 	private String place;
 	private int favoriteCount;
 	private int retweetCount;
-	private ArrayList<String> urls;
+	private List<String> urls;
 	
-	public Tweet() {}
+	public Tweet() {
+		
+		urls = new ArrayList<String>();
+	}
 
 	public Tweet(Status status) {
 		this.tweetId = (int) status.getId();
@@ -91,12 +95,12 @@ public class Tweet {
 		this.retweetCount = retweetCount;
 	}
 	
-	public ArrayList<String> getUrls() {
+	public List<String> getUrls() {
 		return urls;
 	}
 
-	public void setUrls(ArrayList<String> urls) {
-		this.urls = urls;
+	public void setUrls(List<String> list) {
+		this.urls = list;
 	}
 
 	@Override
