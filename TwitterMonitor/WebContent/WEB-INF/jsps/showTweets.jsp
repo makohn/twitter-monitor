@@ -62,6 +62,7 @@
 
 				</c:if>
 				<div id="tweet_pic" style="background-image:url(${pic})"></div>
+				<c:set value="" var="pic"></c:set>
 				<div id="tweet_time">
 					
 				</div>
