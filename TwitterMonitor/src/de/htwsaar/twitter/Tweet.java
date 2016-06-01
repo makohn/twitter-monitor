@@ -24,8 +24,8 @@ public class Tweet {
 	}
 
 	public Tweet(Status status) {
-		this.tweetId = (int) status.getId();
-		this.authorId = (int) status.getUser().getId();
+		this.tweetId = status.getId();
+		this.authorId = status.getUser().getId();
 		this.text = status.getText();
 		this.createdAt = status.getCreatedAt();
 		this.place = status.getPlace().getCountry();
