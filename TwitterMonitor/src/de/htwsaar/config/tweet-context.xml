@@ -10,7 +10,7 @@
 	<mvc:annotation-driven></mvc:annotation-driven>
 
 	<bean id="tweetListener" class="de.htwsaar.twitter.TweetListener">
-		<constructor-arg name="dao" ref="tweetDao"></constructor-arg>
+		<constructor-arg name="tweetService" ref="tweetService"></constructor-arg>
 	</bean>
 	
 

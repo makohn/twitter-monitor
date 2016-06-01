@@ -1,6 +1,5 @@
 package de.htwsaar.twitter;
 
-import de.htwsaar.db.TweetDao;
 import twitter4j.StallWarning;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
@@ -15,23 +14,20 @@ import twitter4j.StatusListener;
 
 public class TweetListener implements StatusListener {
 			
-	private TweetDao dao;
+	private TweetService tweetService;
 					
-	public TweetListener(TweetDao dao) {
-		this.dao = dao;
+	public TweetListener(TweetService tweetService) {
+		this.tweetService = tweetService;
 	}
 
+	/* (non-Javadoc)
+	 * Triggers the tweetService to insert Objects into the
+	 * database whenever a status object is received
+	 * @see twitter4j.StatusListener#onStatus(twitter4j.Status)
+	 */
 	@Override
 	public void onStatus(Status status) {
-		
-		Tweet latestTweet = new Tweet(status);
-		Author author = new Author(status);
-		
-		System.out.println(latestTweet.toString());
-		
-		dao.insertAuthor(author);
-		dao.insertTweet(latestTweet);
-		
+		tweetService.insertStatus(status);
 	}
 
 	@Override
