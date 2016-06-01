@@ -23,6 +23,11 @@ public class Tweet {
 		urls = new ArrayList<String>();
 	}
 
+	/**
+	 * Initializes a tweet object with information gained from the
+	 * received status object.
+	 * @param status
+	 */
 	public Tweet(Status status) {
 		this.tweetId = status.getId();
 		this.authorId = status.getUser().getId();
@@ -35,7 +40,7 @@ public class Tweet {
 		this.urls = new ArrayList<String>();
 		MediaEntity[] me = status.getMediaEntities();
 		for (MediaEntity m : me)
-			urls.add(m.getURL());	// hier gibt es mehrere Methoden gibt es eine spezielle ??? @stefan
+			urls.add(m.getMediaURL());	
 		
 	}
 
