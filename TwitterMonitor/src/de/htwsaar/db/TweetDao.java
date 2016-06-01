@@ -99,7 +99,7 @@ public class TweetDao {
  
                 author.setId(rs.getLong("autor_id"));
                 author.setName(rs.getString("name"));
-                author.setScreen_name(rs.getString("scree_name"));
+                author.setScreen_name(rs.getString("screen_name"));
                  
                 return author;
             }
