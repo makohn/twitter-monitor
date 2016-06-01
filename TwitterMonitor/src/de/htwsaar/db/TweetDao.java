@@ -51,6 +51,8 @@ public class TweetDao {
 				tweet.setPlace(rs.getString("standort"));
 				tweet.setFavoriteCount(rs.getInt("anzahl_likes"));
 				tweet.setRetweetCount(rs.getInt("anzahl_retweets"));
+				
+				tweet.setUrls(getUrlsOfTweet(rs.getLong("tweet_id")));
 
 				return tweet;
 			}
