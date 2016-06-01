@@ -60,6 +60,12 @@ public class TweetDao {
 		});
 	}
 	
+	/**
+	 * Returns a list of all URLs that are mentioned in a singular tweet
+	 * 
+	 * @param tweetId, the ID of the tweet 
+	 * @return
+	 */
 	public List<String> getUrlsOfTweet(long tweetId) {
 		
 		String query = "select * from tweet_bilder where tweet_id = :tweetId";
@@ -74,6 +80,67 @@ public class TweetDao {
                 return rs.getString("url");
             }
         });
+	}
+	
+	/**
+	 * Returns a List of all the authors stored in the database table
+	 * 
+	 * @return
+	 */
+	public List<Author> getAuthors() {
+		 
+        String query = "select * from tweet_autor";
+         
+        return jdbc.query(query, new RowMapper<Author>() {
+ 
+            public Author mapRow(ResultSet rs, int rowNum) throws SQLException {
+ 
+                Author author = new Author();
+ 
+                author.setId(rs.getLong("autor_id"));
+                author.setName(rs.getString("name"));
+                author.setScreen_name(rs.getString("scree_name"));
+                 
+                return author;
+            }
+ 
+        });
+    }
+	
+	
+	/**
+	 * Returns an Author object if the authorID is found in the database.
+	 * 
+	 * @usedIn TweetService, when checking if an author already exists
+	 * @param authorId
+	 * @return
+	 */
+	public Author getAuthor(long authorId) {
+
+		String query = "select * from tweet_autor where autor_id = :authorId";
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("authorId", authorId);
+
+		List<Author> authors = jdbc.query(query, paramMap, new RowMapper<Author>() {
+
+			public Author mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+				Author author = new Author();
+
+				author.setId(rs.getLong("autor_id"));
+				author.setName("name");
+				author.setScreen_name("screen_name");
+
+				return author;
+			}
+
+		});
+
+		if (!authors.isEmpty())
+			return authors.get(0);
+		else
+			return null;
 	}
 
 	/**

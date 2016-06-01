@@ -10,6 +10,12 @@ public class Author {
 	private int followerCount;
 	private int favoriteCount;	
 	
+	
+	/**
+	 * Generates Author objects based on status params received in the stream
+	 * @usedIn TweetListener [onStatus()]
+	 * @param status
+	 */
 	public Author(Status status) {
 		this.id = status.getUser().getId();
 		this.name = status.getUser().getName();
@@ -17,6 +23,13 @@ public class Author {
 		this.followerCount = status.getUser().getFollowersCount();
 		this.favoriteCount = status.getUser().getFavouritesCount();
 	}
+	
+	/**
+	 * Generates Author objects e.g. for adding just essential attributes
+	 * when an author is loaded from the database
+	 * @usedIn TweetDao [getAuthor()]
+	 */
+	public Author() {}
 	
 	public long getId() {
 		return id;		
