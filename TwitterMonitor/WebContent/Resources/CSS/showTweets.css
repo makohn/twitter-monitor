@@ -169,10 +169,11 @@ a                       {
                         float: left;
                         
                         min-height: 400px;
-                        min-width: 100%;
+                        min-width: 90%;
+                        max-width: 90%;
                         border-top-left-radius: 20px;
                         border-top-right-radius: 20px;
-                        background-image: url(https://pbs.twimg.com/media/Ci91VUrWUAAYbK0.jpg:large);
+                        
                         background-size: cover;
                         background-repeat: no-repeat;
                         }
@@ -265,7 +266,4 @@ input[type=search], select {
         display: block;
     }
     
-}
-
-    
-  
+}  

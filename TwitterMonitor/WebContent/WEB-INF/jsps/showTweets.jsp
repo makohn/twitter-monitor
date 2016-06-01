@@ -7,63 +7,63 @@
 
 <html>
 
-    <head>
-       
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Focus on</title>
-        
-        <link rel="stylesheet"  type="text/css" href="Resources/CSS/showTweets.css">
-       
-        <script type="text/javascript" src="Resources/JS/jquery-2.1.4.js"></script>
-        
-        
+<head>
 
-    </head>
-    <body style="margin: 0 auto;">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Focus on</title>
 
-        <div id="header" >
-            
-        </div>
-        
-        <nav>
-            <div id="logo" ></div>
-            
-            <ul>
-                <li><a href="home.php">Home</a></li>
-                <li><a href="#">Tweets</a></li>
-                <li><a href="#">Kategorien</a></li>
-                <li><a href="${pageContext.request.contextPath}/profil">Profil</a></li>
-                <li><a href="#">Einstellungen</a></li>
-            </ul>
-             <ul2>
-                <li><a href="home.php">Home</a></li>
-                <li><a href="#">Tweets</a></li>
-                <li><a href="#">Kategorien</a></li>
-                <li><a href="#">Profil</a></li>
-                <li><a href="#">Einstellungen</a></li>
-            </ul2>
-        </nav>
-        <div id="page">
-                  <div id="sidebar">
-                        
-                        <div id="username">Hallo Username</div>
-                        <div id="welcome_text">Seit dem letzten Login haben wir 230 Tweets für dich gesammelt </div>
-                        <label for="search" >Search</label>
-                        <input type="search">
-                        <label for="sort" >Sort</label>
-                        <select>
-                        <option>Name</option>
-                        <option>Zeit</option>
-                        </select>
-                   
-                </div>  
-                <c:forEach var="row" items="${tweets}">
+<link rel="stylesheet" type="text/css"
+	href="Resources/CSS/showTweets.css">
+
+<script type="text/javascript" src="Resources/JS/jquery-2.1.4.js"></script>
+
+
+
+</head>
+<body style="margin: 0 auto;">
+
+	<div id="header"></div>
+
+	<nav>
+	<div id="logo"></div>
+
+	<ul>
+		<li><a href="home.php">Home</a></li>
+		<li><a href="#">Tweets</a></li>
+		<li><a href="#">Kategorien</a></li>
+		<li><a href="${pageContext.request.contextPath}/profil">Profil</a></li>
+		<li><a href="#">Einstellungen</a></li>
+	</ul>
+	<ul2>
+	<li><a href="home.php">Home</a></li>
+	<li><a href="#">Tweets</a></li>
+	<li><a href="#">Kategorien</a></li>
+	<li><a href="#">Profil</a></li>
+	<li><a href="#">Einstellungen</a></li>
+	</ul2> </nav>
+	<div id="page">
+		<div id="sidebar">
+
+			<div id="username">Hallo Username</div>
+			<div id="welcome_text">Seit dem letzten Login haben wir 230
+				Tweets für dich gesammelt</div>
+			<label for="search">Search</label> <input type="search"> <label
+				for="sort">Sort</label> <select>
+				<option>Name</option>
+				<option>Zeit</option>
+			</select>
+
+		</div>
+		<c:forEach var="row" items="${tweets}">
 			<div id="tweet_panel">
 
-				
+				<c:if test="${row.getUrls().size() > 0}">
+					<c:set value="${row.getUrls().get(0)}" var="pic"></c:set>
 
+				</c:if>
+				<div id="tweet_pic" style="background-image:url(${pic})"></div>
 				<div id="tweet_time">
-					<c:out value="${row.getCreatedAt().toString()}" />
+					
 				</div>
 				<div id="tweet_rating"></div>
 				<div id="tweet_text">
@@ -71,9 +71,8 @@
 				</div>
 			</div>
 		</c:forEach>
-            
-        </div>
-        
-    </body>
-</html> 
+	
+	</div>
 
+</body>
+</html>
