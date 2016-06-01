@@ -2,13 +2,15 @@ package de.htwsaar.db;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import de.htwsaar.twitter.Author;
@@ -17,13 +19,13 @@ import de.htwsaar.twitter.Tweet;
 @Component("tweetDao")
 public class TweetDao {
 
-	private JdbcTemplate jdbc;
+	private NamedParameterJdbcTemplate jdbc;
 
 	public TweetDao() {}
 
 	@Autowired
 	public void setDataSource(DataSource jdbc) {
-		this.jdbc = new JdbcTemplate(jdbc);
+		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
 
 	/**
@@ -58,17 +60,18 @@ public class TweetDao {
 	
 	public List<String> getUrlsOfTweet(long tweetId) {
 		
-		String query = "select * from tweet_bilder where tweet_id = ?";
-		
-		Object[] args = new Object[1];
-		args[0] = tweetId;
-		
-		return jdbc.query(query, args, new RowMapper<String>() {
-			
-			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return rs.getString("url");
-			}
-		});
+		String query = "select * from tweet_bilder where tweet_id = :tweetId";
+        
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("tweetId", tweetId);
+         
+         
+        return jdbc.query(query, paramMap, new RowMapper<String>() {
+             
+            public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getString("url");
+            }
+        });
 	}
 
 	/**
@@ -79,12 +82,22 @@ public class TweetDao {
 	 */
 	public void insertTweet(Tweet tweet) {
 
-		String insert = "insert into tweets (tweet_id, autor_id, text) values (?, ?, ?)";
-		
-		jdbc.update(insert, tweet.getTweetId(), tweet.getAuthorId(), tweet.getText());
-		
-		for (String url : tweet.getUrls())				// das koennte man mit einem Batch-update effektiver machen
-			insertUrlOfTweet(tweet.getTweetId(), url);
+		// eigentlichen Tweet hinzufügen 
+        
+        String insert = "insert into tweets (tweet_id, autor_id, text) values (:tweetId, :autorId, :text)";
+         
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("tweetId", tweet.getTweetId());
+        paramMap.put("autorId", tweet.getAuthorId());
+        paramMap.put("text", tweet.getText());
+         
+        jdbc.update(insert, paramMap);
+         
+        //das koennte man mit einem Batch-update effektiver machen
+        for (String url : tweet.getUrls())              
+            insertUrlOfTweet(tweet.getTweetId(), url);
+        
+        //TODO: tweets mit keywords verbinden
 	}
 	
 	/**
@@ -94,9 +107,14 @@ public class TweetDao {
 	 */
 	public void insertAuthor(Author author)	{
 		
-		String insert = "insert into tweet_autor (autor_id, name, screen_name, anzahl_follower, anzahl_tweets) values (?, ?, ?, ?, ?)";
-		
-		jdbc.update(insert, author.getId(), author.getName(), author.getScreen_name(), author.getFollowerCount(), author.getFavoriteCount());
+		String insert = "insert into tweet_autor (autor_id, name, screen_name) values (:autorId, :name, :screenName)";
+        
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("autorId", author.getId());
+        paramMap.put("name", author.getName());
+        paramMap.put("screenName", author.getScreen_name());
+         
+        jdbc.update(insert, paramMap);
 	}
 	
 	/**
@@ -106,9 +124,13 @@ public class TweetDao {
 	 * @param url
 	 */
 	public void insertUrlOfTweet(long tweetId, String url) {
-		
-		String insert = "insert into tweet_bilder (tweet_id, url) values (?, ?)";
-		
-		jdbc.update(insert, tweetId, url);
+
+		String insert = "insert into tweet_bilder (tweet_id, url) values (:tweetId, :url)";
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("tweetId", tweetId);
+		paramMap.put("url", url);
+
+		jdbc.update(insert, paramMap);
 	}
 }
