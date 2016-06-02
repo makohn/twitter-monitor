@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS `tweet_autor` (
   `screen_name` varchar(20),
   `anzahl_follower` int(11),
   `anzahl_tweets` int(11),
+  `profilbild_url` varchar(100),
   PRIMARY KEY (`autor_id`)
 );
 
@@ -78,7 +79,8 @@ CREATE TABLE IF NOT EXISTS `tweets` (
   `anzahl_likes` int(11),
   `anzahl_retweets` int(11),
   `standort` text,
-  `erstellt_am` datetime,
+  `tweet_datum` datetime,
+  `erstellt_am` datetime default current_timestamp,
   PRIMARY KEY (`tweet_id`),
   FOREIGN KEY (`autor_id`) REFERENCES `tweet_autor` (`autor_id`)
 );
