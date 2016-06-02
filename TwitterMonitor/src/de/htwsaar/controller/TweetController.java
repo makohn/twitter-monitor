@@ -42,7 +42,7 @@ public class TweetController
 //				break;
 //			}
 //		}
-
+		
 		model.addAttribute("tweets", tweets);
 
 		return "showTweets";

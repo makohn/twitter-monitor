@@ -55,21 +55,25 @@
 
 		</div>
 		<c:forEach var="row" items="${tweets}">
-			<div id="tweet_panel">
-
+			<div class="tweet_panel">
+			<div class="line"></div>
+				<c:set value="none" var="display"></c:set>
+				<c:set value="" var="pic"></c:set>
 				<c:if test="${row.getUrls().size() > 0}">
 					<c:set value="${row.getUrls().get(0)}" var="pic"></c:set>
-
+					<c:set value="block" var="display"></c:set>
 				</c:if>
-				<div id="tweet_pic" style="background-image:url(${pic})"></div>
-				<c:set value="" var="pic"></c:set>
-				<div id="tweet_time">
-					
+				<div class="tweet_pic" style="background-image:url(${pic});display:${display}"></div>
+				
+				
+			
+				<div class="tweet_time">
+				<c:out value="Date: ${row.getCreatedAt().toString()}" />
 				</div>
-				<div id="tweet_rating"></div>
-				<div id="tweet_text">
+				<div class="tweet_text">
 					<c:out value="${row.getText()}" />
 				</div>
+				
 			</div>
 		</c:forEach>
 	

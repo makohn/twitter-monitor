@@ -7,7 +7,7 @@
 }
 body{
     min-width: 520px;
-            
+    background-color: #f9fbee;   
 }
 
 #logo{
@@ -140,7 +140,8 @@ a                       {
                         min-width: 100%;
                         }
 
-#tweet_panel            {
+.tweet_panel            {
+						clear:left;
                         position: relative;
                         float: left;
                         display: inline-block;
@@ -148,14 +149,14 @@ a                       {
                         margin-right: auto;
                         border-top-left-radius: 20px;
                         border-top-right-radius: 20px;
-                        background-color: white;
-                        margin-top: 100px;
                         
-                        min-width: 80%;
+                       
+                        
+                        min-width: 500px;
                         max-width: 500px;
                         }
 
-#tweet_time            {
+.tweet_time            {
                         float: left;
                         color: #4266b2;
                         padding-top: 20px;
@@ -165,29 +166,31 @@ a                       {
                         
                         }
 
-#tweet_pic              {
+.tweet_pic              {
                         float: left;
-                        
+                        display: none;
                         min-height: 400px;
-                        min-width: 90%;
-                        max-width: 90%;
+                        min-width: 540px;
+                        max-width: 540px;
                         border-top-left-radius: 20px;
                         border-top-right-radius: 20px;
                         
                         background-size: cover;
                         background-repeat: no-repeat;
                         }
-#tweet_text             {
+.tweet_text             {
                         clear: left;
-                        color: #694425;
+                        font-size:20px;
                         float: left;
-                        min-width: 100%;
+                        min-width: 500px;;
+                        max-width: 500px;
                         min-height: 50px;
                         padding-left: 30px;
                         line-height: 25px;
-                        
+                        background-color: white;
+                        padding:20px;
                         }
-#tweet_rating           {
+.tweet_rating           {
                         float: right;
                         padding-top: 20px;
                         padding-right: 10px;
@@ -195,6 +198,13 @@ a                       {
                         
     
 }
+.line					{
+						margin-top:25px;
+						margin-bottom:25px;
+						min-height:3px;
+						min-width:300px;
+						background-color: #ffc50e;
+						}
 
 #sidebar                {
                         float: left;
@@ -252,8 +262,8 @@ input[type=search], select {
     #sidebar{
         margin-left: 0;
         float: right;
-        min-width: 200px;
-        max-width: 200px;
+        min-width: 20%;
+        max-width: 20%;
     }
     #tweet_panel{
     min-width: 60%;

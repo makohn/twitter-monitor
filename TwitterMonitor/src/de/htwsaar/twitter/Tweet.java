@@ -1,5 +1,6 @@
 package de.htwsaar.twitter;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +13,7 @@ public class Tweet {
 	private long tweetId; 
 	private long authorId;
 	private String text; 
-	private Date createdAt; 
+	private Timestamp createdAt; 
 	private String place;
 	private int favoriteCount;
 	private int retweetCount;
@@ -32,7 +33,7 @@ public class Tweet {
 		this.tweetId = status.getId();
 		this.authorId = status.getUser().getId();
 		this.text = status.getText();
-		this.createdAt = status.getCreatedAt();
+		this.createdAt = (Timestamp) status.getCreatedAt();
 		this.place = status.getPlace().getCountry();
 		this.favoriteCount = status.getFavoriteCount();
 		this.retweetCount = status.getRetweetCount();
@@ -41,7 +42,6 @@ public class Tweet {
 		MediaEntity[] me = status.getMediaEntities();
 		for (MediaEntity m : me)
 			urls.add(m.getMediaURL());	
-		
 	}
 
 	public long getTweetId() {
@@ -72,7 +72,7 @@ public class Tweet {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
 

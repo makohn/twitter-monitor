@@ -42,20 +42,20 @@ public class TweetDao {
 
 			public Tweet mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-				Tweet tweet = new Tweet();
+			    Tweet tweet = new Tweet();
 
-				tweet.setTweetId(rs.getLong("tweet_id"));
-				tweet.setAuthorId(rs.getLong("autor_id"));
-				tweet.setText(rs.getString("text"));
-				tweet.setCreatedAt(rs.getDate("erstellt_am"));
-				tweet.setPlace(rs.getString("standort"));
-				tweet.setFavoriteCount(rs.getInt("anzahl_likes"));
-				tweet.setRetweetCount(rs.getInt("anzahl_retweets"));
-				
-				tweet.setUrls(getUrlsOfTweet(rs.getLong("tweet_id")));
+			    tweet.setTweetId(rs.getLong("tweet_id"));
+			    tweet.setAuthorId(rs.getLong("autor_id"));
+			    tweet.setText(rs.getString("text"));
+			    tweet.setCreatedAt(rs.getTimestamp("erstellt_am"));
+			    tweet.setPlace(rs.getString("standort"));
+			    tweet.setFavoriteCount(rs.getInt("anzahl_likes"));
+			    tweet.setRetweetCount(rs.getInt("anzahl_retweets"));
+			            
+			    tweet.setUrls(getUrlsOfTweet(rs.getLong("tweet_id")));
 
-				return tweet;
-			}
+			    return tweet;
+			   }
 
 		});
 	}
@@ -153,13 +153,13 @@ public class TweetDao {
 
 		// eigentlichen Tweet hinzufügen 
         
-        String insert = "insert into tweets (tweet_id, autor_id, text) values (:tweetId, :autorId, :text)";
+		String insert = "insert into tweets (tweet_id, autor_id, text, erstellt_am) values (:tweetId, :autorId, :text, :createdAt)";
          
         Map<String, Object> paramMap = new HashMap<String, Object>();
         paramMap.put("tweetId", tweet.getTweetId());
         paramMap.put("autorId", tweet.getAuthorId());
         paramMap.put("text", tweet.getText());
-         
+        paramMap.put("createdAt", tweet.getCreatedAt());
         jdbc.update(insert, paramMap);
          
         //das koennte man mit einem Batch-update effektiver machen
