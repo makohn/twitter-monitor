@@ -33,7 +33,7 @@ public class Tweet {
 		this.tweetId = status.getId();
 		this.authorId = status.getUser().getId();
 		this.text = status.getText();
-		this.createdAt = (Timestamp) status.getCreatedAt();
+		this.createdAt = new Timestamp(status.getCreatedAt().getTime());
 		this.place = status.getPlace().getCountry();
 		this.favoriteCount = status.getFavoriteCount();
 		this.retweetCount = status.getRetweetCount();
