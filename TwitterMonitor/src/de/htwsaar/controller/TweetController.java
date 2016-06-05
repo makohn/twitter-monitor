@@ -12,40 +12,30 @@ import de.htwsaar.twitter.Tweet;
 import de.htwsaar.twitter.TweetService;
 
 @Controller
-public class TweetController
-{
+public class TweetController {
 
 	private TweetService tweetService;
 
 	@Autowired
-	public void setTweetService(TweetService tweetService)
-	{
+	public void setTweetService(TweetService tweetService) {
 		this.tweetService = tweetService;
 	}
 
 	@RequestMapping("/showTweets")
-	public String showAdd(Model model)
-	{
-		int tweetListSize = 20;
-		
-		ArrayList<Tweet> tweets = (ArrayList<Tweet>) tweetService.getTweets();
-		
-//		for (int i=tweetListSize-1;i > 0;i--)
-//		{
-//			tweets1.add(tweetsRow.get(tweetsRow.size()-i));
-//		}
-//		for (Tweet tweet : tweets1)
-//		{
-//			tweets.add(tweet);
-//			if (tweetListSize == tweets.size())
-//			{
-//				break;
-//			}
-//		}
-		
-		model.addAttribute("tweets", tweets);
-
-		return "showTweets";
-	}
-
+	 public String showAdd(Model model)
+	 {
+	  int tweetListSize = 2;
+	  
+	  ArrayList<Tweet> tweets = (ArrayList<Tweet>) tweetService.getTweets();
+	  ArrayList<Tweet> tweets1 = new ArrayList<Tweet>();
+	  for (int i=tweetListSize-1;i > 0;i--)
+	  {
+	   tweets1.add(tweets.get(i));
+	  }
+	  
+	  
+	  model.addAttribute("tweets", tweets);
+	        
+	  return "showTweets";
+	 }
 }
