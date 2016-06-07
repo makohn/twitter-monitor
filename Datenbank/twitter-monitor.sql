@@ -78,6 +78,7 @@ CREATE TABLE IF NOT EXISTS `tweets` (
   `text` varchar(160) NOT NULL,
   `anzahl_likes` int(11),
   `anzahl_retweets` int(11),
+  `prio` tinyint,
   `standort` text,
   `tweet_datum` datetime,
   `erstellt_am` datetime default current_timestamp,
@@ -97,7 +98,6 @@ CREATE TABLE IF NOT EXISTS `tweet_bilder` (
 CREATE TABLE IF NOT EXISTS `tweets_x_keywords` (
   `tweet_id` bigint NOT NULL,
   `keyword` varchar(50) NOT NULL,
-  `prio` tinyint,
   PRIMARY KEY (`tweet_id`, `keyword`),
   FOREIGN KEY (`keyword`) REFERENCES `keywords` (`keyword`),
   FOREIGN KEY (`tweet_id`) REFERENCES `tweets` (`tweet_id`)
