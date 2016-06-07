@@ -16,11 +16,13 @@
 	href="Resources/CSS/showTweets.css">
 
 <script type="text/javascript" src="Resources/JS/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="Resources/JS/tweets.js"></script>
 
 
 
 </head>
 <body style="margin: 0 auto;">
+
 
 	<div id="header"></div>
 
@@ -54,29 +56,15 @@
 			</select>
 
 		</div>
-		<c:forEach var="row" items="${tweets}">
-			<div class="tweet_panel">
-			<div class="line"></div>
-				<c:set value="none" var="display"></c:set>
-				<c:set value="" var="pic"></c:set>
-				<c:if test="${row.getUrls().size() > 0}">
-					<c:set value="${row.getUrls().get(0)}" var="pic"></c:set>
-					<c:set value="block" var="display"></c:set>
-				</c:if>
-				<div class="tweet_pic" style="background-image:url(${pic});display:${display}"></div>
+
+		<div id="tweet_panel"></div>
+		<script type="text/javascript">
+			function onLoad() {
+				$.getJSON("<c:url value="/getTweets"/>", updateTweets);
 				
-				
-			
-				<div class="tweet_time">
-				<c:out value="Date: ${row.getCreatedAt().toString()}" />
-				</div>
-				<div class="tweet_text">
-					<c:out value="${row.getText()}" />
-				</div>
-				
-			</div>
-		</c:forEach>
-	
+			}
+			onLoad();
+		</script>
 	</div>
 
 </body>
