@@ -79,6 +79,7 @@ CREATE TABLE IF NOT EXISTS `tweets` (
   `anzahl_likes` int(11),
   `anzahl_retweets` int(11),
   `prio` tinyint,
+  `prio_calc` float,
   `standort` text,
   `tweet_datum` datetime,
   `erstellt_am` datetime default current_timestamp,
