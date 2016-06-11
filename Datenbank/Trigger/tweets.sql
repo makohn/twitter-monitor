@@ -3,16 +3,22 @@
 	setzt die Priorität
 */
 DELIMITER $$
-drop trigger if exists tweets_after_insert;
-create trigger tweets_after_insert
-after insert
+drop trigger if exists tweets_before_insert;
+create trigger tweets_before_insert
+before insert
 	on tweets for each row
 begin
+	declare l_anzahl_follower int;
+	
 	insert into tweets_x_keywords (keyword, tweet_id)
 		(select distinct k.keyword, t.tweet_id from tweets t, keywords k
 			where new.text regexp k.keyword
 			and t.tweet_id = new.tweet_id);
-	call recalc_tweet_prio(new.tweet_id);
+			
+	select anzahl_follower into l_anzahl_follower
+			from tweet_autor
+			where autor_id = new.autor_id;	
+	set new.prio = get_prio(new.anzahl_likes, new.anzahl_retweets, l_anzahl_follower);
 end;$$
 
 /* Trigger errechnet nach dem Ändern der Spalten Likes oder Retweets eines Tweets
@@ -31,6 +37,6 @@ begin
 			from tweet_autor
 			where autor_id = new.autor_id;
 			
-		set new.prio_calc = get_prio(new.anzahl_likes, new.anzahl_retweets, l_anzahl_follower);
+		set new.prio = get_prio(new.anzahl_likes, new.anzahl_retweets, l_anzahl_follower);
 	end if;
 end;$$

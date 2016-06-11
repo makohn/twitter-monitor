@@ -47,5 +47,5 @@ begin
 	declare l_prio float default 0;
 	set l_prio = calc_tweet_prio(p_tweet_id);
 	
-	update tweets set prio_calc = l_prio where tweet_id = p_tweet_id;
+	update tweets set prio = l_prio where tweet_id = p_tweet_id;
 end;$$
