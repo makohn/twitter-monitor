@@ -21,6 +21,6 @@
 		<security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/**" access="permitAll" /> <!-- Keine gute Lösung, User hat Zugriff auf alle Seiten -->
 		<!-- <security:intercept-url pattern="/**" access="denyAll" /> -->
-		<security:form-login />
+		<security:form-login login-page="/" />
 	</security:http>
 </beans>

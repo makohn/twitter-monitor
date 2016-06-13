@@ -29,14 +29,14 @@
         </div>
         <div id="login_panel">
         <div id="login_title">Log in</div>   
-        <form >
+        <form name='f' action='¢{pageContext.request.contextPath}}/j_spring_security_check' method='POST'>
         <label for="login_user">Username</label>
         
-        <input id="textfield_benutzer" type=text>
+        <input id="textfield_benutzer" name='j_username' type=text>
         <label for="login_password">Password</label>
-        <input  id="textfield_password" type=password>
+        <input  id="textfield_password" type=password name='j_password'>
         <div id="new_account" onclick="newUser()" >Neues Benutzerkonto erstellen</div>
-            <div id="loginButton" >Login</div>
+            <input id="loginButton" type="submit">
         </div>
         </form>
         </header>
@@ -51,7 +51,7 @@
        		 <div id="createAccount">
         	
       
-			<form>
+			<form >
 				
 					<label for="user_name">Username</label>
 					<input path="user" name="username" type="text">
