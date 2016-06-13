@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
@@ -16,28 +16,29 @@
         <link rel="stylesheet"  type="text/css" href="Resources/CSS/home.css">
         <link rel="stylesheet"  type="text/css" href="Resources/CSS/Animate.css">
         
-        <script type="text/javascript" src="JS/jquery-2.1.4.js"></script>
-        <script type="text/javascript" src="JS/homeAnimation.js"></script>
-        
+        <script type="text/javascript" src="Resources/JS/jquery-2.1.4.js"></script>
+        <script type="text/javascript" src="Resources/JS/homeAnimation.js"></script>
+        <script type="text/javascript" src="Resources/JS/home.js"></script>
 
     </head>
     <body style="margin: 0 auto;">
-
+	<div id="header_deko"></div>
         <header >
-        <div id="logo">
-        <img src="picture/Bitmap%20Copy.png" alt="logo">    
+      
+        <div id="logo">   
         </div>
         <div id="login_panel">
-        <div id="login_label">Log in</div>    
-        <div id="benutzer_label">Benutzer</div>
-        <input style="textfield" id="textfield_benutzer">
-        <div id="password_label">Passwort</div>
-        <input  id="textfield_password">
-        <div id="new_account" >Neues Benutzerkonto erstellen</div>
-            <div id="loginButton">Login</div>
+        <div id="login_title">Log in</div>   
+        <form >
+        <label for="login_user">Username</label>
         
-        
+        <input id="textfield_benutzer" type=text>
+        <label for="login_password">Password</label>
+        <input  id="textfield_password" type=password>
+        <div id="new_account" onclick="newUser()" >Neues Benutzerkonto erstellen</div>
+            <div id="loginButton" >Login</div>
         </div>
+        </form>
         </header>
         
         <div id="page">
@@ -46,6 +47,28 @@
             <div id="text_comic">Haben Sie die Übersicht <p></p>verloren ?</div>
             <div id="runningMail_pic" ></div>
             </div>
+       		
+       		 <div id="createAccount">
+        	
+      
+			<form>
+				
+					<label for="user_name">Username</label>
+					<input path="user" name="username" type="text">
+					<label for="user_email">Email</label>
+					<input path="email" name="email" type="email">
+					<label for="user_password">Password</label>
+					<input path="password" name="password" type="password">
+					
+					
+					
+						<input value="Erstelle Benutzerkonto" type="submit"  />
+					
+				
+
+			
+			</form>
+        </div>
        
         </div>
         
