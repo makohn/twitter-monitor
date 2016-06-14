@@ -7,7 +7,7 @@
 }
 body{
     min-width: 520px;
-    background-color: #f9fbee;   
+    background-color: #f6f8d1;   
 }
 
 #logo{
@@ -158,12 +158,15 @@ a                       {
 
 .tweet_time            {
                         float: left;
+                        background-color:white;
                         color: #4266b2;
                         padding-top: 20px;
                         padding-left: 10px;
                         min-height: 40px;
-                        min-width: 180px;
-                        
+                        min-width: 530px;
+                        box-shadow: 10px 12px 12px 0px rgba(0,0,0,0.50);
+                        border-top-left-radius: 28px;
+                        border-top-right-radius: 28px;
                         }
 
 .tweet_pic              {
@@ -172,9 +175,10 @@ a                       {
                         min-height: 400px;
                         min-width: 540px;
                         max-width: 540px;
+                        
                         border-top-left-radius: 20px;
                         border-top-right-radius: 20px;
-                        
+                        box-shadow: 10px 12px 12px 0px rgba(0,0,0,0.50);
                         background-size: cover;
                         background-repeat: no-repeat;
                         }
@@ -182,15 +186,17 @@ a                       {
                         clear: left;
                         font-size:20px;
                         float: left;
-                        min-width: 500px;;
-                        max-width: 500px;
+                        min-width: 510px;;
+                        max-width: 510px;
                         min-height: 50px;
                         padding-left: 30px;
                         line-height: 25px;
                         background-color: white;
                         padding:20px;
-                        }
+                        box-shadow: 10px 10px 12px 0px rgba(0,0,0,0.50);
+                        border-bottom-left-radius: 28px;
 .tweet_rating           {
+                        }
                         float: right;
                         padding-top: 20px;
                         padding-right: 10px;
@@ -199,11 +205,11 @@ a                       {
     
 }
 .line					{
-						margin-top:25px;
-						margin-bottom:25px;
-						min-height:3px;
+						margin-top:40px;
+						margin-bottom:40px;
+						min-height:1px;
 						min-width:300px;
-						background-color: #ffc50e;
+						background-color: #dcdcdc;
 						}
 
 #sidebar                {

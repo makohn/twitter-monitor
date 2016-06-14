@@ -1,35 +1,53 @@
+#header_deko{
+	background-color: #ffc50e;
+	min-height:50px;
+	min-width:100%;
+	
+}
+
 header {
     
-    background-color: #00AFF2;
+    background-color: black;
     
-    padding-left: 50px;
-    
-    min-height: 230px;
+    min-height:230px;
     min-width: 100%;
 }
 
-#logo{
-    position: relative;
-    float: left;
-    margin-top: 20px;
+
+    #logo{
+                        display:none;
+                        float: left;
+                        background-image: url(../Picture/Hummingbird.png);
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        margin-top: 30px;
+                        margin-left: 30px;
+                        min-height: 80px;
+                        min-width: 250px;
+                        
+                    
 }
+
         
 #login_panel{
-    background-color: white;
+   
     border-radius: 20px;
     position: relative;
     float: right;
-    margin-top: 30px;
-    margin-right: 100px;
+    margin-top: 10px;
+    padding-right:50px;
+    margin-right: 50px;
     min-width: 300px;
-    min-height: 160px;
+    max-width:300px;
+    
     
     
 }
-#login_label{
+#login_title{
     position: relative;
     float: left;
-    color: #00AFF2;
+    clear:right;
+    color: #4CAF50;
     margin-top: 10px;
     margin-left: 10px;
     font-size: 18px;
@@ -38,21 +56,7 @@ header {
     
     
 }
-#benutzer_label{
-    position: relative;
-    float: left;
-    clear:left;
-    margin-top: 20px;
-    margin-left: 10px;
-    
-}
-#textfield_benutzer{
-    position: relative;
-    float: left;
-    margin-top: 20px;
-    margin-left: 10px;
-    
-}
+
 #password_label{
     position: relative;
     float: left;
@@ -70,27 +74,32 @@ header {
 #new_account{
     position: relative;
     float: left;
-    color: #00AFF2;
+    color: #4CAF50;
     clear: left;
     margin-top: 20px;
-    margin-left: 20px;
+    margin-left: 65px;
+    font-size:12px;
+    cursor:pointer;
 }
 #loginButton{
     float: left;
     color: white;
-    background-color: #00AFF2;
+    background-color: #4CAF50;
     border-radius: 15px;
     padding-top: 10px;
     padding-left: 5px;
     padding-right: 5px;
-    margin-top: 5px;
-    margin-left: 15px;
+    margin-top: 15px;
+    margin-left: 35px;
     min-width: 30px;
     min-height: 30px;
-    
+    cursor:pointer;
+}
+#loginButton:hover {
+    background-color: #45a049;
 }
 #page {
-    min-width: 100%
+    min-width: 100%;
     min-height: 2200px;
     
 }
@@ -110,7 +119,7 @@ header {
 
 #bird_pic{
     display: none;
-    background-image: url(birdcarrypost.png);
+    background-image: url(../Picture/birdcarrypost.png);
     background-repeat: no-repeat;
     background-size: contain;
     position: absolute;
@@ -123,7 +132,7 @@ header {
 }
 #runningMail_pic{
     display: none;
-    background-image: url(runningmailbox.png);
+    background-image: url(../Picture/runningmailbox.png);
     background-repeat: no-repeat;
     background-size: contain;
     position: absolute;
@@ -143,6 +152,77 @@ header {
     line-height: 10px;
 }
 
+#createAccount{
+	display:none;
+	float:left;
+	margin-top:100px;
+	margin-left:200px;
+	min-width:300px;
+	max-width:300px;
+	min-height: 400px;
+}
+input, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+input[id=textfield_benutzer],select{
+	float:left;
+	 width: 200px;;
+   padding: 5px 5px;
+    margin-left:5px;
+    margin-top:30px;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;	
+}
+input[id=textfield_password],select{
+	
+	float:left;
+	 width: 200px;;
+   padding: 5px 5px;
+    
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;	
+}
+label[for=login_password]{
+	float:left;
+	color:white;
+	clear:left;
+	padding:10px;
+	margin-top:8px;
+
+}
+label[for=login_user]{
+	clear:left;
+	float:left;
+	color:white;	
+	padding:10px;
+	margin-top:20px;
+}
 footer{
     
    min-height: 200px;
@@ -150,3 +230,9 @@ footer{
     background-color: gainsboro;
 }
 
+@media screen and (min-width: 700px) {
+     #logo{
+            display:block;
+     }
+ 
+}  

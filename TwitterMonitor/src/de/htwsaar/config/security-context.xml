@@ -16,11 +16,14 @@
 
 
 	<security:http use-expressions="true">
+	
 		<security:intercept-url pattern="/showTweets"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/" access="permitAll" />
-		<security:intercept-url pattern="/**" access="permitAll" /> <!-- Keine gute Lösung, User hat Zugriff auf alle Seiten -->
 		<!-- <security:intercept-url pattern="/**" access="denyAll" /> -->
-		<security:form-login />
+		<security:form-login login-page="/" 
+			login-processing-url="/j_spring_security_check"
+			password-parameter="j_password" username-parameter="j_username"
+			default-target-url="/showTweets" />
 	</security:http>
 </beans>

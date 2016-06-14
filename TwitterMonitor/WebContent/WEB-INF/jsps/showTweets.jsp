@@ -61,7 +61,6 @@
 		<script type="text/javascript">
 			function onLoad() {
 				$.getJSON("<c:url value="/getTweets"/>", updateTweets);
-				
 			}
 			onLoad();
 		</script>

@@ -24,4 +24,6 @@ $(document).ready(function(){
         $('#bird_pic').addClass('animated fadeInLeft');
         $('#bird_pic').css('display','block');
     },3900);
+    
+    
 })
