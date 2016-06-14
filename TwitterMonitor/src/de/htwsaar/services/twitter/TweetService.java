@@ -1,4 +1,4 @@
-package de.htwsaar.twitter;
+package de.htwsaar.services.twitter;
 
 import java.util.List;
 
@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import de.htwsaar.db.TweetDao;
+import de.htwsaar.model.Author;
+import de.htwsaar.model.Tweet;
 import twitter4j.Status;
 
 @Service

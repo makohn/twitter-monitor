@@ -1,4 +1,4 @@
-package de.htwsaar.twitter;
+package de.htwsaar.model;
 
 import twitter4j.Status;
 

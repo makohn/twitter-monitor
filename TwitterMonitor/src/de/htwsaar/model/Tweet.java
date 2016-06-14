@@ -1,4 +1,4 @@
-package de.htwsaar.twitter;
+package de.htwsaar.model;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

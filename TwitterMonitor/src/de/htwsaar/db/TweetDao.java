@@ -13,8 +13,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import de.htwsaar.twitter.Author;
-import de.htwsaar.twitter.Tweet;
+import de.htwsaar.model.Author;
+import de.htwsaar.model.Tweet;
 
 @Component("tweetDao")
 public class TweetDao {

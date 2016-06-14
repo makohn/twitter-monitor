@@ -1,4 +1,4 @@
-package de.htwsaar.twitter;
+package de.htwsaar.services.twitter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

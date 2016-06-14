@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import de.htwsaar.twitter.Tweet;
-import de.htwsaar.twitter.TweetService;
+import de.htwsaar.model.Tweet;
+import de.htwsaar.services.twitter.TweetService;
 
 @Controller
 public class TweetController {
