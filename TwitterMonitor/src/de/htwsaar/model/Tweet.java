@@ -1,26 +1,29 @@
 package de.htwsaar.model;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import de.htwsaar.exceptions.model.TweetException;
+import de.htwsaar.validators.model.TweetValidator;
 import twitter4j.MediaEntity;
 import twitter4j.Status;
 
 public class Tweet {
+            
+//	private static final String REGEX = "[\uD83C\uDF00-\uD83D\uDDFF]|[\uD83D\uDE00-\uD83D\uDE4F]|[\uD83D\uDE80-\uD83D\uDEFF]|[\u2600-\u26FF]|[\u2700-\u27BF]";
+//    private static final Pattern PATTERN = Pattern.compile(REGEX);
 	
 	private long tweetId; 
 	private long authorId;
 	private String text; 
-	private Timestamp createdAt; 
+	private Date createdAt; 
 	private String place;
 	private int favoriteCount;
 	private int retweetCount;
 	private List<String> urls;
 	
-	public Tweet() {
-		
+	public Tweet() {		
 		urls = new ArrayList<String>();
 	}
 
@@ -28,27 +31,30 @@ public class Tweet {
 	 * Initializes a tweet object with information gained from the
 	 * received status object.
 	 * @param status
+	 * @throws TweetException 
 	 */
-	public Tweet(Status status) {
-		this.tweetId = status.getId();
-		this.authorId = status.getUser().getId();
-		this.text = status.getText();
-		this.createdAt = new Timestamp(status.getCreatedAt().getTime());
-		this.place = status.getPlace().getCountry();
-		this.favoriteCount = status.getFavoriteCount();
-		this.retweetCount = status.getRetweetCount();
+	public Tweet(Status status) throws TweetException {
 		
-		this.urls = new ArrayList<String>();
-		MediaEntity[] me = status.getMediaEntities();
-		for (MediaEntity m : me)
-			urls.add(m.getMediaURL());	
+		this();
+		
+		TweetValidator.checkStatus(status);		
+		
+		setTweetId(status.getId());
+		setAuthorId(status.getUser());
+		setText(status.getText());				
+		setCreatedAt(status.getCreatedAt());
+		setPlace(status.getPlace());
+		setFavoriteCount(status.getFavoriteCount());
+		setRetweetCount(status.getRetweetCount());
+		setUrls(status.getMediaEntities());
 	}
 
 	public long getTweetId() {
 		return tweetId;
 	}
 
-	public void setTweetId(long tweetId) {
+	public void setTweetId(long tweetId) throws TweetException {		
+		TweetValidator.checkTweetId(tweetId);		
 		this.tweetId = tweetId;
 	}
 
@@ -56,15 +62,22 @@ public class Tweet {
 		return authorId;
 	}
 
-	public void setAuthorId(long authorId) {
+	public void setAuthorId(long authorId) throws TweetException {
+		TweetValidator.checkAuthorId(authorId);
 		this.authorId = authorId;
+	}
+	
+	public void setAuthorId(twitter4j.User user) throws TweetException {
+		TweetValidator.checkUser(user);
+		setAuthorId(user.getId());
 	}
 
 	public String getText() {
 		return text;
 	}
 
-	public void setText(String text) {
+	public void setText(String text) throws TweetException {
+		text = TweetValidator.checkText(text);
 		this.text = text;
 	}
 
@@ -72,8 +85,13 @@ public class Tweet {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Timestamp createdAt) {
+	public void setCreatedAt(Date createdAt) {
+		createdAt = TweetValidator.checkCreatedAt(createdAt);
 		this.createdAt = createdAt;
+	}
+	
+	public long getAge( ) {
+		return new Date().getTime() - getCreatedAt().getTime();
 	}
 
 	public String getPlace() {
@@ -81,7 +99,15 @@ public class Tweet {
 	}
 
 	public void setPlace(String place) {
+		TweetValidator.checkPlace(place);
 		this.place = place;
+	}
+	
+	public void setPlace(twitter4j.Place place) {	
+		if (place == null)
+			setPlace("");
+		else
+			setPlace(place.getCountry());
 	}
 
 	public int getFavoriteCount() {
@@ -89,6 +115,7 @@ public class Tweet {
 	}
 
 	public void setFavoriteCount(int favoriteCount) {
+		favoriteCount = TweetValidator.checkFavoriteCount(favoriteCount);
 		this.favoriteCount = favoriteCount;
 	}
 
@@ -97,6 +124,7 @@ public class Tweet {
 	}
 
 	public void setRetweetCount(int retweetCount) {
+		retweetCount = TweetValidator.checkRetweetCount(retweetCount);
 		this.retweetCount = retweetCount;
 	}
 	
@@ -105,7 +133,27 @@ public class Tweet {
 	}
 
 	public void setUrls(List<String> list) {
+		list = TweetValidator.checkUrls(list);
 		this.urls = list;
+	}
+	
+	private void setUrls(MediaEntity[] mediaEntities) {		
+		mediaEntities = TweetValidator.checkUrls(mediaEntities);		
+		ArrayList<String> urlList = new ArrayList<String>();
+		for (MediaEntity m : mediaEntities) {
+			urlList.add(m.getMediaURL());
+		}
+		setUrls(urlList);		
+	}
+	
+	@Override
+	public boolean equals(Object object) {
+		if ( object instanceof Tweet ) {
+			if ( ((Tweet) object).getTweetId() == getTweetId() )
+				return true;
+		}		
+		return false;
+			
 	}
 
 	@Override
