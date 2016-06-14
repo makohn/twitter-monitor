@@ -10,9 +10,6 @@ import twitter4j.MediaEntity;
 import twitter4j.Status;
 
 public class Tweet {
-            
-//	private static final String REGEX = "[\uD83C\uDF00-\uD83D\uDDFF]|[\uD83D\uDE00-\uD83D\uDE4F]|[\uD83D\uDE80-\uD83D\uDEFF]|[\u2600-\u26FF]|[\u2700-\u27BF]";
-//    private static final Pattern PATTERN = Pattern.compile(REGEX);
 	
 	private long tweetId; 
 	private long authorId;
