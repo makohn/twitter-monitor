@@ -99,6 +99,6 @@ CREATE TABLE IF NOT EXISTS `tweets_x_keywords` (
   `tweet_id` bigint NOT NULL,
   `keyword` varchar(50) NOT NULL,
   PRIMARY KEY (`tweet_id`, `keyword`),
-  FOREIGN KEY (`keyword`) REFERENCES `keywords` (`keyword`),
+  FOREIGN KEY (`keyword`) REFERENCES `keywords` (`keyword`) ON DELETE CASCADE,
   FOREIGN KEY (`tweet_id`) REFERENCES `tweets` (`tweet_id`) ON DELETE CASCADE
 );
