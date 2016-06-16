@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `tweet_bilder` (
     `tweet_id` bigint NOT NULL,
     `url` varchar(100) NOT NULL,
     PRIMARY KEY (`tweet_id`, `url`),
-    FOREIGN KEY (`tweet_id`) REFERENCES `tweets` (`tweet_id`)
+    FOREIGN KEY (`tweet_id`) REFERENCES `tweets` (`tweet_id`) ON DELETE CASCADE
 );
 
 -- Struktur von Tabelle twitter-monitor.tweets_x_keywords
