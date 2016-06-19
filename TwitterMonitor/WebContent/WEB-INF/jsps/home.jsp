@@ -55,13 +55,12 @@
 
 
 			
-				<sf:form method="post" action="${pageContext.request.contextPath}/newAccount" commandName="keyword">
+				<sf:form method="post" action="${pageContext.request.contextPath}/newAccount" commandName="user">
 			
-				<label for="user_name">Username</label> 
-				<input path="user" name="username" type="text"> <label for="user_email">Email</label>
-				<input path="email" name="email" type="email">
+				<label for="user_email">Email</label>
+				<sf:input path="email" name="email" type="email"/>
 				 <label for="user_password">Password</label>
-				 <input path="password" name="password" type="password"> 
+				 <sf:input path="password" name="password" type="password"/> 
 				<input value="Erstelle Benutzerkonto" type="submit" />
 
 			  </sf:form>

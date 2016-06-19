@@ -7,27 +7,16 @@ import de.htwsaar.validators.model.UserValidator;
 
 public class User {
 	
-	private int userId;
 	private String email;
 	private String password;
 	private Date registeredAt;
 	
 	public User() {}
 	
-	public User(int userId, String email, String password, Date registeredAt) throws UserException {		
-		setUserId(userId);
+	public User(String email, String password, Date registeredAt) throws UserException {
 		setEmail(email);
 		setPassword(password);
 		setRegisteredAt(registeredAt);
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) throws UserException {
-		UserValidator.checkUserId(userId);
-		this.userId = userId;
 	}
 
 	public String getEmail() {
@@ -59,7 +48,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", registeredAt="
+		return "User [email=" + email + ", password=" + password + ", registeredAt="
 				+ registeredAt + "]";
 	}
 }

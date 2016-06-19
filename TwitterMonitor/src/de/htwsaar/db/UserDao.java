@@ -2,7 +2,6 @@ package de.htwsaar.db;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +40,6 @@ public class UserDao {
 				User user = new User();
 
 				try {
-					user.setUserId(rs.getInt("benutzer_id"));
 					user.setEmail(rs.getString("email"));
 					user.setPassword(rs.getString("passwort"));
 					user.setRegisteredAt(rs.getDate("registrierdatum"));
@@ -74,7 +72,6 @@ public class UserDao {
 				User user = new User();
 
 				try {
-					user.setUserId(rs.getInt("benutzer_id"));
 					user.setEmail(rs.getString("email"));
 					user.setPassword(rs.getString("passwort"));
 					user.setRegisteredAt(rs.getDate("registrierdatum"));
@@ -95,11 +92,10 @@ public class UserDao {
 
 	public void insertUser(User user) {
 
-		String insert = "insert into benutzer (benutzer_id, email, passwort) values (:userId, :email, :password)"
+		String insert = "insert into benutzer (email, passwort) values (:email, :password)"
 				+ " on duplicate key update email=:email, passwort=:password;";
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("userId", user.getUserId());
 		paramMap.put("email", user.getEmail());
 		paramMap.put("password", user.getPassword());
 
