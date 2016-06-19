@@ -20,6 +20,11 @@ import twitter4j.conf.ConfigurationBuilder;
 
 @Service
 public class StreamService {
+	
+	private static final String CONSUMER_KEY = "4y9HVRAg43m3dfWoDKCWOzf9x";
+	private static final String CONSUMER_SECRET = "GdZVRXMaGYn2b4PTXficnQVztCbE8eSlBJPT2zIIY5xn45zZRt";
+	private static final String ACCESS_TOKEN = "712907200507850753-BNhxmqynkH6R7LyxG4GUsOf6pGP9i2L";
+	private static final String ACCESS_TOKEN_SECRET = "xPLvu603NO1l1GJzZtmUNNokKqsdj1obVhrVHsHNAa0l8";
 
 	private TwitterStream stream;
 	private TweetListener tweetListener;
@@ -34,14 +39,15 @@ public class StreamService {
 	}
 
 	/**
-	 *  
+	 *  Erzeugt einen Stream mithilfe der OAuth Zugangsdaten, welche dieser
+	 *  App zugeordnet sind.
 	 */
 	private void createStream() {
 		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setOAuthConsumerKey("4y9HVRAg43m3dfWoDKCWOzf9x");
-		cb.setOAuthConsumerSecret("GdZVRXMaGYn2b4PTXficnQVztCbE8eSlBJPT2zIIY5xn45zZRt");
-		cb.setOAuthAccessToken("712907200507850753-BNhxmqynkH6R7LyxG4GUsOf6pGP9i2L");
-		cb.setOAuthAccessTokenSecret("xPLvu603NO1l1GJzZtmUNNokKqsdj1obVhrVHsHNAa0l8");
+		cb.setOAuthConsumerKey(CONSUMER_KEY);
+		cb.setOAuthConsumerSecret(CONSUMER_SECRET);
+		cb.setOAuthAccessToken(ACCESS_TOKEN);
+		cb.setOAuthAccessTokenSecret(ACCESS_TOKEN_SECRET);
 
 		stream = new TwitterStreamFactory(cb.build()).getInstance();
 

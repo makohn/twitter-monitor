@@ -2,7 +2,6 @@ package de.htwsaar.db;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +9,6 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -18,7 +16,6 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import de.htwsaar.exceptions.model.TweetException;
-import de.htwsaar.model.Author;
 import de.htwsaar.model.Tweet;
 
 @Component("tweetDao")
@@ -42,7 +39,7 @@ public class TweetDao {
 	 */
 	public List<Tweet> getTweets() {
 
-		String query = "select * from tweets";
+		String query = "select * from tweets limit 10";
 
 		return jdbc.query(query, new RowMapper<Tweet>() {
 
