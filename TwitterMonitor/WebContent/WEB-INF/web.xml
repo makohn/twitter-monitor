@@ -52,8 +52,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-		classpath:de/htwsaar/config/tweet-context.xml
-		classpath:de/htwsaar/config/tweetDao-context.xml
+		classpath:de/htwsaar/config/service-context.xml
+		classpath:de/htwsaar/config/dao-context.xml
 		classpath:de/htwsaar/config/security-context.xml
 		</param-value>
 	</context-param>
