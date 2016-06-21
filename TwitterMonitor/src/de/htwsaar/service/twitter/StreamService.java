@@ -1,6 +1,7 @@
 package de.htwsaar.service.twitter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import de.htwsaar.db.TweetDao;
@@ -88,6 +89,7 @@ public class StreamService {
 		stream.shutdown();
 	}
 
+	@Scheduled(cron = "0 1 1 * * ?")
 	public void restartStream() {
 		stopStream();
 		startStream();
