@@ -34,8 +34,8 @@ public class TweetValidator {
 	public static String checkText(String text) throws TweetException {
 		if ( text == null )
 			throw new TweetException();
-		if ( text.length() > 160 )
-			text = text.substring(0, 159);
+		if ( text.length() > 199 )
+			text = text.substring(0, 199);
 		
 		return text;
 	}
@@ -49,6 +49,8 @@ public class TweetValidator {
 	public static String checkPlace(String place) {
 		if ( place == null )
 			place = "";
+		if ( place.length() > 59 )
+			place = place.substring(0, 59);
 		return place;
 	}
 

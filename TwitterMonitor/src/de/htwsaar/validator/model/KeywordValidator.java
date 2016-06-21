@@ -8,13 +8,22 @@ public class KeywordValidator {
 		if ( keyword == null )
 			throw new KeywordException();
 		
-		if ( keyword.length() > 50 )
+		if ( keyword.length() > 49 )
 			throw new KeywordException();
 	}
 
 	public static void checkUserId(int userId) throws KeywordException {
 		if ( userId < 0 )
 			throw new KeywordException();		
+	}
+	
+	public static String checkUsername(String username) throws KeywordException {
+		if ( username == null )
+			throw new KeywordException();
+		if ( username.length() > 59 )
+			throw new KeywordException();
+		
+		return username;
 	}
 
 	public static void checkPriority(int priority) throws KeywordException {
