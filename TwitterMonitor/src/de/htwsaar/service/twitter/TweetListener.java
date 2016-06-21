@@ -1,5 +1,8 @@
 package de.htwsaar.service.twitter;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import twitter4j.StallWarning;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
@@ -12,13 +15,18 @@ import twitter4j.StatusListener;
  * die Datenbank.
  */
 
+@Component("tweetListener")
 public class TweetListener implements StatusListener {
 			
 	private TweetService tweetService;
 					
-	public TweetListener(TweetService tweetService) {
+	public TweetListener(TweetService tweetService) {}
+	
+	@Autowired
+	public void setTweetService(TweetService tweetService) {
 		this.tweetService = tweetService;
 	}
+
 
 	/* (non-Javadoc)
 	 * Triggers the tweetService to insert Objects into the
