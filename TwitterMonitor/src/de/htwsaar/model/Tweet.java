@@ -25,7 +25,8 @@ public class Tweet {
 	}
 
 	/**
-	 * Initialisiert ein Tweet Objekt mit den Daten aus dem Status
+	 * Initializes a tweet object with information gained from the
+	 * received status object.
 	 * @param status
 	 * @throws TweetException 
 	 */
