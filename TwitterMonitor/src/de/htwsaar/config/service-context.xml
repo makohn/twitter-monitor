@@ -9,9 +9,4 @@
 	<context:component-scan base-package="de.htwsaar.services"></context:component-scan>
 	<mvc:annotation-driven></mvc:annotation-driven>
 
-	<bean id="tweetListener" class="de.htwsaar.service.twitter.TweetListener">
-		<constructor-arg name="tweetService" ref="tweetService"></constructor-arg>
-	</bean>
-	
-
 </beans>
