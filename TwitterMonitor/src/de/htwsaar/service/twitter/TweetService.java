@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import de.htwsaar.db.AuthorDao;
@@ -17,6 +18,15 @@ import de.htwsaar.model.IncomingTweet;
 import de.htwsaar.model.Tweet;
 import twitter4j.Status;
 
+/**
+ * The TweetService Class is a facade for I/O activities of Tweet Objects.
+ * It can be seen as the superior layer to the DAO layer, providing methods
+ * for storing and loading Tweet Objects.
+ * 
+ * Incoming tweets are buffered before they get passed to the DAO layer. 
+ * 
+ * @author Philipp Schaefer 
+ */
 @Service
 public class TweetService {
 
@@ -25,10 +35,11 @@ public class TweetService {
 	
 	private static final int RETWEET_REFRESH_LIMIT = 25;
 	private static final int MAXIMUM_BUFFER_SIZE = 100;
+	private static final long FIFTEEN_MINUTES = 15 * 60 * 1000;
 	
 
-	private HashMap<IncomingTweet, Integer> retweetMap;
-	private boolean isLocked;
+	private volatile HashMap<IncomingTweet, Integer> retweetMap;
+//	private boolean isLocked;
 
 	private TweetDao tweetDao;
 	private AuthorDao authorDao;
@@ -40,53 +51,44 @@ public class TweetService {
 		this.authorDao = authorDao;
 
 		retweetMap = new HashMap<IncomingTweet, Integer>();
-		isLocked = false;
+//		isLocked = false;
 	}
 
 	public List<Tweet> getTweets() {
 		return tweetDao.getTweets();
 	}
+	
+	public Tweet getTweet(long id) {
+		return tweetDao.getTweet(id);
+	}
+	
+	public void insertTweet(Tweet tweet) {
+		tweetDao.insertTweet(tweet);
+	}
 
-	/**
-	 * Uploads a single tweet into the database.
-	 * 
-	 * @param tweety
-	 */
-	public void uploadTweet(Tweet tweety) {
-		tweetDao.insertTweet(tweety);
+	public void insertAuthor(Author author) {
+		authorDao.insertAuthor(author);
 	}
 
 	/**
-	 * Uploads a single author into the database.
-	 * 
-	 * @param authory
-	 */
-	public void uploadAutor(Author authory) {
-		authorDao.insertAuthor(authory);
-	}
-
-	/**
+	 * This method converts a stream-received Tweet Status into a Tweet Object
+	 * Depending on the tweet being an original or a Retweet, the Tweet Object is
+	 * either added to the buffer or updated if already existing.
 	 * @throws TwitterMonitorException
-	 *             First inserts the author, then inserts a tweet in the
-	 *             database. This is necessary b.o. author_id being a FK in the
-	 *             tweet table.
-	 * 
-	 * @param status,
-	 *            the tweet information object @throws
+	 * @param status - the tweet information object
 	 */
-	public synchronized void insertStatus(Status status) {
-		// "synchronized" hat mir Olbertz empfohlen, weil ja evtl. mehrere Tweets die Methode gleichzeitig aufrufen
-		// so müsste sie theoretisch vom Multithreading her gesperrt sein, solange sie läuft.
-		// Ich hatte mir dafür nur dieses Boolean-Schloss überlegt. (Olbertz war sich nicht so ganz sicher)
-		
-		if ( !isLocked && (retweetMap.size() > MAXIMUM_BUFFER_SIZE) ) {
-			isLocked = true;
-			clearMap();
-			isLocked = false;
-		}
+	public /*synchronized*/ void insertStatus(Status status) {
+		//TODO: "synchronized" hat mir Olbertz empfohlen, weil ja evtl. mehrere Tweets die Methode gleichzeitig aufrufen
+		// so m¸sste sie theoretisch vom Multithreading her gesperrt sein, solange sie l‰uft.
+		// Ich hatte mir dafuer nur dieses Boolean-Schloss ¸berlegt. (Olbertz war sich nicht so ganz sicher)
+				
+//		if ( !isLocked && (retweetMap.size() > MAXIMUM_BUFFER_SIZE) ) {
+//			isLocked = true;
+//			clearMap();
+//			isLocked = false;
+//		}
 		
 		try {
-
 			// If the status is a retweet then load the original status and
 			// forget the retweet.
 			if (status.isRetweet()) {
@@ -104,7 +106,6 @@ public class TweetService {
 				// and leave the method.
 				return;
 			}
-
 
 			// Check if the map already has an entry for the tweet.
 			if (retweetMap.containsKey(tweet)) {
@@ -132,8 +133,6 @@ public class TweetService {
 			authorDao.insertAuthor(author);
 			tweetDao.insertTweet(tweet);
 
-			System.out.println("                                         Größe der Map: " + retweetMap.size());
-
 		} catch (AuthorException e) {
 			e.printStackTrace();
 		} catch (TweetException e) {
@@ -145,26 +144,13 @@ public class TweetService {
 		}
 	}
 
-	public void insertTweet(Tweet tweet) {
-		tweetDao.insertTweet(tweet);
-	}
-
-	public void insertAuthor(Author author) {
-		authorDao.insertAuthor(author);
-	}
-
-	public void updateAuthor(Author author) {
-		authorDao.updateAuthor(author);
-	}
-
-	public void updateTweet(Tweet tweet) {
-		tweetDao.updateTweet(tweet);
-	}
-	
+	/**
+	 * This method clears and renews the buffer at a given interval.
+	 */
+	@Scheduled(fixedDelay = FIFTEEN_MINUTES)
 	private void clearMap() {
 				
-		HashMap<IncomingTweet, Integer> newMap = new HashMap<IncomingTweet, Integer>();
-		
+		HashMap<IncomingTweet, Integer> newMap = new HashMap<IncomingTweet, Integer>();		
 		ArrayList<Tweet> toBeUpdated = new ArrayList<Tweet>();
 						
 		// Check all entry and remove, keep or update them accordingly.
@@ -188,7 +174,7 @@ public class TweetService {
 				// update the tweets to the database. (The tweet is removed from the map afterwards)
 				toBeUpdated.add(t);
 			}
-			// If the tweet is not to old, has recently been retweeted, was retweeted more than once, but not more than a certain amount,
+			// If the tweet is not too old, has recently been retweeted, was retweeted more than once, but not more than a certain amount,
 			else {
 				// keep them in the buffer.
 				newMap.put(t, retweetMap.get(t));
@@ -214,8 +200,9 @@ public class TweetService {
 		
 		tweetDao.insertTweets(toBeUpdated);
 		
-		// Anmerkung: Alternativ könnte man in dieser Methode auch einfach alle tweets die kein 0-retweet-count haben updaten
+		// Anmerkung: Alternativ kˆnnte man in dieser Methode auch einfach alle tweets die kein 0-retweet-count haben updaten
 		// Habe erst nachdem ich das alles fertig hatte mich nochmal an das Batch-Update gesetzt...
+		System.out.println("Grˆﬂe des Buffers: " + retweetMap.size());
 	}
 	
 }
