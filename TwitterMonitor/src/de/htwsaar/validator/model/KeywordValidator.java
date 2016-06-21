@@ -1,6 +1,6 @@
-package de.htwsaar.validators.model;
+package de.htwsaar.validator.model;
 
-import de.htwsaar.exceptions.model.KeywordException;
+import de.htwsaar.exception.model.KeywordException;
 
 public class KeywordValidator {
 

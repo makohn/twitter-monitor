@@ -15,7 +15,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
-import de.htwsaar.exceptions.model.TweetException;
+import de.htwsaar.exception.model.TweetException;
 import de.htwsaar.model.Tweet;
 
 @Component("tweetDao")

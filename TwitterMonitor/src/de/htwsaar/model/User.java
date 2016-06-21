@@ -2,8 +2,8 @@ package de.htwsaar.model;
 
 import java.util.Date;
 
-import de.htwsaar.exceptions.model.UserException;
-import de.htwsaar.validators.model.UserValidator;
+import de.htwsaar.exception.model.UserException;
+import de.htwsaar.validator.model.UserValidator;
 
 public class User {
 	

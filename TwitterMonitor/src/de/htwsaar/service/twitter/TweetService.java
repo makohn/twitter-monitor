@@ -1,4 +1,4 @@
-package de.htwsaar.services.twitter;
+package de.htwsaar.service.twitter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import de.htwsaar.db.AuthorDao;
 import de.htwsaar.db.TweetDao;
-import de.htwsaar.exceptions.TwitterMonitorException;
-import de.htwsaar.exceptions.model.AuthorException;
-import de.htwsaar.exceptions.model.TweetException;
+import de.htwsaar.exception.TwitterMonitorException;
+import de.htwsaar.exception.model.AuthorException;
+import de.htwsaar.exception.model.TweetException;
 import de.htwsaar.model.Author;
 import de.htwsaar.model.IncomingTweet;
 import de.htwsaar.model.Tweet;

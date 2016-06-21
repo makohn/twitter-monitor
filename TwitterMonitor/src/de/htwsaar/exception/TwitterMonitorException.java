@@ -1,4 +1,4 @@
-package de.htwsaar.exceptions;
+package de.htwsaar.exception;
 
 public class TwitterMonitorException extends Exception {
 

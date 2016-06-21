@@ -1,4 +1,4 @@
-package de.htwsaar.services.twitter;
+package de.htwsaar.service.twitter;
 
 import twitter4j.StallWarning;
 import twitter4j.Status;

@@ -1,4 +1,4 @@
-package de.htwsaar.services.user;
+package de.htwsaar.service.user;
 
 import java.util.List;
 

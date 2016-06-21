@@ -1,7 +1,7 @@
 package de.htwsaar.model;
 
-import de.htwsaar.exceptions.model.AuthorException;
-import de.htwsaar.validators.model.AuthorValidator;
+import de.htwsaar.exception.model.AuthorException;
+import de.htwsaar.validator.model.AuthorValidator;
 import twitter4j.Status;
 
 public class Author {

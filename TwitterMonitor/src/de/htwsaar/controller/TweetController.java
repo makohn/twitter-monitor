@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import de.htwsaar.model.Tweet;
-import de.htwsaar.services.twitter.TweetService;
+import de.htwsaar.service.twitter.TweetService;
 
 @Controller
 public class TweetController {

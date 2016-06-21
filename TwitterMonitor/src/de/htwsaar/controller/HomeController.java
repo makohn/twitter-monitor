@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import de.htwsaar.model.User;
-import de.htwsaar.services.user.UserService;
+import de.htwsaar.service.user.UserService;
 
 @Controller
 public class HomeController {

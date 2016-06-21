@@ -2,8 +2,8 @@ package de.htwsaar.model;
 
 import java.util.Date;
 
-import de.htwsaar.exceptions.model.TweetException;
-import de.htwsaar.validators.model.TweetValidator;
+import de.htwsaar.exception.model.TweetException;
+import de.htwsaar.validator.model.TweetValidator;
 import twitter4j.Status;
 
 public class IncomingTweet extends Tweet {

@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import de.htwsaar.exceptions.model.UserException;
+import de.htwsaar.exception.model.UserException;
 import de.htwsaar.model.User;
 
 @Component("userDao")

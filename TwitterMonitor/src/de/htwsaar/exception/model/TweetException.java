@@ -1,4 +1,4 @@
-package de.htwsaar.exceptions.model;
+package de.htwsaar.exception.model;
 
 public class TweetException extends ModelException {
 
