@@ -11,19 +11,19 @@ import de.htwsaar.model.User;
 @Service
 public class UserService {
 	
-	private UserDao dao;
+	private UserDao userDao;
 	
 	@Autowired
-	public UserService(UserDao dao) {
-		this.dao = dao;
+	public UserService(UserDao userDao) {
+		this.userDao = userDao;
 	}
 
 	public void insertUser(User user) {
-		dao.insertUser(user);		
+		userDao.insertUser(user);		
 	}
 
 	public List<User> getUsers() {
-		return dao.getUsers();
+		return userDao.getUsers();
 	}
 
 }
