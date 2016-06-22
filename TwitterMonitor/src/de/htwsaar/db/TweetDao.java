@@ -48,7 +48,7 @@ public class TweetDao {
 	 */
 	public List<Tweet> getTweets() {
 
-		String query = "select * from tweets";
+		String query = "select * from tweets limit 20";
 
 		return jdbc.query(query, new TweetRowMapper());
 	}
