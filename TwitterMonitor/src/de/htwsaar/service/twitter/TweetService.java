@@ -200,9 +200,8 @@ public class TweetService {
 		
 		tweetDao.insertTweets(toBeUpdated);
 		
-		// Anmerkung: Alternativ kˆnnte man in dieser Methode auch einfach alle tweets die kein 0-retweet-count haben updaten
+		// Anmerkung: Alternativ koennte man in dieser Methode auch einfach alle tweets die kein 0-retweet-count haben updaten
 		// Habe erst nachdem ich das alles fertig hatte mich nochmal an das Batch-Update gesetzt...
-		System.out.println("Grˆﬂe des Buffers: " + retweetMap.size());
 	}
 	
 }
