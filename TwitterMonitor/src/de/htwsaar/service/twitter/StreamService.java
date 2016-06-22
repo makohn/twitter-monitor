@@ -29,19 +29,16 @@ public class StreamService {
 
 	private TwitterStream stream;
 	private TweetListener tweetListener;
-	private TweetDao dao;
 
 	@Autowired
 	public StreamService(TweetListener tweetListener, TweetDao dao) {
 		this.tweetListener = tweetListener;
-		this.dao = dao;
-
 		startStream();
 	}
 
 	/**
-	 *  Erzeugt einen Stream mithilfe der OAuth Zugangsdaten, welche dieser
-	 *  App zugeordnet sind.
+	 *  This method builds a stream to the twitter API by using the
+	 *  OAuth Credentials that are connected to this application.
 	 */
 	private void createStream() {
 		ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -56,8 +53,8 @@ public class StreamService {
 	}
 
 	/**
-	 * Initialisiert den Stream mit den Keywords aus der Datenbank im Filter.
-	 * 
+	 * This method initializes the stream with keywords and other filters,
+	 * such as languages. 
 	 */
 	private void initStream() {
 
