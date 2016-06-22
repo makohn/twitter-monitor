@@ -11,12 +11,11 @@ import twitter4j.TwitterStreamFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
 /**
- * @author philipp
- * 
- *         Der StreamService ist dafuer verantwortlich einen einen Stream und einen
- *         Filter zu erstellen, zu konfigurieren und den Stream zu initialisieren, indem der Filter
- *         darauf angewendet wird.
+ * The class StreamService is responsible for creating a stream to the Twitter APi as well as
+ * a filter, which configures and initializes the stream which defined parameters, such as
+ * keywords.
  *
+ * @author Philipp Schaefer, Moritz Grill
  */
 
 @Service
