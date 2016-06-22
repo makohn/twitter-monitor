@@ -20,7 +20,7 @@ public class TweetListener implements StatusListener {
 			
 	private TweetService tweetService;
 					
-	public TweetListener(TweetService tweetService) {}
+	public TweetListener() {}
 	
 	@Autowired
 	public void setTweetService(TweetService tweetService) {
