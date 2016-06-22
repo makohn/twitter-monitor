@@ -1,9 +1,13 @@
 
 package de.htwsaar.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,9 +31,22 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/newAccount", method=RequestMethod.POST) 
-	public String newAccount(User user){
-		userService.insertUser(user);
+	public String newAccount(@Valid User user, BindingResult result){
 		
+		if(result.hasErrors()) {
+			System.out.println(result);
+			return "home";
+		}
+		
+		user.setAuthority("user");
+		user.setEnabled(true);	
+		
+		try {
+			userService.insertUser(user);
+		} catch (DuplicateKeyException e) {
+			result.rejectValue("username",  "DuplicateKey.username", "Dieser Benutzername existiert bereits.");
+			return "home";
+		}
 		return "showTweets";	
 	}
 }
