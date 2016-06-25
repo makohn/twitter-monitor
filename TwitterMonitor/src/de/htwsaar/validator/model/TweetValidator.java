@@ -1,10 +1,10 @@
-package de.htwsaar.validators.model;
+package de.htwsaar.validator.model;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import de.htwsaar.exceptions.model.TweetException;
+import de.htwsaar.exception.model.TweetException;
 import twitter4j.MediaEntity;
 import twitter4j.Status;
 import twitter4j.User;
@@ -34,8 +34,8 @@ public class TweetValidator {
 	public static String checkText(String text) throws TweetException {
 		if ( text == null )
 			throw new TweetException();
-		if ( text.length() > 160 )
-			text = text.substring(0, 159);
+		if ( text.length() > 199 )
+			text = text.substring(0, 199);
 		
 		return text;
 	}
@@ -49,6 +49,8 @@ public class TweetValidator {
 	public static String checkPlace(String place) {
 		if ( place == null )
 			place = "";
+		if ( place.length() > 59 )
+			place = place.substring(0, 59);
 		return place;
 	}
 

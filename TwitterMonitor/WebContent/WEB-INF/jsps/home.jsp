@@ -29,8 +29,8 @@
 			action='${pageContext.request.contextPath}/j_spring_security_check'
 			method='POST'>
 			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" /> <label for="login_user">Username</label> <input
-				id="textfield_benutzer" name='j_username' type=text> <label
+				value="${_csrf.token}" /> <label for="login_user">Username</label> 
+				<input id="textfield_benutzer" name='j_username' type=text> <label
 				for="login_password">Password</label> <input id="textfield_password"
 				type=password name='j_password'>
 			<div id="new_account" onclick="newUser()">Neues Benutzerkonto
@@ -54,16 +54,17 @@
 		<div id="createAccount">
 
 
-			<form>
+			
+				<sf:form method="post" action="${pageContext.request.contextPath}/newAccount" commandName="user">
+				<label for="user_name">Username</label>
+				<sf:input path="username" name="username" type="text"/>
+				<label for="user_email">Email</label>
+				<sf:input path="email" name="email" type="email"/>
+				 <label for="user_password">Password</label>
+				 <sf:input path="password" name="password" type="password"/> 
+				<input value="Erstelle Benutzerkonto" type="submit" />
 
-				<label for="user_name">Username</label> <input path="user"
-					name="username" type="text"> <label for="user_email">Email</label>
-				<input path="email" name="email" type="email"> <label
-					for="user_password">Password</label> <input path="password"
-					name="password" type="password"> <input
-					value="Erstelle Benutzerkonto" type="submit" />
-
-			</form>
+			  </sf:form>
 		</div>
 	</div>
 </body>

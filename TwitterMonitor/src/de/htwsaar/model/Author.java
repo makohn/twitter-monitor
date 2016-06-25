@@ -1,19 +1,17 @@
 package de.htwsaar.model;
 
-import de.htwsaar.exceptions.model.AuthorException;
-import de.htwsaar.validators.model.AuthorValidator;
+import de.htwsaar.exception.model.AuthorException;
+import de.htwsaar.validator.model.AuthorValidator;
 import twitter4j.Status;
 
 public class Author {
 	
-	private long id;
+	private long authorId;
 	private String name;
 	private String screenName;
 	private int followerCount;
-	private int favoriteCount;
 	private String pictureUrl;
-	
-	
+		
 	/**
 	 * Generates Author objects based on status params received in the stream
 	 * @usedIn TweetListener [onStatus()]
@@ -26,11 +24,10 @@ public class Author {
 		
 		twitter4j.User user = status.getUser();
 		
-		setId(user.getId());
+		setAuthorId(user.getId());
 		setName(user.getName());
 		setScreenName(user.getScreenName());
 		setFollowerCount(user.getFollowersCount());
-		setFavoriteCount(user.getFavouritesCount());
 		setPictureUrl(user.getProfileImageURL());	
 	}
 	
@@ -41,12 +38,12 @@ public class Author {
 	 */
 	public Author() {}
 	
-	public long getId() {
-		return id;		
+	public long getAuthorId() {
+		return authorId;		
 	}
-	public void setId(long id) throws AuthorException {
-		AuthorValidator.checkId(id);
-		this.id = id;
+	public void setAuthorId(long authorId) throws AuthorException {
+		AuthorValidator.checkId(authorId);
+		this.authorId = authorId;
 	}
 	public String getName() {
 		return name;
@@ -70,15 +67,6 @@ public class Author {
 		followerCount = AuthorValidator.checkFollowerCount(followerCount);
 		this.followerCount = followerCount;
 	}
-	
-	public int getFavoriteCount() {
-		return favoriteCount;
-	}
-	
-	public void setFavoriteCount(int favoriteCount) {
-		favoriteCount = AuthorValidator.checkFavoriteCount(favoriteCount);
-		this.favoriteCount = favoriteCount;
-	}
 
 	public String getPictureUrl() {		
 		return pictureUrl;
@@ -91,8 +79,7 @@ public class Author {
 
 	@Override
 	public String toString() {
-		return "Author [id=" + id + ", name=" + name + ", screenName=" + screenName + ", followerCount=" + followerCount
-				+ ", favoriteCount=" + favoriteCount + ", pictureUrl=" + pictureUrl + "]";
+		return "Author [authorId=" + authorId + ", name=" + name + ", screenName=" + screenName + ", followerCount="
+				+ followerCount + ", pictureUrl=" + pictureUrl + "]";
 	}
-
 }

@@ -1,8 +1,8 @@
-package de.htwsaar.validators.model;
+package de.htwsaar.validator.model;
 
 import java.util.Date;
 
-import de.htwsaar.exceptions.model.UserException;
+import de.htwsaar.exception.model.UserException;
 
 public class UserValidator {
 

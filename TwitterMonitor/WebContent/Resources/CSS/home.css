@@ -92,6 +92,7 @@ header {
     margin-top: 15px;
     margin-left: 35px;
     min-width: 30px;
+    max-width:50px;
     min-height: 30px;
     cursor:pointer;
 }

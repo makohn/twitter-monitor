@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import de.htwsaar.exceptions.model.TweetException;
-import de.htwsaar.validators.model.TweetValidator;
+import de.htwsaar.exception.model.TweetException;
+import de.htwsaar.validator.model.TweetValidator;
 import twitter4j.MediaEntity;
 import twitter4j.Status;
 
