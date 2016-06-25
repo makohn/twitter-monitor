@@ -1,4 +1,4 @@
-/* Trigger gleicht nach dem Einfügen eines neuen Tweets
+/* Trigger gleicht vor dem Einfügen eines neuen Tweets
    	die Keywords mit dem neuen Tweet ab und
 	setzt die Priorität
 */
@@ -9,15 +9,17 @@ before insert
 	on tweets for each row
 begin
 	declare l_anzahl_follower int;
-	
+
+	# TODO: Nicht alle Tweets mit dem entsprechenden Keyword werden beachtet
 	insert into tweets_x_keywords (keyword, tweet_id)
 		(select distinct k.keyword, t.tweet_id from tweets t, keywords k
 			where new.text regexp k.keyword
 			and t.tweet_id = new.tweet_id);
-			
+
 	select anzahl_follower into l_anzahl_follower
 			from tweet_autor
-			where autor_id = new.autor_id;	
+			where autor_id = new.autor_id;
+
 	set new.prio = get_prio(new.anzahl_likes, new.anzahl_retweets, l_anzahl_follower);
 end;$$
 
@@ -31,12 +33,12 @@ before update
 	on tweets for each row
 begin
 	declare l_anzahl_follower int;
-	
+
 	if new.anzahl_likes <=> old.anzahl_likes or new.anzahl_retweets <=> old.anzahl_retweets then
 		select anzahl_follower into l_anzahl_follower
 			from tweet_autor
 			where autor_id = new.autor_id;
-			
+
 		set new.prio = get_prio(new.anzahl_likes, new.anzahl_retweets, l_anzahl_follower);
 	end if;
 end;$$

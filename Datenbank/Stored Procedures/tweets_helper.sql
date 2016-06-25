@@ -8,11 +8,11 @@ create function get_prio(
 ) returns float
 begin
 	declare l_prio float default 0;
-	
+
 	if p_follower is not null then
-		set l_prio = round((((ifnull(p_likes,0) / 2) + ifnull(p_retweets,0) * 2) / ifnull(p_follower,1)) * 100, 3);
+		set l_prio = round((((ifnull(p_likes,0) / 2) + ifnull(p_retweets,0)) / (sqrt(ifnull(p_follower,1))+100)), 2);
 	end if;
-	
+
 	return l_prio;
 end;$$
 
@@ -26,7 +26,7 @@ create function calc_tweet_prio(
 ) returns float
 begin
 	declare l_prio float default 0;
-	
+
 	select get_prio(t.anzahl_likes, t.anzahl_retweets, a.anzahl_follower)
 		into l_prio
 		from tweets t, tweet_autor a
@@ -42,10 +42,10 @@ DELIMITER $$
 drop procedure if exists recalc_tweet_prio;
 create procedure recalc_tweet_prio(
 	p_tweet_id bigint
-) 
+)
 begin
 	declare l_prio float default 0;
 	set l_prio = calc_tweet_prio(p_tweet_id);
-	
+
 	update tweets set prio = l_prio where tweet_id = p_tweet_id;
 end;$$
