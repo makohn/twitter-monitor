@@ -8,19 +8,19 @@ create trigger tweets_before_insert
 before insert
 	on tweets for each row
 begin
-	declare l_anzahl_follower int;
+	declare l_followerCount int;
 
 	# TODO: Nicht alle Tweets mit dem entsprechenden Keyword werden beachtet
-	insert into tweets_x_keywords (keyword, tweet_id)
-		(select distinct k.keyword, t.tweet_id from tweets t, keywords k
+	insert into tweets_x_keywords (keyword, tweetId)
+		(select distinct k.keyword, t.tweetId from tweets t, keywords k
 			where new.text regexp k.keyword
-			and t.tweet_id = new.tweet_id);
+			and t.tweetId = new.tweetId);
 
-	select anzahl_follower into l_anzahl_follower
-			from tweet_autor
-			where autor_id = new.autor_id;
+	select followerCount into l_followerCount
+			from tweetAuthors
+			where authorId = new.authorId;
 
-	set new.prio = get_prio(new.anzahl_likes, new.anzahl_retweets, l_anzahl_follower);
+	set new.prio = get_prio(new.favoriteCount, new.retweetCount, l_followerCount);
 end;$$
 
 /* Trigger errechnet nach dem Ändern der Spalten Likes oder Retweets eines Tweets
@@ -32,13 +32,13 @@ create trigger tweets_before_update
 before update
 	on tweets for each row
 begin
-	declare l_anzahl_follower int;
+	declare l_followerCount int;
 
-	if new.anzahl_likes <=> old.anzahl_likes or new.anzahl_retweets <=> old.anzahl_retweets then
-		select anzahl_follower into l_anzahl_follower
-			from tweet_autor
-			where autor_id = new.autor_id;
+	if new.favoriteCount <=> old.favoriteCount or new.retweetCount <=> old.retweetCount then
+		select followerCount into l_followerCount
+			from tweetAuthors
+			where authorId = new.authorId;
 
-		set new.prio = get_prio(new.anzahl_likes, new.anzahl_retweets, l_anzahl_follower);
+		set new.prio = get_prio(new.favoriteCount, new.retweetCount, l_followerCount);
 	end if;
 end;$$
