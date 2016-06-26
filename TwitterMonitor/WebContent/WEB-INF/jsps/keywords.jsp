@@ -16,7 +16,7 @@
 	href="Resources/CSS/showTweets.css">
 
 <script type="text/javascript" src="Resources/JS/jquery-2.1.4.js"></script>
-<script type="text/javascript" src="Resources/JS/tweets.js"></script>
+<script type="text/javascript" src="Resources/JS/keywords.js"></script>
 
 
 
@@ -57,7 +57,7 @@
 
 		</div>
 
-		<div id="tweet_panel"></div>
+		<div id="keywords_div"></div>
 		<script type="text/javascript">
 			function onLoad() {
 				$.getJSON("<c:url value="/getKeywords"/>", updateKeywords);
