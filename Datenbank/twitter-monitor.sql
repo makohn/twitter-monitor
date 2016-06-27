@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `user_x_preferences` (
 CREATE TABLE IF NOT EXISTS `keywords` (
   `keyword` varchar(50) NOT NULL,
   `username` varchar(60) NOT NULL,
-  `activ` char(1) DEFAULT 'T' NOT NULL,
+  `active` char(1) DEFAULT 'T' NOT NULL,
   `createdAt` datetime default current_timestamp,
   PRIMARY KEY (`keyword`,`username`),
   FOREIGN KEY (`username`) REFERENCES `users` (`username`)
