@@ -40,3 +40,8 @@ begin
 		set new.prio = get_prio(new.anzahl_likes, new.anzahl_retweets, l_anzahl_follower);
 	end if;
 end;$$
+
+/*
+	Braucht man vielleicht noch einen Trigger für nach dem Löschen eines Tweets, der die Einträge dafür wieder löscht?
+	Oder macht das der Foreign Key mit Cascade?
+*/
