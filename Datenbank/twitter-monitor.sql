@@ -2,103 +2,110 @@
 CREATE DATABASE IF NOT EXISTS `twitter_monitor` /*!40100 COLLATE 'utf8_general_ci' */;
 USE `twitter_monitor`;
 
--- Struktur von Tabelle twitter-monitor.benutzer
-CREATE TABLE IF NOT EXISTS `benutzer` (
-  `benutzer_id` int(11) NOT NULL AUTO_INCREMENT,
+-- Struktur von Tabelle twitter-monitor.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `username` varchar(60) NOT NULL,
+  `password` varchar(80) NOT NULL,
+  `enabled` tinyint default 1 NOT NULL,
   `email` varchar(60) NOT NULL,
-  `passwort` text NOT NULL,
-  `registrierdatum` datetime default current_timestamp,
-  PRIMARY KEY (`benutzer_id`)
+  `registeredAt` datetime default current_timestamp,
+  PRIMARY KEY (`username`)
 );
 
--- Struktur von Tabelle twitter-monitor.einstellungen
-CREATE TABLE IF NOT EXISTS `einstellungen` (
-  `kz` char(3) NOT NULL,
-  `beschreibung` text NOT NULL,
-  `standardwert` int(11) NOT NULL,
-  PRIMARY KEY (`kz`)
+CREATE TABLE IF NOT EXISTS `authorities` (
+  `username` varchar(60) NOT NULL,
+  `authority` varchar(60) NOT NULL,
+  PRIMARY KEY (`username`, `authority`),
+  FOREIGN KEY (`username`) REFERENCES `users` (`username`)
 );
 
--- Struktur von Tabelle twitter-monitor.benachrichtigungs_typ
-CREATE TABLE IF NOT EXISTS `benachrichtigungs_typ` (
-  `kz` char(3) NOT NULL,
-  `beschreibung` text NOT NULL,
-  PRIMARY KEY (`kz`)
+-- Struktur von Tabelle twitter-monitor.notificationType
+CREATE TABLE IF NOT EXISTS `notificationType` (
+  `type` char(3) NOT NULL,
+  `descr` varchar(60) NOT NULL,
+  PRIMARY KEY (`type`)
 );
 
--- Struktur von Tabelle twitter-monitor.benachrichtigungen
-CREATE TABLE IF NOT EXISTS `benachrichtigungen` (
-  `benachrichtigungs_id` int(11) NOT NULL AUTO_INCREMENT,
-  `benutzer_id` int(11) NOT NULL,
-  `benachrichtigungs_typ_kz` char(3) NOT NULL,
-  `titel` text NOT NULL,
-  `text` text NOT NULL,
-  `erstellt_am` datetime default current_timestamp,
-  `versendet_am` datetime,
-  PRIMARY KEY (`benachrichtigungs_id`),
-  FOREIGN KEY (`benachrichtigungs_typ_kz`) REFERENCES `benachrichtigungs_typ` (`kz`),
-  FOREIGN KEY (`benutzer_id`) REFERENCES `benutzer` (`benutzer_id`)
+-- Struktur von Tabelle twitter-monitor.notifications
+CREATE TABLE IF NOT EXISTS `notifications` (
+  `notificationId` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(60) NOT NULL,
+  `type` char(3) NOT NULL,
+  `subject` varchar(60) NOT NULL,
+  `body` text NOT NULL,
+  `createdAt` datetime default current_timestamp,
+  `sentAt` datetime,
+  PRIMARY KEY (`notificationId`),
+  FOREIGN KEY (`type`) REFERENCES `notificationType` (`type`),
+  FOREIGN KEY (`username`) REFERENCES `users` (`username`)
 );
 
--- Struktur von Tabelle twitter-monitor.benutzer_x_einstellungen
-CREATE TABLE IF NOT EXISTS `benutzer_x_einstellungen` (
-  `benutzer_id` int(11) NOT NULL,
-  `einstellungen_kz` char(3) NOT NULL,
-  `wert` int(11),
-  PRIMARY KEY (`benutzer_id`,`einstellungen_kz`),
-  FOREIGN KEY (`benutzer_id`) REFERENCES `benutzer` (`benutzer_id`),
-  FOREIGN KEY (`einstellungen_kz`) REFERENCES `einstellungen` (`kz`)
+-- Struktur von Tabelle twitter-monitor.preferences
+CREATE TABLE IF NOT EXISTS `preferences` (
+  `preferenceType` char(3) NOT NULL,
+  `descr` varchar(60) NOT NULL,
+  `defaultValue` int(11) NOT NULL,
+  PRIMARY KEY (`preferenceType`)
+);
+
+-- Struktur von Tabelle twitter-monitor.user_x_preferences
+CREATE TABLE IF NOT EXISTS `user_x_preferences` (
+  `username` varchar(60) NOT NULL,
+  `preferenceType` char(3) NOT NULL,
+  `value` int(11) NOT NULL,
+  PRIMARY KEY (`username`,`preferenceType`),
+  FOREIGN KEY (`username`) REFERENCES `users` (`username`),
+  FOREIGN KEY (`preferenceType`) REFERENCES `preferences` (`preferenceType`)
 );
 
 -- Struktur von Tabelle twitter-monitor.keywords
 CREATE TABLE IF NOT EXISTS `keywords` (
   `keyword` varchar(50) NOT NULL,
-  `benutzer_id` int(11) NOT NULL,
-  `aktiv` char(1) DEFAULT 'T' NOT NULL,
-  `erstellt_am` datetime default current_timestamp,
-  PRIMARY KEY (`keyword`,`benutzer_id`),
-  FOREIGN KEY (`benutzer_id`) REFERENCES `benutzer` (`benutzer_id`)
+  `username` varchar(60) NOT NULL,
+  `active` char(1) DEFAULT 'T' NOT NULL,
+  `createdAt` datetime default current_timestamp,
+  PRIMARY KEY (`keyword`,`username`),
+  FOREIGN KEY (`username`) REFERENCES `users` (`username`)
 );
 
--- Struktur von Tabelle twitter-monitor.tweet_autor
-CREATE TABLE IF NOT EXISTS `tweet_autor` (
-  `autor_id` bigint NOT NULL,
+-- Struktur von Tabelle twitter-monitor.tweetAuthors
+CREATE TABLE IF NOT EXISTS `tweetAuthors` (
+  `authorId` bigint NOT NULL,
   `name` varchar(15) NOT NULL,
-  `screen_name` varchar(20),
-  `anzahl_follower` int(11),
-  `anzahl_tweets` int(11),
-  `profilbild_url` varchar(100),
-  PRIMARY KEY (`autor_id`)
+  `screenName` varchar(20),
+  `followerCount` int(11),
+  `pictureUrl` varchar(100),
+  PRIMARY KEY (`authorId`)
 );
 
 -- Struktur von Tabelle twitter-monitor.tweets
 CREATE TABLE IF NOT EXISTS `tweets` (
-  `tweet_id` bigint NOT NULL,
-  `autor_id` bigint NOT NULL,
-  `text` varchar(160) NOT NULL,
-  `anzahl_likes` int(11),
-  `anzahl_retweets` int(11),
+  `tweetId` bigint NOT NULL,
+  `authorId` bigint NOT NULL,
+  `text` varchar(200) NOT NULL,
+  `favoriteCount` int(11) NOT NULL,
+  `retweetCount` int(11) NOT NULL,
   `prio` float,
-  `standort` text,
-  `tweet_datum` datetime,
-  `erstellt_am` datetime default current_timestamp,
-  PRIMARY KEY (`tweet_id`),
-  FOREIGN KEY (`autor_id`) REFERENCES `tweet_autor` (`autor_id`)
+  `place` varchar(60) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `lastUpdate` datetime default current_timestamp,
+  PRIMARY KEY (`tweetId`),
+  FOREIGN KEY (`authorId`) REFERENCES `tweetAuthors` (`authorId`)
 );
 
--- Struktur von Tabelle twitter-monitor.tweet_bilder
-CREATE TABLE IF NOT EXISTS `tweet_bilder` (
-    `tweet_id` bigint NOT NULL,
+-- Struktur von Tabelle twitter-monitor.tweetMedia
+CREATE TABLE IF NOT EXISTS `tweetMedia` (
+    `tweetId` bigint NOT NULL,
     `url` varchar(100) NOT NULL,
-    PRIMARY KEY (`tweet_id`, `url`),
-    FOREIGN KEY (`tweet_id`) REFERENCES `tweets` (`tweet_id`) ON DELETE CASCADE
+    PRIMARY KEY (`tweetId`, `url`),
+    FOREIGN KEY (`tweetId`) REFERENCES `tweets` (`tweetId`) ON DELETE CASCADE
 );
 
 -- Struktur von Tabelle twitter-monitor.tweets_x_keywords
 CREATE TABLE IF NOT EXISTS `tweets_x_keywords` (
-  `tweet_id` bigint NOT NULL,
+  `tweetId` bigint NOT NULL,
   `keyword` varchar(50) NOT NULL,
-  PRIMARY KEY (`tweet_id`, `keyword`),
+  PRIMARY KEY (`tweetId`, `keyword`),
   FOREIGN KEY (`keyword`) REFERENCES `keywords` (`keyword`) ON DELETE CASCADE,
-  FOREIGN KEY (`tweet_id`) REFERENCES `tweets` (`tweet_id`) ON DELETE CASCADE
+  FOREIGN KEY (`tweetId`) REFERENCES `tweets` (`tweetId`) ON DELETE CASCADE
 );
