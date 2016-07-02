@@ -25,6 +25,7 @@
 	    <security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/newAccount" access="permitAll" />
 		<security:intercept-url pattern="/showTweets" access="isAuthenticated()" />
+		<security:intercept-url pattern="/changePriority" access="permitAll" />
 		
 		<security:form-login login-page="/" 
 			login-processing-url="/j_spring_security_check"
