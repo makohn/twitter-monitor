@@ -1,7 +1,4 @@
-/* Trigger gleicht vor dem Einfügen eines neuen Tweets
-   	die Keywords mit dem neuen Tweet ab und
-	setzt die Priorität
-*/
+/* Trigger setzt die Priorität vor dem Einfügen eines neuen Tweets */
 DELIMITER $$
 drop trigger if exists tweets_before_insert;
 create trigger tweets_before_insert
@@ -10,17 +7,25 @@ before insert
 begin
 	declare l_followerCount int;
 
-	# TODO: Nicht alle Tweets mit dem entsprechenden Keyword werden beachtet
-	insert into tweets_x_keywords (keyword, tweetId)
-		(select distinct k.keyword, t.tweetId from tweets t, keywords k
-			where new.text regexp k.keyword
-			and t.tweetId = new.tweetId);
-
 	select followerCount into l_followerCount
 			from tweetAuthors
 			where authorId = new.authorId;
 
 	set new.prio = get_prio(new.favoriteCount, new.retweetCount, l_followerCount);
+end;$$
+
+/* Trigger gleicht nach dem Einfügen eines neuen Tweets
+   	die Keywords mit dem neuen Tweet ab
+*/
+DELIMITER $$
+drop trigger if exists tweets_after_insert;
+create trigger tweets_after_insert
+before insert
+	on tweets for each row
+begin
+	insert into tweets_x_keywords (keyword, tweetId)
+		(select distinct k.keyword, new.tweetId from keywords k
+			where new.text regexp k.keyword);
 end;$$
 
 /* Trigger errechnet nach dem Ändern der Spalten Likes oder Retweets eines Tweets
@@ -42,3 +47,8 @@ begin
 		set new.prio = get_prio(new.favoriteCount, new.retweetCount, l_followerCount);
 	end if;
 end;$$
+
+/*
+	Braucht man vielleicht noch einen Trigger für nach dem Löschen eines Tweets, der die Einträge dafür wieder löscht?
+	Oder macht das der Foreign Key mit Cascade?
+*/
