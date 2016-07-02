@@ -48,11 +48,10 @@ public class KeywordController {
 	}
 	
 	@RequestMapping(value = "changePriority", method = RequestMethod.POST) 
-	public @ResponseBody String changePriority(@RequestBody Keyword updateKeyword, HttpServletRequest request) {
-		String keyword = updateKeyword.getKeyword();
-		int priority = updateKeyword.getPriority();
-		
-		
-		return "keywords";
-	}
+    public @ResponseBody String changePriority(@RequestBody Keyword ukeyword, HttpServletRequest request) {
+        String keyword = ukeyword.getKeyword();
+        int priority = ukeyword.getPriority();
+        
+        return keyword + " " + priority;
+    }
 }

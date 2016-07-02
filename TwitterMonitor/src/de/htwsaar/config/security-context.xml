@@ -21,7 +21,7 @@
 
 
 	<security:http use-expressions="true">
-	
+	<security:csrf disabled="true"/>
 	    <security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/newAccount" access="permitAll" />
 		<security:intercept-url pattern="/showTweets" access="isAuthenticated()" />

@@ -166,6 +166,7 @@ a                       {
 						background-repeat: no-repeat;
 						background-size: contain; 
 }
+
 .prio_star2				{
 						float: left;
 						min-width: 30px;
@@ -194,6 +195,8 @@ a                       {
 						background-repeat: no-repeat;
 						background-size: contain; 
 }
+						
+
 .delete_cross			{
 						float: left;
 						margin-left: 50px;
