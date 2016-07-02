@@ -41,9 +41,10 @@ function updateKeywords(data)
         
         var prio_star1 = document.createElement("div");
 		 prio_star1.setAttribute("class","prio_star1");
-         if (keyword.prio > 0)
+         if (keyword.priority > 0)
              {
                  prio_star1.setAttribute("style",yellowStar);
+                 prio_star1.setAttribute("onClick","changePrio(".concat("\"").concat(keyword.keyword).concat("\"").concat(",").concat("1").concat("\)"));
              }
             else{
                  prio_star1.setAttribute("style",greyStar);
@@ -54,7 +55,7 @@ function updateKeywords(data)
         
         var prio_star2 = document.createElement("div");
 		 prio_star2.setAttribute("class","prio_star2");
-         if (keyword.prio > 1)
+         if (keyword.priority > 1)
              {
                  prio_star2.setAttribute("style",yellowStar);
              }
@@ -67,7 +68,7 @@ function updateKeywords(data)
         
         var prio_star3 = document.createElement("div");
 		 prio_star3.setAttribute("class","prio_star3");
-         if (keyword.prio > 2)
+         if (keyword.priority > 2)
              {
                  prio_star3.setAttribute("style",yellowStar);
              }
@@ -80,7 +81,7 @@ function updateKeywords(data)
         
         var prio_star4 = document.createElement("div");
 		 prio_star4.setAttribute("class","prio_star4");
-         if (keyword.prio > 3)
+         if (keyword.priority > 3)
              {
                  prio_star4.setAttribute("style",yellowStar);
              }
@@ -93,7 +94,7 @@ function updateKeywords(data)
         
         var prio_star5 = document.createElement("div");
 		 prio_star5.setAttribute("class","prio_star5");
-         if (keyword.prio > 4)
+         if (keyword.priority > 4)
              {
                  prio_star5.setAttribute("style",yellowStar);
              }
@@ -122,6 +123,24 @@ function deleteKeyword(keyword){
     var keyword_id = "#".concat(keyword);
     $(keyword_id).remove();
 }
+
+function changePrio(keywordName,prio) {
+	   var keyword = {
+	      "keywordName" : keywordName,
+	      "keywordPrio" : prio
+	   }
+	   $.ajax({
+	      type: "POST",
+	      contentType : 'application/json; charset=utf-8',
+	      dataType : 'json',
+	      url: "/TwitterMonitor/changePriority",
+	      data: JSON.stringify(keyword), // Note it is important
+	      success :function(result) {
+	       // do what ever you want with data
+	     }
+	  });
+	}
+
         
         
         

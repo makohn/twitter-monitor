@@ -50,8 +50,6 @@ public class TweetController {
 		List<Tweet> tweets = tweetService.getTweets();
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("tweets", tweets);
-
 		return data;
-
 	}
 }
