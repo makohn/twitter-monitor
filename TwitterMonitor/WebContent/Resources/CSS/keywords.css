@@ -1,0 +1,248 @@
+#header {
+    
+    background-color: #ffc50e;
+   
+    min-height: 50px;
+    
+}
+body{
+    min-width: 520px;
+    background-color: #f6f8d1;   
+}
+
+#logo{
+                        display: none;
+                        float: left;
+                        background-image: url(../Picture/Hummingbird.png);
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        margin-top: 30px;
+                        margin-left: 30px;
+                        min-height: 80px;
+                        min-width: 250px;
+                        
+                    
+}
+nav                     {
+                        
+                        background-color: black;
+                        min-width: 100%;
+                        min-height: 140px;
+                        max-height: 40px;
+                        }
+
+
+
+nav ul li:hover > ul    {
+		                  display: block;
+                          
+                        }
+
+nav ul                  {
+                        display: none;
+                        background: rgba(0, 0, 0, 0); 
+                        padding: 0 0px;
+                        border-color: white;
+                        border-top-width:thin;
+                        border-top-style:outset;
+                        border-bottom-width:thin;
+                        border-bottom-style:outset;
+                        list-style: none;
+                        position: relative;
+                        
+                        margin-left: 10%;
+                        margin-top: 70px;
+                        
+                        }
+
+
+
+
+nav ul:after            {
+		                  content: ""; clear: both; display: block; 
+            
+	                       }
+
+nav ul li               {
+                        z-index: 5;
+	                     float: left;
+                    
+    
+                        
+                        }
+
+
+nav ul li:hover a       {
+                        z-index: 4;
+			             color: #EED880;
+                        border-radius: 20px;
+		                }
+	
+nav ul li a             {
+                        z-index: 4;
+                            display: block; padding: 5px 40px;
+                            color: white; text-decoration: none;
+                        
+    
+                        }
+                                                            /* navigation end  */                                                                
+	
+nav ul2                    {
+                        display: block;
+                        float: left;
+                        margin-left: 10%;
+                        margin-top: 40px;
+                        background-image: url(../Picture/menuIcon.png);
+                        min-width: 50px;
+                        min-height: 50px;
+                        z-index: 4;
+}
+nav ul2 li               {
+                        display: none;
+                        z-index: 5;
+                        }
+
+nav ul2:hover > li  {
+                        display: block;
+                        z-index: 5;
+                        }
+
+nav ul2:hover   {
+                        background-image: none;
+                        background-color: #ffc50e;
+                        margin-top: 0;
+                        
+                        
+                        }
+nav ul2 li a             {
+                        z-index: 4;
+                            display: block; padding: 5px 40px;
+                            color: white; text-decoration: none;
+                        
+    
+                        }
+nav ul2 li:hover a       {
+                        z-index: 4;
+			             color: black;
+                        border-radius: 20px;
+		                }
+
+
+
+a                       {
+                        color: #EED880;
+                        text-decoration: none;
+                        }
+
+#page                   {
+                        
+                        min-height: 1000px;
+                        min-width: 100%;
+                        }
+#keywords_div			{
+						float:left;
+						margin-left: 20px;
+						margin-top: 100px;
+}
+.keyword_div			{
+						float:left;
+						clear:left;
+						min-height: 50px;
+						
+}
+.keyword_label			{
+						float:left;
+						margin-top:6px;
+						min-width: 100px;
+}
+.prio_div				{
+						float:left;
+						margin-left: 40px;
+}
+.prio_star1				{
+						float: left;
+						min-width: 30px;
+						min-height: 30px;
+						background-repeat: no-repeat;
+						background-size: contain; 
+}
+.prio_star2				{
+						float: left;
+						min-width: 30px;
+						min-height: 30px;
+						background-repeat: no-repeat;
+						background-size: contain; 
+}
+.prio_star3				{
+						float: left;
+						min-width: 30px;
+						min-height: 30px;
+						background-repeat: no-repeat;
+						background-size: contain; 
+}
+.prio_star4				{
+						float: left;
+						min-width: 30px;
+						min-height: 30px;
+						background-repeat: no-repeat;
+						background-size: contain; 
+}
+.prio_star5				{
+						float: left;
+						min-width: 30px;
+						min-height: 30px;
+						background-repeat: no-repeat;
+						background-size: contain; 
+}
+.delete_cross			{
+						float: left;
+						margin-left: 50px;
+						min-width: 30px;
+						min-height: 30px;
+						background-repeat: no-repeat;
+						background-size: contain; 
+}
+
+
+#sidebar                {
+                        float: left;
+                        margin-left: 50px;
+                        padding-left: 15px;
+                        
+                        padding-top: 40px;
+                        margin-top: 150px;
+                         border-color: gray ;
+                        border-left-style: solid;
+                        border-left-width:thin;
+                        
+    
+                        min-height: 400px;
+                        min-width: 50%;
+                        max-width: 100%;
+                        
+                        
+    
+}
+
+
+
+@media screen and (min-width: 1100px) {
+    
+  nav ul {
+    display: inline-table;
+    }
+    #sidebar{
+        margin-left: 0;
+        float: right;
+        min-width: 20%;
+        max-width: 20%;
+    }
+    
+    nav ul2 {
+            display: none;
+    }
+    #logo{
+        display: block;
+    }
+    
+}  

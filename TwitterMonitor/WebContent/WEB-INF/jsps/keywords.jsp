@@ -13,7 +13,7 @@
 <title>Focus on</title>
 
 <link rel="stylesheet" type="text/css"
-	href="Resources/CSS/showTweets.css">
+	href="Resources/CSS/keywords.css">
 
 <script type="text/javascript" src="Resources/JS/jquery-2.1.4.js"></script>
 <script type="text/javascript" src="Resources/JS/keywords.js"></script>
@@ -46,13 +46,7 @@
 	<div id="page">
 		<div id="sidebar">
 
-			<div id="username">Hallo Username</div>
-			<div id="welcome_text">Seit dem letzten Login haben wir 230
-				Tweets für dich gesammelt</div>
-			<label for="search">Search</label> <input type="search"> <label
-				for="sort">Sort</label> <select>
-				<option>Name</option>
-				<option>Zeit</option>
+			
 			</select>
 
 		</div>
