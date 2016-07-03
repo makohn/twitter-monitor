@@ -15,6 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import de.htwsaar.model.Tweet;
 import de.htwsaar.service.twitter.TweetService;
 
+/**
+ * The TweetController Class is responsible for
+ * displaying user-related tweets 
+ *  
+ * @author Philipp Schaefer, Marek Kohn, Stefan Schloesser
+ *  
+ * */
 @Controller
 public class TweetController {
 
@@ -25,24 +32,28 @@ public class TweetController {
 		this.tweetService = tweetService;
 	}
 
+	/**
+	 * This method displays all the tweets associated 
+	 * with user-specified keywords.
+	 * @param model - the keyword model representing keywords that
+	 * should be displayed.
+	 * @return the showTweets webpage adjusted to the currently 
+	 * logged-in user
+	 */
 	@RequestMapping("/showTweets")
-	public String showAdd(Model model) {
-		int tweetListSize = 2;
-
+	public String showTweets(Model model) {
+		
 		ArrayList<Tweet> tweets = (ArrayList<Tweet>) tweetService.getTweets();
-		for (int i = tweetListSize - 1; i > 0; i--) {
-			tweets.add(tweets.get(i));
-		}
-
+		
 		model.addAttribute("tweets", tweets);
 
 		return "showTweets";
 	}
 
 	/**
-	 * Converts a list of Tweets into a JSON object...
-	 * @usedIn showTweets.jsp 
-	 * @return
+	 * This method converts a list of Tweets into a JSON object.
+	 * @return a tweet Map that is interpreted as a JSON Array by
+	 * the frontend
 	 */
 	@RequestMapping(value = "getTweets", method = RequestMethod.GET, headers = "Accept=application/json")
 	@ResponseBody
