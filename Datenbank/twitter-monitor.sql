@@ -1,5 +1,5 @@
 -- Datenbank Struktur für twitter-monitor
-CREATE DATABASE IF NOT EXISTS `twitter_monitor` /*!40100 COLLATE 'utf8_general_ci' */;
+CREATE DATABASE IF NOT EXISTS `twitter_monitor` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `twitter_monitor`;
 
 -- Struktur von Tabelle twitter-monitor.users
