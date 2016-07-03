@@ -15,6 +15,14 @@ import org.springframework.stereotype.Component;
 import de.htwsaar.exception.model.KeywordException;
 import de.htwsaar.model.Keyword;
 
+/**
+ * The KeywordDao Class encapsulates the database access for the keyword entity.
+ * It provides methods for loading and storing Keyword Objects.
+ * 
+ * @author Philipp Schaefer, Marek Kohn
+ *
+ */
+
 @Component("keywordDao")
 public class KeywordDao {
 
@@ -27,6 +35,12 @@ public class KeywordDao {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
 	
+	/**
+	 * This method returns a list of all keywords that are stored in
+	 * the database and match the specified user
+	 * @param username - the unique identifier of a user
+	 * @return a list of Keyword Objects
+	 */
 	public List<Keyword> getKeywords(String username) {
 
 		String query = "select * from keywords where username = :username";
@@ -37,6 +51,11 @@ public class KeywordDao {
 		return jdbc.query(query, paramSource, new KeywordRowMapper()); 
 	}
 	
+	/**
+	 * This method returns an array of all distinct keywords stored
+	 * in the database. Duplicates will not be loaded.
+	 * @return an array of Keyword Objects
+	 */
 	public String[] getKeywords() {
 		
 		String query = "select distinct keyword from keywords";
@@ -50,11 +69,18 @@ public class KeywordDao {
 		return keywordArray;
 	}
 
+	/**
+	 * This method saves or updates a keyword in the database.
+	 * If the keyword, identified by its name, doesn't exist it is
+	 * added to the database.If the keyword does exist, its priority 
+	 * and active status get updated.
+	 * @param keyword - the keyword that should be stored or updated
+	 */
 	public void insertKeyword(Keyword keyword) {
 
 		String insert = "insert into keywords (keyword, username, priority, active)"
-								   + " values (:keyword, :username, :priority, :active)";
-//								   + " on duplicate key update priority=:priority, active=:active";
+								   + " values (:keyword, :username, :priority, :active)"
+								   + " on duplicate key update priority=:priority, active=:active";
 
 		
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();		
@@ -66,6 +92,11 @@ public class KeywordDao {
 		jdbc.update(insert, paramSource);
 	}
 
+	/**
+	 * This method deletes a keyword from the database.
+	 * @param keyword - the keyword that should be deleted
+	 * (keyword and username are primary key in the table)
+	 */
 	public void deleteKeyword(Keyword keyword) {
 
 		String delete = "delete from keywords where keyword=:keyword and username=:username)";
@@ -77,6 +108,11 @@ public class KeywordDao {
 		jdbc.update(delete, paramSource);
 	}
 
+	/**
+	 * This method returns all the keywords that are associated with
+	 * a tweet. 
+	 * @param tweetId - the unique identifier of a Tweet
+	 */
 	public List<String> getKeywordsOfTweet(long tweetId) {
 
 		String query = "select * from tweets_x_keywords where tweetId = :tweetId";
@@ -87,6 +123,10 @@ public class KeywordDao {
 		return jdbc.query(query, paramSource, new StringRowMapper());
 	}
 	
+	/**
+	 * This class serves as a utility to create Keyword Objects out
+	 * of a ResultSet that is received from a database query.
+	 */
 	private class KeywordRowMapper implements RowMapper<Keyword> {
 		
 		@Override
@@ -108,6 +148,11 @@ public class KeywordDao {
 		}
 	}
 	
+	/**
+	 * This class serves as a utility to create keywords (just the raw
+	 * String Object) out of a ResultSet that is received from a
+	 * database query.
+	 */
 	private class StringRowMapper implements RowMapper<String> {
 		
 		@Override
