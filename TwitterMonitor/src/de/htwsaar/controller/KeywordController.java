@@ -15,9 +15,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import de.htwsaar.exception.model.KeywordException;
 import de.htwsaar.model.Keyword;
 import de.htwsaar.service.user.UserService;
 
+
+/**
+ * The KeywordController Class is the communication interface
+ * between keyword-related frontend / backend functionality such as:
+ * 
+ * - Displaying user-related keywords 
+ * - Adding new keywords 
+ * - Changing the priority of existing keywords
+ * 
+ * @author Philipp Schaefer, Marek Kohn
+ * 
+ * */
 @Controller
 public class KeywordController {
 
@@ -28,12 +41,25 @@ public class KeywordController {
 		this.userService = userService;
 	}
 	
+	/**
+	 * This method displays the keywords.jsp when the keyword
+	 * path of the website is called.
+	 * @param model - the Keyword Model representing a
+	 * keyword that is either displayed or added
+	 */
 	@RequestMapping("/keywords")
 	public String loadKeywords(Model model) {
 		//model.addAttribute("keyword", new Keyword());
 		return "keywords";
 	}
 
+	/**
+	 * This method loads all the user-related keywords from the database
+	 * sends them to the frontend as a JSON Object
+	 * @param principal - the currently logged in user
+	 * @returns a keyword Map that is interpreted as a JSON Array by
+	 * the frontend
+	 */
 	@RequestMapping(value = "getKeywords", method = RequestMethod.GET, headers = "Accept=application/json")
 	@ResponseBody
 	public Map<String, Object> getKeywords(Principal principal) {
@@ -47,11 +73,24 @@ public class KeywordController {
 		return data;
 	}
 	
+	/**
+	 * This method provides a Keyword Bean, which can be manipulated 
+	 * by frontend functions, where it gets either initialized
+	 * or updated.
+	 * @param keyword - a keyword bean, that is sended empty as a request and
+	 * received initialized as a response
+	 * @param request - the Java representation of the request
+	 * @param principal - the currently logged in user
+	 */
 	@RequestMapping(value = "changePriority", method = RequestMethod.POST) 
-    public @ResponseBody String changePriority(@RequestBody Keyword ukeyword, HttpServletRequest request) {
-        String keyword = ukeyword.getKeyword();
-        int priority = ukeyword.getPriority();
-        
-        return keyword + " " + priority;
-    }
+	public String changePriority(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal)
+		throws KeywordException {
+		String username = principal.getName();
+		
+		keyword.setUsername(username);
+		
+		userService.insertKeyword(keyword);
+		
+		return "keywords";
+	}
 }
