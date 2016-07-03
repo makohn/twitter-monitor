@@ -21,16 +21,18 @@
 
 
 	<security:http use-expressions="true">
-	<security:csrf disabled="true"/>
+	
+		<security:csrf disabled="true"/>
 	    <security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/newAccount" access="permitAll" />
 		<security:intercept-url pattern="/showTweets" access="isAuthenticated()" />
 		<security:intercept-url pattern="/changePriority" access="permitAll" />
-		<security:intercept-url pattern="/keywords" access="permitAll" />
+		
 		<security:form-login login-page="/" 
 			login-processing-url="/j_spring_security_check"
 			password-parameter="j_password" username-parameter="j_username"
 			default-target-url="/showTweets" />
 			
 	</security:http>
+	
 </beans>
