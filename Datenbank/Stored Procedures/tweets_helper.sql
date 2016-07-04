@@ -10,7 +10,7 @@ create function get_prio(
 begin
 	declare l_prio float default 0;
 
-	if p_follower is not null then
+	if p_followerCount is not null then
 		set l_prio = round((((ifnull(p_favoriteCount,0) / 2) + ifnull(p_retweetCount,0)) / (sqrt(ifnull(p_followerCount,1))+100)), 2);
 	end if;
 
