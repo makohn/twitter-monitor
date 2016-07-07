@@ -20,7 +20,7 @@ end;$$
 DELIMITER $$
 drop trigger if exists tweets_after_insert;
 create trigger tweets_after_insert
-before insert
+after insert
 	on tweets for each row
 begin
 	insert into tweets_x_keywords (keyword, tweetId)
