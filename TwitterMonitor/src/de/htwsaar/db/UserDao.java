@@ -82,18 +82,32 @@ public class UserDao {
 		String insertAuthorities = "insert into authorities (username, authority) values (:username, :authority)";
 //				+ " on duplicate key update username=:username, authority=:authority";
 		
+		MapSqlParameterSource paramSource = getUserParameterSource(user);
+		
+//		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+//		paramSource.addValue("username", user.getUsername());
+//		paramSource.addValue("enabled", user.getEnabled());
+//		paramSource.addValue("email", user.getEmail());
+//		paramSource.addValue("password", user.getPassword());
+//		paramSource.addValue("authority", user.getAuthority());
+
+		jdbc.update(insertUsers, paramSource);
+		jdbc.update(insertAuthorities, paramSource);
+	}	
+	
+	private MapSqlParameterSource getUserParameterSource(User user) {
+
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+
 		paramSource.addValue("username", user.getUsername());
 		paramSource.addValue("enabled", user.getEnabled());
 		paramSource.addValue("email", user.getEmail());
 		paramSource.addValue("password", user.getPassword());
 		paramSource.addValue("authority", user.getAuthority());
 
-		jdbc.update(insertUsers, paramSource);
-		jdbc.update(insertAuthorities, paramSource);
+		return paramSource;
 	}
-	
-	
+
 	/**
 	 * This class serves as a utility to create User Objects out
 	 * of a ResultSet that is received from a database query.
