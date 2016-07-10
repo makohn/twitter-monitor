@@ -37,4 +37,9 @@ public class UserService {
 	public List<Keyword> getKeywords(String username) {
 		return keywordDao.getKeywords(username);
 	}
+	
+	public void switchActive(Keyword keyword) {
+		keyword.setActive(!keyword.getActive());
+		keywordDao.insertKeyword(keyword);		
+	}
 }
