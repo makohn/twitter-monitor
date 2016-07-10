@@ -1,6 +1,7 @@
 package de.htwsaar.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OutputTweet extends Tweet {
 
@@ -8,7 +9,7 @@ public class OutputTweet extends Tweet {
 	private float priority;
 	
 	// Keywords associated with the Tweet
-	private ArrayList<String> keywords;
+	private List<String> keywords;
 	
 	// TweetAuthor-Info
 	private String name;
@@ -16,7 +17,10 @@ public class OutputTweet extends Tweet {
 	private int followerCount;
 	private String pictureUrl;
 		
-	public OutputTweet() {}
+	public OutputTweet() {
+		
+		keywords = new ArrayList<String>();
+	}
 	
 	public float getPriority() {
 		return priority;
@@ -24,12 +28,17 @@ public class OutputTweet extends Tweet {
 	public void setPriority(float priority) {
 		this.priority = priority;
 	}
-	public ArrayList<String> getKeywords() {
+	public List<String> getKeywords() {
 		return keywords;
 	}
-	public void setKeywords(ArrayList<String> keywords) {
+	public void setKeywords(List<String> keywords) {
 		this.keywords = keywords;
 	}
+	
+	public void addKeyword(String keyword) {
+		keywords.add(keyword);
+	}
+	
 	public String getName() {
 		return name;
 	}

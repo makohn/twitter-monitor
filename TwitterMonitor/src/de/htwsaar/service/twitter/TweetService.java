@@ -15,6 +15,7 @@ import de.htwsaar.exception.model.AuthorException;
 import de.htwsaar.exception.model.TweetException;
 import de.htwsaar.model.Author;
 import de.htwsaar.model.IncomingTweet;
+import de.htwsaar.model.OutputTweet;
 import de.htwsaar.model.Tweet;
 import twitter4j.Status;
 
@@ -52,12 +53,16 @@ public class TweetService {
 		retweetMap = new HashMap<IncomingTweet, Integer>();
 	}
 
-	public List<Tweet> getTweets() {
+	public List<OutputTweet> getTweets() {
 		return tweetDao.getTweets();
 	}
 	
-	public Tweet getTweet(long id) {
-		return tweetDao.getTweet(id);
+	public OutputTweet getTweet(long tweetId) {
+		return tweetDao.getTweet(tweetId);
+	}
+	
+	public List<OutputTweet> getTweets(String username) {
+		return tweetDao.getTweets(username);
 	}
 	
 	public void insertTweet(Tweet tweet) {
@@ -121,6 +126,9 @@ public class TweetService {
 			// Insert or Update Author and Tweet.
 			authorDao.insertAuthor(author);
 			tweetDao.insertTweet(tweet);
+			
+			// TODO: vlt. koennte man die Tweets, die eingefügt werden sollen 
+			//			auch noch in einem Buffer speichern, um die DB-Zugriffe zu verringern
 
 		} catch (AuthorException e) {
 			e.printStackTrace();

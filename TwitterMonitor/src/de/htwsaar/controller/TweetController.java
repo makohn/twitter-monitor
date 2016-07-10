@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import de.htwsaar.model.Tweet;
+import de.htwsaar.model.OutputTweet;
 import de.htwsaar.service.twitter.TweetService;
 
 /**
@@ -43,7 +43,7 @@ public class TweetController {
 	@RequestMapping("/showTweets")
 	public String showTweets(Model model) {
 		
-		ArrayList<Tweet> tweets = (ArrayList<Tweet>) tweetService.getTweets();
+		ArrayList<OutputTweet> tweets = (ArrayList<OutputTweet>) tweetService.getTweets();
 		
 		model.addAttribute("tweets", tweets);
 
@@ -58,7 +58,7 @@ public class TweetController {
 	@RequestMapping(value = "getTweets", method = RequestMethod.GET, headers = "Accept=application/json")
 	@ResponseBody
 	public Map<String, Object> getTweets() {
-		List<Tweet> tweets = tweetService.getTweets();
+		List<OutputTweet> tweets = tweetService.getTweets();
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("tweets", tweets);
 		return data;
