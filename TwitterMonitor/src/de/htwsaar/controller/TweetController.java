@@ -1,5 +1,6 @@
 package de.htwsaar.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,9 +42,9 @@ public class TweetController {
 	 * logged-in user
 	 */
 	@RequestMapping("/showTweets")
-	public String showTweets(Model model) {
+	public String showTweets(Model model, Principal principal) {
 		
-		ArrayList<OutputTweet> tweets = (ArrayList<OutputTweet>) tweetService.getTweets();
+		ArrayList<OutputTweet> tweets = (ArrayList<OutputTweet>) tweetService.getTweets(principal.getName());
 		
 		model.addAttribute("tweets", tweets);
 
@@ -57,8 +58,8 @@ public class TweetController {
 	 */
 	@RequestMapping(value = "getTweets", method = RequestMethod.GET, headers = "Accept=application/json")
 	@ResponseBody
-	public Map<String, Object> getTweets() {
-		List<OutputTweet> tweets = tweetService.getTweets();
+	public Map<String, Object> getTweets(Principal principal) {
+		List<OutputTweet> tweets = tweetService.getTweets(principal.getName());
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("tweets", tweets);
 		return data;
