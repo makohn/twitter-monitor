@@ -138,6 +138,7 @@ function changePrio(keywordName,prio,k) {
        data: JSON.stringify(keyword), 
        success :function(result) {
     	   lastKeyword = result;
+    	   //alert(result.keyword);
        }
    });
  }
@@ -156,9 +157,10 @@ function createNewKeyword() {
 	}
 	
 	changePrio(newKey, 1, currentPrio.length);
-	
+	// Keyword-Textfeld ausblenden
 	$('#newKeyword').css('display','none');
 	
+	alert(lastKeyword.keyword);
 	createPrioDiv(lastKeyword,keyword_count,currentPrio.length);
 	
 }

@@ -82,7 +82,8 @@ public class KeywordController {
 	 * @param request - the Java representation of the request
 	 * @param principal - the currently logged in user
 	 */
-	@RequestMapping(value = "changePriority", method = RequestMethod.POST) 
+	@RequestMapping(value = "changePriority", method = RequestMethod.POST, headers = "Accept=application/json") 
+	@ResponseBody
 	public Keyword changePriority(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal)
 		throws KeywordException {
 		String username = principal.getName();
@@ -91,6 +92,8 @@ public class KeywordController {
 		
 		userService.insertKeyword(keyword);
 		
+		//Map<String, Object> data = new HashMap<String, Object>();
+		//data.put("keywords", keyword);
 		return keyword;
 	}
 }
