@@ -139,8 +139,10 @@ function changePrio(keywordName,prio,k) {
        url: "/TwitterMonitor/changePriority",
        data: JSON.stringify(keyword), 
        success :function (result) {
-    	  
+    	  if (isNewKeyWord(result.keyword))
+    		  {
     	  setLastKeyword(result);
+    		  }
        }
    });
    
@@ -155,24 +157,30 @@ function setLastKeyword(result)
 function createNewKeyword() {
 	
 	var newKey = $('#newKeyword_text').val();
-	for(var i=0;i<keywordsfield.length;i++) 
-	{
-		
-		
-		if (newKey == keywordsfield[i].keyword)
-			{
-				
-			    return;
-			}
-	}
+	
+	if (isNewKeyWord(newKey))
+		{
 	
 	changePrio(newKey, 1, currentPrio.length);
 	// Keyword-Textfeld ausblenden
 	$('#newKeyword').css('display','none');
-	
+		}
 	
 }
 
+function isNewKeyWord(newKey)
+{
+	for(var i=0;i<keywordsfield.length;i++) 
+	{
+		
+		if (newKey == keywordsfield[i].keyword)
+			{
+				
+			    return false;
+			}
+	}
+	return true;
+}
 
 
         
