@@ -121,7 +121,7 @@ function deleteKeyword(keyword){
 		       contentType : 'application/json; charset=utf-8',
 		       dataType : 'json',
 		       url: "/TwitterMonitor/deleteKeyword",
-		       data: JSON.stringify(keyword), 
+		       data: JSON.stringify(keywordToDelete), 
 		       success :function (result) {
 		    	  
 		       }

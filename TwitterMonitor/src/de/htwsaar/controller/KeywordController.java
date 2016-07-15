@@ -92,8 +92,23 @@ public class KeywordController {
 		
 		userService.insertKeyword(keyword);
 		
-		//Map<String, Object> data = new HashMap<String, Object>();
-		//data.put("keywords", keyword);
 		return keyword;
+	}
+	
+	/**
+	 * 
+	 * @param keyword
+	 * @param request
+	 * @param principal
+	 * @throws KeywordException
+	 */
+	@RequestMapping(value ="deleteKeyword", method = RequestMethod.POST, headers = "Accept=application/json")
+	public void deleteKeyword(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal) 
+		throws KeywordException {
+		String username = principal.getName();
+		
+		keyword.setUsername(username);
+		
+		userService.deleteKeyword(keyword);
 	}
 }
