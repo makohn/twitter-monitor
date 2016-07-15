@@ -2,6 +2,7 @@ var deleteCross ="background-image: url(Resources/Picture/Delete_Cross.png);";
 var keyword_count = 0;
 var currentPrio = [];
 var keywordsfield = [];
+var stars = [ ];
 /*
  * @description 	This method renders the keywords received from
  * 					the KeywordController and displays a star rating
@@ -16,7 +17,7 @@ var keywordsfield = [];
 function updateKeywords(data)
 	{
 		keywordsfield = data.keywords;
-		var stars = [ ];
+		
 		$("#Keywords_div").html("");
         
         //for each keyword
@@ -35,7 +36,7 @@ function updateKeywords(data)
 			 
 			
 		
-
+		}
 }
 
 function createPrioDiv(keyword,count,k)
@@ -108,7 +109,7 @@ function createPrioDiv(keyword,count,k)
     delete_cross.setAttribute("onClick","deleteKeyword(".concat(keyword_count).concat("\)"));   
 	keyword_div.appendChild(delete_cross);
 	}
-}
+
 
 /*
  * @description		This function removes a keyword from the view
