@@ -3,7 +3,7 @@ var keyword_count = 0;
 var currentPrio = [];
 var keywordsfield = [];
 var stars = [ ];
-var lastKeyword;
+
 /*
  * @description 	This method renders the keywords received from
  * 					the KeywordController and displays a star rating
@@ -36,6 +36,7 @@ function updateKeywords(data)
 
 function createPrioDiv(keyword,count,k)
 {
+	stars[k] = [ ]; 
 	var keyword_div = document.createElement("div");
     keyword_div.setAttribute("id",count);
 	keyword_div.setAttribute("class","keyword_div");
@@ -103,7 +104,7 @@ function createPrioDiv(keyword,count,k)
     delete_cross.setAttribute("style", deleteCross);
     delete_cross.setAttribute("onClick","deleteKeyword(".concat(keyword_count).concat("\)"));   
 	keyword_div.appendChild(delete_cross);
-	}
+}
 
 
 /*
@@ -126,6 +127,7 @@ function deleteKeyword(keyword){
  */
 function changePrio(keywordName,prio,k) {
 	currentPrio[k] = prio;
+	
     var keyword = {
        "keyword" : keywordName,
        "priority" : prio
@@ -136,14 +138,22 @@ function changePrio(keywordName,prio,k) {
        dataType : 'json',
        url: "/TwitterMonitor/changePriority",
        data: JSON.stringify(keyword), 
-       success :function(result) {
-    	   lastKeyword = result;
-    	   //alert(result.keyword);
+       success :function (result) {
+    	  
+    	  setLastKeyword(result);
        }
    });
+   
  }
 
+function setLastKeyword(result)
+{
+	createPrioDiv(result,keyword_count,currentPrio.length-1);
+}
+
+
 function createNewKeyword() {
+	
 	var newKey = $('#newKeyword_text').val();
 	for(var i=0;i<keywordsfield.length;i++) 
 	{
@@ -160,8 +170,6 @@ function createNewKeyword() {
 	// Keyword-Textfeld ausblenden
 	$('#newKeyword').css('display','none');
 	
-	alert(lastKeyword.keyword);
-	createPrioDiv(lastKeyword,keyword_count,currentPrio.length);
 	
 }
 
