@@ -31,15 +31,14 @@ import twitter4j.Status;
 public class TweetService {
 
 	private static final long MAXIMUM_AGE = 48 * 60 * 60 * 1000; // 2 days in milliseconds
-	private static final long MAXIMUM_RECEIVED_AGE = 2 * 60 * 60 * 1000; // 2 Hours in milliseconds
+//	private static final long MAXIMUM_RECEIVED_AGE = 2 * 60 * 60 * 1000; // 2 Hours in milliseconds
 	
 	private static final int RETWEET_REFRESH_LIMIT = 25;
-	private static final int MAXIMUM_BUFFER_SIZE = 100;
+//	private static final int MAXIMUM_BUFFER_SIZE = 100;
 	private static final long FIFTEEN_MINUTES = 15 * 60 * 1000;
 	
 
 	private volatile HashMap<IncomingTweet, Integer> retweetMap;
-//	private boolean isLocked;
 
 	private TweetDao tweetDao;
 	private AuthorDao authorDao;
@@ -51,7 +50,6 @@ public class TweetService {
 		this.authorDao = authorDao;
 
 		retweetMap = new HashMap<IncomingTweet, Integer>();
-//		isLocked = false;
 	}
 
 	public List<Tweet> getTweets() {
@@ -78,16 +76,7 @@ public class TweetService {
 	 * @param status - the tweet information object
 	 */
 	public /*synchronized*/ void insertStatus(Status status) {
-		//TODO: "synchronized" hat mir Olbertz empfohlen, weil ja evtl. mehrere Tweets die Methode gleichzeitig aufrufen
-		// so m¸sste sie theoretisch vom Multithreading her gesperrt sein, solange sie l‰uft.
-		// Ich hatte mir dafuer nur dieses Boolean-Schloss ¸berlegt. (Olbertz war sich nicht so ganz sicher)
 				
-//		if ( !isLocked && (retweetMap.size() > MAXIMUM_BUFFER_SIZE) ) {
-//			isLocked = true;
-//			clearMap();
-//			isLocked = false;
-//		}
-		
 		try {
 			// If the status is a retweet then load the original status and
 			// forget the retweet.
@@ -149,59 +138,66 @@ public class TweetService {
 	 */
 	@Scheduled(fixedDelay = FIFTEEN_MINUTES)
 	private void clearMap() {
-				
-		HashMap<IncomingTweet, Integer> newMap = new HashMap<IncomingTweet, Integer>();		
-		ArrayList<Tweet> toBeUpdated = new ArrayList<Tweet>();
-						
-		// Check all entry and remove, keep or update them accordingly.
-		for (IncomingTweet t : retweetMap.keySet()) {
-			
-			// If the original tweet is too old anyway,
-			if ( t.getAge() > MAXIMUM_AGE ) {
-				// do nothing. (so the tweet is removed from the map)
-			}
-			// If the tweet hasn't been retweeted since the last cleanup,
-			else if ( retweetMap.get(t) == 0 )  {
-				// do nothing either.
-			}
-			// If the tweet hasn't been retweeted within a certain time,
-			else if ( t.getReceivedElapsed() > MAXIMUM_RECEIVED_AGE ) {
-				// update Database.
-				toBeUpdated.add(t);
-			}			
-			// If the tweet was retweeted more than a certain amount compared to the maximum limit.
-			if ( retweetMap.get(t) > RETWEET_REFRESH_LIMIT / 2 ) {
-				// update the tweets to the database. (The tweet is removed from the map afterwards)
-				toBeUpdated.add(t);
-			}
-			// If the tweet is not too old, has recently been retweeted, was retweeted more than once, but not more than a certain amount,
-			else {
-				// keep them in the buffer.
-				newMap.put(t, retweetMap.get(t));
-			}		
-		}
-						
+		
+		HashMap<IncomingTweet, Integer> oldMap = retweetMap;
 		retweetMap = new HashMap<IncomingTweet, Integer>();
-		
-		// Additional:
-		// If the map is still too large,
-		if ( newMap.size() > MAXIMUM_BUFFER_SIZE / 2 ) {
-			// remove tweets in a arbitrary pattern.
-			int tweetsToRemove = newMap.size() - MAXIMUM_BUFFER_SIZE/2;
-			int i=0;
-			for (IncomingTweet t : newMap.keySet()) {
-				i++;
-				if ( (i % (newMap.size()/tweetsToRemove) != 0 ) )
-						retweetMap.put(t, newMap.get(t));
-				else
-					toBeUpdated.add(t);
-			}
-		}
-		
-		tweetDao.insertTweets(toBeUpdated);
-		
-		// Anmerkung: Alternativ koennte man in dieser Methode auch einfach alle tweets die kein 0-retweet-count haben updaten
-		// Habe erst nachdem ich das alles fertig hatte mich nochmal an das Batch-Update gesetzt...
+		ArrayList<Tweet> tweetUpdates = new ArrayList<Tweet>();
+		for (Tweet t : oldMap.keySet()) 
+			tweetUpdates.add(t);
+		tweetDao.insertTweets(tweetUpdates);
+				
+//		HashMap<IncomingTweet, Integer> newMap = new HashMap<IncomingTweet, Integer>();		
+//		ArrayList<Tweet> toBeUpdated = new ArrayList<Tweet>();
+//						
+//		// Check all entry and remove, keep or update them accordingly.
+//		for (IncomingTweet t : retweetMap.keySet()) {
+//			
+//			// If the original tweet is too old anyway,
+//			if ( t.getAge() > MAXIMUM_AGE ) {
+//				// do nothing. (so the tweet is removed from the map)
+//			}
+//			// If the tweet hasn't been retweeted since the last cleanup,
+//			else if ( retweetMap.get(t) == 0 )  {
+//				// do nothing either.
+//			}
+//			// If the tweet hasn't been retweeted within a certain time,
+//			else if ( t.getReceivedElapsed() > MAXIMUM_RECEIVED_AGE ) {
+//				// update Database.
+//				toBeUpdated.add(t);
+//			}			
+//			// If the tweet was retweeted more than a certain amount compared to the maximum limit.
+//			if ( retweetMap.get(t) > RETWEET_REFRESH_LIMIT / 2 ) {
+//				// update the tweets to the database. (The tweet is removed from the map afterwards)
+//				toBeUpdated.add(t);
+//			}
+//			// If the tweet is not too old, has recently been retweeted, was retweeted more than once, but not more than a certain amount,
+//			else {
+//				// keep them in the buffer.
+//				newMap.put(t, retweetMap.get(t));
+//			}		
+//		}
+//						
+//		retweetMap = new HashMap<IncomingTweet, Integer>();
+//		
+//		// Additional:
+//		// If the map is still too large,
+//		if ( newMap.size() > MAXIMUM_BUFFER_SIZE / 2 ) {
+//			// remove tweets in a arbitrary pattern.
+//			int tweetsToRemove = newMap.size() - MAXIMUM_BUFFER_SIZE/2;
+//			int i=0;
+//			for (IncomingTweet t : newMap.keySet()) {
+//				i++;
+//				if ( (i % (newMap.size()/tweetsToRemove) != 0 ) )
+//						retweetMap.put(t, newMap.get(t));
+//				else
+//					toBeUpdated.add(t);
+//			}
+//		}
+//		
+//		tweetDao.insertTweets(toBeUpdated);
+//		
+//		// Anmerkung: Alternativ koennte man in dieser Methode auch einfach alle tweets die kein 0-retweet-count haben updaten
+//		// Habe erst nachdem ich das alles fertig hatte mich nochmal an das Batch-Update gesetzt...
 	}
 	
 }

@@ -51,7 +51,7 @@ public class AuthorDao {
 	/**
 	 * This method loads a single author from the database.
 	 * @param authorId - the unique id of a author (twitter user)
-	 * @return a Author Object, if the author exists.
+	 * @return a Author Object, if the author exists. Otherwise returns null.
 	 */
 	public Author getAuthor(long authorId) {
 
@@ -79,14 +79,29 @@ public class AuthorDao {
 		String insert = "insert into tweetAuthors (authorId, name, screenName, followerCount, pictureUrl) values (:autorId, :name, :screenName, :followerCount, :pictureUrl)"
 					  + " on duplicate key update name = :name, screenName = :screenName, followerCount = :followerCount, pictureUrl = :pictureUrl";
 
+		MapSqlParameterSource paramSource = getAuthorParameterSource(author);
+		
+//		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+//		paramSource.addValue("autorId", author.getAuthorId());
+//		paramSource.addValue("name", author.getName());
+//		paramSource.addValue("screenName", author.getScreenName());
+//		paramSource.addValue("followerCount", author.getFollowerCount());
+//		paramSource.addValue("pictureUrl", author.getPictureUrl());
+
+		jdbc.update(insert, paramSource);
+	}
+
+	private MapSqlParameterSource getAuthorParameterSource(Author author) {
+		
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		
 		paramSource.addValue("autorId", author.getAuthorId());
 		paramSource.addValue("name", author.getName());
 		paramSource.addValue("screenName", author.getScreenName());
 		paramSource.addValue("followerCount", author.getFollowerCount());
 		paramSource.addValue("pictureUrl", author.getPictureUrl());
-
-		jdbc.update(insert, paramSource);
+		
+		return paramSource;
 	}
 
 	/**

@@ -48,7 +48,9 @@ public class TweetDao {
 	 */
 	public List<Tweet> getTweets() {
 
-		String query = "select * from tweets limit 20";
+		String query = "select * from tweets limit 20";		// TODO: wenn die Methode ALLE tweets liefern soll
+															// ist das limit doch irgendwie nicht so sinnvoll
+															// oder geht es hier nur um testzwecke
 
 		return jdbc.query(query, new TweetRowMapper());
 	}
@@ -66,14 +68,37 @@ public class TweetDao {
 		paramSource.addValue("tweetId", tweetId);
 		
 		try {
-			return (Tweet) jdbc.queryForObject(query, paramSource, new TweetRowMapper()); 
-		
+			return (Tweet) jdbc.queryForObject(query, paramSource, new TweetRowMapper()); 		
 		}
 		catch (EmptyResultDataAccessException e) {
 			e.printStackTrace();
 		}
 		return null;
 			
+	}
+	
+	/**
+	 * This method loads all tweets of a certain user from the database.
+	 * 
+	 * @param username
+	 * @return
+	 */
+	public List<Tweet> getTweets(String username) {
+
+		String query = "select * from keywords, tweets_x_keywords, tweets "
+						+ "where keywords.keyword = tweets_x_keywords.keyword " 
+						+ "and tweets_x_keywords.tweetId = tweets.tweetId "
+						+ "and keyword.username = :username";
+
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("username", username);
+		
+		try {																	// TODO: ist hier der try-catch notwendig
+			return jdbc.query(query, paramSource, new TweetRowMapper()); 		// bei leerem Ergebnis wird ja eigentlich nur
+		} catch (EmptyResultDataAccessException e) {							// eine leere liste zurückgegeben.
+			e.printStackTrace();
+		}
+		return null;			
 	}
 
 	/**
@@ -108,14 +133,16 @@ public class TweetDao {
 		String insert = "insert into tweets (tweetId, authorId, text, favoriteCount, retweetCount, place, createdAt) values (:tweetId, :authorId, :text, :favoriteCount, :retweetCount, :place, :createdAt)"
 							+ " on duplicate key update favoriteCount=:favoriteCount, retweetCount=:retweetCount;";
 
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("tweetId", tweet.getTweetId());
-		paramSource.addValue("authorId", tweet.getAuthorId());
-		paramSource.addValue("text", tweet.getText());
-		paramSource.addValue("favoriteCount", tweet.getFavoriteCount());
-		paramSource.addValue("retweetCount", tweet.getRetweetCount());
-		paramSource.addValue("place", tweet.getPlace());
-		paramSource.addValue("createdAt", tweet.getCreatedAt());
+		MapSqlParameterSource paramSource = getTweetParamSource(tweet);
+		
+//		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+//		paramSource.addValue("tweetId", tweet.getTweetId());
+//		paramSource.addValue("authorId", tweet.getAuthorId());
+//		paramSource.addValue("text", tweet.getText());
+//		paramSource.addValue("favoriteCount", tweet.getFavoriteCount());
+//		paramSource.addValue("retweetCount", tweet.getRetweetCount());
+//		paramSource.addValue("place", tweet.getPlace());
+//		paramSource.addValue("createdAt", tweet.getCreatedAt());
 
 		jdbc.update(insert, paramSource);
 
@@ -139,15 +166,17 @@ public class TweetDao {
 			
 			Tweet tweet = tweets.get(i);
 			
-			MapSqlParameterSource paramSource = new MapSqlParameterSource();
-			// TODO: Hier wird Code dupliziert, macht es Sinn folgende Zeilen auszulagern ? 
-			paramSource.addValue("tweetId", tweet.getTweetId());
-			paramSource.addValue("authorId", tweet.getAuthorId());
-			paramSource.addValue("text", tweet.getText());
-			paramSource.addValue("favoriteCount", tweet.getFavoriteCount());
-			paramSource.addValue("retweetCount", tweet.getRetweetCount());
-			paramSource.addValue("place", tweet.getPlace());
-			paramSource.addValue("createdAt", tweet.getCreatedAt());
+			MapSqlParameterSource paramSource = getTweetParamSource(tweet);
+			
+//			MapSqlParameterSource paramSource = new MapSqlParameterSource();
+//			// TODO: Hier wird Code dupliziert, macht es Sinn folgende Zeilen auszulagern ? 
+//			paramSource.addValue("tweetId", tweet.getTweetId());
+//			paramSource.addValue("authorId", tweet.getAuthorId());
+//			paramSource.addValue("text", tweet.getText());
+//			paramSource.addValue("favoriteCount", tweet.getFavoriteCount());
+//			paramSource.addValue("retweetCount", tweet.getRetweetCount());
+//			paramSource.addValue("place", tweet.getPlace());
+//			paramSource.addValue("createdAt", tweet.getCreatedAt());
 			
 			for (String url : tweet.getUrls())
 				urls.put(tweet.getTweetId(), url);
@@ -205,7 +234,7 @@ public class TweetDao {
 	}
 	
 	/**
-	 * This method inserts multiple Media URLs into the
+	 * This method inserts multiple Media URLs of multiple tweets into the
 	 * database.
 	 * @param urls - a java.util.HashMap
 	 * 					 of Media URLs that belong to the tweet
@@ -272,6 +301,21 @@ public class TweetDao {
 		paramMap.put("keyword", keyword);
 
 		return jdbc.query(query, paramMap, new TweetRowMapper());
+	}
+	
+	private MapSqlParameterSource getTweetParamSource(Tweet tweet) {
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		
+		paramSource.addValue("tweetId", tweet.getTweetId());
+		paramSource.addValue("authorId", tweet.getAuthorId());
+		paramSource.addValue("text", tweet.getText());
+		paramSource.addValue("favoriteCount", tweet.getFavoriteCount());
+		paramSource.addValue("retweetCount", tweet.getRetweetCount());
+		paramSource.addValue("place", tweet.getPlace());
+		paramSource.addValue("createdAt", tweet.getCreatedAt());
+		
+		return paramSource;
 	}
 	
 	/**

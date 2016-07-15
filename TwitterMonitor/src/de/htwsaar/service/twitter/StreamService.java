@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import de.htwsaar.db.TweetDao;
+import de.htwsaar.db.KeywordDao;
 import twitter4j.FilterQuery;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
@@ -28,10 +28,13 @@ public class StreamService {
 
 	private TwitterStream stream;
 	private TweetListener tweetListener;
+	private KeywordDao keywordDao;
 
 	@Autowired
-	public StreamService(TweetListener tweetListener, TweetDao dao) {
+	public StreamService(TweetListener tweetListener, KeywordDao keywordDao) {
 		this.tweetListener = tweetListener;
+		this.keywordDao = keywordDao;
+		
 		startStream();
 	}
 
@@ -57,17 +60,13 @@ public class StreamService {
 	 */
 	private void initStream() {
 
-		// TODO: Keywords aus Datenbank laden.
-		// List<String> keywords = dao.getKeywords();
-		// String[] keywordsArray = (String[]) keywords.toArray(); -> zu
-		// aufwendig!!!
-
 		String[] keywordsArray = { "Wasser", "Deutschland", "Hamburg", "Berlin", "Paris", "America", "Trump",
 				"Clinton" };
 
 		// Erstelle Filter ..
 		FilterQuery filter = new FilterQuery();
 		filter.track(keywordsArray);
+//		filter.track(keywordDao.getKeywords());
 		filter.language("de", "en");
 
 		// weitere Konfigurationen ...
