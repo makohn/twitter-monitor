@@ -151,6 +151,9 @@ function changePrio(keywordName,prio,k) {
 function setLastKeyword(result)
 {
 	createPrioDiv(result,keyword_count,currentPrio.length-1);
+	keywordsfield.push(result);
+	$('#newKeyword').css('display','block');
+	$('#newKeyword_text').val("");
 }
 
 
