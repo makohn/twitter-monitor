@@ -173,6 +173,8 @@ a                       {
 						background-repeat: no-repeat;
 						background: url(../Picture/stars.png);
 						background-position: 0 0;
+						cursor:pointer;
+						
 }
 
 .prio_star_filled {
@@ -185,6 +187,8 @@ a                       {
 						background-repeat: no-repeat;
 						background: url(../Picture/stars.png);
 						background-position: -40px 0;
+						cursor:pointer;
+						
 }
 
 					
@@ -197,6 +201,37 @@ a                       {
 						background-repeat: no-repeat;
 						background-size: contain; 
 }
+
+#newKeyword	{
+						float:left;
+						clear:left;
+						margin-left:20px;
+						margin-top:20px;
+						}
+
+#newKeyword_text 		{
+							float:left;
+							background-color:#f6f8d1;
+							min-width:330px;
+							border-style: solid;
+							border-color:black;
+							border-size:thin;
+							line-height: 25px;
+							
+ 
+						}
+#newKeyword_button		{
+							float:left;
+							margin-left:10px;
+							
+							background-image: url(../Picture/addButton.png);
+							background-repeat:no-repeat;
+							background-size:auto;
+							min-width:50px;
+							min-height:50px;
+							border-radius:10px;
+							cursor:pointer;
+						}
 
 
 #sidebar                {

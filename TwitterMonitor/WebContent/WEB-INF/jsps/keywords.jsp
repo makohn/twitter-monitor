@@ -32,7 +32,7 @@
 
 	<ul>
 		<li><a href="home.php">Home</a></li>
-		<li><a href="#">Tweets</a></li>
+		<li><a href="${pageContext.request.contextPath}/showTweets"">Tweets</a></li>
 		<li><a href="#">Kategorien</a></li>
 		<li><a href="${pageContext.request.contextPath}/profil">Profil</a></li>
 		<li><a href="#">Einstellungen</a></li>
@@ -59,6 +59,11 @@
 			}
 			onLoad();
 		</script>
+		<div id="newKeyword">
+		<input type="text"  id="newKeyword_text">
+		<div id="newKeyword_button" onclick="createNewKeyword()" ></div>
+		</div>
+		
 	</div>
 	
 </body>

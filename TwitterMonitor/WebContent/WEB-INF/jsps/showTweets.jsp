@@ -31,9 +31,9 @@
 
 	<ul>
 		<li><a href="home.php">Home</a></li>
-		<li><a href="#">Tweets</a></li>
+		<li><a href="${pageContext.request.contextPath}/showTweets"">Tweets</a></li>
 		<li><a href="#">Kategorien</a></li>
-		<li><a href="${pageContext.request.contextPath}/profil">Profil</a></li>
+		<li><a href="${pageContext.request.contextPath}/keywords">Profil</a></li>
 		<li><a href="#">Einstellungen</a></li>
 	</ul>
 	<ul2>
