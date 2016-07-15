@@ -3,6 +3,7 @@ var keyword_count = 0;
 var currentPrio = [];
 var keywordsfield = [];
 var stars = [ ];
+var lastKeyword;
 /*
  * @description 	This method renders the keywords received from
  * 					the KeywordController and displays a star rating
@@ -24,18 +25,12 @@ function updateKeywords(data)
 		for(var k=0;k<data.keywords.length;k++) {
 			var keyword = data.keywords[k];	
 			
-			//do 
-			
-			
-			
+			//do 			
 			currentPrio[k] = keyword.priority;
 			stars[k] = [ ];    
 	        keyword_count++;
 			
 	        createPrioDiv(keyword,keyword_count,k);
-			 
-			
-		
 		}
 }
 
@@ -142,7 +137,7 @@ function changePrio(keywordName,prio,k) {
        url: "/TwitterMonitor/changePriority",
        data: JSON.stringify(keyword), 
        success :function(result) {
-    	   // Hier könnte man die JSON Daten auf die changePrio Seite ausgeben
+    	   lastKeyword = result;
        }
    });
  }
@@ -158,11 +153,13 @@ function createNewKeyword() {
 				
 			    return;
 			}
-	}	
+	}
+	
+	changePrio(newKey, 1, currentPrio.length);
 	
 	$('#newKeyword').css('display','none');
 	
-	createPrioDiv(newKey,keyword_count,1);
+	createPrioDiv(lastKeyword,keyword_count,currentPrio.length);
 	
 }
 
