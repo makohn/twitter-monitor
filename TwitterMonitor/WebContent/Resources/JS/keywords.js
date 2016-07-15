@@ -112,7 +112,22 @@ function createPrioDiv(keyword,count,k)
  * @param			keyword The keyword that should be removed.
  */
 function deleteKeyword(keyword){
+	var keyword_name = keywordsfield[keyword-1].keyword;
+	var keywordToDelete = {
+		       "keyword" : keyword_name
+		    }
+		    $.ajax({
+		       type: "POST",
+		       contentType : 'application/json; charset=utf-8',
+		       dataType : 'json',
+		       url: "/TwitterMonitor/deleteKeyword",
+		       data: JSON.stringify(keyword), 
+		       success :function (result) {
+		    	  
+		       }
+		   });
     var keyword_id = "#".concat(keyword);
+    
     $(keyword_id).remove();
 }
 
