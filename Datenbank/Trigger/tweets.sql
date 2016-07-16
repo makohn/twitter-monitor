@@ -25,7 +25,7 @@ after insert
 begin
 	insert into tweets_x_keywords (keyword, tweetId)
 		(select distinct k.keyword, new.tweetId from keywords k
-			where new.text regexp k.keyword);
+			where new.text regexp k.keyword and k.active = 1);
 end;$$
 
 /* Trigger errechnet nach dem Ändern der Spalten Likes oder Retweets eines Tweets
