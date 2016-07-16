@@ -7,11 +7,15 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import de.htwsaar.db.psc.AllKeywordStatementCreator;
+import de.htwsaar.db.psc.DeleteKeywordStatementCreator;
+import de.htwsaar.db.psc.InsertKeywordStatementCreator;
+import de.htwsaar.db.psc.TweetKeywordStatementCreator;
+import de.htwsaar.db.psc.UserKeywordStatementCreator;
 import de.htwsaar.exception.model.KeywordException;
 import de.htwsaar.model.Keyword;
 
@@ -26,13 +30,13 @@ import de.htwsaar.model.Keyword;
 @Component("keywordDao")
 public class KeywordDao {
 
-	private NamedParameterJdbcTemplate jdbc;
+	private JdbcTemplate jdbc;
 
 	public KeywordDao() {}
 	
 	@Autowired
 	public KeywordDao(DataSource jdbc) {
-		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
+		this.jdbc = new JdbcTemplate(jdbc);
 	}
 	
 	/**
@@ -43,24 +47,18 @@ public class KeywordDao {
 	 */
 	public List<Keyword> getKeywords(String username) {
 
-		String query = "select * from keywords where username = :username";
-
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("username", username);
-
-		return jdbc.query(query, paramSource, new KeywordRowMapper()); 
+		return jdbc.query(new UserKeywordStatementCreator(username), new KeywordRowMapper());
 	}
 	
 	/**
 	 * This method returns an array of all distinct keywords stored
 	 * in the database. Duplicates will not be loaded.
+	 * 
 	 * @return an array of Keyword Objects
 	 */
 	public String[] getKeywords() {
 		
-		String query = "select distinct keyword from keywords";
-		
-		List<String> keywords = jdbc.query(query, new StringRowMapper()); 
+		List<String> keywords = jdbc.query(new AllKeywordStatementCreator(), new StringRowMapper()); 
 		
 		String[] keywordArray = new String[keywords.size()];
 		for (int i=0; i<keywords.size(); i++)
@@ -78,18 +76,7 @@ public class KeywordDao {
 	 */
 	public void insertKeyword(Keyword keyword) {
 
-		String insert = "insert into keywords (keyword, username, priority, active)"
-								   + " values (:keyword, :username, :priority, :active)"
-								   + " on duplicate key update priority=:priority, active=:active";
-
-		
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();		
-		paramSource.addValue("keyword", keyword.getKeyword());
-		paramSource.addValue("username", keyword.getUsername());
-		paramSource.addValue("priority", keyword.getPriority());
-		paramSource.addValue("active", keyword.getActive());
-
-		jdbc.update(insert, paramSource);
+		jdbc.update(new InsertKeywordStatementCreator(keyword));
 	}
 
 	/**
@@ -98,14 +85,8 @@ public class KeywordDao {
 	 * (keyword and username are primary key in the table)
 	 */
 	public void deleteKeyword(Keyword keyword) {
-
-		String delete = "delete from keywords where keyword=:keyword and username=:username)";
-
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("keyword", keyword.getKeyword());
-		paramSource.addValue("username", keyword.getUsername());
-
-		jdbc.update(delete, paramSource);
+		
+		jdbc.update(new DeleteKeywordStatementCreator(keyword.getUsername(), keyword.getKeyword()));
 	}
 
 	/**
@@ -114,13 +95,8 @@ public class KeywordDao {
 	 * @param tweetId - the unique identifier of a Tweet
 	 */
 	public List<String> getKeywordsOfTweet(long tweetId) {
-
-		String query = "select * from tweets_x_keywords where tweetId = :tweetId";
-
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("tweetId", tweetId);
-
-		return jdbc.query(query, paramSource, new StringRowMapper());
+		
+		return jdbc.query(new TweetKeywordStatementCreator(tweetId), new StringRowMapper());
 	}
 	
 	/**
