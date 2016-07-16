@@ -14,7 +14,7 @@ begin
   set l_tweet_prio = calc_tweet_prio(p_tweetId);
 
   # Wenn mehrere Keywords zu einem Tweet passen, soll die hoechste Prio genommen werden
-  select ifnull(max(k.priority),0) into l_personal_prio
+  select ifnull(sum(k.priority),1) into l_personal_prio
     from keywords k, tweets_x_keywords x
   	where k.username = p_username
     	and x.tweetId = p_tweetId
