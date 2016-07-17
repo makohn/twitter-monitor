@@ -1,8 +1,9 @@
 
-
+var count=0;
+var tweetsfield = [];
 function updateTweets(data)
 	{
-	
+	     tweetsfield = data.tweets;
 
 		$("#tweet_panel").html("");
 		for(var i=0;i<data.tweets.length;i++){
@@ -11,6 +12,7 @@ function updateTweets(data)
 		//create a tweet_panel div 
 		var tweet_div = document.createElement("div");
 		tweet_div.setAttribute("class","tweet_panel");
+		tweet_div.setAttribute("id","tweet".concat(count));
 		$("#tweet_panel").append(tweet_div);
 		
 		//create a tweet_line_div 
@@ -28,21 +30,35 @@ function updateTweets(data)
 		
 			var pic_div = document.createElement("div");
 			pic_div.setAttribute("class","tweet_pic ");
+			pic_div.setAttribute("id","pic".concat(count));
+			pic_div.setAttribute("onClick","slidePic(".concat("pic").concat(count).concat("\)"));
 			pic_div.setAttribute("style",'display:block;background-image:url('+pics[0]+')');
 			tweet_div.appendChild(pic_div);
 			
 		}
 		
+		//create a tweet_data_div 
+		var tweet_data = document.createElement("div");
+		tweet_data.setAttribute("class","tweet_data");
+		tweet_div.appendChild(tweet_data);
+		if (tweet.urls.length !=0)
+		{	
+			tweet_data.setAttribute("style",'border-top-right-radius: 0px;border-top-left-radius: 0px;');
+		}
 		
+		//create a tweet_author-pic_div and passing author_div from JSON
+		var tweet_author_pic = document.createElement("div");
+		tweet_author_pic.setAttribute("class","tweet_author_pic");
+		tweet_author_pic.setAttribute("style",'background-image:url('+tweet.pictureUrl+')');
+		tweet_data.appendChild(tweet_author_pic);
 		
 		//create a tweet_time_div and passing Tweet_time from JSON
 		var tweet_time = document.createElement("div");
 		tweet_time.setAttribute("class","tweet_time");
-		tweet_div.appendChild(tweet_time);
-		if (tweet.urls.length !=0)
-		{	
-			tweet_time.setAttribute("style",'border-top-right-radius: 0px;border-top-left-radius: 0px;');
-		}
+		tweet_time.innerHTML=tweet.createdAt;
+		tweet_data.appendChild(tweet_time);
+	
+		
 		
 		//create a tweet_text_div and passing Tweet_text from JSON
 		var tweet_text = document.createElement("div");
@@ -52,11 +68,25 @@ function updateTweets(data)
 		}
 		
 		
+		count++;
+	}
+	
+//	function slidePic(div_id)
+//	{	var id = div_id.substring(2);
+//		var pics = getPicsUrls(id);
+//		
+//		$('div_id').setAttribute("style",'background-image:url('+pics[0]+')');
+//	}
+	
+	function getPicsUrls(pic_id)
+	{
+		return data.tweets[pic_id].urls;
+	}
+	
+	function getNextPicUrl(pic_id)
+	{
+		var img = document.getElementById(pic_id);
+		var style = img.currentStyle || window.getComputedStyle(img, false);
+		return style.backgroundImage.slice(4, -1).replace(/"/g, "");
 		
 	}
-	// Diese Funktion soll dazu dienen mehrere Bilder anzuzeigen.
-//	function slidePic(element)
-//	{
-//		parent =element.getParentNode();
-//		parent.setAttribute("style",'display:block;background-image:url('+pics[0]+')');
-//	}
