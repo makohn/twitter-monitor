@@ -99,7 +99,7 @@ public class KeywordDao {
 	 */
 	public void deleteKeyword(Keyword keyword) {
 
-		String delete = "delete from keywords where keyword=:keyword and username=:username)";
+		String delete = "delete from keywords where keyword=:keyword and username=:username";
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("keyword", keyword.getKeyword());

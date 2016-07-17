@@ -79,11 +79,13 @@ public class KeywordController {
 	 * or updated.
 	 * @param keyword - a keyword bean, that is sended empty as a request and
 	 * received initialized as a response
-	 * @param request - the Java representation of the request
+	 * @param request - the Java representation of the REST request
 	 * @param principal - the currently logged in user
+	 * @returns the keyword that is inserted or updated
 	 */
-	@RequestMapping(value = "changePriority", method = RequestMethod.POST) 
-	public String changePriority(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal)
+	@RequestMapping(value = "changePriority", method = RequestMethod.POST, headers = "Accept=application/json") 
+	@ResponseBody
+	public Keyword changePriority(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal)
 		throws KeywordException {
 		String username = principal.getName();
 		
@@ -91,6 +93,25 @@ public class KeywordController {
 		
 		userService.insertKeyword(keyword);
 		
-		return "keywords";
+		return keyword;
+	}
+	
+	/**
+	 * This method launches the deletion of a user's keyword, whenever the
+	 * deletion is triggered off by a UI event, e.g. if a user clicks on the
+	 * 'delete cross'.
+	 * @param keyword - a keyword bean, created out of the keyword name and
+	 * 					the user's identity. Represents the 'to-delete' keyword.
+	 * @param request - the Java representation of the REST request
+	 * @param principal -the currently logged in user
+	 */
+	@RequestMapping(value ="deleteKeyword", method = RequestMethod.POST, headers = "Accept=application/json")
+	public void deleteKeyword(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal) 
+		throws KeywordException {
+		String username = principal.getName();
+		
+		keyword.setUsername(username);
+		
+		userService.deleteKeyword(keyword);
 	}
 }

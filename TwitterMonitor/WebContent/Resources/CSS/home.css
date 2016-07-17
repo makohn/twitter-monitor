@@ -13,21 +13,20 @@ header {
     min-width: 100%;
 }
 
-
-    #logo{
-                        display:none;
-                        float: left;
-                        background-image: url(../Picture/Hummingbird.png);
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        margin-top: 30px;
-                        margin-left: 30px;
-                        min-height: 80px;
-                        min-width: 250px;
+#logo{
+	
+   	display:none;
+    float: left;
+    background-image: url(../Picture/Hummingbird.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-top: 30px;
+    margin-left: 30px;
+    min-height: 80px;
+    min-width: 250px;
                         
                     
 }
-
         
 #login_panel{
    
@@ -43,6 +42,7 @@ header {
     
     
 }
+
 #login_title{
     position: relative;
     float: left;
@@ -65,12 +65,14 @@ header {
     margin-left: 10px;
     
 }
+
 #textfield_password{
     position: relative;
     float: left;
     margin-top: 15px;
      margin-left: 10px;
 }
+
 #new_account{
     position: relative;
     float: left;
@@ -81,6 +83,7 @@ header {
     font-size:12px;
     cursor:pointer;
 }
+
 #loginButton{
     float: left;
     color: white;
@@ -96,6 +99,7 @@ header {
     min-height: 30px;
     cursor:pointer;
 }
+
 #loginButton:hover {
     background-color: #45a049;
 }
@@ -131,6 +135,7 @@ header {
     margin-left: 120px;
     
 }
+
 #runningMail_pic{
     display: none;
     background-image: url(../Picture/runningmailbox.png);
@@ -142,6 +147,7 @@ header {
     margin-top: 360px;
     margin-left: 560px;
 }
+
 #text_comic{
     color: white;
     position: absolute;
@@ -162,6 +168,14 @@ header {
 	max-width:300px;
 	min-height: 400px;
 }
+
+#passwd_line{
+	height: 6px;
+	width: 25%;
+	background-color: white;
+	margin-bottom: 10px;
+}
+
 input, select {
     width: 100%;
     padding: 12px 20px;
@@ -171,7 +185,6 @@ input, select {
     border-radius: 4px;
     box-sizing: border-box;
 }
-
 
 input[type=submit] {
     width: 100%;
@@ -187,10 +200,11 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: #45a049;
 }
+
 input[id=textfield_benutzer],select{
 	float:left;
-	 width: 200px;;
-   padding: 5px 5px;
+	width: 200px;
+   	padding: 5px 5px;
     margin-left:5px;
     margin-top:30px;
     display: block;
@@ -198,17 +212,18 @@ input[id=textfield_benutzer],select{
     border-radius: 4px;
     box-sizing: border-box;	
 }
+
 input[id=textfield_password],select{
 	
 	float:left;
-	 width: 200px;;
-   padding: 5px 5px;
-    
+	width: 200px;
+   	padding: 5px 5px;
     display: block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;	
 }
+
 label[for=login_password]{
 	float:left;
 	color:white;
@@ -217,6 +232,7 @@ label[for=login_password]{
 	margin-top:8px;
 
 }
+
 label[for=login_user]{
 	clear:left;
 	float:left;
@@ -224,6 +240,7 @@ label[for=login_user]{
 	padding:10px;
 	margin-top:20px;
 }
+
 footer{
     
    min-height: 200px;

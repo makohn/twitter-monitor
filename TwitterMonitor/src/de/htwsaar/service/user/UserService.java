@@ -34,6 +34,10 @@ public class UserService {
 		keywordDao.insertKeyword(keyword);		
 	}
 	
+	public void deleteKeyword(Keyword keyword) {
+		keywordDao.deleteKeyword(keyword);
+	}
+	
 	public List<Keyword> getKeywords(String username) {
 		return keywordDao.getKeywords(username);
 	}
