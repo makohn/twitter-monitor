@@ -129,6 +129,11 @@ function deleteKeyword(keyword){
     var keyword_id = "#".concat(keyword);
     
     $(keyword_id).remove();
+    
+    keywordsfield = jQuery.grep(keywordsfield, function(value) {
+      return value != keywordsfield[keywordcount];
+    });
+     
 }
 
 /*
@@ -178,7 +183,7 @@ function createNewKeyword() {
 	
 	if (isNewKeyWord(newKey))
 		{
-	
+	keyword_count++;
 	changePrio(newKey, 1, currentPrio.length);
 	// Keyword-Textfeld ausblenden
 	$('#newKeyword').css('display','none');
