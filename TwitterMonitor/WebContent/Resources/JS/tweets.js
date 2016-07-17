@@ -58,11 +58,14 @@ function updateTweets(data)
 		tweet_author_name.innerHTML=tweet.name;
 		tweet_data.appendChild(tweet_author_name);
 		
+		if (tweet.place != "")
+		{
 		//create a tweet_place_div and passing author_div from JSON
 		var tweet_place = document.createElement("div");
 		tweet_place.setAttribute("class","tweet_place");
-		tweet_place.innerHTML=tweet.place;
+		tweet_place.innerHTML="@".concat(tweet.place);
 		tweet_author_name.appendChild(tweet_place);
+		}
 		
 		//create a tweet_time_div and passing Tweet_time from JSON
 		var tweet_time = document.createElement("div");
