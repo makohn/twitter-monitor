@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import de.htwsaar.exception.model.TweetException;
+import de.htwsaar.model.OutputTweet;
 import de.htwsaar.model.Tweet;
 
 /**
@@ -34,11 +35,14 @@ public class TweetDao {
 
 	private NamedParameterJdbcTemplate jdbc;
 
+	private KeywordDao keywordDao;
+		
 	public TweetDao() {}
 	
 	@Autowired
-	public TweetDao(DataSource jdbc) {
-		this.jdbc = new NamedParameterJdbcTemplate(jdbc);		
+	public TweetDao(DataSource jdbc, KeywordDao keywordDao) {
+		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
+		this.keywordDao = keywordDao;
 	}
 
 	/**
@@ -46,13 +50,16 @@ public class TweetDao {
 	 * the database.
 	 * @return a list of Tweet Objects
 	 */
-	public List<Tweet> getTweets() {
+	public List<OutputTweet> getTweets() {
 
-		String query = "select * from tweets limit 20";		// TODO: wenn die Methode ALLE tweets liefern soll
+		String query = "select * from tweets, tweetAuthors where tweets.authorId = tweetAuthors.authorId limit 20";		
+															// TODO: wenn die Methode ALLE tweets liefern soll
 															// ist das limit doch irgendwie nicht so sinnvoll
 															// oder geht es hier nur um testzwecke
-
-		return jdbc.query(query, new TweetRowMapper());
+		
+		List<OutputTweet> tweets = jdbc.query(query, new TweetRowMapper());
+		
+		return tweets;
 	}
 
 	/**
@@ -60,15 +67,15 @@ public class TweetDao {
 	 * @param tweetId - the unique id of a tweet
 	 * @return a Tweet Object, if the tweet exists.
 	 */
-	public Tweet getTweet(long tweetId) {
+	public OutputTweet getTweet(long tweetId) {
 
-		String query = "select * from tweets where tweetId = :tweetId";
+		String query = "select * from tweets, tweetAuthors where tweets.authorId = tweetAuthors.authorId and tweetId = :tweetId";
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("tweetId", tweetId);
 		
 		try {
-			return (Tweet) jdbc.queryForObject(query, paramSource, new TweetRowMapper()); 		
+			return (OutputTweet) jdbc.queryForObject(query, paramSource, new TweetRowMapper()); 		
 		}
 		catch (EmptyResultDataAccessException e) {
 			e.printStackTrace();
@@ -83,11 +90,12 @@ public class TweetDao {
 	 * @param username
 	 * @return
 	 */
-	public List<Tweet> getTweets(String username) {
+	public List<OutputTweet> getTweets(String username) {
 
-		String query = "select * from keywords, tweets_x_keywords, tweets "
+		String query = "select * from keywords, tweets_x_keywords, tweets, tweetAuthors "
 						+ "where keywords.keyword = tweets_x_keywords.keyword " 
 						+ "and tweets_x_keywords.tweetId = tweets.tweetId "
+						+ "and tweets.authorId = tweetAuthors.authorId "
 						+ "and keyword.username = :username";
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
@@ -293,7 +301,7 @@ public class TweetDao {
 	 * @param keyword - the requested keyword
 	 * @return a list of tweets that match with the keyword
 	 */
-	public List<Tweet> getTweetsWithKeyword(String keyword) {
+	public List<OutputTweet> getTweetsWithKeyword(String keyword) {
 
 		String query = "select * from tweets_x_keywords where keyword = :keyword";
 
@@ -322,11 +330,11 @@ public class TweetDao {
 	 * This class serves as a utility to create Tweet Objects out
 	 * of a ResultSet that is received from a database query.
 	 */
-	private class TweetRowMapper implements RowMapper<Tweet> {
+	private class TweetRowMapper implements RowMapper<OutputTweet> {
 
 		@Override
-		public Tweet mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Tweet tweet = new Tweet();
+		public OutputTweet mapRow(ResultSet rs, int rowNum) throws SQLException {
+			OutputTweet tweet = new OutputTweet();
 
 			try {
 				tweet.setTweetId(rs.getLong("tweetId"));
@@ -335,8 +343,15 @@ public class TweetDao {
 				tweet.setCreatedAt(rs.getDate("createdAt"));
 				tweet.setPlace(rs.getString("place"));
 				tweet.setFavoriteCount(rs.getInt("favoriteCount"));
-				tweet.setRetweetCount(rs.getInt("retweetCount"));
+				tweet.setRetweetCount(rs.getInt("retweetCount"));				
+				tweet.setFollowerCount(rs.getInt("followerCount"));
+				tweet.setPriority(rs.getFloat("prio"));
+				tweet.setName(rs.getString("name"));
+				tweet.setScreenName(rs.getString("screenName"));
+				tweet.setPictureUrl(rs.getString("pictureUrl"));
+				
 				tweet.setUrls(getUrlsOfTweet(rs.getLong("tweetId")));
+				tweet.setKeywords(keywordDao.getKeywordsOfTweet(rs.getLong("tweetId")));
 			} catch (TweetException e) {
 				e.printStackTrace();
 			}

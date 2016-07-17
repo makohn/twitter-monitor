@@ -1,5 +1,6 @@
 package de.htwsaar.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import de.htwsaar.model.Tweet;
+import de.htwsaar.model.OutputTweet;
 import de.htwsaar.service.twitter.TweetService;
 
 /**
@@ -41,9 +42,9 @@ public class TweetController {
 	 * logged-in user
 	 */
 	@RequestMapping("/showTweets")
-	public String showTweets(Model model) {
+	public String showTweets(Model model, Principal principal) {
 		
-		ArrayList<Tweet> tweets = (ArrayList<Tweet>) tweetService.getTweets();
+		ArrayList<OutputTweet> tweets = (ArrayList<OutputTweet>) tweetService.getTweets(principal.getName());
 		
 		model.addAttribute("tweets", tweets);
 
@@ -57,8 +58,8 @@ public class TweetController {
 	 */
 	@RequestMapping(value = "getTweets", method = RequestMethod.GET, headers = "Accept=application/json")
 	@ResponseBody
-	public Map<String, Object> getTweets() {
-		List<Tweet> tweets = tweetService.getTweets();
+	public Map<String, Object> getTweets(Principal principal) {
+		List<OutputTweet> tweets = tweetService.getTweets(principal.getName());
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("tweets", tweets);
 		return data;
