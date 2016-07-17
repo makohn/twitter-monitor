@@ -92,18 +92,20 @@ public class TweetDao {
 	 */
 	public List<OutputTweet> getTweets(String username) {
 
-		String query = "select * from keywords, tweets_x_keywords, tweets, tweetAuthors "
-						+ "where keywords.keyword = tweets_x_keywords.keyword " 
-						+ "and tweets_x_keywords.tweetId = tweets.tweetId "
-						+ "and tweets.authorId = tweetAuthors.authorId "
-						+ "and keyword.username = :username";
+//		String query = "select * from keywords, tweets_x_keywords, tweets, tweetauthors "
+//						+ "where keywords.keyword = tweets_x_keywords.keyword " 
+//						+ "and tweets_x_keywords.tweetId = tweets.tweetId "
+//						+ "and tweets.authorId = tweetAuthors.authorId "
+//						+ "and keywords.username = :username";
+		
+		String query = "select * from tweets, tweetauthors where tweets.authorId = tweetauthors.authorId limit 20";
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("username", username);
 		
 		try {																	// TODO: ist hier der try-catch notwendig
 			return jdbc.query(query, paramSource, new TweetRowMapper()); 		// bei leerem Ergebnis wird ja eigentlich nur
-		} catch (EmptyResultDataAccessException e) {							// eine leere liste zurückgegeben.
+		} catch (EmptyResultDataAccessException e) {							// eine leere liste zurï¿½ckgegeben.
 			e.printStackTrace();
 		}
 		return null;			
