@@ -167,10 +167,21 @@ a                       {
                         border-top-left-radius: 28px;
                         border-top-right-radius: 28px;
                         }
+ 
+  .tweet_author_name      {
+                        float: left;
+                        color: black;
                         
+                        margin-left:5px;
+                        padding-top: 40px;
+                        
+                        min-height: 40px;
+                        
+                  
+                        }                           
  .tweet_author_pic      {
                         float: left;
-                        background-size: cover;
+                        background-size: contain;
                         background-repeat: no-repeat;
                         min-width: 50px;
                         min-height: 40px;

@@ -52,6 +52,12 @@ function updateTweets(data)
 		tweet_author_pic.setAttribute("style",'background-image:url('+tweet.pictureUrl+')');
 		tweet_data.appendChild(tweet_author_pic);
 		
+		//create a tweet_author-name_div and passing author_div from JSON
+		var tweet_author_name = document.createElement("div");
+		tweet_author_name.setAttribute("class","tweet_author_name");
+		tweet_author_name.innerHTML=tweet.name;
+		tweet_data.appendChild(tweet_author_name);
+		
 		//create a tweet_time_div and passing Tweet_time from JSON
 		var tweet_time = document.createElement("div");
 		tweet_time.setAttribute("class","tweet_time");
