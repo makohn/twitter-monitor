@@ -1,13 +1,13 @@
 #header {
     
-    background-color: #ffc50e;
+   background: linear-gradient(to right, #00284d, #99ffff);
    
-    min-height: 50px;
+    min-height: 10px;
     
 }
 body{
     min-width: 520px;
-    background-color: #f6f8d1;   
+    background-color: #edf8fd;   
 }
 
 #logo{
@@ -16,7 +16,7 @@ body{
                         background-image: url(../Picture/colibri.png);
                         background-size: contain;
                         background-repeat: no-repeat;
-                        margin-top: 30px;
+                        margin-top: 10px;
                         margin-left: 30px;
                         min-height: 80px;
                         min-width: 250px;
@@ -27,14 +27,14 @@ nav                     {
                         
                         background-color: black;
                         min-width: 100%;
-                        min-height: 140px;
+                        min-height: 100px;
                         max-height: 40px;
                         }
 
 
 
 nav ul li:hover > ul    {
-		                  display: block;
+                          display: block;
                           
                         }
 
@@ -51,7 +51,7 @@ nav ul                  {
                         position: relative;
                         
                         margin-left: 10%;
-                        margin-top: 70px;
+                        margin-top: 40px;
                         
                         }
 
@@ -59,14 +59,14 @@ nav ul                  {
 
 
 nav ul:after            {
-		                  content: ""; clear: both; display: block; 
+                          content: ""; clear: both; display: block; 
             
-	                       }
+                           }
 
 nav ul li               {
                         z-index: 5;
-	                     float: left;
-                    
+                        float: left;
+                        font: 15px arial, sans-serif;
     
                         
                         }
@@ -74,10 +74,10 @@ nav ul li               {
 
 nav ul li:hover a       {
                         z-index: 4;
-			             color: #EED880;
+                         color: #cbf0fc;
                         border-radius: 20px;
-		                }
-	
+                        }
+    
 nav ul li a             {
                         z-index: 4;
                             display: block; padding: 5px 40px;
@@ -85,7 +85,7 @@ nav ul li a             {
                         
     
                         }
-                                                            /* navigation end  */                                                                
+                                                            /* navigation end  */                                                                  
 	
 nav ul2                    {
                         display: block;
