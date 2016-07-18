@@ -1,28 +1,33 @@
 #header_deko{
-	background-color: #ffc50e;
-	min-height:50px;
-	min-width:100%;
+	background: linear-gradient(to right, #00284d, #99ffff);
+    min-height: 10px;
 	
 }
 
 header {
     
-    background-color: black;
+    background: linear-gradient(to right, #00284d, #99ffff);
     
     min-height:230px;
     min-width: 100%;
+}
+
+body {
+	background: linear-gradient(#ffffff, #d2edf9);
+	font-family: "Segoe UI", sans-serif; 
+	font-size: 14px;
 }
 
 #logo{
 	
    	display:none;
     float: left;
-    background-image: url(../Picture/Hummingbird.png);
+    background-image: url(../Picture/colibri.png);
     background-size: contain;
     background-repeat: no-repeat;
     margin-top: 30px;
     margin-left: 30px;
-    min-height: 80px;
+    min-height: 150px;
     min-width: 250px;
                         
                     
@@ -33,28 +38,21 @@ header {
     border-radius: 20px;
     position: relative;
     float: right;
-    margin-top: 10px;
-    padding-right:50px;
-    margin-right: 50px;
+    margin-top: 2px;
+    padding-right:60px;
+    margin-right: 60px;
     min-width: 300px;
     max-width:300px;
-    
-    
-    
+      
 }
 
 #login_title{
     position: relative;
     float: left;
     clear:right;
-    color: #4CAF50;
-    margin-top: 10px;
-    margin-left: 10px;
-    font-size: 18px;
-    font-weight: bolder;
-    
-    
-    
+    color: #113955;
+    margin-top: 4px;
+    margin-left: 10px;  
 }
 
 #password_label{
@@ -73,35 +71,34 @@ header {
      margin-left: 10px;
 }
 
-#new_account{
-    position: relative;
-    float: left;
-    color: #4CAF50;
-    clear: left;
-    margin-top: 20px;
-    margin-left: 65px;
-    font-size:12px;
-    cursor:pointer;
-}
-
 #loginButton{
     float: left;
     color: white;
-    background-color: #4CAF50;
-    border-radius: 15px;
+    background-color: #113955;
     padding-top: 10px;
     padding-left: 5px;
     padding-right: 5px;
     margin-top: 15px;
-    margin-left: 35px;
-    min-width: 30px;
-    max-width:50px;
+    margin-left: 91px;
     min-height: 30px;
+    width: 66.5%;
+    max-height:70%;
+    cursor:pointer;
+}
+
+#new_account{
+    position: relative;
+    float: left;
+    color: #113955;
+    clear: left;
+    margin-top: 5px;
+    margin-left: 91px;
+    font-size:12px;
     cursor:pointer;
 }
 
 #loginButton:hover {
-    background-color: #45a049;
+    background-color: #031e3d;
 }
 #page {
     min-width: 100%;
@@ -119,7 +116,7 @@ header {
     position: relative;
     min-width: 100%;
     min-height: 1000px;
-     background-color: white;
+    background: linear-gradient(#ffffff, #d2edf9);
 }
 
 #bird_pic{
@@ -206,7 +203,7 @@ input[id=textfield_benutzer],select{
 	width: 200px;
    	padding: 5px 5px;
     margin-left:5px;
-    margin-top:30px;
+    margin-top:20px;
     display: block;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -238,7 +235,7 @@ label[for=login_user]{
 	float:left;
 	color:white;	
 	padding:10px;
-	margin-top:20px;
+	margin-top:10px;
 }
 
 footer{

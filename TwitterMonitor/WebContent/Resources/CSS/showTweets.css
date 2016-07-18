@@ -1,22 +1,22 @@
 #header {
     
-    background-color: #ffc50e;
+   background: linear-gradient(to right, #00284d, #99ffff);
    
-    min-height: 50px;
+    min-height: 10px;
     
 }
 body{
     min-width: 520px;
-    background-color: #f6f8d1;   
+    background-color: #edf8fd;   
 }
 
 #logo{
                         display: none;
                         float: left;
-                        background-image: url(../Picture/Hummingbird.png);
+                        background-image: url(../Picture/colibri.png);
                         background-size: contain;
                         background-repeat: no-repeat;
-                        margin-top: 30px;
+                        margin-top: 10px;
                         margin-left: 30px;
                         min-height: 80px;
                         min-width: 250px;
@@ -25,16 +25,16 @@ body{
 }
 nav                     {
                         
-                        background-color: black;
+                        background-color: #113955;
                         min-width: 100%;
-                        min-height: 140px;
+                        min-height: 100px;
                         max-height: 40px;
                         }
 
 
 
 nav ul li:hover > ul    {
-		                  display: block;
+                          display: block;
                           
                         }
 
@@ -51,7 +51,7 @@ nav ul                  {
                         position: relative;
                         
                         margin-left: 10%;
-                        margin-top: 70px;
+                        margin-top: 40px;
                         
                         }
 
@@ -59,14 +59,14 @@ nav ul                  {
 
 
 nav ul:after            {
-		                  content: ""; clear: both; display: block; 
+                          content: ""; clear: both; display: block; 
             
-	                       }
+                           }
 
 nav ul li               {
                         z-index: 5;
-	                     float: left;
-                    
+                        float: left;
+                        font: 15px arial, sans-serif;
     
                         
                         }
@@ -74,10 +74,10 @@ nav ul li               {
 
 nav ul li:hover a       {
                         z-index: 4;
-			             color: #EED880;
+                         color: #cbf0fc;
                         border-radius: 20px;
-		                }
-	
+                        }
+    
 nav ul li a             {
                         z-index: 4;
                             display: block; padding: 5px 40px;
@@ -85,7 +85,7 @@ nav ul li a             {
                         
     
                         }
-                                                            /* navigation end  */                                                                
+                                                            /* navigation end  */                                                                  
 	
 nav ul2                    {
                         display: block;
@@ -155,8 +155,7 @@ a                       {
                         min-width: 500px;
                         max-width: 500px;
                         }
-
-.tweet_time            {
+.tweet_data            {
                         float: left;
                         background-color:white;
                         color: #4266b2;
@@ -167,6 +166,49 @@ a                       {
                         box-shadow: 10px 12px 12px 0px rgba(0,0,0,0.50);
                         border-top-left-radius: 28px;
                         border-top-right-radius: 28px;
+                        }
+ 
+  .tweet_author_name      {
+                        float: left;
+                        color: black;
+                        margin-left:5px;
+                        padding-top: 40px;
+                        
+                        min-height: 40px;
+                        
+                  
+                        }  
+   .tweet_place      {
+                        
+                        
+                        color: grey;
+
+                        }                               
+ .tweet_author_pic      {
+                        float: left;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        min-width: 50px;
+                        min-height: 40px;
+                        margin-right:15px;
+                        padding-top: 20px;
+                        padding-left: 10px;
+                        min-height: 40px;
+                        
+                        
+                      
+                        }                      
+                      
+.tweet_time            {
+                        float: right;
+                        color: inherit;
+                        margin-right:15px;
+                        padding-top: 20px;
+                        padding-left: 10px;
+                        min-height: 40px;
+                        
+                        
+                      
                         }
 
 .tweet_pic              {

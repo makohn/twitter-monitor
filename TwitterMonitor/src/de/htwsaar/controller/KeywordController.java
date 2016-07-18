@@ -106,12 +106,15 @@ public class KeywordController {
 	 * @param principal -the currently logged in user
 	 */
 	@RequestMapping(value ="deleteKeyword", method = RequestMethod.POST, headers = "Accept=application/json")
-	public void deleteKeyword(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal) 
+	@ResponseBody
+	public Keyword deleteKeyword(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal) 
 		throws KeywordException {
 		String username = principal.getName();
 		
 		keyword.setUsername(username);
 		
 		userService.deleteKeyword(keyword);
+		
+		return keyword;
 	}
 }

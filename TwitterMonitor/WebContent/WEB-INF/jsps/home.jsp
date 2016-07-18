@@ -33,7 +33,7 @@
 	<div id="logo"></div>
 	
 	<div id="login_panel">
-		<div id="login_title">Log in</div>
+		<div id="login_title">Login</div>
 		<form 	name='f'
 				action='${pageContext.request.contextPath}/j_spring_security_check'
 				method='POST'>
@@ -42,8 +42,8 @@
 			<input 	id="textfield_benutzer" name='j_username' type=text> 
 			<label	for="login_password">Password</label> 
 			<input id="textfield_password"	type=password name='j_password'>
-			<div id="new_account" onclick="newUser()">Neues Benutzerkonto erstellen</div>
 			<input id="loginButton" type="submit">
+			<div id="new_account" onclick="newUser()">Neues Benutzerkonto erstellen</div>
 		</form>
 	</div>
 	
