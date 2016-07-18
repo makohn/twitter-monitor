@@ -1,29 +1,31 @@
 #header {
-	background-color: #ffc50e;
-	min-height: 50px;
+	background: linear-gradient(to right, #00284d, #99ffff);
+	min-height: 10px;
 }
 
 body {
 	min-width: 520px;
-	background-color: #f6f8d1;
+	background-color: #edf8fd;
+	font-family: "Segoe UI", sans-serif; 
+	font-size: 20px;
 }
 
 #logo {
 	display: none;
 	float: left;
-	background-image: url(../Picture/Hummingbird.png);
+	background-image: url(../Picture/colibri.png);
 	background-size: contain;
 	background-repeat: no-repeat;
-	margin-top: 30px;
+	margin-top: 10px;
 	margin-left: 30px;
 	min-height: 80px;
 	min-width: 250px;
 }
 
 nav {
-	background-color: black;
+	background-color: #113955;
 	min-width: 100%;
-	min-height: 140px;
+	min-height: 100px;
 	max-height: 40px;
 }
 
@@ -43,7 +45,7 @@ nav ul {
 	list-style: none;
 	position: relative;
 	margin-left: 10%;
-	margin-top: 70px;
+	margin-top: 40px;
 }
 
 nav ul:after {
@@ -55,11 +57,12 @@ nav ul:after {
 nav ul li {
 	z-index: 5;
 	float: left;
+	font: 15px arial, sans-serif;
 }
 
 nav ul li:hover a {
 	z-index: 4;
-	color: #EED880;
+	color: #cbf0fc;
 	border-radius: 20px;
 }
 
@@ -70,7 +73,7 @@ nav ul li a {
 	color: white;
 	text-decoration: none;
 }
-/* navigation end  */
+
 nav ul2 {
 	display: block;
 	float: left;
@@ -193,12 +196,11 @@ a {
 
 #newKeyword_text {
 	float: left;
-	background-color: #f6f8d1;
+	opacity: 1.0;
 	min-width: 330px;
-	border-style: solid;
-	border-color: black;
-	border-size: thin;
 	line-height: 25px;
+	background-color: #edf8fd;
+	cursor: text;
 }
 
 #newKeyword_button {
