@@ -42,12 +42,13 @@
 
 			<div id="username">Hallo ${pageContext.request.userPrincipal.name}</div>
 			<div id="welcome_text">Seit dem letzten Login haben wir 230 Tweets für dich gesammelt</div>
-			<label for="search">Search</label> <input type="search">
+			<label for="search">Search</label> <input id="search" type="search">
 			<label for="sort">Sort</label> 
 			<select>
 				<option>Name</option>
 				<option>Zeit</option>
 			</select>
+			<div id="goButton" onClick="search()">Go</div>
 		</div>
 		
 		<!--############# Tweet Panel ##################-->

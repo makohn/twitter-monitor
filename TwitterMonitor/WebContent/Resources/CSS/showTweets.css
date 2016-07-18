@@ -228,24 +228,16 @@ a                       {
                         clear: left;
                         font-size:20px;
                         float: left;
-                        min-width: 510px;;
-                        max-width: 510px;
+                        min-width: 500px;;
+                        max-width: 500px;
                         min-height: 50px;
                         padding-left: 30px;
                         line-height: 25px;
                         background-color: white;
                         padding:20px;
                         box-shadow: 10px 10px 12px 0px rgba(0,0,0,0.50);
-                        border-bottom-left-radius: 28px;
-.tweet_rating           {
-                        }
-                        float: right;
-                        padding-top: 20px;
-                        padding-right: 10px;
-                        min-height: 40px;
-                        
-    
-}
+                        border-bottom-left-radius: 28px; 
+						}
 .line					{
 						margin-top:40px;
 						margin-bottom:40px;
@@ -301,6 +293,17 @@ input[type=search], select {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
+#goButton				{
+						float:right;
+						clear:both;
+						background-color:grey;
+						margin-top:10px;
+						padding-left:10px;
+						padding-right:10px;
+						margin-right:63px;
+						cursor: pointer;
+						}
 
 @media screen and (min-width: 1100px) {
     

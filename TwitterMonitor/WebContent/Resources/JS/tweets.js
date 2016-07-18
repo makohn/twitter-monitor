@@ -1,10 +1,24 @@
 
 var count=0;
-var tweetsfield = [];
+var first=true;
+var tweetsfield;
+var searchfield;
 function updateTweets(data)
 	{
-	     tweetsfield = data.tweets;
-
+	 
+		if (first)
+		{
+	     
+	     tweetsfield = $.extend(true, [], data);
+	     searchfield = $.extend(true, [], data);
+	     first = false;
+		}else{
+			$("#tweet_panel").remove();
+			var tweet_panel = document.createElement("div");
+			tweet_panel.setAttribute("id","tweet_panel");
+			$("#page").append(tweet_panel);
+		}
+		
 		$("#tweet_panel").html("");
 		for(var i=0;i<data.tweets.length;i++){
 		var tweet = data.tweets[i];	
@@ -31,7 +45,7 @@ function updateTweets(data)
 			var pic_div = document.createElement("div");
 			pic_div.setAttribute("class","tweet_pic ");
 			pic_div.setAttribute("id","pic".concat(count));
-			pic_div.setAttribute("onClick","slidePic(".concat("pic").concat(count).concat("\)"));
+			pic_div.setAttribute("onClick","slidePic(".concat('\"').concat("pic").concat(count).concat('\"').concat("\)"));
 			pic_div.setAttribute("style",'display:block;background-image:url('+pics[0]+')');
 			tweet_div.appendChild(pic_div);
 			
@@ -80,28 +94,86 @@ function updateTweets(data)
 		tweet_text.setAttribute("class","tweet_text");
 		tweet_text.innerHTML=tweet.text;
 		tweet_div.appendChild(tweet_text);
+		count++;
 		}
 		
 		
-		count++;
+		
 	}
 	
-//	function slidePic(div_id)
-//	{	var id = div_id.substring(2);
-//		var pics = getPicsUrls(id);
-//		
-//		$('div_id').setAttribute("style",'background-image:url('+pics[0]+')');
-//	}
+	function slidePic(div_id)
+	{	
+		
+		var id = String(div_id).substring(3);
+		
+		var pics = getPicsUrls(id);
+		
+		var oldpic;
+		for(var i=0;i<pics.length;i++){
+			
+			if(pics[i] == getPicUrl(div_id))
+				{
+					
+					if(i+1 < pics.length)
+					{
+						document.getElementById(div_id).setAttribute("style",'display:block;background-image:url('+pics[i+1]+')');
+						return;
+					}else if(i+1 == pics.length)
+						{
+						document.getElementById(div_id).setAttribute("style",'display:block;background-image:url('+pics[0]+')');
+						return;
+						}
+				}
+			
+		}
+		
+	}
 	
 	function getPicsUrls(pic_id)
 	{
-		return data.tweets[pic_id].urls;
+		 
+		 return  tweetsfield.tweets[pic_id].urls;
+		 
 	}
 	
-	function getNextPicUrl(pic_id)
+	function getPicUrl(pic_id)
 	{
+		
 		var img = document.getElementById(pic_id);
 		var style = img.currentStyle || window.getComputedStyle(img, false);
+		
 		return style.backgroundImage.slice(4, -1).replace(/"/g, "");
+		
+	}
+	
+	function search()
+	{
+		
+		var keyString = $('#search').val();
+		if(!(keyString == "")){
+			
+		for(var i=0;i<searchfield.tweets.length;i++)
+		{
+			var tweet = searchfield.tweets[i];
+			var index = [];
+			if (!(tweet.text.includes(keyString)))
+			{
+				
+				searchfield.tweets.splice(i,1);
+				i=0;
+			}
+			
+		}
+		
+		updateTweets(searchfield);
+	
+		}else 
+			{
+			searchfield = $.extend(true, [], tweetsfield);
+			updateTweets(tweetsfield);
+			}
+		
+		
+		
 		
 	}
