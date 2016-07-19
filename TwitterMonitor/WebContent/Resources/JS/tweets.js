@@ -147,7 +147,8 @@ function updateTweets(data)
 	}
 	
 	function search()
-	{
+	{	
+		searchfield = null;
 		searchfield = $.extend(true, [], tweetsfield);
 		var keyString = $('#search').val();
 		if(!(keyString == "")){
@@ -158,9 +159,8 @@ function updateTweets(data)
 			var index = [];
 			if (!(tweet.text.includes(keyString)))
 			{
-				
 				searchfield.tweets.splice(i,1);
-				i=0;
+				i=-1;
 			}
 			
 		}
