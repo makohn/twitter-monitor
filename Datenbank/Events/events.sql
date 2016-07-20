@@ -9,7 +9,7 @@ on schedule every 720 minute
     on completion preserve
     do
       begin
-      delete from tweetsMedia where tweetId in (
+      delete from tweetMedia where tweetId in (
       	select t.tweetId from tweets t where date_add(t.createdAt, interval 5 day) < sysdate());
       delete from tweets_x_keywords where tweetId in (
       	select t.tweetId from tweets t where date_add(t.createdAt, interval 5 day) < sysdate());
