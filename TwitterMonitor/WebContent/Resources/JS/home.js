@@ -41,3 +41,10 @@ function evalPasswd() {
 		$('#passwd_line').css('background-color', 'white');
 	}
 };
+
+function evalUsrName(){
+	
+	var val = $('#new_username').val();
+	
+	if (val.mach(/[a-zA-ZäöüÄÖÜ\-_]{1,}/))
+}

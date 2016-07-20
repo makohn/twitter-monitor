@@ -64,7 +64,8 @@
 		
 			<sf:form method="post" action="${pageContext.request.contextPath}/newAccount" commandName="user">
 				<label for="user_name">Username</label>
-				<sf:input path="username" name="username" type="text"/>
+				<sf:input path="username" onkeyup="evalUsrName()" name="username" id="new_username" type="text"/>
+				<div id="eval_username"></div>
 				<label for="user_email">Email</label>
 				<sf:input path="email" name="email" type="email"/>
 				<label for="user_password">Password</label>

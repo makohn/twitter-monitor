@@ -47,7 +47,6 @@
 			<select id="sortOption" onchange="sort()">
 				<option>-Bitte wählen-</option>
 				<option>Priorität</option>
-				<option>Name</option>
 				<option>Zeit</option>
 				
 			</select>
@@ -62,6 +61,7 @@
 				} onLoad();
 			</script>
 	   </div>
+	   <div ></div>
 	   
 <!----------------------------------------------------------------------------------->
 </body>

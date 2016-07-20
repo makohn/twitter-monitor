@@ -2,6 +2,13 @@ var count = 0;
 var first = true;
 var tweetsfield;
 var searchfield;
+
+/**
+ * By passing an array of tweet objects this method creates a tweet-container for all tweets.
+ * In addition, this method saves the array that is passed the first time during runtime 
+ * in a global variable called "tweetsfield". That makes it possible to have an original array. 
+ * @param data
+ */
 function updateTweets(data) {
 
 	if (first) {
@@ -125,6 +132,11 @@ function slidePic(div_id) {
 
 }
 
+/**
+ * 
+ * @param pic_id
+ * @returns
+ */
 function getPicsUrls(pic_id) {
 
 	return tweetsfield.tweets[pic_id].urls;
@@ -168,16 +180,12 @@ function sort()
 {
 	if ($( "#sortOption option:selected" ).text() == "-Bitte wählen-")
 	{
-		updateTweets(tweetsfield);
+		updateTweets(searchfield);
 		return;
 	}
 	searchfield.tweets.sort(function(a, b){
-		if ($( "#sortOption option:selected" ).text() == "Name")
-			{
-				if(a.text < b.text) return -1;
-				if(a.text > b.text) return 1;
-					return 0;
-		}else if($( "#sortOption option:selected" ).text() == "Zeit")
+
+		 if($( "#sortOption option:selected" ).text() == "Zeit")
 			{
 			if(a.createdAt < b.createdAt) return -1;
 			if(a.createdAt > b.createdAt) return 1;
