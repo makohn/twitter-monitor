@@ -10,19 +10,19 @@ begin
 		Rückgabe: Prio als float
 	*/
 	declare l_general_prio float default 0;
-  declare l_personal_prio float default 0;
+  declare l_keyword_prio float default 0;
 
   set l_general_prio = get_general_prio(p_tweetId);
 
   # Wenn mehrere Keywords zu einem Tweet passen, sollen diese Keyword-Prioritaeten addiert werden
-  select ifnull(sum(k.priority),1) into l_personal_prio
+  select ifnull(sum(k.priority),1) into l_keyword_prio
     from keywords k, tweets_x_keywords x
   	where k.username = p_username
     	and x.tweetId = p_tweetId
     	and x.keyword = k.keyword
       and k.active = 1;
 
-	return l_personal_prio * l_general_prio;
+	return l_keyword_prio * l_general_prio;
 end;$$
 
 DELIMITER $$
