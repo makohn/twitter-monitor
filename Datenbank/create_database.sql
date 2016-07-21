@@ -86,20 +86,12 @@ CREATE TABLE IF NOT EXISTS `tweets` (
   `text` varchar(200) NOT NULL,
   `favoriteCount` int(11) NOT NULL,
   `retweetCount` int(11) NOT NULL,
-  `prio` float,
-  `place` varchar(60) NOT NULL,
+  `place` varchar(60),
+  `image` varchar(100),
   `createdAt` datetime NOT NULL,
   `lastUpdate` datetime default current_timestamp,
   PRIMARY KEY (`tweetId`),
   FOREIGN KEY (`authorId`) REFERENCES `tweetAuthors` (`authorId`)
-);
-
--- Struktur von Tabelle twitter-monitor.tweetMedia
-CREATE TABLE IF NOT EXISTS `tweetMedia` (
-    `tweetId` bigint NOT NULL,
-    `url` varchar(100) NOT NULL,
-    PRIMARY KEY (`tweetId`, `url`),
-    FOREIGN KEY (`tweetId`) REFERENCES `tweets` (`tweetId`) ON DELETE CASCADE
 );
 
 -- Struktur von Tabelle twitter-monitor.tweets_x_keywords
