@@ -106,22 +106,7 @@ public class KeywordDao {
 		paramSource.addValue("username", keyword.getUsername());
 
 		jdbc.update(delete, paramSource);
-	}
-
-	/**
-	 * This method returns all the keywords that are associated with
-	 * a tweet. 
-	 * @param tweetId - the unique identifier of a Tweet
-	 */
-	public List<String> getKeywordsOfTweet(long tweetId) {
-
-		String query = "select * from tweets_x_keywords where tweetId = :tweetId";
-
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("tweetId", tweetId);
-
-		return jdbc.query(query, paramSource, new StringRowMapper());
-	}
+	}	
 	
 	/**
 	 * This class serves as a utility to create Keyword Objects out

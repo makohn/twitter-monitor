@@ -34,15 +34,12 @@ import de.htwsaar.model.Tweet;
 public class TweetDao {
 
 	private NamedParameterJdbcTemplate jdbc;
-
-	private KeywordDao keywordDao;
 		
 	public TweetDao() {}
 	
 	@Autowired
 	public TweetDao(DataSource jdbc, KeywordDao keywordDao) {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
-		this.keywordDao = keywordDao;
 	}
 
 	/**
@@ -59,6 +56,8 @@ public class TweetDao {
 		
 		List<OutputTweet> tweets = jdbc.query(query, new TweetRowMapper());
 		
+		// hier weiß ich noch nicht genau wie wir die keywords in die (limitierte) liste reinkriegen sollen
+		
 		return tweets;
 	}
 
@@ -74,14 +73,21 @@ public class TweetDao {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("tweetId", tweetId);
 		
+		OutputTweet tweet = null;
 		try {
-			return (OutputTweet) jdbc.queryForObject(query, paramSource, new TweetRowMapper()); 		
+			tweet = (OutputTweet) jdbc.queryForObject(query, paramSource, new TweetRowMapper()); 		
 		}
 		catch (EmptyResultDataAccessException e) {
 			e.printStackTrace();
 		}
-		return null;
+		
+		query = "select * from tweets_x_keywords where tweetId = :tweetId";
+		
+		tweet.setKeywords(jdbc.query(query, paramSource, new StringRowMapper()));
+		
+		return tweet;
 			
+		
 	}
 	
 	/**
@@ -91,24 +97,38 @@ public class TweetDao {
 	 * @return
 	 */
 	public List<OutputTweet> getTweets(String username) {
-
-//		String query = "select * from keywords, tweets_x_keywords, tweets, tweetauthors "
-//						+ "where keywords.keyword = tweets_x_keywords.keyword " 
-//						+ "and tweets_x_keywords.tweetId = tweets.tweetId "
-//						+ "and tweets.authorId = tweetAuthors.authorId "
-//						+ "and keywords.username = :username";
 		
-		String query = "select * from tweets, tweetauthors where tweets.authorId = tweetauthors.authorId limit 20";
+		String query = "select * from tweets, tweetauthors, tweets_x_keywords, keywords "
+				+ "where tweets.authorId = tweetauthors.authorId "
+				+ "and tweets.tweetId = tweets_x_keywords.tweetId "
+				+ "and tweets_x_keywords.keyword = keywords.keyword "
+				+ "and keyword.username = :username";
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("username", username);
 		
+		// This query will get all Tweets for the user including one keyword per row.
+		// So if there are multiple Keywords associated with a Tweet, there will be multiple identical rows
+		// only with different keywords.
+		List<OutputTweet> tweetList = null;
 		try {																	// TODO: ist hier der try-catch notwendig
-			return jdbc.query(query, paramSource, new TweetRowMapper()); 		// bei leerem Ergebnis wird ja eigentlich nur
+			tweetList = jdbc.query(query, paramSource, new TweetRowMapper()); 		// bei leerem Ergebnis wird ja eigentlich nur
 		} catch (EmptyResultDataAccessException e) {							// eine leere liste zurï¿½ckgegeben.
 			e.printStackTrace();
 		}
-		return null;			
+		
+		// Here the tweetList of the query is worked through. If a tweet shows up
+		// a second, third ... time, the keyword will be added to the first tweets list.
+		// The first appearances are stored in a HashMap.
+		HashMap<Long, OutputTweet> tweetMap = new HashMap<Long, OutputTweet>();
+		for (OutputTweet tweet : tweetList) {
+			if (tweetMap.containsKey(tweet.getTweetId()))
+				tweetMap.get(tweet.getTweetId()).addKeyword(tweet.getKeywords().get(0));
+			else
+				tweetMap.put(tweet.getTweetId(), tweet);
+		}
+		
+		return (List<OutputTweet>) tweetMap.values();
 	}
 
 	/**
@@ -119,8 +139,9 @@ public class TweetDao {
 	 */
 	public void insertTweet(Tweet tweet) {
 
-		String insert = "insert into tweets (tweetId, authorId, text, favoriteCount, retweetCount, place, image, createdAt) values (:tweetId, :authorId, :text, :favoriteCount, :retweetCount, :place, :image, :createdAt)"
-							+ " on duplicate key update favoriteCount=:favoriteCount, retweetCount=:retweetCount;";
+		String insert = "insert into tweets (tweetId, authorId, text, favoriteCount, retweetCount, place, image, createdAt) "
+							+ "values (:tweetId, :authorId, :text, :favoriteCount, :retweetCount, :place, :image, :createdAt) "
+							+ "on duplicate key update favoriteCount=:favoriteCount, retweetCount=:retweetCount;";
 
 		MapSqlParameterSource paramSource = getTweetParamSource(tweet);
 
@@ -134,8 +155,9 @@ public class TweetDao {
 	 */
 	public void insertTweets(List<Tweet> tweets) {
 		
-		String insert = "insert into tweets (tweetId, authorId, text, favoriteCount, retweetCount, place, image, createdAt) values (:tweetId, :authorId, :text, :favoriteCount, :retweetCount, :place, :image, :createdAt)"
-				+ " on duplicate key update favoriteCount=:favoriteCount, retweetCount=:retweetCount;";
+		String insert = "insert into tweets (tweetId, authorId, text, favoriteCount, retweetCount, place, image, createdAt) "
+							+ "values (:tweetId, :authorId, :text, :favoriteCount, :retweetCount, :place, :image, :createdAt) "
+							+ "on duplicate key update favoriteCount=:favoriteCount, retweetCount=:retweetCount;";
 		
 		SqlParameterSource[] paramSources = new MapSqlParameterSource[tweets.size()];		
 		for (int i=0; i<tweets.size(); i++) {
@@ -174,6 +196,21 @@ public class TweetDao {
 		paramMap.put("keyword", keyword);
 
 		return jdbc.query(query, paramMap, new TweetRowMapper());
+	}
+	
+	/**
+	 * This method returns all the keywords that are associated with
+	 * a tweet. 
+	 * @param tweetId - the unique identifier of a Tweet
+	 */
+	public List<String> getKeywordsOfTweet(long tweetId) {
+
+		String query = "select * from tweets_x_keywords where tweetId = :tweetId";
+
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("tweetId", tweetId);
+
+		return jdbc.query(query, paramSource, new StringRowMapper());
 	}
 	
 	private MapSqlParameterSource getTweetParamSource(Tweet tweet) {
@@ -216,12 +253,23 @@ public class TweetDao {
 				tweet.setName(rs.getString("name"));
 				tweet.setScreenName(rs.getString("screenName"));
 				tweet.setPictureUrl(rs.getString("pictureUrl"));
-				
-				tweet.setKeywords(keywordDao.getKeywordsOfTweet(rs.getLong("tweetId")));
 			} catch (TweetException e) {
 				e.printStackTrace();
 			}
 			return tweet;
 		}		
+	}
+	
+	/**
+	 * This class serves as a utility to create keywords (just the raw
+	 * String Object) out of a ResultSet that is received from a
+	 * database query.
+	 */
+	private class StringRowMapper implements RowMapper<String> {
+		
+		@Override
+		public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return rs.getString("keyword");				
+		}
 	}
 }
