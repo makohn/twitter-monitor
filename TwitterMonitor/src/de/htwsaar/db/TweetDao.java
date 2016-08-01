@@ -112,27 +112,6 @@ public class TweetDao {
 	}
 
 	/**
-	 * This method returns a list of Media URLs that are connected 
-	 * to a tweet (Pictures, Videos,...).
-	 * @param tweetId - the unique identifier of the tweet
-	 * @return a list of String Objects
-	 */
-	public List<String> getUrlsOfTweet(long tweetId) {
-
-		String query = "select * from tweetMedia where tweetId = :tweetId";
-
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("tweetId", tweetId);
-
-		return jdbc.query(query, paramSource, new RowMapper<String>() {
-
-			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return rs.getString("url");
-			}
-		});
-	}
-
-	/**
 	 * This method inserts tweets into the database. 
 	 * If the tweet already exists, its  retweet/favorite count
 	 * are being updated.
@@ -140,23 +119,12 @@ public class TweetDao {
 	 */
 	public void insertTweet(Tweet tweet) {
 
-		String insert = "insert into tweets (tweetId, authorId, text, favoriteCount, retweetCount, place, createdAt) values (:tweetId, :authorId, :text, :favoriteCount, :retweetCount, :place, :createdAt)"
+		String insert = "insert into tweets (tweetId, authorId, text, favoriteCount, retweetCount, place, image, createdAt) values (:tweetId, :authorId, :text, :favoriteCount, :retweetCount, :place, :image, :createdAt)"
 							+ " on duplicate key update favoriteCount=:favoriteCount, retweetCount=:retweetCount;";
 
 		MapSqlParameterSource paramSource = getTweetParamSource(tweet);
-		
-//		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-//		paramSource.addValue("tweetId", tweet.getTweetId());
-//		paramSource.addValue("authorId", tweet.getAuthorId());
-//		paramSource.addValue("text", tweet.getText());
-//		paramSource.addValue("favoriteCount", tweet.getFavoriteCount());
-//		paramSource.addValue("retweetCount", tweet.getRetweetCount());
-//		paramSource.addValue("place", tweet.getPlace());
-//		paramSource.addValue("createdAt", tweet.getCreatedAt());
 
 		jdbc.update(insert, paramSource);
-
-		insertUrlsOfTweet(tweet.getTweetId(), tweet.getUrls());
 	}
 	
 	/**
@@ -166,108 +134,17 @@ public class TweetDao {
 	 */
 	public void insertTweets(List<Tweet> tweets) {
 		
-		String insert = "insert into tweets (tweetId, authorId, text, favoriteCount, retweetCount, place, createdAt) values (:tweetId, :authorId, :text, :favoriteCount, :retweetCount, :place, :createdAt)"
+		String insert = "insert into tweets (tweetId, authorId, text, favoriteCount, retweetCount, place, image, createdAt) values (:tweetId, :authorId, :text, :favoriteCount, :retweetCount, :place, :image, :createdAt)"
 				+ " on duplicate key update favoriteCount=:favoriteCount, retweetCount=:retweetCount;";
 		
 		SqlParameterSource[] paramSources = new MapSqlParameterSource[tweets.size()];		
-		HashMap<Long, String> urls = new HashMap<Long, String>();
-		
 		for (int i=0; i<tweets.size(); i++) {
-			
-			Tweet tweet = tweets.get(i);
-			
-			MapSqlParameterSource paramSource = getTweetParamSource(tweet);
-			
-//			MapSqlParameterSource paramSource = new MapSqlParameterSource();
-//			// TODO: Hier wird Code dupliziert, macht es Sinn folgende Zeilen auszulagern ? 
-//			paramSource.addValue("tweetId", tweet.getTweetId());
-//			paramSource.addValue("authorId", tweet.getAuthorId());
-//			paramSource.addValue("text", tweet.getText());
-//			paramSource.addValue("favoriteCount", tweet.getFavoriteCount());
-//			paramSource.addValue("retweetCount", tweet.getRetweetCount());
-//			paramSource.addValue("place", tweet.getPlace());
-//			paramSource.addValue("createdAt", tweet.getCreatedAt());
-			
-			for (String url : tweet.getUrls())
-				urls.put(tweet.getTweetId(), url);
-			
+				
+			MapSqlParameterSource paramSource = getTweetParamSource(tweets.get(i));			
 			paramSources[i] = paramSource;
 		}
 		
 		jdbc.batchUpdate(insert, paramSources);
-		
-		insertUrlsOfTweet(urls);
-	}
-
-	/**
-	 * This method inserts a single Media URL of a tweet into the
-	 * corresponding table in the database.
-	 * @param tweetId - the unique id of the tweet
-	 * @param url - a Media URL that belongs to the tweet
-	 */
-	public void insertUrlOfTweet(long tweetId, String url) {
-
-		String insert = "insert into tweetMedia (tweetId, url) values (:tweetId, :url)"
-						+ " on duplicate key update url=:url"; //TODO: work around, andere Loesung finden
-
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();			
-		paramSource.addValue("tweetId", tweetId);
-		paramSource.addValue("url", url);
-
-		jdbc.update(insert, paramSource);
-	}
-	
-	/**
-	 * This method inserts multiple Media URLs into the
-	 * database. 
-	 * @param tweetId - the unique id of the tweet
-	 * @param urls - a java.util.List
-	 * 					 of Media URLs that belong to the tweet
-	 */
-	public void insertUrlsOfTweet(long tweetId, List<String> urls) {
-		
-		String insert = "insert into tweetMedia (tweetId, url) values (:tweetId, :url)"
-						+ " on duplicate key update url=:url"; //TODO: work around, andere Loesung finden
-		
-		SqlParameterSource[] paramSources = new MapSqlParameterSource[urls.size()];
-						
-		for (int i=0; i<urls.size(); i++) {
-			
-			MapSqlParameterSource paramSource = new MapSqlParameterSource();			
-			paramSource.addValue("tweetId", tweetId);
-			paramSource.addValue("url", urls.get(i));
-			
-			paramSources[i] = paramSource;
-		}		
-		
-		jdbc.batchUpdate(insert, paramSources);		
-	}
-	
-	/**
-	 * This method inserts multiple Media URLs of multiple tweets into the
-	 * database.
-	 * @param urls - a java.util.HashMap
-	 * 					 of Media URLs that belong to the tweet
-	 */
-	public void insertUrlsOfTweet(HashMap<Long, String> urls) {
-		
-		String insert = "insert into tweetMedia (tweetId, url) values (:tweetId, :url)"
-						+ " on duplicate key update url=:url"; //TODO: work around, andere Lˆsung finden
-		
-		SqlParameterSource[] paramSources = new MapSqlParameterSource[urls.size()];		
-						
-		int i=0;
-		for (Long id : urls.keySet()) {			
-			
-			MapSqlParameterSource paramSource = new MapSqlParameterSource();
-			
-			paramSource.addValue("tweetId", id.longValue());
-			paramSource.addValue("url", urls.get(id));
-			
-			paramSources[i] = paramSource;
-			i++;
-		}		
-		jdbc.batchUpdate(insert, paramSources);		
 	}
 	
 	/**
@@ -276,20 +153,6 @@ public class TweetDao {
 	 */
 	public void deleteTweet(long tweetId) {
 		String delete = "delete from tweets where tweetId = :tweetId";
-
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("tweetId", tweetId);
-
-		deleteUrlsOfTweet(tweetId);
-		jdbc.update(delete, paramSource);
-	}
-	
-	/**
-	 * This method removes a tweet URL from the database.
-	 * @param tweetId - the unique identifier of the tweet.
-	 */
-	private void deleteUrlsOfTweet(long tweetId) {
-		String delete = "delete from tweetMedia where tweetId = :tweetId";
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("tweetId", tweetId);
@@ -323,6 +186,7 @@ public class TweetDao {
 		paramSource.addValue("favoriteCount", tweet.getFavoriteCount());
 		paramSource.addValue("retweetCount", tweet.getRetweetCount());
 		paramSource.addValue("place", tweet.getPlace());
+		paramSource.addValue("image", tweet.getImage());
 		paramSource.addValue("createdAt", tweet.getCreatedAt());
 		
 		return paramSource;
@@ -344,6 +208,7 @@ public class TweetDao {
 				tweet.setText(rs.getString("text"));
 				tweet.setCreatedAt(rs.getDate("createdAt"));
 				tweet.setPlace(rs.getString("place"));
+				tweet.setImage(rs.getString("image"));
 				tweet.setFavoriteCount(rs.getInt("favoriteCount"));
 				tweet.setRetweetCount(rs.getInt("retweetCount"));				
 				tweet.setFollowerCount(rs.getInt("followerCount"));
@@ -352,7 +217,6 @@ public class TweetDao {
 				tweet.setScreenName(rs.getString("screenName"));
 				tweet.setPictureUrl(rs.getString("pictureUrl"));
 				
-				tweet.setUrls(getUrlsOfTweet(rs.getLong("tweetId")));
 				tweet.setKeywords(keywordDao.getKeywordsOfTweet(rs.getLong("tweetId")));
 			} catch (TweetException e) {
 				e.printStackTrace();

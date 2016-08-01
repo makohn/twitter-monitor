@@ -18,11 +18,9 @@ public class Tweet {
 	private String place;
 	private int favoriteCount;
 	private int retweetCount;
-	private List<String> urls;
+	private String image;
 	
-	public Tweet() {		
-		urls = new ArrayList<String>();
-	}
+	public Tweet() {}
 
 	/**
 	 * Initializes a tweet object with information gained from the
@@ -31,8 +29,6 @@ public class Tweet {
 	 * @throws TweetException 
 	 */
 	public Tweet(Status status) throws TweetException {
-		
-		this();
 		
 		TweetValidator.checkStatus(status);		
 		
@@ -43,7 +39,7 @@ public class Tweet {
 		setPlace(status.getPlace());
 		setFavoriteCount(status.getFavoriteCount());
 		setRetweetCount(status.getRetweetCount());
-		setUrls(status.getMediaEntities());
+		setImage(status.getMediaEntities() );
 	}
 
 	public long getTweetId() {
@@ -125,22 +121,20 @@ public class Tweet {
 		this.retweetCount = retweetCount;
 	}
 	
-	public List<String> getUrls() {
-		return urls;
+	public String getImage() {
+		return image;
 	}
 
-	public void setUrls(List<String> list) {
-		list = TweetValidator.checkUrls(list);
-		this.urls = list;
+	public void setImage(String image) {
+		image = TweetValidator.checkImage(image);
+		this.image = image;
 	}
 	
-	private void setUrls(MediaEntity[] mediaEntities) {		
-		mediaEntities = TweetValidator.checkUrls(mediaEntities);		
-		ArrayList<String> urlList = new ArrayList<String>();
-		for (MediaEntity m : mediaEntities) {
-			urlList.add(m.getMediaURL());
-		}
-		setUrls(urlList);		
+	private void setImage(MediaEntity[] mediaEntities) {
+		if (mediaEntities.length == 0)
+			setImage("");
+		else
+			setImage(mediaEntities[0].getMediaURL());
 	}
 	
 	@Override
@@ -156,10 +150,8 @@ public class Tweet {
 	@Override
 	public String toString() {
 		return "Tweet [tweetId=" + tweetId + ", authorId=" + authorId + ", text=" + text + ", createdAt=" + createdAt
-				+ ", place=" + place + ", favoriteCount=" + favoriteCount + ", retweetCount=" + retweetCount + ", urls="
-				+ urls + "]";
+				+ ", place=" + place + ", favoriteCount=" + favoriteCount + ", retweetCount=" + retweetCount
+				+ ", image=" + image + "]";
 	}
-
-	
 
 }

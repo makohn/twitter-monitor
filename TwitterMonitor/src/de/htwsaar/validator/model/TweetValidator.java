@@ -65,17 +65,11 @@ public class TweetValidator {
 			retweetCount = 0;
 		return retweetCount;
 	}
-
-	public static List<String> checkUrls(List<String> list) {
-		if ( list == null )
-			list = new ArrayList<String>();
-		return list;
-	}
-
-	public static MediaEntity[] checkUrls(MediaEntity[] mediaEntities) {
-		if ( mediaEntities == null )
-			mediaEntities = new MediaEntity[0];
-		return mediaEntities;		
+	
+	public static String checkImage(String image) {
+		if ( image == null )
+			image = "";
+		return image;
 	}
 
 	public static Date checkReceivedAt(Date receivedAt) {
