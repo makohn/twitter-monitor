@@ -187,8 +187,8 @@ function sort()
 
 		 if($( "#sortOption option:selected" ).text() == "Zeit")
 			{
-			if(a.createdAt < b.createdAt) return -1;
-			if(a.createdAt > b.createdAt) return 1;
+			if(a.createdAt > b.createdAt) return -1;
+			if(a.createdAt < b.createdAt) return 1;
 				return 0;
 		}else if($( "#sortOption option:selected" ).text() == "Priorität")
 			{

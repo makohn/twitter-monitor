@@ -45,6 +45,9 @@ function evalPasswd() {
 function evalUsrName(){
 	
 	var val = $('#new_username').val();
-	
-	if (val.mach(/[a-zA-ZäöüÄÖÜ\-_]{1,}/))
+		
+	if (val.mach(/[a-zA-ZäöüÄÖÜ]{1,}/))
+		{
+		$('#eval_username').innerHTML('\U2714');
+		}
 }
