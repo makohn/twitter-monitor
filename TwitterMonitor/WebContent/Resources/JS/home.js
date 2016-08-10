@@ -46,11 +46,13 @@ function evalUsrName(){
 	
 	var val = $('#new_username').val();
 		
-	if ( val.match(/[a-zA-ZäöüÄÖÜ]/) )
+	if ( val.match(/[a-zA-ZäöüÄÖÜ]{1,}/) && ! val.match(/\W/))
 		{
+		$('#eval_username').css('color','green');
 		$('#eval_username').text('\u2714');
 		}
 	else{
+		$('#eval_username').css('color','red');
 		$('#eval_username').text('Keine Sonderzeichen erlaubt');
 	    }
 }
