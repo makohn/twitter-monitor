@@ -25,7 +25,7 @@ public class Keyword {
 	@Max(value=5, message="Die Prioritaet darf hoechstens 5 sein.")
 	private int priority;
 	
-	private boolean active = false;
+	private boolean active = true;
 	
 	public Keyword() {}
 	

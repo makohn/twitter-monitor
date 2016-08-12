@@ -83,13 +83,6 @@ public class UserDao {
 //				+ " on duplicate key update username=:username, authority=:authority";
 		
 		MapSqlParameterSource paramSource = getUserParameterSource(user);
-		
-//		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-//		paramSource.addValue("username", user.getUsername());
-//		paramSource.addValue("enabled", user.getEnabled());
-//		paramSource.addValue("email", user.getEmail());
-//		paramSource.addValue("password", user.getPassword());
-//		paramSource.addValue("authority", user.getAuthority());
 
 		jdbc.update(insertUsers, paramSource);
 		jdbc.update(insertAuthorities, paramSource);

@@ -1,5 +1,8 @@
 package de.htwsaar.service.twitter;
 
+import java.util.ArrayList;
+
+import org.junit.FixMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,7 @@ public class StreamService {
 	private static final String CONSUMER_SECRET = "GdZVRXMaGYn2b4PTXficnQVztCbE8eSlBJPT2zIIY5xn45zZRt";
 	private static final String ACCESS_TOKEN = "712907200507850753-BNhxmqynkH6R7LyxG4GUsOf6pGP9i2L";
 	private static final String ACCESS_TOKEN_SECRET = "xPLvu603NO1l1GJzZtmUNNokKqsdj1obVhrVHsHNAa0l8";
+	private static final long FIFTEEN_MINUTES = 15 * 60 * 1000;;
 
 	private TwitterStream stream;
 	private TweetListener tweetListener;
@@ -60,18 +64,27 @@ public class StreamService {
 	 */
 	private void initStream() {
 
-		String[] keywordsArray = { "Wasser", "Deutschland", "Hamburg", "Berlin", "Paris", "America", "Trump",
-				"Clinton" };
+//		String[] keywordsArray = { "Wasser", "Deutschland", "Hamburg", "Berlin", "Paris", "America", "Trump",
+//				"Clinton" };
+//		// Erstelle Filter ..
+//		FilterQuery filter = new FilterQuery();
+//		filter.track(keywordsArray);
+//		filter.language("de", "en");
+//		// weitere Konfigurationen ...
+//		stream.filter(filter);
 
-		// Erstelle Filter ..
-		FilterQuery filter = new FilterQuery();
-		filter.track(keywordsArray);
-//		filter.track(keywordDao.getKeywords());
-		filter.language("de", "en");
+		String[] keywordsArray = keywordDao.getKeywords();
+		if ( (keywordsArray != null) && (keywordsArray.length != 0) ) {
+		
+			// Erstelle Filter ..
+			FilterQuery filter = new FilterQuery();
+			filter.track(keywordsArray);
+			filter.language("de", "en");
 
-		// weitere Konfigurationen ...
-
-		stream.filter(filter);
+			// weitere Konfigurationen ...
+		
+			stream.filter(filter);
+		}
 
 	}
 
@@ -81,11 +94,14 @@ public class StreamService {
 	}
 
 	public void stopStream() {
+		stream.removeListener(tweetListener);
 		stream.shutdown();
 	}
 
-	@Scheduled(cron = "0 1 1 * * ?")
+//	@Scheduled(cron = "0 1 * * * ?")
+	@Scheduled(fixedDelay = /*FIFTEEN_MINUTES*/3*60*1000)
 	public void restartStream() {
+		System.out.println("restart Stream");
 		stopStream();
 		startStream();
 	}

@@ -44,8 +44,7 @@ public class TweetController {
 	@RequestMapping("/showTweets")
 	public String showTweets(Model model, Principal principal) {
 		
-		ArrayList<OutputTweet> tweets = (ArrayList<OutputTweet>) tweetService.getTweets(principal.getName());
-		
+		ArrayList<OutputTweet> tweets = (ArrayList<OutputTweet>) tweetService.getTweets(principal.getName());		
 		model.addAttribute("tweets", tweets);
 
 		return "showTweets";
@@ -59,6 +58,7 @@ public class TweetController {
 	@RequestMapping(value = "getTweets", method = RequestMethod.GET, headers = "Accept=application/json")
 	@ResponseBody
 	public Map<String, Object> getTweets(Principal principal) {
+		
 		List<OutputTweet> tweets = tweetService.getTweets(principal.getName());
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("tweets", tweets);
