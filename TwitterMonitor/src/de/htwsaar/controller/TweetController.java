@@ -44,7 +44,7 @@ public class TweetController {
 	@RequestMapping("/showTweets")
 	public String showTweets(Model model, Principal principal) {
 		
-		ArrayList<OutputTweet> tweets = (ArrayList<OutputTweet>) tweetService.getTweets(principal.getName());		
+		ArrayList<OutputTweet> tweets = (ArrayList<OutputTweet>) tweetService.getTweets(principal.getName());
 		model.addAttribute("tweets", tweets);
 
 		return "showTweets";

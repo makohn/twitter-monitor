@@ -3,7 +3,6 @@ package de.htwsaar.service.twitter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -33,7 +32,7 @@ public class TweetService {
 
 	private static final long MAXIMUM_AGE = 48 * 60 * 60 * 1000; // 2 days in
 																	// milliseconds
-	private static final long ONE_MINUTE = 60 * 1000;
+//	private static final long ONE_MINUTE = 60 * 1000;
 
 //	private ConcurrentHashMap<Long, Tweet> tweetBuffer;
 //	private ConcurrentHashMap<Long, Author> authorBuffer;
@@ -153,10 +152,10 @@ public class TweetService {
 	private synchronized void uploadTweetBuffers() {
 
 //		System.out.println("upload buffers");
-		tweetDao.insertTweets(new ArrayList<Tweet>(tweetBuffer.values()));
-		tweetBuffer.clear();
 		authorDao.insertAuthors(new ArrayList<Author>(authorBuffer.values()));
 		authorBuffer.clear();
+		tweetDao.insertTweets(new ArrayList<Tweet>(tweetBuffer.values()));
+		tweetBuffer.clear();
 //		System.out.println("upload buffers finished");
 	}
 }

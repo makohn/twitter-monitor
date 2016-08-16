@@ -1,10 +1,15 @@
 package de.htwsaar.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class OutputTweet extends Tweet {
 
+	private static final SimpleDateFormat CREATED_AT_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
 	// Final priority of the tweets = global Prio * private Prio
 	private float priority;
 	
@@ -62,6 +67,10 @@ public class OutputTweet extends Tweet {
 	}
 	public void setPictureUrl(String pictureUrl) {
 		this.pictureUrl = pictureUrl;
+	}
+	@JsonProperty("createdAt")
+	public String getCreatedAtFormatted() {
+		return CREATED_AT_FORMAT.format(createdAt);
 	}
 	
 	@Override

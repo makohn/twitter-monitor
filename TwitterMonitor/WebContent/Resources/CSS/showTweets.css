@@ -1,327 +1,290 @@
 #header {
-    
-   background: linear-gradient(to right, #00284d, #99ffff);
-   
-    min-height: 10px;
-    
-}
-body{
-    min-width: 520px;
-    background-color: #edf8fd;   
+	background: linear-gradient(to right, #00284d, #99ffff);
+	min-height: 10px;
 }
 
-#logo{
-                        display: none;
-                        float: left;
-                        background-image: url(../Picture/colibri.png);
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        margin-top: 10px;
-                        margin-left: 30px;
-                        min-height: 80px;
-                        min-width: 250px;
-                        
-                    
-}
-nav                     {
-                        
-                        background-color: #113955;
-                        min-width: 100%;
-                        min-height: 100px;
-                        max-height: 40px;
-                        }
-
-
-
-nav ul li:hover > ul    {
-                          display: block;
-                          
-                        }
-
-nav ul                  {
-                        display: none;
-                        background: rgba(0, 0, 0, 0); 
-                        padding: 0 0px;
-                        border-color: white;
-                        border-top-width:thin;
-                        border-top-style:outset;
-                        border-bottom-width:thin;
-                        border-bottom-style:outset;
-                        list-style: none;
-                        position: relative;
-                        
-                        margin-left: 10%;
-                        margin-top: 40px;
-                        
-                        }
-
-
-
-
-nav ul:after            {
-                          content: ""; clear: both; display: block; 
-            
-                           }
-
-nav ul li               {
-                        z-index: 5;
-                        float: left;
-                        font: 15px arial, sans-serif;
-    
-                        
-                        }
-
-
-nav ul li:hover a       {
-                        z-index: 4;
-                         color: #cbf0fc;
-                        border-radius: 20px;
-                        }
-    
-nav ul li a             {
-                        z-index: 4;
-                            display: block; padding: 5px 40px;
-                            color: white; text-decoration: none;
-                        
-    
-                        }
-                                                            /* navigation end  */                                                                  
-	
-nav ul2                    {
-                        display: block;
-                        float: left;
-                        margin-left: 10%;
-                        margin-top: 40px;
-                        background-image: url(../Picture/menuIcon.png);
-                        min-width: 50px;
-                        min-height: 50px;
-                        z-index: 4;
-}
-nav ul2 li               {
-                        display: none;
-                        z-index: 5;
-                        }
-
-nav ul2:hover > li  {
-                        display: block;
-                        z-index: 5;
-                        }
-
-nav ul2:hover   {
-                        background-image: none;
-                        background-color: #ffc50e;
-                        margin-top: 0;
-                        
-                        
-                        }
-nav ul2 li a             {
-                        z-index: 4;
-                            display: block; padding: 5px 40px;
-                            color: white; text-decoration: none;
-                        
-    
-                        }
-nav ul2 li:hover a       {
-                        z-index: 4;
-			             color: black;
-                        border-radius: 20px;
-		                }
-
-
-
-a                       {
-                        color: #EED880;
-                        text-decoration: none;
-                        }
-
-#page                   {
-                        
-                        min-height: 1000px;
-                        min-width: 100%;
-                        }
-
-.tweet_panel            {
-						clear:left;
-                        position: relative;
-                        float: left;
-                        display: inline-block;
-                        margin-left: 100px;
-                        margin-right: auto;
-                        border-top-left-radius: 20px;
-                        border-top-right-radius: 20px;
-                        
-                       
-                        
-                        min-width: 500px;
-                        max-width: 500px;
-                        }
-.tweet_data            {
-                        float: left;
-                        background-color:white;
-                        color: #4266b2;
-                        padding-top: 20px;
-                        padding-left: 10px;
-                        min-height: 40px;
-                        min-width: 530px;
-                        box-shadow: 10px 12px 12px 0px rgba(0,0,0,0.50);
-                        border-top-left-radius: 28px;
-                        border-top-right-radius: 28px;
-                        }
- 
-  .tweet_author_name      {
-                        float: left;
-                        color: black;
-                        margin-left:5px;
-                        padding-top: 40px;
-                        
-                        min-height: 40px;
-                        
-                  
-                        }  
-   .tweet_place      {
-                        
-                        
-                        color: grey;
-
-                        }                               
- .tweet_author_pic      {
-                        float: left;
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        min-width: 50px;
-                        min-height: 40px;
-                        margin-right:15px;
-                        padding-top: 20px;
-                        padding-left: 10px;
-                        min-height: 40px;
-                        
-                        
-                      
-                        }                      
-                      
-.tweet_time            {
-                        float: right;
-                        color: inherit;
-                        margin-right:15px;
-                        padding-top: 20px;
-                        padding-left: 10px;
-                        min-height: 40px;
-                        
-                        
-                      
-                        }
-
-.tweet_pic              {
-                        float: left;
-                        display: none;
-                        min-height: 400px;
-                        min-width: 540px;
-                        max-width: 540px;
-                        
-                        border-top-left-radius: 20px;
-                        border-top-right-radius: 20px;
-                        box-shadow: 10px 12px 12px 0px rgba(0,0,0,0.50);
-                        background-size: cover;
-                        background-repeat: no-repeat;
-                        }
-.tweet_text             {
-                        clear: left;
-                        font-size:20px;
-                        float: left;
-                        min-width: 510px;;
-                        max-width: 510px;
-                        min-height: 50px;
-                        padding-left: 30px;
-                        line-height: 25px;
-                        background-color: white;
-                        padding:20px;
-                        box-shadow: 10px 10px 12px 0px rgba(0,0,0,0.50);
-                        border-bottom-left-radius: 28px;
-.tweet_rating           {
-                        }
-                        float: right;
-                        padding-top: 20px;
-                        padding-right: 10px;
-                        min-height: 40px;
-                        
-    
-}
-.line					{
-						margin-top:40px;
-						margin-bottom:40px;
-						min-height:1px;
-						min-width:300px;
-						background-color: #dcdcdc;
-						}
-
-#sidebar                {
-                        float: left;
-                        margin-left: 50px;
-                        padding-left: 15px;
-                        
-                        padding-top: 40px;
-                        margin-top: 150px;
-                         border-color: gray ;
-                        border-left-style: solid;
-                        border-left-width:thin;
-                        
-    
-                        min-height: 400px;
-                        min-width: 50%;
-                        max-width: 100%;
-                        
-                        
-    
+body {
+	min-width: 520px;
+	background-color: #edf8fd;
+	font: normal 14px/14px Helvetica, Arial, sans-serif;
 }
 
-#username{
-            font-size: 25px;
-                        
+#logo {
+	display: none;
+	float: left;
+	background-image: url(../Picture/colibri.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	margin-top: 10px;
+	margin-left: 30px;
+	min-height: 80px;
+	min-width: 250px;
 }
-#welcome_text{
-            padding: 20px;
-            min-height: 100px;
+
+nav {
+	background-color: #113955;
+	min-width: 100%;
+	min-height: 100px;
+	max-height: 40px;
 }
-label{
-    float: left;
-    min-width: 100%;
-    color: lightgray;
-    
-    
-    
+
+nav ul li:hover>ul {
+	display: block;
 }
+
+nav ul {
+	display: none;
+	background: rgba(0, 0, 0, 0);
+	padding: 0 0px;
+	border-color: white;
+	border-top-width: thin;
+	border-top-style: outset;
+	border-bottom-width: thin;
+	border-bottom-style: outset;
+	list-style: none;
+	position: relative;
+	margin-left: 10%;
+	margin-top: 40px;
+}
+
+nav ul:after {
+	content: "";
+	clear: both;
+	display: block;
+}
+
+nav ul li {
+	z-index: 5;
+	float: left;
+	font: 15px arial, sans-serif;
+}
+
+nav ul li:hover a {
+	z-index: 4;
+	color: #cbf0fc;
+	border-radius: 20px;
+}
+
+nav ul li a {
+	z-index: 4;
+	display: block;
+	padding: 5px 40px;
+	color: white;
+	text-decoration: none;
+}
+/* navigation end  */
+nav ul2 {
+	display: block;
+	float: left;
+	margin-left: 10%;
+	margin-top: 40px;
+	background-image: url(../Picture/menuIcon.png);
+	min-width: 50px;
+	min-height: 50px;
+	z-index: 4;
+}
+
+nav ul2 li {
+	display: none;
+	z-index: 5;
+}
+
+nav ul2:hover>li {
+	display: block;
+	z-index: 5;
+}
+
+nav ul2:hover {
+	background-image: none;
+	background-color: #ffc50e;
+	margin-top: 0;
+}
+
+nav ul2 li a {
+	z-index: 4;
+	display: block;
+	padding: 5px 40px;
+	color: white;
+	text-decoration: none;
+}
+
+nav ul2 li:hover a {
+	z-index: 4;
+	color: black;
+	border-radius: 20px;
+}
+
+a {
+	color: #EED880;
+	text-decoration: none;
+}
+
+#page {
+	min-height: 1000px;
+	min-width: 100%;
+}
+
+.tweet_panel {
+	clear: left;
+	position: relative;
+	float: left;
+	display: inline-block;
+	margin-left: 100px;
+	margin-right: auto;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	min-width: 500px;
+	max-width: 500px;
+}
+
+.tweet_data {
+	float: left;
+	background-color: white;
+	color: #4266b2;
+	padding-top: 20px;
+	padding-left: 10px;
+	min-height: 40px;
+	min-width: 530px;
+	box-shadow: 10px 12px 12px 0px rgba(0, 0, 0, 0.50);
+	border-top-left-radius: 28px;
+	border-top-right-radius: 28px;
+}
+
+.tweet_author_name {
+	float: left;
+	color: black;
+	font-weight: bold;
+	margin-left: 5px;
+	padding-top: 20px;
+	min-height: 40px;
+}
+
+.tweet_place {
+	color: grey;
+}
+
+.tweet_author_pic {
+	float: left;
+	background-size: contain;
+	background-repeat: no-repeat;
+	min-width: 30px;
+	min-height: 30px;
+	margin-right: 15px;
+	padding-top: 
+0px;
+	padding-bottom: 3px;
+	padding-left: 10px;
+}
+
+.tweet_time {
+	float: right;
+	color: inherit;
+	margin-right: 15px;
+	padding-top: 20px;
+	padding-left: 10px;
+	min-height: 40px;
+}
+
+.tweet_pic {
+	float: left;
+	display: none;
+	min-height: 400px;
+	min-width: 540px;
+	max-width: 540px;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	box-shadow: 10px 12px 12px 0px rgba(0, 0, 0, 0.50);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.tweet_text {
+	clear: left;
+	font-size: 16px;
+	float: left;
+	min-width: 500px;
+	max-width: 500px;
+	min-height: 50px;
+	padding-left: 30px;
+	line-height: 25px;
+	background-color: white;
+	padding: 20px;
+	box-shadow: 10px 10px 12px 0px rgba(0, 0, 0, 0.50);
+	border-bottom-left-radius: 28px;
+}
+
+.tweet_rating {
+	float: right;
+	padding-top: 20px;
+	padding-right: 10px;
+	min-height: 40px;
+}
+
+.line {
+	margin-top: 40px;
+	margin-bottom: 40px;
+	min-height: 1px;
+	min-width: 300px;
+	background-color: #dcdcdc;
+}
+
+#sidebar {
+	float: left;
+	margin-left: 50px;
+	padding-left: 15px;
+	padding-top: 40px;
+	margin-top: 150px;
+	border-color: gray;
+	border-left-style: solid;
+	border-left-width: thin;
+	min-height: 400px;
+	min-width: 50%;
+	max-width: 100%;
+}
+
+#username {
+	font-size: 25px;
+}
+
+#welcome_text {
+	padding: 20px;
+	min-height: 100px;
+}
+
+label {
+	float: left;
+	min-width: 100%;
+	color: lightgray;
+}
+
 input[type=search], select {
-    float: left;
-    width: 80%;
-    
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+	float: left;
+	width: 80%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
 
 @media screen and (min-width: 1100px) {
-    
-  nav ul {
-    display: inline-table;
-    }
-    #sidebar{
-        margin-left: 0;
-        float: right;
-        min-width: 20%;
-        max-width: 20%;
-    }
-    #tweet_panel{
-    min-width: 60%;
-    
-    }
-    nav ul2 {
-            display: none;
-    }
-    #logo{
-        display: block;
-    }
-    
-}  
+	nav ul {
+		display: inline-table;
+	}
+	#sidebar {
+		margin-left: 0;
+		float: right;
+		min-width: 20%;
+		max-width: 20%;
+	}
+	#tweet_panel {
+		min-width: 60%;
+	}
+	nav ul2 {
+		display: none;
+	}
+	#logo {
+		display: block;
+	}
+}

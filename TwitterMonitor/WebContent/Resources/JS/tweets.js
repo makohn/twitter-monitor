@@ -24,24 +24,22 @@ function updateTweets(data)
 			tweet_div.setAttribute("style",'margin-top:200px;');
 		}
 		//create a tweet_pic_div 
-		if (tweet.urls.length !=0)
+		if (tweet.image)
 		{	
-			var pics = tweet.urls;	
+			var pic = tweet.image;	
 		
 			var pic_div = document.createElement("div");
 			pic_div.setAttribute("class","tweet_pic ");
 			pic_div.setAttribute("id","pic".concat(count));
-			pic_div.setAttribute("onClick","slidePic(".concat("pic").concat(count).concat("\)"));
-			pic_div.setAttribute("style",'display:block;background-image:url('+pics[0]+')');
+			pic_div.setAttribute("style",'display:block;background-image:url('+pic+')');
 			tweet_div.appendChild(pic_div);
-			
 		}
 		
 		//create a tweet_data_div 
 		var tweet_data = document.createElement("div");
 		tweet_data.setAttribute("class","tweet_data");
 		tweet_div.appendChild(tweet_data);
-		if (tweet.urls.length !=0)
+		if (tweet.image)
 		{	
 			tweet_data.setAttribute("style",'border-top-right-radius: 0px;border-top-left-radius: 0px;');
 		}

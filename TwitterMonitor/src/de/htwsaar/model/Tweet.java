@@ -1,8 +1,6 @@
 package de.htwsaar.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import de.htwsaar.exception.model.TweetException;
 import de.htwsaar.validator.model.TweetValidator;
@@ -11,14 +9,14 @@ import twitter4j.Status;
 
 public class Tweet {
 	
-	private long tweetId; 
-	private long authorId;
-	private String text; 
-	private Date createdAt; 
-	private String place;
-	private int favoriteCount;
-	private int retweetCount;
-	private String image;
+	private   long tweetId; 
+	private   long authorId;
+	private   String text; 
+	private   String place;
+	private   int favoriteCount;
+	private   int retweetCount;
+	private   String image;
+	protected Date createdAt; 
 	
 	public Tweet() {}
 

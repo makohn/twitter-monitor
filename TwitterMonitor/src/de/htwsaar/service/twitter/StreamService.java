@@ -1,8 +1,5 @@
 package de.htwsaar.service.twitter;
 
-import java.util.ArrayList;
-
-import org.junit.FixMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -28,7 +25,7 @@ public class StreamService {
 	private static final String CONSUMER_SECRET = "GdZVRXMaGYn2b4PTXficnQVztCbE8eSlBJPT2zIIY5xn45zZRt";
 	private static final String ACCESS_TOKEN = "712907200507850753-BNhxmqynkH6R7LyxG4GUsOf6pGP9i2L";
 	private static final String ACCESS_TOKEN_SECRET = "xPLvu603NO1l1GJzZtmUNNokKqsdj1obVhrVHsHNAa0l8";
-	private static final long FIFTEEN_MINUTES = 15 * 60 * 1000;;
+//	private static final long FIFTEEN_MINUTES = 15 * 60 * 1000;;
 
 	private TwitterStream stream;
 	private TweetListener tweetListener;

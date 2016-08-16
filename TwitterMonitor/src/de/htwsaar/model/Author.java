@@ -28,7 +28,7 @@ public class Author {
 		setName(user.getName());
 		setScreenName(user.getScreenName());
 		setFollowerCount(user.getFollowersCount());
-		setPictureUrl(user.getProfileImageURL());	
+		setPictureUrl(user.getBiggerProfileImageURLHttps());	
 	}
 	
 	/**

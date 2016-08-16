@@ -48,7 +48,7 @@ public class TweetDao {
 	 */
 	public List<OutputTweet> getTweets() {
 
-		String query = "select *, calc_tweet_prio(tweets.tweetId) prio from tweets, tweetAuthors where tweets.authorId = tweetAuthors.authorId limit 20";		
+		String query = "select *, get_general_prio(tweets.tweetId) as prio from tweets, tweetauthors where tweets.`authorId` = tweetauthors.`authorId` limit 20";		
 															// TODO: wenn die Methode ALLE tweets liefern soll
 															// ist das limit doch irgendwie nicht so sinnvoll
 															// oder geht es hier nur um testzwecke
@@ -98,7 +98,8 @@ public class TweetDao {
 				+ "where tweets.authorId = tweetAuthors.authorId "
 				+ "and tweets.tweetId = tweets_x_keywords.tweetId "
 				+ "and tweets_x_keywords.keyword = keywords.keyword "
-				+ "and keywords.username = :username";
+				+ "and keywords.username = :username "
+				+ "order by prio desc limit 20";
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("username", username);
@@ -251,7 +252,7 @@ public class TweetDao {
 				tweet.setTweetId(rs.getLong("tweetId"));
 				tweet.setAuthorId(rs.getLong("authorId"));
 				tweet.setText(rs.getString("text"));
-				tweet.setCreatedAt(rs.getDate("createdAt"));
+				tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 				tweet.setPlace(rs.getString("place"));
 				tweet.setImage(rs.getString("image"));
 				tweet.setFavoriteCount(rs.getInt("favoriteCount"));
@@ -283,7 +284,7 @@ public class TweetDao {
 				tweet.setTweetId(rs.getLong("tweetId"));
 				tweet.setAuthorId(rs.getLong("authorId"));
 				tweet.setText(rs.getString("text"));
-				tweet.setCreatedAt(rs.getDate("createdAt"));
+				tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 				tweet.setPlace(rs.getString("place"));
 				tweet.setImage(rs.getString("image"));
 				tweet.setFavoriteCount(rs.getInt("favoriteCount"));
