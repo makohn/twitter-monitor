@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.10" icons="true" automaticImage="PNG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
+  router="FAN">  
+  <class id="1" language="java" name="de.htwsaar.model.Author" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/model/Author.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="183" width="168" x="991" y="1225"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="de.htwsaar.model.Keyword" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/model/Keyword.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="186" width="180" x="539" y="1196"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="de.htwsaar.model.OutputTweet" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/model/OutputTweet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="184" width="178" x="1417" y="1265"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="de.htwsaar.model.Tweet" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/model/Tweet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="239" width="179" x="1676" y="1231"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="de.htwsaar.model.User" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/model/User.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="184" width="179" x="203" y="1168"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="de.htwsaar.service.twitter.TweetService" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/service/twitter/TweetService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1705" y="414"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="de.htwsaar.service.twitter.TweetListener" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/service/twitter/TweetListener.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="111" width="204" x="1327" y="259"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="de.htwsaar.service.twitter.StreamService" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/service/twitter/StreamService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="294" width="209" x="1059" y="271"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="de.htwsaar.service.user.UserService" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/service/user/UserService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="187" width="205" x="641" y="271"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="de.htwsaar.util.TweetLogger" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/util/TweetLogger.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="249" y="329"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="de.htwsaar.db.AuthorDao.AuthorRowMapper" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/db/AuthorDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="173" x="1301" y="935"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="de.htwsaar.db.AuthorDao" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/db/AuthorDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1349" y="798"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="de.htwsaar.db.KeywordDao" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/db/KeywordDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="859" y="786"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="de.htwsaar.db.KeywordDao.StringRowMapper" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/db/KeywordDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="49" width="169" x="672" y="890"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="de.htwsaar.db.KeywordDao.KeywordRowMapper" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/db/KeywordDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="51" width="184" x="857" y="890"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="de.htwsaar.db.TweetDao" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/db/TweetDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1888" y="842"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="de.htwsaar.db.TweetDao.TweetRowMapper" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/db/TweetDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="49" width="203" x="1771" y="1020"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="de.htwsaar.db.TweetDao.StringRowMapper" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/db/TweetDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="49" width="206" x="1914" y="1079"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="de.htwsaar.db.TweetDao.TweetKeywordRowMapper" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/db/TweetDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="51" width="204" x="2048" y="1011"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="de.htwsaar.db.UserDao" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/db/UserDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="435" y="776"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="de.htwsaar.db.UserDao.UserRowMapper" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/db/UserDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="49" width="165" x="226" y="881"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="de.htwsaar.controller.HomeController" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/controller/HomeController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="713" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="de.htwsaar.controller.KeywordController" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/controller/KeywordController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1150" y="56"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="de.htwsaar.controller.TweetController" project="TwitterMonitor" 
+    file="/TwitterMonitor/src/de/htwsaar/controller/TweetController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1668" y="41"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="25">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="26" name="keywordDao"/>      
+      <multiplicity id="27" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="28">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="21"/>  
+  </nesting>  
+  <association id="29">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="30" name="tweetService"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="32">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="18"/>  
+  </nesting>  
+  <nesting id="33">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="19"/>  
+  </nesting>  
+  <association id="34">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="35" name="tweetService"/>      
+      <multiplicity id="36" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="37">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="38" name="authorDao">        
+        <position height="16" width="59" x="1143" y="664"/>      
+      </attribute>      
+      <multiplicity id="39" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="40">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="41" name="keywordDao"/>      
+      <multiplicity id="42" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="43">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="44" name="userDao"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="46">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="47" name="userService"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="49">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="15"/>  
+  </nesting>  
+  <nesting id="50">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="14"/>  
+  </nesting>  
+  <nesting id="51">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="17"/>  
+  </nesting>  
+  <association id="52">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="53" name="tweetDao"/>      
+      <multiplicity id="54" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="55">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="56" name="tweetListener"/>      
+      <multiplicity id="57" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="58">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="11"/>  
+  </nesting>  
+  <association id="59">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="60" name="userService"/>      
+      <multiplicity id="61" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="62">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

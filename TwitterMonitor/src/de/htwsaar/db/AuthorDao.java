@@ -2,12 +2,13 @@ package de.htwsaar.db;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -47,7 +48,14 @@ public class AuthorDao {
 
 		String query = "select * from tweetAuthors";
 
-		return jdbc.query(query, new AuthorRowMapper());
+		List<Author> authors = null;
+		try {
+			authors = jdbc.query(query, new AuthorRowMapper());
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			authors = new ArrayList<Author>();
+		}
+		return authors;
 	}
 
 	/**
@@ -64,12 +72,13 @@ public class AuthorDao {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("authorId", authorId);
 
+		Author author = null;
 		try {
-			return (Author) jdbc.queryForObject(query, paramSource, new AuthorRowMapper());
-		} catch (EmptyResultDataAccessException e) {
+			author = (Author) jdbc.queryForObject(query, paramSource, new AuthorRowMapper());
+		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return author;
 	}
 
 	/**
@@ -84,8 +93,11 @@ public class AuthorDao {
 				+ " on duplicate key update name = :name, screenName = :screenName, followerCount = :followerCount, pictureUrl = :pictureUrl";
 
 		MapSqlParameterSource paramSource = getAuthorParameterSource(author);
-
-		jdbc.update(insert, paramSource);
+		try {
+			jdbc.update(insert, paramSource);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void insertAuthors(List<Author> authors) {
@@ -99,9 +111,30 @@ public class AuthorDao {
 			MapSqlParameterSource paramSource = getAuthorParameterSource(authors.get(i));
 			paramSources[i] = paramSource;
 		}
+		try {
+			jdbc.batchUpdate(insert, paramSources);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * This method removes Author Objects from the database.
+	 * 
+	 * @param authorId
+	 *            - the unique id of the author.
+	 */
+	public void deleteAuthor(long authorId) {
+		String delete = "delete from tweetAuthors where authorId = :authorId";
 
-		jdbc.batchUpdate(insert, paramSources);
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("authorId", authorId);
 
+		try {
+			jdbc.update(delete, paramSource);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private MapSqlParameterSource getAuthorParameterSource(Author author) {
@@ -115,21 +148,6 @@ public class AuthorDao {
 		paramSource.addValue("pictureUrl", author.getPictureUrl());
 
 		return paramSource;
-	}
-
-	/**
-	 * This method removes Author Objects from the database.
-	 * 
-	 * @param authorId
-	 *            - the unique id of the author.
-	 */
-	public void deleteAuthor(long authorId) {
-		String delete = "delete from tweetAuthors where authorId = :authorId";
-
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("authorId", authorId);
-
-		jdbc.update(delete, paramSource);
 	}
 
 	/**
@@ -155,5 +173,4 @@ public class AuthorDao {
 			return author;
 		}
 	}
-
 }

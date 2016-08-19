@@ -1,44 +1,65 @@
 package de.htwsaar.util;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
 
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+
+@Aspect
 public class TweetLogger {
 
-	private static HashMap<Date, String> log;
+	private static final String LOG_PATH = "/home/philipp/logfiles/log";
+	private static final String ARCHIVE_PATH = "/home/philipp/logfiles/archive";
+
+	private BufferedWriter logWriter;
+	private File logFile;
+
+	public TweetLogger() throws IOException {
+		
+		logFile = new File(LOG_PATH);
+//		logFile.createNewFile();
 	
-	public TweetLogger() {
-		log = new HashMap<Date, String>();
+		logWriter = new BufferedWriter(new FileWriter(logFile, true));
 	}
 
-	public HashMap<Date, String> getLog() {
-		return log;
+	@Pointcut("execution(* de.htwsaar.service.StreamService.stopStream(..))")
+	public void archivePoint() {
 	}
-	
-	public static void insertLog(String message) {
-		log.put(new Date(), message);
+
+	@Pointcut("execution(* de.htwsaar.*.*(..))")
+	public void logPoint() {
+	}
+
+	@AfterThrowing(pointcut = "logPoint()", throwing = "e")
+	public synchronized void insertLog(Throwable e) throws IOException {
+		logWriter.write((new Date()).toString() + " - " + e.getMessage());
+	}
+
+	@After("ArchivePoint()")
+	public synchronized void archiveLog() throws IOException {
 		
-		if ( log.size() > 500 )
-			saveLog();
-	}
-	
-	
-	public static void saveLog() {
-		try {			
-			BufferedWriter writer = new BufferedWriter(new FileWriter("/logfiles/log - " + new Date().toString() + ".txt"));
-			
-			for (Date date : log.keySet())
-				writer.write(date.toString() + " : " + log.get(date)+"\n\n");
-			
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+		logWriter.close();
+		BufferedReader logReader = new BufferedReader(new FileReader(LOG_PATH));
+		BufferedWriter archiveWriter = new BufferedWriter(new FileWriter(ARCHIVE_PATH, true));
+		
+		String logLine;
+		while ((logLine = logReader.readLine()) != null) {
+			archiveWriter.write(logLine);
 		}
 		
-		log = new HashMap<Date, String>();
-	}	
-	
+		logReader.close();
+		archiveWriter.close();
+		
+		logFile.delete();
+		logFile.createNewFile();
+		logWriter = new BufferedWriter(new FileWriter(logFile, true));
+	}
 }

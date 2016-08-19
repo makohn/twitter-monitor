@@ -1,11 +1,8 @@
 package de.htwsaar.validator.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import de.htwsaar.exception.model.TweetException;
-import twitter4j.MediaEntity;
 import twitter4j.Status;
 import twitter4j.User;
 
