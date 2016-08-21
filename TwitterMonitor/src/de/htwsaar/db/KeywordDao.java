@@ -19,7 +19,7 @@ import de.htwsaar.model.Keyword;
  * The KeywordDao Class encapsulates the database access for the keyword entity.
  * It provides methods for loading and storing Keyword Objects.
  * 
- * @author Philipp Schaefer, Marek Kohn
+ * @author Philipp Schaefer, Marek Kohn, Niko Kleer, Martin Feick
  *
  */
 

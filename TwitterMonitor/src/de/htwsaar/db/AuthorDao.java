@@ -21,7 +21,7 @@ import de.htwsaar.model.Author;
  * The AuthorDao Class encapsulates the database access for the tweet author
  * entity. It provides methods for loading and storing Author Objects.
  * 
- * @author Philipp Schaefer
+ * @author Philipp Schaefer, Niko Kleer, Martin Feick
  * 
  */
 

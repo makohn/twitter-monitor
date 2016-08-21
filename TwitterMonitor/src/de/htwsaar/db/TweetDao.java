@@ -25,7 +25,7 @@ import de.htwsaar.model.Tweet;
  * The TweetDao Class encapsulates the database access for the tweet entity.
  * It provides methods for loading and storing Tweet Objects.
  * 
- * @author Philipp Schaefer, Marek Kohn
+ * @author Philipp Schaefer, Marek Kohn, Niko Kleer, Martin Feick
  *
  */
 
