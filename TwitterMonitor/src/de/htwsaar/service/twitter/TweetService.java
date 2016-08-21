@@ -34,8 +34,6 @@ public class TweetService {
 																	// milliseconds
 	private static final long ONE_MINUTE = 60 * 1000;
 
-	// private ConcurrentHashMap<Long, Tweet> tweetBuffer;
-	// private ConcurrentHashMap<Long, Author> authorBuffer;
 	private HashMap<Long, Tweet> tweetBuffer;
 	private HashMap<Long, Author> authorBuffer;
 
@@ -47,8 +45,6 @@ public class TweetService {
 		this.tweetDao = tweetDao;
 		this.authorDao = authorDao;
 
-		// tweetBuffer = new ConcurrentHashMap<Long, Tweet>();
-		// authorBuffer = new ConcurrentHashMap<Long, Author>();
 		tweetBuffer = new HashMap<Long, Tweet>();
 		authorBuffer = new HashMap<Long, Author>();
 	}
@@ -124,39 +120,15 @@ public class TweetService {
 		}
 	}
 
-	// /**
-	// * This method clears and renews the buffer at a given interval.
-	// */
-	// @Scheduled(fixedDelay = /* ONE_MINUTE */30 * 1000)
-	// private synchronized void uploadTweetBuffers() {
-	//
-	// System.out.println("upload tweetbuffers");
-	// tweetDao.insertTweets(new ArrayList<Tweet>(tweetBuffer.values()));
-	// tweetBuffer.clear();
-	// System.out.println("upload tweetbuffers finished");
-	// }
-	//
-	// /**
-	// * This method clears and renews the buffer at a given interval.
-	// */
-	// @Scheduled(fixedDelay = /* ONE_MINUTE */30 * 1000)
-	// private synchronized void uploadAuthorBuffers() {
-	//
-	// System.out.println("upload authorbuffers");
-	// authorDao.insertAuthors(new ArrayList<Author>(authorBuffer.values()));
-	// authorBuffer.clear();
-	// System.out.println("upload authorbuffers finished");
-	// }
-
 	/**
 	 * This method clears and renews the buffer at a given interval.
 	 */
 	@Scheduled(fixedDelay = /* ONE_MINUTE */30 * 1000)
 	private synchronized void uploadTweetBuffers() {
-		tweetDao.insertTweets(new ArrayList<Tweet>(tweetBuffer.values()));
-		tweetBuffer.clear();
 		authorDao.insertAuthors(new ArrayList<Author>(authorBuffer.values()));
 		authorBuffer.clear();
+		tweetDao.insertTweets(new ArrayList<Tweet>(tweetBuffer.values()));
+		tweetBuffer.clear();
 	}
 
 	

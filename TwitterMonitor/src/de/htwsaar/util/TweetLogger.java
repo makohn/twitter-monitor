@@ -12,8 +12,10 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
 
 @Aspect
+@Component("tweetLogger")
 public class TweetLogger {
 
 	private static final String LOG_PATH = "/home/philipp/logfiles/log";
@@ -22,31 +24,42 @@ public class TweetLogger {
 	private BufferedWriter logWriter;
 	private File logFile;
 
-	public TweetLogger() throws IOException {
+	public TweetLogger() {
+		
+		System.out.println("Logger gestartet");			// DEBUG
 		
 		logFile = new File(LOG_PATH);
-//		logFile.createNewFile();
-	
-		logWriter = new BufferedWriter(new FileWriter(logFile, true));
+		try {
+			logFile.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+		
 	}
-
-	@Pointcut("execution(* de.htwsaar.service.StreamService.stopStream(..))")
+	
+	@Pointcut("execution(* de.htwsaar.service.twitter.StreamService.stopStream(..))")
 	public void archivePoint() {
 	}
 
-	@Pointcut("execution(* de.htwsaar.*.*(..))")
+	@Pointcut("execution(* *(..))")
 	public void logPoint() {
 	}
 
 	@AfterThrowing(pointcut = "logPoint()", throwing = "e")
 	public synchronized void insertLog(Throwable e) throws IOException {
+		
+		System.out.println("einfügen");			// DEBUG
+		
+		logWriter = new BufferedWriter(new FileWriter(logFile, true));
 		logWriter.write((new Date()).toString() + " - " + e.getMessage());
+		logWriter.close();
 	}
 
-	@After("ArchivePoint()")
+	@After("archivePoint()")
 	public synchronized void archiveLog() throws IOException {
 		
-		logWriter.close();
+		System.out.println("Archiviere");			// DEBUG
+				
 		BufferedReader logReader = new BufferedReader(new FileReader(LOG_PATH));
 		BufferedWriter archiveWriter = new BufferedWriter(new FileWriter(ARCHIVE_PATH, true));
 		
@@ -60,6 +73,5 @@ public class TweetLogger {
 		
 		logFile.delete();
 		logFile.createNewFile();
-		logWriter = new BufferedWriter(new FileWriter(logFile, true));
 	}
 }

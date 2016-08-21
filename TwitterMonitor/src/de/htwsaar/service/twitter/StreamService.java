@@ -93,12 +93,15 @@ public class StreamService {
 	}
 
 	public void stopStream() {
+//		
+//		System.out.println("Stopping Stream");	// DEBUG
+		
 		stream.removeListener(tweetListener);
 		stream.shutdown();
 	}
 
 	// @Scheduled(cron = "0 1 * * * ?")
-	@Scheduled(fixedDelay = /* FIFTEEN_MINUTES */3 * 60 * 1000)
+	@Scheduled(fixedDelay = /* FIFTEEN_MINUTES */2 * 60 * 1000)
 	public void restartStream() {
 		stopStream();
 		startStream();

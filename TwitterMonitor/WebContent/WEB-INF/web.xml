@@ -47,7 +47,7 @@
 			classpath:de/htwsaar/config/service-context.xml
 			classpath:de/htwsaar/config/dao-context.xml
 			classpath:de/htwsaar/config/security-context.xml
-			classpath:de/htwsaar/config/logger-context.xml
+<!-- 			classpath:de/htwsaar/config/logger-context.xml -->
 		</param-value>
 	</context-param>
 	<filter>

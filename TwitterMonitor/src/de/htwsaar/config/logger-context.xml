@@ -9,5 +9,15 @@
 
 
 	<context:component-scan base-package="de.htwsaar.util"></context:component-scan>
+
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+<!-- 	<aop:config> -->
+<!-- 		<aop:aspect ref="tweetLogger"> -->
+<!-- 			<aop:after method="archiveLog()" -->
+<!-- 				pointcut="execution(* de.htwsaar.service.twitter.StreamService.stopStream(..))" /> -->
+			
+<!-- 		</aop:aspect> -->
+<!-- 	</aop:config> -->
+	
 </beans>
