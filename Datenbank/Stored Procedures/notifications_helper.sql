@@ -1,7 +1,7 @@
 DELIMITER $$
 drop function if exists get_tweet_html;
 create function get_tweet_html(
-	p_tweet_text text, p_author_name varchar(15), p_author_picture_url varchar(100)
+	p_tweet_text text, p_author_name varchar(15), p_author_picture_url varchar(100), p_tweet_datum datetime
 ) returns text
 begin
 	declare l_body text default '';
@@ -53,7 +53,7 @@ begin
 				margin-right: 15px;
 				padding-top: 10px;
 				padding-left: 10px;
-				min-height: 40px;">2016-08-24 09:07:50</div>
+				min-height: 40px;">', DATE_FORMAT(p_tweet_datum, '%d.%m.%Y %H:%m'), '</div>
 		</div>	
 		<div style="
 			clear: left;
@@ -87,12 +87,13 @@ begin
 	*/
 	declare l_personal_prio float;
 	declare l_tweet_text varchar(200);
+	declare l_tweet_datum datetime;
 	declare l_author_name varchar(15);
 	declare l_author_picture_url varchar(100);
 	declare l_body text default '';
   	declare done int default 0;
 	declare cur cursor for 
-		select get_personal_prio(t.tweetId, p_username) personal_prio, t.text, a.name, a.pictureUrl
+		select get_personal_prio(t.tweetId, p_username) personal_prio, t.text, a.name, a.pictureUrl, t.createdAt
 		   from tweets t, tweets_x_keywords x, keywords k, tweetauthors a
 		   where t.tweetId = x.tweetId
 			   and x.keyword = k.keyword
@@ -105,9 +106,9 @@ begin
 
   	open cur;
 		repeat
-			fetch cur into l_personal_prio, l_tweet_text, l_author_name, l_author_picture_url;
+			fetch cur into l_personal_prio, l_tweet_text, l_author_name, l_author_picture_url, l_tweet_datum;
 			if not done then
-				set l_body = concat(l_body, get_tweet_html(l_tweet_text, l_author_name, l_author_picture_url));
+				set l_body = concat(l_body, get_tweet_html(l_tweet_text, l_author_name, l_author_picture_url, l_tweet_datum));
 			end if;
 		until done end repeat;
 	close cur;
