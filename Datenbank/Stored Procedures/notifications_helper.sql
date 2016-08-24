@@ -1,10 +1,28 @@
 DELIMITER $$
 drop function if exists get_tweet_html;
 create function get_tweet_html(
-	p_tweet_text text, p_author_name varchar(15), p_author_picture_url varchar(100), p_tweet_datum datetime
+	p_tweet_text text, p_author_name varchar(15), p_author_picture_url varchar(100), p_tweet_datum datetime, p_tweet_image varchar(100)
 ) returns text
 begin
 	declare l_body text default '';
+  	declare l_body_image text default '';
+  	
+  	if length(p_tweet_image) > 3 then
+  		set l_body_image = concat('
+		  <div style="
+				display:block;
+				background-image:url(', p_tweet_image, ');
+				float: left;
+				min-height: 400px;
+				min-width: 530px;
+				max-width: 530px;
+				border-top-left-radius: 20px;
+				border-top-right-radius: 20px;
+				box-shadow: 10px 12px 12px 0px rgba(0, 0, 0, 0.50);
+				background-size: cover;
+				background-repeat: no-repeat;">
+			</div>');
+  	end if;
   	
   	set l_body = concat('
 	  <div style="
@@ -16,10 +34,10 @@ begin
 			border-top-left-radius: 20px;
 			border-top-right-radius: 20px;
 			min-width: 500px;
-			max-width: 500px;">
+			max-width: 500px;">', l_body_image, '
 			<div style="
-				border-top-right-radius: 0px;
-				border-top-left-radius: 0px;
+				border-top-right-radius: 0px !important;
+				border-top-left-radius: 0px !important;
 				float: left;
 				background-color: #f9f9f9;
 				color: #4266b2;
@@ -86,6 +104,7 @@ begin
 		und gibt sie als HTML-Text zurueck
 	*/
 	declare l_personal_prio float;
+	declare l_tweet_image varchar(100);
 	declare l_tweet_text varchar(200);
 	declare l_tweet_datum datetime;
 	declare l_author_name varchar(15);
@@ -93,7 +112,7 @@ begin
 	declare l_body text default '';
   	declare done int default 0;
 	declare cur cursor for 
-		select get_personal_prio(t.tweetId, p_username) personal_prio, t.text, a.name, a.pictureUrl, t.createdAt
+		select get_personal_prio(t.tweetId, p_username) personal_prio, t.text, a.name, a.pictureUrl, t.createdAt, t.image
 		   from tweets t, tweets_x_keywords x, keywords k, tweetauthors a
 		   where t.tweetId = x.tweetId
 			   and x.keyword = k.keyword
@@ -106,9 +125,9 @@ begin
 
   	open cur;
 		repeat
-			fetch cur into l_personal_prio, l_tweet_text, l_author_name, l_author_picture_url, l_tweet_datum;
+			fetch cur into l_personal_prio, l_tweet_text, l_author_name, l_author_picture_url, l_tweet_datum, l_tweet_image;
 			if not done then
-				set l_body = concat(l_body, get_tweet_html(l_tweet_text, l_author_name, l_author_picture_url, l_tweet_datum));
+				set l_body = concat(l_body, get_tweet_html(l_tweet_text, l_author_name, l_author_picture_url, l_tweet_datum, l_tweet_image));
 			end if;
 		until done end repeat;
 	close cur;
