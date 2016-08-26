@@ -1,12 +1,14 @@
 package de.htwsaar.util;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.htwsaar.model.Notification;
 import de.htwsaar.service.user.NotificationService;
 
 /**
- * Versendet automatisiert Benachrichtigungen an die Benutzer
+ * Stellt einen Dienst bereit zum automatisiert Versenden von Benachrichtigungen an die Benutzer
  * @author Oliver Seibert
  *
  */
@@ -15,11 +17,32 @@ public class NotificationManager {
 	private NotificationService notificationService = new NotificationService();
 	private MailSender mailSender = new MailSender();
 	private final String TYPE_EMAIL = "ema";
+	private Timer timer;
+	
+	/**
+	 * Startet den Dienst und sieht alle 5 Minuten nach, ob neue Benachrichtigungen vorhanden sind
+	 */
+	public void start(){
+		TimerTask action = new TimerTask() {
+            public void run() {
+            	sendNotifications();
+            }
+        };
+        timer = new Timer();
+        timer.schedule(action, 1000, 300000);
+	}
+	
+	/**
+	 * Stop den Dienst
+	 */
+	public void stop(){
+		timer.cancel();
+	}
 	
 	/**
 	 * Versendet eine Benachrichtigung und markiert sie entsprechend als versendet
 	 */
-	public void sendNotifications(){
+	private void sendNotifications(){
 		List<Notification> notificationList = notificationService.getNotificationsNotSent();
 		
 		for (Notification notification: notificationList){
