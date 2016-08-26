@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.stereotype.Component;
+
 import de.htwsaar.model.Notification;
 import de.htwsaar.service.user.NotificationService;
 
@@ -12,9 +16,10 @@ import de.htwsaar.service.user.NotificationService;
  * @author Oliver Seibert
  *
  */
+@Component
 public class NotificationManager {
 	
-	private NotificationService notificationService = new NotificationService();
+	private NotificationService notificationService;
 	private MailSender mailSender = new MailSender();
 	private final String TYPE_EMAIL = "ema";
 	private Timer timer;
@@ -22,6 +27,7 @@ public class NotificationManager {
 	/**
 	 * Startet den Dienst und sieht alle 5 Minuten nach, ob neue Benachrichtigungen vorhanden sind
 	 */
+	@PostConstruct
 	public void start(){
 		TimerTask action = new TimerTask() {
             public void run() {
@@ -46,6 +52,7 @@ public class NotificationManager {
 		List<Notification> notificationList = notificationService.getNotificationsNotSent();
 		
 		for (Notification notification: notificationList){
+			System.out.println("Versende: " + notification);
 			switch (notification.getType())
 			{
 				case TYPE_EMAIL:
