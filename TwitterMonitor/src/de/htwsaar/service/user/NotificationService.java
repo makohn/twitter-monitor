@@ -15,6 +15,7 @@ import de.htwsaar.model.Notification;
  */
 @Service
 public class NotificationService {
+	// TODO: new entfernen
 	private NotificationDao notificationDao = new NotificationDao();
 	
 	public NotificationService(){}
