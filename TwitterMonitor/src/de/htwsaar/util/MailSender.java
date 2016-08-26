@@ -14,16 +14,7 @@ public class MailSender {
 	private final String emailSMTPserver = "smtp.gmail.com";
 	private final String emailServerPort = "587";
 
-	/* Empfaengeradresse, Betreff und Inhalt der Mail */
-	private String empfaengerMailAdresse = "test@mail.de";
-	private String emailSubject = "TOP-Tweets des Tages";
-	private String emailBody = "Inhalt des Tweets";
-
 	public void sendMail(String empfaengerMailAdresse, String emailSubject, String emailBody) {
-		this.empfaengerMailAdresse = empfaengerMailAdresse;
-		this.emailSubject = emailSubject;
-		this.emailBody = emailBody;
-		
 		Properties props = new Properties();
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.user", SMTPAuthenticator.getSenderMailAdresse());
