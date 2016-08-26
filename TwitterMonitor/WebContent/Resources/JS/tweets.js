@@ -3,6 +3,8 @@ var count=0;
 var tweetsfield = [];
 function updateTweets(data)
 	{
+		document.write("query");
+	
 	     tweetsfield = data.tweets;
 
 		$("#tweet_panel").html("");

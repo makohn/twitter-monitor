@@ -105,6 +105,9 @@ public class StreamService {
 	// @Scheduled(cron = "0 1 * * * ?")
 	@Scheduled(fixedDelay = /* FIFTEEN_MINUTES */2 * 60 * 1000)
 	public void restartStream() {
+		
+		System.out.println("Restart Stream");	// DEBUG
+		
 		stopStream();
 		startStream();
 	}

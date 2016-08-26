@@ -125,6 +125,9 @@ public class TweetService {
 	 */
 	@Scheduled(fixedDelay = /* ONE_MINUTE */30 * 1000)
 	private synchronized void uploadTweetBuffers() {
+		
+		System.out.println("upload Tweetbuffers");	// DEBUG
+		
 		authorDao.insertAuthors(new ArrayList<Author>(authorBuffer.values()));
 		authorBuffer.clear();
 		tweetDao.insertTweets(new ArrayList<Tweet>(tweetBuffer.values()));

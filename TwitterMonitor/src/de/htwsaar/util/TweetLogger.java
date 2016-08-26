@@ -63,24 +63,25 @@ public class TweetLogger {
 
 		System.out.println("Archiviere"); // DEBUG
 
-		try {
-			BufferedReader logReader = new BufferedReader(new FileReader(LOG_PATH));
-			BufferedWriter archiveWriter = new BufferedWriter(new FileWriter(ARCHIVE_PATH, true));
+		File logFile = new File(LOG_PATH);
+		if (logFile.exists()) {
+			try {
+				BufferedReader logReader = new BufferedReader(new FileReader(LOG_PATH));
+				BufferedWriter archiveWriter = new BufferedWriter(new FileWriter(ARCHIVE_PATH, true));
 
-			String logLine;
-			while ((logLine = logReader.readLine()) != null) {
-				archiveWriter.write(logLine);
+				String logLine;
+				while ((logLine = logReader.readLine()) != null) {
+					archiveWriter.write(logLine);
+				}
+
+				logReader.close();
+				archiveWriter.close();
+
+				logFile.delete();
+
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-
-			logReader.close();
-			archiveWriter.close();
-
-			File logFile = new File(LOG_PATH);
-			logFile.delete();
-			logFile.createNewFile();
-
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 }

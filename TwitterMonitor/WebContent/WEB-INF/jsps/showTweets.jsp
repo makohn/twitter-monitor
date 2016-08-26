@@ -54,6 +54,8 @@
 		<div id="tweet_panel"></div>
 			<script type="text/javascript">
 				function onLoad() {
+					document.write("onLoad")
+// 					updateTweets({"tweets":[{"tweetId":767428813294710784,"authorId":4224729994,"text":"American Blacks support Donald Trump! \nRT if you want to make liberals mad!\uD83D\uDE0F https://t.co/X2A7oqQlIK","place":"","favoriteCount":120,"retweetCount":131,"image":"http://pbs.twimg.com/media/CqRT6f8VMAAMV0P.jpg","createdAt":"2016-08-21 20:31:01","priority":2.16,"keywords":["trump"],"name":"Tennessee GOP","screenName":"TEN_GOP","followerCount":27034,"pictureUrl":"http://pbs.twimg.com/profile_images/673898503047917569/jAwPmxX1_normal.jpg","age":425129180}]});
 					$.getJSON("<c:url value="/getTweets"/>", updateTweets);
 				} onLoad();
 				
@@ -62,7 +64,6 @@
 // 					onLoad();
 // 				}
 			</script>
-			"<c:url value="/getTweets"/>"
 	   </div>
 	   
 <!----------------------------------------------------------------------------------->
