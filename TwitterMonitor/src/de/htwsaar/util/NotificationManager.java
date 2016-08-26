@@ -8,7 +8,7 @@ import de.htwsaar.model.Notification;
 import de.htwsaar.service.user.NotificationService;
 
 /**
- * Stellt einen Dienst bereit zum automatisiert Versenden von Benachrichtigungen an die Benutzer
+ * Stellt einen Dienst bereit zum automatisierten Versenden von Benachrichtigungen an die Benutzer
  * @author Oliver Seibert
  *
  */
