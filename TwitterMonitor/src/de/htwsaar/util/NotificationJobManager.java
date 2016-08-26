@@ -17,7 +17,7 @@ import de.htwsaar.service.user.NotificationService;
  *
  */
 @Component
-public class NotificationManager {
+public class NotificationJobManager {
 	
 	private NotificationService notificationService;
 	private MailSender mailSender = new MailSender();
