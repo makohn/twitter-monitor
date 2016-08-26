@@ -70,4 +70,10 @@ public class Notification {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+	
+	@Override
+	public String toString() {
+		return "Notification [ID=" + notificationID + ", username=" + username + ", email=" + email + ", type="
+				+ type + ", subject=" + subject + "]";
+	}
 }
