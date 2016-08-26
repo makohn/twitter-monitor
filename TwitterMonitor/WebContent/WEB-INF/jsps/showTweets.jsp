@@ -56,7 +56,13 @@
 				function onLoad() {
 					$.getJSON("<c:url value="/getTweets"/>", updateTweets);
 				} onLoad();
+				
+// 				var interval = setInterval(updateTimer, 30000);
+// 				function updateTimer() {
+// 					onLoad();
+// 				}
 			</script>
+			"<c:url value="/getTweets"/>"
 	   </div>
 	   
 <!----------------------------------------------------------------------------------->

@@ -5,6 +5,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import de.htwsaar.db.KeywordDao;
+import de.htwsaar.util.TweetLogger;
 import twitter4j.FilterQuery;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
@@ -93,8 +94,9 @@ public class StreamService {
 	}
 
 	public void stopStream() {
-//		
+		
 //		System.out.println("Stopping Stream");	// DEBUG
+		TweetLogger.archiveLog();
 		
 		stream.removeListener(tweetListener);
 		stream.shutdown();
