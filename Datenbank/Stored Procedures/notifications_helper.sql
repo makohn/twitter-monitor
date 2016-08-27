@@ -150,7 +150,7 @@ begin
    
    declare done int default 0;
 	declare cur cursor for 
-		select username from users where enabled = 1;
+		select username from users where enabled = 1 and check_preference('not', username) = 1;
 	declare continue handler for not found set done = 1;
 	
 	set l_subject = 'Top-Tweets der letzten 12 Stunden';
