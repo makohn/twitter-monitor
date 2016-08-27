@@ -105,6 +105,26 @@ public class UserDao {
 			e.printStackTrace();
 		}
 	}
+	
+	public void deleteUser(String username) {
+		
+		String deleteKeywords = "delete from keywords where username = :username";
+		String deleteAuthority = "delete from authorities where username = :username";
+		String deleteUser = "delete from users where username = :username";
+				
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("username", username);
+		
+		try {
+			jdbc.update(deleteKeywords, paramSource);
+			jdbc.update(deleteAuthority, paramSource);
+			jdbc.update(deleteUser, paramSource);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 
 	private MapSqlParameterSource getUserParameterSource(User user) {
 

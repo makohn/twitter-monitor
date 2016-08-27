@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="Resources/JS/jquery-2.1.4.js"></script>
 	<script type="text/javascript" src="Resources/JS/keywords.js"></script>
 	
-	<title>Focus on</title>
+	<title>TwitterMonitor - Keywords</title>
 </head>
 
 <body style="margin: 0 auto;">
@@ -28,11 +28,12 @@
 	<nav>
 		<div id="logo"></div>
 		<ul>
-			<li><a href="home.php">Home</a></li>
 			<li><a href="${pageContext.request.contextPath}/showTweets">Tweets</a></li>
-			<li><a href="#">Kategorien</a></li>
-			<li><a href="${pageContext.request.contextPath}/profil">Profil</a></li>
-			<li><a href="#">Einstellungen</a></li>
+			<li><a href="${pageContext.request.contextPath}/keywords">Keywords</a></li>
+			<li><a href="${pageContext.request.contextPath}/settings">Einstellungen</a></li>
+			<li><a href="${pageContext.request.contextPath}/instructions">Anleitung</a></li>
+			<li><a href="${pageContext.request.contextPath}/impressum">Impressum</a></li>
+			<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 		</ul>
 	</nav>
 	

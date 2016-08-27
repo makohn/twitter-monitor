@@ -30,6 +30,10 @@ public class UserService {
 		return userDao.getUsers();
 	}
 	
+	public void deleteUser(String username) {
+		userDao.deleteUser(username);
+	}
+	
 	public void insertKeyword(Keyword keyword) {
 		keywordDao.insertKeyword(keyword);		
 	}
@@ -37,6 +41,10 @@ public class UserService {
 	public void deleteKeyword(Keyword keyword) {
 		keywordDao.deleteKeyword(keyword);
 	}
+	
+//	public List<Keyword> getKeywords(String username, boolean positive) {			// POS/NEG
+//		return keywordDao.getKeywords(username, positive);							// POS/NEG
+//	}
 	
 	public List<Keyword> getKeywords(String username) {
 		return keywordDao.getKeywords(username);

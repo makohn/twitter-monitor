@@ -1,6 +1,8 @@
 
 package de.htwsaar.controller;
 
+import java.util.List;
+
 import javax.naming.Context;
 import javax.validation.Valid;
 
@@ -34,12 +36,10 @@ import de.htwsaar.service.user.UserService;
 public class HomeController {
 
 	private UserService userService;
-	private StreamService streamService;
 	
 	@Autowired
-	public void serUsersService(UserService userService, StreamService streamService) {
+	public void setUsersService(UserService userService) {
 		this.userService = userService;
-		this.streamService = streamService;
 	}
 	
 	/**
@@ -54,12 +54,12 @@ public class HomeController {
 		return "home";
 	}
 	
-	// Debug
-	@RequestMapping("/test")
-	public String doTest(Model model){
-	
-		streamService.restartStream();
-		
+//	// Debug
+//	@RequestMapping("/test")
+//	public String doTest(Model model){
+//	
+////		streamService.restartStream();
+//		
 //		System.out.println("Fehler wird verursacht");
 //		
 //		try {
@@ -67,10 +67,16 @@ public class HomeController {
 //		} catch (KeywordException e) {
 //			e.printStackTrace();
 //		}
-		
-		model.addAttribute("user", new User());
-		return "home";
-	}
+////		
+////		model.addAttribute("user", new User());
+////		return "home";
+//		
+////		List<Keyword> keywords = userService.getKeywords("obiWan");
+////		System.out.println(keywords);
+//		
+//		model.addAttribute("user", new User());
+//		return "home";
+//	}
 	
 	/**
 	 * This method controlls the registration process by 
@@ -100,5 +106,15 @@ public class HomeController {
 			return "home";
 		}
 		return "showTweets";	
+	}
+	
+	@RequestMapping("/instructions")
+	public String showInstructions(){
+		return "instructions";
+	}
+	
+	@RequestMapping("/impressum")
+	public String showImpressum(){
+		return "impressum";
 	}
 }

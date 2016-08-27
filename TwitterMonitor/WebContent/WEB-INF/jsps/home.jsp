@@ -22,7 +22,7 @@
 	<script type="text/javascript" src="Resources/JS/homeAnimation.js"></script>
 	<script type="text/javascript" src="Resources/JS/home.js"></script>
 	
-	<title>Focus on</title>
+	<title>TwitterMonitor - Home</title>
 </head>
 
 <body style="margin: 0 auto;">

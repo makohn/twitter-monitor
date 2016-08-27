@@ -8,6 +8,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -37,7 +38,7 @@ public class AuthorDao {
 	public AuthorDao(DataSource jdbc) {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
-
+	
 	/**
 	 * This method returns a list of all tweet authors that are stored in the
 	 * database.
@@ -45,7 +46,7 @@ public class AuthorDao {
 	 * @return a list of Author Objects
 	 */
 	public List<Author> getAuthors() {
-
+		
 		String query = "select * from tweetAuthors";
 
 		List<Author> authors = null;

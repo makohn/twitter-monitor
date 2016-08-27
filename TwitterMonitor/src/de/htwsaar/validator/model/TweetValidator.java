@@ -74,5 +74,4 @@ public class TweetValidator {
 			receivedAt = new Date();
 		return receivedAt;
 	}
-	
 }

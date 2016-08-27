@@ -57,6 +57,7 @@ public class KeywordController {
 	 * This method loads all the user-related keywords from the database
 	 * sends them to the frontend as a JSON Object
 	 * @param principal - the currently logged in user
+	 * @throws Exception 
 	 * @returns a keyword Map that is interpreted as a JSON Array by
 	 * the frontend
 	 */
@@ -66,6 +67,7 @@ public class KeywordController {
 		
 		String username = principal.getName();
 		
+//		List<Keyword> keywords = userService.getKeywords(username, true);				// POS/NEG
 		List<Keyword> keywords = userService.getKeywords(username);
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("keywords", keywords);
@@ -90,6 +92,7 @@ public class KeywordController {
 		String username = principal.getName();
 		
 		keyword.setUsername(username);
+//		keyword.setPositive(true);					// POS/NEG
 		
 		userService.insertKeyword(keyword);
 		

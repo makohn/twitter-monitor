@@ -23,7 +23,7 @@ import de.htwsaar.validator.model.UserValidator;
  *
  */
 public class User {
-	
+		
 	@NotBlank/*(message="Benutzername darf nicht leer sein.")*/
 	@Size(min=5, max=59)
 	@Pattern(regexp="^\\w{5,}$"/*, message="Benutzername darf nur aus Buchstaben, Zahlen und Unterstrich bestehen."*/)

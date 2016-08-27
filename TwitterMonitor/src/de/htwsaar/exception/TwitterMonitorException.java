@@ -10,12 +10,12 @@ public class TwitterMonitorException extends Exception {
 	
 	public TwitterMonitorException() {		
 		super(msg);
-		TweetLogger.insertLog(msg);
+//		TweetLogger.insertLog(msg);
 	}	
 	
 	public TwitterMonitorException(String msg) {
 		super(msg);
-		TweetLogger.insertLog(msg);
+//		TweetLogger.insertLog(msg);
 	}
 }
 

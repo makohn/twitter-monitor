@@ -95,8 +95,8 @@ public class StreamService {
 
 	public void stopStream() {
 		
-//		System.out.println("Stopping Stream");	// DEBUG
-		TweetLogger.archiveLog();
+		System.out.println("Stopping Stream");	// DEBUG
+//		TweetLogger.archiveLog();
 		
 		stream.removeListener(tweetListener);
 		stream.shutdown();

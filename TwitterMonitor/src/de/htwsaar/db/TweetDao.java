@@ -42,6 +42,8 @@ public class TweetDao {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
 
+	
+	// DEBUG
 	/**
 	 * This method returns a list of all tweets that are stored in the database.
 	 * 
@@ -68,6 +70,8 @@ public class TweetDao {
 		return tweets;
 	}
 
+	
+	// DEBUG
 	/**
 	 * This method loads a single tweet from the database.
 	 * 
@@ -96,6 +100,8 @@ public class TweetDao {
 
 	/**
 	 * This method loads all tweets of a certain user from the database.
+	 * 
+	 * Used in TweetService to load all tweets of a User.
 	 * 
 	 * @param username
 	 * @return
@@ -128,7 +134,7 @@ public class TweetDao {
 		// tweets-list.
 		// The first appearances are stored in a HashMap.
 		HashMap<Long, OutputTweet> tweetMap = new HashMap<Long, OutputTweet>();
-		for (OutputTweet tweet : tweetList) {
+		for (OutputTweet tweet : tweetList) {			
 			if (tweetMap.containsKey(tweet.getTweetId()))
 				tweetMap.get(tweet.getTweetId()).addKeyword(tweet.getKeywords().get(0));
 			else

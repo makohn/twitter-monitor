@@ -1,0 +1,23 @@
+package de.htwsaar.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import de.htwsaar.service.user.UserService;
+
+@Controller
+public class SettingsController {
+
+	private UserService userService;
+	
+	@Autowired
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+	
+	@RequestMapping("/settings")
+	public String showSettings(){
+		return "settings";
+	}
+}

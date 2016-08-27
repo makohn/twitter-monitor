@@ -42,16 +42,22 @@ public class KeywordDao {
 	 * This method returns a list of all keywords that are stored in the
 	 * database and match the specified user
 	 * 
+	 * Used in UserService to display users keywords.
+	 * 
 	 * @param username
 	 *            - the unique identifier of a user
 	 * @return a list of Keyword Objects
+	 * @throws Exception 
 	 */
+//	public List<Keyword> getKeywords(String username, boolean positive) {											// POS/NEG
 	public List<Keyword> getKeywords(String username) {
 
+//		String query = "select * from keywords where username = :username and positive = :positive";				// POS/NEG
 		String query = "select * from keywords where username = :username";
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("username", username);
+//		paramSource.addValue("positive", positive);																	// POS/NEG
 
 		List<Keyword> keywords = null;
 		try {
@@ -65,13 +71,16 @@ public class KeywordDao {
 	}
 
 	/**
-	 * This method returns an array of all distinct keywords stored in the
+	 * This method returns an array of all distinct, positive keywords stored in the
 	 * database. Duplicates will not be loaded.
+	 * 
+	 * Used in StreamService to initialize the stream.
 	 * 
 	 * @return an array of Keyword Objects
 	 */
 	public String[] getKeywords() {
 
+//		String query = "select distinct keyword from keywords where positive = true";						// POS/NEG
 		String query = "select distinct keyword from keywords";
 
 		List<String> keywords = null;
@@ -91,6 +100,8 @@ public class KeywordDao {
 
 	/**
 	 * This method deletes a keyword from the database.
+	 * 
+	 * Used in UserService to delete Keywords.
 	 * 
 	 * @param keyword
 	 *            - the keyword that should be deleted (keyword and username are
@@ -113,14 +124,20 @@ public class KeywordDao {
 
 	/**
 	 * This method saves or updates a keyword in the database. If the keyword,
-	 * identified by its name, doesn't exist it is added to the database.If the
+	 * identified by its name, doesn't exist it is added to the database. If the
 	 * keyword does exist, its priority and active status get updated.
+	 * 
+	 * Used in UserService to insert Keyword. 
+	 * Used in UserService to switch Keyword active/inactive.
 	 * 
 	 * @param keyword
 	 *            - the keyword that should be stored or updated
 	 */
 	public void insertKeyword(Keyword keyword) {
 
+//		String insert = "insert into keywords (keyword, username, priority, positive, active)"		// POS/NEG
+//				+ " values (:keyword, :username, :priority, :positive, :active)"					// POS/NEG
+//				+ " on duplicate key update priority=:priority, active=:active";					// POS/NEG
 		String insert = "insert into keywords (keyword, username, priority, active)"
 				+ " values (:keyword, :username, :priority, :active)"
 				+ " on duplicate key update priority=:priority, active=:active";
@@ -129,6 +146,7 @@ public class KeywordDao {
 		paramSource.addValue("keyword", keyword.getKeyword());
 		paramSource.addValue("username", keyword.getUsername());
 		paramSource.addValue("priority", keyword.getPriority());
+//		paramSource.addValue("positive", keyword.isPositive());					// POS/NEG
 		paramSource.addValue("active", keyword.getActive());
 
 		try {
@@ -153,6 +171,7 @@ public class KeywordDao {
 				keyword.setKeyword(rs.getString("keyword"));
 				keyword.setUsername(rs.getString("username"));
 				keyword.setPriority(rs.getInt("priority"));
+//				keyword.setPositive(rs.getBoolean("positive"));		// POS/NEG	
 				keyword.setActive(rs.getBoolean("active"));
 			} catch (KeywordException e) {
 				keyword = null;

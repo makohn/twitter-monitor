@@ -11,7 +11,7 @@ import de.htwsaar.exception.model.KeywordException;
 import de.htwsaar.validator.model.KeywordValidator;
 
 public class Keyword {
-	
+		
 	@NotNull
 	@NotBlank(message="Das Keyword darf nicht leer sein.")
 	@Size(min=5, max=49, message="Das Keyword muss zwischen 5 und 49 Zeichen lang sein.")
@@ -25,8 +25,10 @@ public class Keyword {
 	@Max(value=5, message="Die Prioritaet darf hoechstens 5 sein.")
 	private int priority;
 	
-	private boolean active = true;
+//	private boolean positive = true;					// POS/NEG
 	
+	private boolean active = true;
+		
 	public Keyword() {}
 	
 	public Keyword(String keyword, String username, int priority) throws KeywordException {		
@@ -41,6 +43,14 @@ public class Keyword {
 		setPriority(priority);
 		setActive(active);
 	}
+	
+//	public Keyword(String keyword, String username, int priority, boolean positive, boolean active) throws KeywordException {		
+//		setKeyword(keyword);
+//		setUsername(username);
+//		setPriority(priority);
+////		setPositive(positive);
+//		setActive(active);
+//	}
 
 	public String getKeyword() {
 		return keyword;
@@ -68,6 +78,14 @@ public class Keyword {
 		KeywordValidator.checkPriority(priority);
 		this.priority = priority;
 	}
+	
+//	public boolean isPositive() {							// POS/NEG
+//		return positive;									// POS/NEG
+//	}														// POS/NEG
+//	
+//	public void setPositive(boolean positive) {				// POS/NEG
+//		this.positive = positive;							// POS/NEG
+//	}														// POS/NEG
 
 	public boolean getActive() {
 		return active;
@@ -81,7 +99,5 @@ public class Keyword {
 	public String toString() {
 		return "Keyword [keyword=" + keyword + ", username=" + username + ", priority=" + priority + ", active="
 				+ active + "]";
-	}
-
-	
+	}	
 }

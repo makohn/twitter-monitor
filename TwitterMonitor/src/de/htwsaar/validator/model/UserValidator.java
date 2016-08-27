@@ -29,5 +29,4 @@ public class UserValidator {
 			registeredAt = new Date();
 		return registeredAt;
 	}
-
 }

@@ -59,14 +59,11 @@ public class TweetController {
 	@RequestMapping(value = "/getTweets", method = RequestMethod.GET, headers = "Accept=application/json")
 	@ResponseBody
 	public Map<String, Object> getTweets(Principal principal) {
-		
-		System.out.println("Controlleraufruf");
-		
+				
 		List<OutputTweet> tweets = tweetService.getTweets(principal.getName());
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("tweets", tweets);
 		
-		System.out.println("Daten geladen");
 		return data;
 	}
 }

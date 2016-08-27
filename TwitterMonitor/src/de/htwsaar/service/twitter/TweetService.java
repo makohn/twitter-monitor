@@ -127,6 +127,9 @@ public class TweetService {
 	private synchronized void uploadTweetBuffers() {
 		
 		System.out.println("upload Tweetbuffers");	// DEBUG
+		System.out.println("authorCount: " + authorBuffer.size());
+		System.out.println("tweetCount: " + tweetBuffer.size());
+		
 		
 		authorDao.insertAuthors(new ArrayList<Author>(authorBuffer.values()));
 		authorBuffer.clear();
