@@ -17,7 +17,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
+import de.htwsaar.exception.model.KeywordException;
 import de.htwsaar.exception.model.TweetException;
+import de.htwsaar.model.Keyword;
 import de.htwsaar.model.OutputTweet;
 import de.htwsaar.model.Tweet;
 
@@ -90,7 +92,7 @@ public class TweetDao {
 		OutputTweet tweet = null;
 		try {
 			tweet = (OutputTweet) jdbc.queryForObject(tweetQuery, paramSource, new TweetRowMapper());
-			tweet.setKeywords(jdbc.query(keywordQuery, paramSource, new StringRowMapper()));
+			tweet.setKeywords(jdbc.query(keywordQuery, paramSource, new KeywordRowMapper()));
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
@@ -134,12 +136,21 @@ public class TweetDao {
 		// tweets-list.
 		// The first appearances are stored in a HashMap.
 		HashMap<Long, OutputTweet> tweetMap = new HashMap<Long, OutputTweet>();
-		for (OutputTweet tweet : tweetList) {			
-			if (tweetMap.containsKey(tweet.getTweetId()))
-				tweetMap.get(tweet.getTweetId()).addKeyword(tweet.getKeywords().get(0));
+		HashMap<Long, OutputTweet> negMap = new HashMap<Long, OutputTweet>();
+		for (OutputTweet tweet : tweetList) {
+			if (tweet.getKeywords().get(0).isPositive()) {
+				if (tweetMap.containsKey(tweet.getTweetId()))
+					tweetMap.get(tweet.getTweetId()).addKeyword(tweet.getKeywords().get(0));
+				else
+					tweetMap.put(tweet.getTweetId(), tweet);
+			}
 			else
-				tweetMap.put(tweet.getTweetId(), tweet);
+				negMap.put(tweet.getTweetId(), tweet);			
 		}
+		
+		for (Long id : negMap.keySet())
+			tweetMap.remove(id);
+		
 
 		return new ArrayList<OutputTweet>(tweetMap.values());
 	}
@@ -317,9 +328,11 @@ public class TweetDao {
 
 		@Override
 		public OutputTweet mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
 			OutputTweet tweet = new OutputTweet();
-
-			try {
+			
+			try {		
+				
 				tweet.setTweetId(rs.getLong("tweetId"));
 				tweet.setAuthorId(rs.getLong("authorId"));
 				tweet.setText(rs.getString("text"));
@@ -334,11 +347,23 @@ public class TweetDao {
 				tweet.setScreenName(rs.getString("screenName"));
 				tweet.setPictureUrl(rs.getString("pictureUrl"));
 
-				List<String> keywords = new ArrayList<String>();
-				keywords.add(rs.getString("keyword"));
+//				List<String> keywords = new ArrayList<String>();
+//				keywords.add(rs.getString("keyword"));
+//				tweet.setKeywords(keywords);
+				
+				List<Keyword> keywords = new ArrayList<Keyword>();
+				Keyword keyword = new Keyword();
+				keyword.setKeyword(rs.getString("keyword"));
+				keyword.setUsername(rs.getString("username"));
+				keyword.setPriority(rs.getInt("priority"));
+				keyword.setPositive(rs.getBoolean("positive"));
+				keyword.setActive(rs.getBoolean("active"));
+				keywords.add(keyword);
 				tweet.setKeywords(keywords);
 
 			} catch (TweetException e) {
+				e.printStackTrace();
+			} catch (KeywordException e) {
 				e.printStackTrace();
 			}
 			return tweet;
@@ -354,6 +379,27 @@ public class TweetDao {
 		@Override
 		public String mapRow(ResultSet rs, int rowNum) throws SQLException {
 			return rs.getString("keyword");
+		}
+	}
+	
+	private class KeywordRowMapper implements RowMapper<Keyword> {
+
+		@Override
+		public Keyword mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			Keyword keyword = new Keyword();
+					
+			try {
+				keyword.setKeyword(rs.getString("keyword"));
+				keyword.setUsername(rs.getString("username"));
+				keyword.setPriority(rs.getInt("priority"));
+				keyword.setPositive(rs.getBoolean("positive"));
+				keyword.setActive(rs.getBoolean("active"));
+			} catch (KeywordException e) {
+				e.printStackTrace();
+			}
+			
+			return keyword;
 		}
 	}
 }

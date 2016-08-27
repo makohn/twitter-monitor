@@ -52,6 +52,12 @@ public class KeywordController {
 		//model.addAttribute("keyword", new Keyword());
 		return "keywords";
 	}
+	
+	@RequestMapping("/negKeywords")
+	public String loadNegKeywords(Model model) {
+		//model.addAttribute("keyword", new Keyword());
+		return "negKeywords";
+	}
 
 	/**
 	 * This method loads all the user-related keywords from the database
@@ -67,8 +73,32 @@ public class KeywordController {
 		
 		String username = principal.getName();
 		
-//		List<Keyword> keywords = userService.getKeywords(username, true);				// POS/NEG
-		List<Keyword> keywords = userService.getKeywords(username);
+		List<Keyword> keywords = userService.getKeywords(username, true);				// POS/NEG
+		
+//		List<Keyword> keywords = userService.getKeywords(username);
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("keywords", keywords);
+
+		return data;
+	}
+	
+	/**
+	 * This method loads all the user-related keywords from the database
+	 * sends them to the frontend as a JSON Object
+	 * @param principal - the currently logged in user
+	 * @throws Exception 
+	 * @returns a keyword Map that is interpreted as a JSON Array by
+	 * the frontend
+	 */
+	@RequestMapping(value = "getNegKeywords", method = RequestMethod.GET, headers = "Accept=application/json")
+	@ResponseBody
+	public Map<String, Object> getNegKeywords(Principal principal) {
+				
+		String username = principal.getName();
+		
+		List<Keyword> keywords = userService.getKeywords(username, false);				// POS/NEG		
+//		List<Keyword> keywords = userService.getKeywords(username);
+		
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("keywords", keywords);
 

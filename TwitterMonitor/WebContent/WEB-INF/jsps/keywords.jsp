@@ -30,6 +30,7 @@
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/showTweets">Tweets</a></li>
 			<li><a href="${pageContext.request.contextPath}/keywords">Keywords</a></li>
+			<li><a href="${pageContext.request.contextPath}/negKeywords">negative Keywords</a></li>
 			<li><a href="${pageContext.request.contextPath}/settings">Einstellungen</a></li>
 			<li><a href="${pageContext.request.contextPath}/instructions">Anleitung</a></li>
 			<li><a href="${pageContext.request.contextPath}/impressum">Impressum</a></li>

@@ -49,15 +49,15 @@ public class KeywordDao {
 	 * @return a list of Keyword Objects
 	 * @throws Exception 
 	 */
-//	public List<Keyword> getKeywords(String username, boolean positive) {											// POS/NEG
-	public List<Keyword> getKeywords(String username) {
+	public List<Keyword> getKeywords(String username, boolean positive) {											// POS/NEG
+//	public List<Keyword> getKeywords(String username) {
 
-//		String query = "select * from keywords where username = :username and positive = :positive";				// POS/NEG
-		String query = "select * from keywords where username = :username";
+		String query = "select * from keywords where username = :username and positive = :positive";				// POS/NEG
+//		String query = "select * from keywords where username = :username";
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("username", username);
-//		paramSource.addValue("positive", positive);																	// POS/NEG
+		paramSource.addValue("positive", positive);																	// POS/NEG
 
 		List<Keyword> keywords = null;
 		try {
@@ -80,8 +80,8 @@ public class KeywordDao {
 	 */
 	public String[] getKeywords() {
 
-//		String query = "select distinct keyword from keywords where positive = true";						// POS/NEG
-		String query = "select distinct keyword from keywords";
+		String query = "select distinct keyword from keywords where positive = true";						// POS/NEG
+//		String query = "select distinct keyword from keywords";
 
 		List<String> keywords = null;
 		try {
@@ -96,6 +96,27 @@ public class KeywordDao {
 			keywordArray[i] = keywords.get(i);
 
 		return keywordArray;
+	}
+	
+	public void getKeywordCount(String username, boolean positive) {
+		
+		String query = "select count(*) from keywords where username = :username and positive = :positive";
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("username", username);
+		paramSource.addValue("positive", positive);
+		
+		try {
+			jdbc.query(query, paramSource, new RowMapper<Integer>() {
+				@Override
+				public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {					
+					return rs.getInt(0);
+				}
+				
+			});
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -135,18 +156,18 @@ public class KeywordDao {
 	 */
 	public void insertKeyword(Keyword keyword) {
 
-//		String insert = "insert into keywords (keyword, username, priority, positive, active)"		// POS/NEG
-//				+ " values (:keyword, :username, :priority, :positive, :active)"					// POS/NEG
-//				+ " on duplicate key update priority=:priority, active=:active";					// POS/NEG
-		String insert = "insert into keywords (keyword, username, priority, active)"
-				+ " values (:keyword, :username, :priority, :active)"
-				+ " on duplicate key update priority=:priority, active=:active";
+		String insert = "insert into keywords (keyword, username, priority, positive, active)"		// POS/NEG
+				+ " values (:keyword, :username, :priority, :positive, :active)"					// POS/NEG
+				+ " on duplicate key update priority=:priority, active=:active";					// POS/NEG
+//		String insert = "insert into keywords (keyword, username, priority, active)"
+//				+ " values (:keyword, :username, :priority, :active)"
+//				+ " on duplicate key update priority=:priority, active=:active";
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("keyword", keyword.getKeyword());
 		paramSource.addValue("username", keyword.getUsername());
 		paramSource.addValue("priority", keyword.getPriority());
-//		paramSource.addValue("positive", keyword.isPositive());					// POS/NEG
+		paramSource.addValue("positive", keyword.isPositive());					// POS/NEG
 		paramSource.addValue("active", keyword.getActive());
 
 		try {
@@ -171,7 +192,7 @@ public class KeywordDao {
 				keyword.setKeyword(rs.getString("keyword"));
 				keyword.setUsername(rs.getString("username"));
 				keyword.setPriority(rs.getInt("priority"));
-//				keyword.setPositive(rs.getBoolean("positive"));		// POS/NEG	
+				keyword.setPositive(rs.getBoolean("positive"));		// POS/NEG	
 				keyword.setActive(rs.getBoolean("active"));
 			} catch (KeywordException e) {
 				keyword = null;

@@ -25,30 +25,30 @@ public class Keyword {
 	@Max(value=5, message="Die Prioritaet darf hoechstens 5 sein.")
 	private int priority;
 	
-//	private boolean positive = true;					// POS/NEG
+	private boolean positive = true;					// POS/NEG
 	
 	private boolean active = true;
 		
 	public Keyword() {}
 	
-	public Keyword(String keyword, String username, int priority) throws KeywordException {		
-		setKeyword(keyword);
-		setUsername(username);
-		setPriority(priority);
-	}
-	
-	public Keyword(String keyword, String username, int priority, boolean active) throws KeywordException {		
-		setKeyword(keyword);
-		setUsername(username);
-		setPriority(priority);
-		setActive(active);
-	}
-	
+//	public Keyword(String keyword, String username, int priority) throws KeywordException {		
+//		setKeyword(keyword);
+//		setUsername(username);
+//		setPriority(priority);
+//	}
+//	
+//	public Keyword(String keyword, String username, int priority, boolean active) throws KeywordException {		
+//		setKeyword(keyword);
+//		setUsername(username);
+//		setPriority(priority);
+//		setActive(active);
+//	}
+//	
 //	public Keyword(String keyword, String username, int priority, boolean positive, boolean active) throws KeywordException {		
 //		setKeyword(keyword);
 //		setUsername(username);
 //		setPriority(priority);
-////		setPositive(positive);
+//		setPositive(positive);
 //		setActive(active);
 //	}
 
@@ -79,13 +79,13 @@ public class Keyword {
 		this.priority = priority;
 	}
 	
-//	public boolean isPositive() {							// POS/NEG
-//		return positive;									// POS/NEG
-//	}														// POS/NEG
-//	
-//	public void setPositive(boolean positive) {				// POS/NEG
-//		this.positive = positive;							// POS/NEG
-//	}														// POS/NEG
+	public boolean isPositive() {							// POS/NEG
+		return positive;									// POS/NEG
+	}														// POS/NEG
+	
+	public void setPositive(boolean positive) {				// POS/NEG
+		this.positive = positive;							// POS/NEG
+	}														// POS/NEG
 
 	public boolean getActive() {
 		return active;

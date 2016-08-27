@@ -42,12 +42,12 @@ public class UserService {
 		keywordDao.deleteKeyword(keyword);
 	}
 	
-//	public List<Keyword> getKeywords(String username, boolean positive) {			// POS/NEG
-//		return keywordDao.getKeywords(username, positive);							// POS/NEG
+//	public List<Keyword> getKeywords(String username) {
+//		return keywordDao.getKeywords(username, positive);
 //	}
 	
-	public List<Keyword> getKeywords(String username) {
-		return keywordDao.getKeywords(username);
+	public List<Keyword> getKeywords(String username, boolean positive) {
+		return keywordDao.getKeywords(username, positive);
 	}
 	
 	public void switchActive(Keyword keyword) {

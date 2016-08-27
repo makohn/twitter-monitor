@@ -14,7 +14,7 @@ public class OutputTweet extends Tweet {
 	private float priority;
 	
 	// Keywords associated with the Tweet
-	private List<String> keywords;
+	private List<Keyword> keywords;
 	
 	// TweetAuthor-Info
 	private String name;
@@ -24,7 +24,7 @@ public class OutputTweet extends Tweet {
 		
 	public OutputTweet() {
 		
-		keywords = new ArrayList<String>();
+		keywords = new ArrayList<Keyword>();
 	}
 	
 	public float getPriority() {
@@ -33,14 +33,14 @@ public class OutputTweet extends Tweet {
 	public void setPriority(float priority) {
 		this.priority = priority;
 	}
-	public List<String> getKeywords() {
+	public List<Keyword> getKeywords() {
 		return keywords;
 	}
-	public void setKeywords(List<String> keywords) {
+	public void setKeywords(List<Keyword> keywords) {
 		this.keywords = keywords;
 	}
 	
-	public void addKeyword(String keyword) {
+	public void addKeyword(Keyword keyword) {
 		keywords.add(keyword);
 	}
 	

@@ -2,6 +2,7 @@ var deleteCross ="background-image: url(Resources/Picture/Delete_Cross.png);";
 var keyword_count = 0;
 var currentPrio = [];
 var keywordsfield = [];
+var negkeywordsfield = [];
 var stars = [ ];
 
 /*
@@ -197,8 +198,7 @@ function isNewKeyWord(newKey)
 	{
 		
 		if (newKey == keywordsfield[i].keyword)
-			{
-				
+			{				
 			    return false;
 			}
 	}
