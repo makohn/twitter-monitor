@@ -47,3 +47,28 @@ begin
 
 	return l_exists;
 end;$$
+
+DELIMITER $$
+drop function if exists check_preference;
+create function check_preference(
+	p_preferenceType varchar(3), p_username varchar(60)
+) returns int
+begin
+	/*
+		Überprüft, ob die Einstellung vom Benutzer gesetzt wurde. Wenn nicht wird der Standard-Wert genommen
+	 	Rückgabe: 1:true/0:false
+	*/
+	declare l_value int default 0;
+	declare l_anz int;
+
+	select ifnull(value,0), count(*) into l_value, l_anz from user_x_preferences
+		where username = p_username
+		and preferenceType = p_preferenceType;
+
+	if l_anz < 1 then
+		select defaultValue into l_value from preferences
+			where preferenceType = p_preferenceType;
+	end if;
+
+	return l_value;
+end;$$
