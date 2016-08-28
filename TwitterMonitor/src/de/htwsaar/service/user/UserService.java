@@ -26,9 +26,9 @@ public class UserService {
 		userDao.insertUser(user);		
 	}
 
-	public List<User> getUsers() {
-		return userDao.getUsers();
-	}
+//	public List<User> getUsers() {
+//		return userDao.getUsers();
+//	}
 	
 	public void deleteUser(String username) {
 		userDao.deleteUser(username);

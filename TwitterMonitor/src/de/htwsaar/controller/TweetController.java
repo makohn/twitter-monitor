@@ -2,6 +2,7 @@ package de.htwsaar.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,9 +61,14 @@ public class TweetController {
 	@ResponseBody
 	public Map<String, Object> getTweets(Principal principal) {
 				
+		Date vorher = new Date();		// DEBUG
+		
 		List<OutputTweet> tweets = tweetService.getTweets(principal.getName());
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("tweets", tweets);
+		
+		Date nachher = new Date();		// DEBUG
+		System.out.println("Controller-Anfrage: " + ((nachher.getTime()-vorher.getTime())/1000) + " s");
 		
 		return data;
 	}

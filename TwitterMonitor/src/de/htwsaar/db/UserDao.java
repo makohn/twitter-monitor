@@ -37,49 +37,49 @@ public class UserDao {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
 
-	/**
-	 * This method returns a list of all user that are stored in the data base
-	 * including their authority.
-	 * 
-	 * @return a list of User Objects
-	 */
-	public List<User> getUsers() {
-
-		String query = "select * from users natural join authorities";
-
-		List<User> users = null;
-		try {
-			users = jdbc.query(query, new UserRowMapper());
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-			users = new ArrayList<User>();
-		}
-		return users;
-	}
-
-	/**
-	 * This method loads a single user from the database.
-	 * 
-	 * @param username
-	 *            - the unique id of a user
-	 * @return an User Object, if the user exists or null if not.
-	 */
-	public User getUser(String username) {
-
-		String query = "select * from users natural join authorities where username = :username";
-
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("username", username);
-
-		User user = null;
-		try {
-			user = (User) jdbc.queryForObject(query, paramSource, new UserRowMapper());
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
-
-		return user;
-	}
+//	/**
+//	 * This method returns a list of all user that are stored in the data base
+//	 * including their authority.
+//	 * 
+//	 * @return a list of User Objects
+//	 */
+//	public List<User> getUsers() {
+//
+//		String query = "select * from users natural join authorities";
+//
+//		List<User> users = null;
+//		try {
+//			users = jdbc.query(query, new UserRowMapper());
+//		} catch (DataAccessException e) {
+//			e.printStackTrace();
+//			users = new ArrayList<User>();
+//		}
+//		return users;
+//	}
+//
+//	/**
+//	 * This method loads a single user from the database.
+//	 * 
+//	 * @param username
+//	 *            - the unique id of a user
+//	 * @return an User Object, if the user exists or null if not.
+//	 */
+//	public User getUser(String username) {
+//
+//		String query = "select * from users natural join authorities where username = :username";
+//
+//		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+//		paramSource.addValue("username", username);
+//
+//		User user = null;
+//		try {
+//			user = (User) jdbc.queryForObject(query, paramSource, new UserRowMapper());
+//		} catch (DataAccessException e) {
+//			e.printStackTrace();
+//		}
+//
+//		return user;
+//	}
 
 	/**
 	 * This method inserts a user into the database.

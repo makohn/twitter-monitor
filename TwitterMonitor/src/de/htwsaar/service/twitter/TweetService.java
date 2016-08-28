@@ -50,33 +50,33 @@ public class TweetService {
 	}
 
 	// Debug
-	public List<OutputTweet> getTweets() {
-		return tweetDao.getTweets();
-	}
+//	public List<OutputTweet> getTweets() {
+//		return tweetDao.getTweets();
+//	}
 
 	// Debug
-	public OutputTweet getTweet(long tweetId) {
-		return tweetDao.getTweet(tweetId);
-	}
+//	public OutputTweet getTweet(long tweetId) {
+//		return tweetDao.getTweet(tweetId);
+//	}
 
 	public List<OutputTweet> getTweets(String username) {
 		return tweetDao.getTweets(username);
 	}
 
 	// Debug
-	public void insertTweet(Tweet tweet) {
-		tweetDao.insertTweet(tweet);
-	}
+//	public void insertTweet(Tweet tweet) {
+//		tweetDao.insertTweet(tweet);
+//	}
 
 	// Debug
-	public void insertAuthor(Author author) {
-		authorDao.insertAuthor(author);
-	}
+//	public void insertAuthor(Author author) {
+//		authorDao.insertAuthor(author);
+//	}
 
 	// Debug
-	public Author getAuthor(Long authorId) {
-		return authorDao.getAuthor(authorId);
-	}
+//	public Author getAuthor(Long authorId) {
+//		return authorDao.getAuthor(authorId);
+//	}
 	
 	/**
 	 * This method converts a stream-received Tweet Status into a Tweet Object
@@ -91,7 +91,7 @@ public class TweetService {
 
 		try {
 			// If the status is a retweet then load the original status and
-			// forget the retweet.
+			// forget about the retweet.
 			if (status.isRetweet()) {
 				status = status.getRetweetedStatus();
 			}
