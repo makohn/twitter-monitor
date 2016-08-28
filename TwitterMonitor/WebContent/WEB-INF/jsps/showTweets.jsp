@@ -32,7 +32,6 @@
 			<li><a href="${pageContext.request.contextPath}/negKeywords">negative Keywords</a></li>
 			<li><a href="${pageContext.request.contextPath}/settings">Einstellungen</a></li>
 			<li><a href="${pageContext.request.contextPath}/instructions">Anleitung</a></li>
-			<li><a href="${pageContext.request.contextPath}/impressum">Impressum</a></li>
 			<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 		</ul>
 	</nav>

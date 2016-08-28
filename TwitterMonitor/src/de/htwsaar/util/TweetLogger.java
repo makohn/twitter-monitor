@@ -36,7 +36,7 @@ public class TweetLogger {
 	@AfterThrowing(pointcut = "logPoint()", throwing = "e")
 	public /*static*/ synchronized void insertLog(Throwable e) {
 
-		System.out.println("log einfuegen"); // DEBUG
+//		System.out.println("log einfuegen"); // DEBUG
 
 		try {
 			new File(LOG_PATH).createNewFile();
@@ -53,7 +53,7 @@ public class TweetLogger {
 	// @After("execution(void de.htwsaar.service.twitter.StreamService.stopStream())")
 	public /*static*/ synchronized void archiveLog() {
 
-		System.out.println("Archiviere"); // DEBUG
+//		System.out.println("Archiviere"); // DEBUG
 
 		File logFile = new File(LOG_PATH);
 		if (logFile.exists()) {

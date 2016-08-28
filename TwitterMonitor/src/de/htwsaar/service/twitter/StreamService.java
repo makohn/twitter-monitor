@@ -27,8 +27,10 @@ public class StreamService {
 	private static final String ACCESS_TOKEN = "712907200507850753-BNhxmqynkH6R7LyxG4GUsOf6pGP9i2L";
 	private static final String ACCESS_TOKEN_SECRET = "xPLvu603NO1l1GJzZtmUNNokKqsdj1obVhrVHsHNAa0l8";
 
-	private static final long FIFTEEN_MINUTES = 15 * 60 * 1000;;
+	private static final long FIFTEEN_MINUTES = 15 * 60 * 1000;
 
+	private String[] keywordsArray;
+	
 	private TwitterStream stream;
 	private TweetListener tweetListener;
 	private KeywordDao keywordDao;
@@ -38,6 +40,8 @@ public class StreamService {
 		this.tweetListener = tweetListener;
 		this.keywordDao = keywordDao;
 
+		keywordsArray = keywordDao.getKeywords();
+		
 		startStream();
 	}
 
@@ -73,7 +77,6 @@ public class StreamService {
 		// // weitere Konfigurationen ...
 		// stream.filter(filter);
 
-		String[] keywordsArray = keywordDao.getKeywords();
 		if ((keywordsArray != null) && (keywordsArray.length != 0)) {
 
 			// Erstelle Filter ..
@@ -95,7 +98,7 @@ public class StreamService {
 
 	public void stopStream() {
 		
-		System.out.println("Stopping Stream");	// DEBUG
+//		System.out.println("Stopping Stream");	// DEBUG
 //		TweetLogger.archiveLog();
 		
 		stream.removeListener(tweetListener);
@@ -108,7 +111,42 @@ public class StreamService {
 		
 		System.out.println("Restart Stream");	// DEBUG
 		
-		stopStream();
-		startStream();
+		String[] newKeywordsArray = keywordDao.getKeywords();
+		
+//		System.out.println("newKeywords:");
+//		for (String k : newKeywordsArray)
+//			System.out.println(k);
+//		System.out.println("oldKeywords:");
+//		for (String k : keywordsArray)
+//			System.out.println(k);
+		
+		if (keywordsChanged(keywordsArray, newKeywordsArray)) {
+//			System.out.println("andere Keywords");
+			keywordsArray = newKeywordsArray;
+			stopStream();
+			startStream();
+		}
+	}
+	
+	private boolean keywordsChanged(String[] oldKeywords, String[] newKeywords) {
+		
+		boolean changed = false;
+		
+		if (oldKeywords.length != newKeywords.length) {
+//			System.out.println("same length");
+			changed = true;
+		} else {
+			for (int i=0; i<newKeywords.length; i++) {
+				if (!newKeywords[i].equals(oldKeywords[i])) {
+					changed = true;
+//					System.out.println("different keyword");
+					break;
+				}
+			}
+		}		
+		
+//		System.out.println("changed " + changed);
+		
+		return changed;
 	}
 }

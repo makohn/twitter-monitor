@@ -1,9 +1,6 @@
 var deleteCross ="background-image: url(Resources/Picture/Delete_Cross.png);";
 var keyword_count = 0;
-//var currentPrio = [];
 var keywordsfield = [];
-//var negkeywordsfield = [];
-//var stars = [ ];
 
 /*
  * @description 	This method renders the keywords received from
@@ -26,21 +23,15 @@ function updateKeywords(data)
         //for each keyword
 		for(var k=0;k<data.keywords.length;k++) {
 			var keyword = data.keywords[k];	
+			  
+	        keyword_count++;
 			
-			//do 			
-//			currentPrio[k] = keyword.priority;
-//			stars[k] = [ ];    
-//	        keyword_count++;
-			
-//	        createPrioDiv(keyword,keyword_count,k);
 	        createPrioDiv(keyword,keyword_count);
 		}
 }
 
-//function createPrioDiv(keyword,count,k)
 function createPrioDiv(keyword,count)
 {
-//	stars[k] = [ ]; 
 	var keyword_div = document.createElement("div");
     keyword_div.setAttribute("id",count);
 	keyword_div.setAttribute("class","keyword_div");
@@ -51,56 +42,6 @@ function createPrioDiv(keyword,count)
 	 keyword_label.setAttribute("class","keyword_label");
      keyword_label.innerHTML=keyword.keyword;
 	 keyword_div.appendChild(keyword_label);
-	
-     //create a keyword priority div	        
-//    var prio_div = document.createElement("div");
-//	 prio_div.setAttribute("class","prio_div");
-//	 keyword_div.appendChild(prio_div);    
-    
-     //create priority stars for this keyword	        
-//	 for (var i = 0; i < 5; i++) {
-//		  var prio_star = document.createElement("div");
-//		  prio_star.classList.add('prio_star');
-//		  prio_star.setAttribute('data-index', i);
-//		  if(i < keyword.priority) {
-//			  prio_star.classList.add('prio_star_filled');
-//		  }
-//		  prio_star.setAttribute("onClick","changePrio(".concat("\"").concat(keyword.keyword).concat("\"").concat(",").concat(i+1).concat(",").concat(k).concat("\)"));
-//		  stars[k].push(prio_star);
-//		  prio_div.appendChild(prio_star);   
-//		  attachStarEvents(prio_star, k);
-//	 }
-	 //add listeners to each priority star
-//	 function attachStarEvents(star, k) {
-//	      starMouseOver(star, k);
-//	      starMouseOut(star, k);
-//	 }
-   
-	 //add a mouse over listener
-//	 function starMouseOver(star, k) {
-//	      star.addEventListener('mouseover', function(e) {
-//	        for (i = 0; i < stars[k].length; i++) {
-//	          if (i <= star.getAttribute('data-index')) {
-//	            stars[k][i].classList.add('prio_star_filled');
-//	          } else {
-//	            stars[k][i].classList.remove('prio_star_filled');
-//	          }
-//	        }
-//	      });
-//	  }
-	 
-	 //add mouse out listener
-//	 function starMouseOut(star, k) {
-//	      star.addEventListener('mouseout', function(e) {
-//			for (i = 0; i < stars[k].length; i++) {
-//				if (i < currentPrio[k]) {
-//					stars[k][i].classList.add('prio_star_filled');
-//				} else {
-//					stars[k][i].classList.remove('prio_star_filled');
-//				}
-//			}
-//	      });
-//	 }
  	        
     //create a delete_cross
     var delete_cross = document.createElement("div");
@@ -116,7 +57,8 @@ function createPrioDiv(keyword,count)
  * @param			keyword The keyword that should be removed.
  */
 function deleteKeyword(keyword){
-	var keyword_name = keywordsfield[keyword-1].keyword;
+	
+	var keyword_name = keywordsfield[keyword-1].keyword;	
 	var keywordToDelete = {
 		       "keyword" : keyword_name
 		    }
@@ -126,9 +68,7 @@ function deleteKeyword(keyword){
 		       dataType : 'json',
 		       url: "/TwitterMonitor/deleteKeyword",
 		       data: JSON.stringify(keywordToDelete), 
-		       success :function (result) {
-		    	  
-		       }
+		       success :function (result) {}
 		   });
     var keyword_id = "#".concat(keyword);
     
@@ -149,9 +89,7 @@ function deleteKeyword(keyword){
  * @param			k an internal keyword id, for rendering the 
  * 					priority stars immediately
  */
-//function changePrio(keywordName,prio,k) {
 function changePrio(keywordName,prio) {
-//	currentPrio[k] = prio;
 	
     var keyword = {
        "keyword" : keywordName,
@@ -164,10 +102,10 @@ function changePrio(keywordName,prio) {
        dataType : 'json',
        url: "/TwitterMonitor/changePriority",
        data: JSON.stringify(keyword), 
-       success :function (result) {
+       success : function (result) {
     	  if (isNewKeyWord(result.keyword))
     		  {
-    	  setLastKeyword(result);
+    		  	setLastKeyword(result);
     		  }
        }
    });
@@ -176,7 +114,7 @@ function changePrio(keywordName,prio) {
 
 function setLastKeyword(result)
 {
-	createPrioDiv(result,keyword_count,currentPrio.length-1);
+	createPrioDiv(result,keyword_count);
 	keywordsfield.push(result);
 	$('#newKeyword').css('display','block');
 	$('#newKeyword_text').val("");
@@ -190,7 +128,6 @@ function createNewKeyword() {
 	if (isNewKeyWord(newKey))
 		{
 			keyword_count++;
-		//	changePrio(newKey, 1, currentPrio.length);
 			changePrio(newKey, 1);
 			// Keyword-Textfeld ausblenden
 			$('#newKeyword').css('display','none');

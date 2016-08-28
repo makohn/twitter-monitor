@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="Resources/CSS/negKeywords.css">
 	
 	<script type="text/javascript" src="Resources/JS/jquery-2.1.4.js"></script>
-	<script type="text/javascript" src="Resources/JS/negKeywords.js"></script>
+	<script type="text/javascript" src="Resources/JS/negativeKeywords.js"></script>
 	
 	<title>TwitterMonitor - negative Keywords</title>
 </head>
@@ -33,7 +33,6 @@
 			<li><a href="${pageContext.request.contextPath}/negKeywords">negative Keywords</a></li>
 			<li><a href="${pageContext.request.contextPath}/settings">Einstellungen</a></li>
 			<li><a href="${pageContext.request.contextPath}/instructions">Anleitung</a></li>
-			<li><a href="${pageContext.request.contextPath}/impressum">Impressum</a></li>
 			<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 		</ul>
 	</nav>

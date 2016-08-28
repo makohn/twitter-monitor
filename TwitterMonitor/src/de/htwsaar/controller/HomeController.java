@@ -105,16 +105,11 @@ public class HomeController {
 			result.rejectValue("username",  "DuplicateKey.username", "Dieser Benutzername existiert bereits.");
 			return "home";
 		}
-		return "showTweets";	
+		return "home";	
 	}
 	
 	@RequestMapping("/instructions")
 	public String showInstructions(){
 		return "instructions";
-	}
-	
-	@RequestMapping("/impressum")
-	public String showImpressum(){
-		return "impressum";
 	}
 }

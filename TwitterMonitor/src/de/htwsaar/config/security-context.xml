@@ -27,7 +27,6 @@
 	    <security:intercept-url pattern="/test" access="permitAll" />
 		<security:intercept-url pattern="/newAccount" access="permitAll" />
 		<security:intercept-url pattern="/instructions" access="permitAll" />
-		<security:intercept-url pattern="/impressum" access="permitAll" />
 		<security:intercept-url pattern="/showTweets" access="isAuthenticated()" />
 		<security:intercept-url pattern="/getTweets" access="isAuthenticated()" />
 		<security:intercept-url pattern="/keywords" access="isAuthenticated()" />
@@ -37,6 +36,7 @@
 		<security:intercept-url pattern="/changePriority" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/deleteKeyword" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/settings" access="isAuthenticated()" />
+		<security:intercept-url pattern="/deleteUser" access="isAuthenticated()" />
 		
 		<security:form-login login-page="/"
 			login-processing-url="/j_spring_security_check"
