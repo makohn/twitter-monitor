@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -30,7 +29,7 @@ public class TweetLogger {
 	public void archivePoint() {
 	}
 
-	@Pointcut("execution(* de.htwsaar.db.*.*(..)) or execution(* de.htwsaar.validator.model.*.*(..)")
+	@Pointcut("execution(* de.htwsaar.db.*.*(..)) or execution(* de.htwsaar.validator.model.*.*(..))")
 	public void logPoint() {
 	}
 

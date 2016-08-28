@@ -43,7 +43,7 @@ public class UserService {
 	}
 	
 //	public List<Keyword> getKeywords(String username) {
-//		return keywordDao.getKeywords(username, positive);
+//		return keywordDao.getKeywords(username);
 //	}
 	
 	public List<Keyword> getKeywords(String username, boolean positive) {

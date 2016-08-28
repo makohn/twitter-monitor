@@ -2,7 +2,7 @@ var deleteCross ="background-image: url(Resources/Picture/Delete_Cross.png);";
 var keyword_count = 0;
 var currentPrio = [];
 var keywordsfield = [];
-var negkeywordsfield = [];
+//var negkeywordsfield = [];
 var stars = [ ];
 
 /*
@@ -17,7 +17,7 @@ var stars = [ ];
  */
 
 function updateKeywords(data)
-	{
+	{	
 		keywordsfield = data.keywords;
 		
 		$("#Keywords_div").html("");
@@ -131,6 +131,8 @@ function deleteKeyword(keyword){
     
     $(keyword_id).remove();
     
+    keyword_count--;
+    
     keywordsfield = jQuery.grep(keywordsfield, function(value) {
       return value != keywordsfield[keywordcount];
     });
@@ -182,7 +184,7 @@ function createNewKeyword() {
 	
 	var newKey = $('#newKeyword_text').val();
 	
-	if (isNewKeyWord(newKey))
+	if (isNewKeyWord(newKey) && (keyword_count < 10))
 		{
 	keyword_count++;
 	changePrio(newKey, 1, currentPrio.length);

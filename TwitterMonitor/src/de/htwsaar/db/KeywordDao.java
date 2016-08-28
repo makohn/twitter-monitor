@@ -98,26 +98,26 @@ public class KeywordDao {
 		return keywordArray;
 	}
 	
-	public void getKeywordCount(String username, boolean positive) {
-		
-		String query = "select count(*) from keywords where username = :username and positive = :positive";
-		
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("username", username);
-		paramSource.addValue("positive", positive);
-		
-		try {
-			jdbc.query(query, paramSource, new RowMapper<Integer>() {
-				@Override
-				public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {					
-					return rs.getInt(0);
-				}
-				
-			});
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
-	}
+//	public void getKeywordCount(String username, boolean positive) {
+//		
+//		String query = "select count(*) from keywords where username = :username and positive = :positive";
+//		
+//		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+//		paramSource.addValue("username", username);
+//		paramSource.addValue("positive", positive);
+//		
+//		try {
+//			jdbc.query(query, paramSource, new RowMapper<Integer>() {
+//				@Override
+//				public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {					
+//					return rs.getInt(0);
+//				}
+//				
+//			});
+//		} catch (DataAccessException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * This method deletes a keyword from the database.
