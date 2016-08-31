@@ -12,10 +12,10 @@ import de.htwsaar.model.User;
 
 @Service
 public class UserService {
-	
+
 	private UserDao userDao;
 	private KeywordDao keywordDao;
-	
+
 	@Autowired
 	public UserService(UserDao userDao, KeywordDao keywordDao) {
 		this.userDao = userDao;
@@ -23,27 +23,27 @@ public class UserService {
 	}
 
 	public void insertUser(User user) {
-		userDao.insertUser(user);		
+		userDao.insertUser(user);
 	}
 
-	public List<User> getUsers() {
-		return userDao.getUsers();
+	public void deleteUser(String username) {
+		userDao.deleteUser(username);
 	}
-	
+
 	public void insertKeyword(Keyword keyword) {
-		keywordDao.insertKeyword(keyword);		
+		keywordDao.insertKeyword(keyword);
 	}
-	
+
 	public void deleteKeyword(Keyword keyword) {
 		keywordDao.deleteKeyword(keyword);
 	}
-	
-	public List<Keyword> getKeywords(String username) {
-		return keywordDao.getKeywords(username);
+
+	public List<Keyword> getKeywords(String username, boolean positive) {
+		return keywordDao.getKeywords(username, positive);
 	}
-	
+
 	public void switchActive(Keyword keyword) {
 		keyword.setActive(!keyword.getActive());
-		keywordDao.insertKeyword(keyword);		
+		keywordDao.insertKeyword(keyword);
 	}
 }
