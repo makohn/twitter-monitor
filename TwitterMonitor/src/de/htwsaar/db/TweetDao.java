@@ -92,6 +92,35 @@ public class TweetDao {
 
 		return new ArrayList<OutputTweet>(tweetMap.values());
 	}
+	
+//	public int getTweetCount(String username) {
+//		
+//		String query = "select count(*) "
+//				+ "from tweets, tweetAuthors, tweets_x_keywords, keywords "
+//				+ "where tweets.authorId = tweetAuthors.authorId and tweets.tweetId = tweets_x_keywords.tweetId "
+//				+ "and tweets_x_keywords.keyword = keywords.keyword and keywords.username = :username "
+//				+ "and positive = 1	and active = 1 " + "and tweets.tweetId not in ("
+//				+ "select tweets.tweetId from tweets, tweets_x_keywords, keywords "
+//				+ "where tweets.tweetId = tweets_x_keywords.tweetId and tweets_x_keywords.keyword = keywords.keyword "
+//				+ "and keywords.username = :username and positive = 0 and active = 1)";
+//
+//		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+//		paramSource.addValue("username", username);
+//		
+//		int count = 0;
+//		try {
+//			count = (int) jdbc.queryForObject(query, paramSource, new RowMapper<Integer>() {
+//				@Override
+//				public Integer mapRow(ResultSet rs,int rowNum) throws SQLException {
+//					return rs.getInt(0);
+//				}				
+//			});
+//		} catch (DataAccessException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return count;
+//	}
 
 	/**
 	 * This method inserts a list of multiple tweets at once into the database.

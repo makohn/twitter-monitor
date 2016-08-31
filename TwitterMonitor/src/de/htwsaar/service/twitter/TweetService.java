@@ -51,6 +51,10 @@ public class TweetService {
 	public List<OutputTweet> getTweets(String username) {		
 		return tweetDao.getTweets(username);
 	}
+	
+//	public int getTweetCount(String username) {
+//		return tweetDao.getTweetCount(username);
+//	}
 
 	/**
 	 * This method converts a stream-received Tweet Status into a Tweet Object

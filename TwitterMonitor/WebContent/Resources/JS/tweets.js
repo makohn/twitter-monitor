@@ -208,3 +208,9 @@ function sort()
 	
 	updateTweets(searchfield);
 }
+
+//function checkTweets(data)
+//{
+//	if (data.count != count)
+//		document.getElementById("newTweetsButton").style.visibility = "visible"
+//}

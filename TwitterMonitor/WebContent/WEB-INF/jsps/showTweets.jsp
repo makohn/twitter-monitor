@@ -46,9 +46,12 @@
 			<div id="username">Hallo
 				${pageContext.request.userPrincipal.name}</div>
 			<div id="welcome_text">Tweets werden geladen ...</div>
+			
+<!-- 			<button id="newTweetsButton" onClick="onLoad()">Es sind neue Tweets angekommen</button> -->
 
 			<label for="search">Search</label> <input id="search"
 				onkeyup="search()" type="search"> <label for="sort">Sort</label>
+				
 			<select id="sortOption" onChange="sort()">
 				<option>-Bitte wählen-</option>
 				<option>Priorität</option>
@@ -59,18 +62,25 @@
 
 		<!--############# Tweet Panel ##################-->
 		<div id="tweet_panel"></div>
+		
+		
+		
 		<script type="text/javascript">
+		
 			function onLoad() {
 				$.getJSON("<c:url value="/getTweets"/>", updateTweets);
 			}
 			onLoad();
 			
-			var interval = setInterval(updateTimer, 30000);
-			function updateTimer() {
-				onLoad();
-				search();
-				sort();
-			}
+// 			document.getElementById(newTweetsButton).style.visibility="hidden";
+			
+// 			var interval = setInterval(updateTimer, 30000);
+// 			function updateTimer() {
+// // 				onLoad();
+// // 				search();
+// // 				sort();
+// 				$.getJSON("<c:url value="/getTweetCount"/>", checkTweets);
+// 			}
 			
 		</script>
 	</div>

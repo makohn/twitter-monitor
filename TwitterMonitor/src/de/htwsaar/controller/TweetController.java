@@ -60,4 +60,15 @@ public class TweetController {
 		
 		return data;
 	}
+	
+//	@RequestMapping(value = "getTweetCount", method = RequestMethod.GET, headers = "Accept=application/json")
+//	@ResponseBody
+//	public Map<String, Object> getTweetCount(Principal principal) {
+//		
+//		int count = tweetService.getTweetCount(principal.getName());
+//		Map<String, Object> data = new HashMap<String, Object>();
+//		data.put("count", count);
+//		
+//		return data;
+//	}
 }
