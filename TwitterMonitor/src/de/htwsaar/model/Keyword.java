@@ -25,22 +25,11 @@ public class Keyword {
 	@Max(value=5, message="Die Prioritaet darf hoechstens 5 sein.")
 	private int priority;
 	
+	private boolean positive = true;
+	
 	private boolean active = true;
 	
 	public Keyword() {}
-	
-	public Keyword(String keyword, String username, int priority) throws KeywordException {		
-		setKeyword(keyword);
-		setUsername(username);
-		setPriority(priority);
-	}
-	
-	public Keyword(String keyword, String username, int priority, boolean active) throws KeywordException {		
-		setKeyword(keyword);
-		setUsername(username);
-		setPriority(priority);
-		setActive(active);
-	}
 
 	public String getKeyword() {
 		return keyword;
@@ -76,12 +65,18 @@ public class Keyword {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	
+	public boolean isPositive() {
+		return positive;
+	}
+
+	public void setPositive(boolean positive) {
+		this.positive = positive;
+	}
 
 	@Override
 	public String toString() {
-		return "Keyword [keyword=" + keyword + ", username=" + username + ", priority=" + priority + ", active="
-				+ active + "]";
+		return "Keyword [keyword=" + keyword + ", username=" + username + ", priority=" + priority + ", positive="
+				+ positive + ", active=" + active + "]";
 	}
-
-	
 }
