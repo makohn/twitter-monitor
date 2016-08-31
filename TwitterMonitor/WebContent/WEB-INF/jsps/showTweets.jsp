@@ -64,11 +64,14 @@
 				$.getJSON("<c:url value="/getTweets"/>", updateTweets);
 			}
 			onLoad();
-
-			// 				var interval = setInterval(updateTimer, 30000);
-			// 				function updateTimer() {
-			// 					onLoad();
-			// 				}
+			
+			var interval = setInterval(updateTimer, 30000);
+			function updateTimer() {
+				onLoad();
+				search();
+				sort();
+			}
+			
 		</script>
 	</div>
 
