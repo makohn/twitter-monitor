@@ -68,6 +68,7 @@ public class OutputTweet extends Tweet {
 	public void setPictureUrl(String pictureUrl) {
 		this.pictureUrl = pictureUrl;
 	}
+	
 	@JsonProperty("createdAt")
 	public String getCreatedAtFormatted() {
 		return CREATED_AT_FORMAT.format(createdAt);
