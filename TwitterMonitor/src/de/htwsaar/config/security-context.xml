@@ -42,7 +42,8 @@
 			login-processing-url="/j_spring_security_check"
 			password-parameter="j_password" username-parameter="j_username"
 			default-target-url="/showTweets" />
-			
+
+		<security:logout logout-success-url="/" logout-url="/logout" />
 	</security:http>
-	
+
 </beans>
