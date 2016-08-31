@@ -161,19 +161,19 @@ public class TweetDao {
 				tweet.setScreenName(rs.getString("screenName"));
 				tweet.setPictureUrl(rs.getString("pictureUrl"));
 
-				// List<String> keywords = new ArrayList<String>();
-				// keywords.add(rs.getString("keyword"));
-				// tweet.setKeywords(keywords);
-
-				List<Keyword> keywords = new ArrayList<Keyword>();
-				Keyword keyword = new Keyword();
-				keyword.setKeyword(rs.getString("keyword"));
-				keyword.setUsername(rs.getString("username"));
-				keyword.setPriority(rs.getInt("priority"));
-				keyword.setPositive(rs.getBoolean("positive"));
-				keyword.setActive(rs.getBoolean("active"));
-				keywords.add(keyword);
+				List<String> keywords = new ArrayList<String>();
+				keywords.add(rs.getString("keyword"));
 				tweet.setKeywords(keywords);
+
+				// List<Keyword> keywords = new ArrayList<Keyword>();
+				// Keyword keyword = new Keyword();
+				// keyword.setKeyword(rs.getString("keyword"));
+				// keyword.setUsername(rs.getString("username"));
+				// keyword.setPriority(rs.getInt("priority"));
+				// keyword.setPositive(rs.getBoolean("positive"));
+				// keyword.setActive(rs.getBoolean("active"));
+				// keywords.add(keyword);
+				// tweet.setKeywords(keywords);
 
 			} catch (TweetException e) {
 				e.printStackTrace();
