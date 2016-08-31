@@ -19,18 +19,16 @@ import de.htwsaar.exception.model.KeywordException;
 import de.htwsaar.model.Keyword;
 import de.htwsaar.service.user.UserService;
 
-
 /**
- * The KeywordController Class is the communication interface
- * between keyword-related frontend / backend functionality such as:
+ * The KeywordController Class is the communication interface between
+ * keyword-related frontend / backend functionality such as:
  * 
- * - Displaying user-related keywords 
- * - Adding new keywords 
- * - Changing the priority of existing keywords
+ * - Displaying user-related keywords - Adding new keywords - Changing the
+ * priority of existing keywords
  * 
  * @author Philipp Schaefer, Marek Kohn
  * 
- * */
+ */
 @Controller
 public class KeywordController {
 
@@ -40,59 +38,76 @@ public class KeywordController {
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-	
+
 	/**
-	 * This method displays the keywords.jsp when the keyword
-	 * path of the website is called.
-	 * @param model - the Keyword Model representing a
-	 * keyword that is either displayed or added
+	 * This method displays the keywords.jsp when the keyword path of the
+	 * website is called.
+	 * 
+	 * @param model
+	 *            - the Keyword Model representing a keyword that is either
+	 *            displayed or added
 	 */
 	@RequestMapping("/keywords")
-	public String loadKeywords(Model model) {
-		//model.addAttribute("keyword", new Keyword());
+	public String loadKeywords() {
 		return "keywords";
 	}
 
+	@RequestMapping("/negKeywords")
+	public String loadNegKeywords() {
+		return "negKeywords";
+	}
+
 	/**
-	 * This method loads all the user-related keywords from the database
-	 * sends them to the frontend as a JSON Object
-	 * @param principal - the currently logged in user
-	 * @returns a keyword Map that is interpreted as a JSON Array by
-	 * the frontend
+	 * This method loads all the user-related keywords from the database sends
+	 * them to the frontend as a JSON Object
+	 * 
+	 * @param principal
+	 *            - the currently logged in user
+	 * @returns a keyword Map that is interpreted as a JSON Array by the
+	 *          frontend
 	 */
 	@RequestMapping(value = "getKeywords", method = RequestMethod.GET, headers = "Accept=application/json")
 	@ResponseBody
 	public Map<String, Object> getKeywords(Principal principal) {
-		
+
 		String username = principal.getName();
-		
-		List<Keyword> keywords = userService.getKeywords(username);
+		List<Keyword> keywords = userService.getKeywords(username, true);
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("keywords", keywords);
 
 		return data;
 	}
 	
+	@RequestMapping(value = "getNegKeywords", method = RequestMethod.GET, headers = "Accept=application/json")
+	@ResponseBody
+	public Map<String, Object> getNegKeywords(Principal principal) {
+				
+		String username = principal.getName();
+		List<Keyword> keywords = userService.getKeywords(username, false);
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("keywords", keywords);
+
+		return data;
+}
+
 	/**
-	 * This method provides a Keyword Bean, which can be manipulated 
-	 * by frontend functions, where it gets either initialized
-	 * or updated.
+	 * This method provides a Keyword Bean, which can be manipulated by frontend
+	 * functions, where it gets either initialized or updated.
+	 * 
 	 * @param keyword - a keyword bean, that is sended empty as a request and
-	 * received initialized as a response
+	 *            received initialized as a response
 	 * @param request - the Java representation of the REST request
 	 * @param principal - the currently logged in user
 	 * @returns the keyword that is inserted or updated
 	 */
-	@RequestMapping(value = "changePriority", method = RequestMethod.POST, headers = "Accept=application/json") 
+	@RequestMapping(value = "changePriority", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
-	public Keyword changePriority(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal)
-		throws KeywordException {
+	public Keyword changePriority(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal) throws KeywordException {
+		
 		String username = principal.getName();
-		
 		keyword.setUsername(username);
-		
 		userService.insertKeyword(keyword);
-		
+
 		return keyword;
 	}
 	
@@ -100,21 +115,20 @@ public class KeywordController {
 	 * This method launches the deletion of a user's keyword, whenever the
 	 * deletion is triggered off by a UI event, e.g. if a user clicks on the
 	 * 'delete cross'.
-	 * @param keyword - a keyword bean, created out of the keyword name and
-	 * 					the user's identity. Represents the 'to-delete' keyword.
+	 * 
+	 * @param keyword - a keyword bean, created out of the keyword name and the
+	 *            user's identity. Represents the 'to-delete' keyword.
 	 * @param request - the Java representation of the REST request
-	 * @param principal -the currently logged in user
+	 * @param principal - the currently logged in user
 	 */
-	@RequestMapping(value ="deleteKeyword", method = RequestMethod.POST, headers = "Accept=application/json")
+	@RequestMapping(value = "deleteKeyword", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
-	public Keyword deleteKeyword(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal) 
-		throws KeywordException {
+	public Keyword deleteKeyword(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal) throws KeywordException {
+		
 		String username = principal.getName();
-		
 		keyword.setUsername(username);
-		
 		userService.deleteKeyword(keyword);
-		
+
 		return keyword;
 	}
 }
