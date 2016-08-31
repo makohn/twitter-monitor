@@ -74,7 +74,7 @@ public class HomeController {
 			result.rejectValue("username", "DuplicateKey.username", "Dieser Benutzername existiert bereits.");
 			return "home";
 		}
-		return "showTweets";
+		return "home";
 	}
 
 	@RequestMapping("/instructions")
