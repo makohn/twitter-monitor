@@ -40,22 +40,27 @@ public class TweetListener implements StatusListener {
 
 	@Override
 	public void onException(Exception arg0) {
+		System.out.println("onException: " + arg0.getMessage());
 	}
 
 	@Override
 	public void onDeletionNotice(StatusDeletionNotice arg0) {
+		System.out.println("StatusDeletionNotice: " + arg0);
 	}
 
 	@Override
 	public void onScrubGeo(long arg0, long arg1) {
+		System.out.println("onScrubGeo: " + arg0 + ", " + arg1);
 	}
 
 	@Override
 	public void onStallWarning(StallWarning arg0) {
+		System.out.println("onStallWarning: " + arg0.getMessage());
 	}
 
 	@Override
 	public void onTrackLimitationNotice(int arg0) {
+		System.out.println("onTrackLimitationNotice: " + arg0);
 	}	
 
 }
