@@ -38,7 +38,7 @@ public class User {
 	@Email/*(message="Sie müssen eine gültige Email-Adresse angeben")*/
 	private String email;
 	
-	private boolean enabled = false;	
+	private boolean enabled = true;	
 	private String authority;
 	
 	public User() {}

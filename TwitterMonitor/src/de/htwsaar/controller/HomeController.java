@@ -65,7 +65,6 @@ public class HomeController {
 		}
 		
 		user.setAuthority("user");
-		user.setEnabled(true);	
 		
 		try {
 			userService.insertUser(user);
