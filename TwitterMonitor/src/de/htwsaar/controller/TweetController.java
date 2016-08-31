@@ -45,7 +45,7 @@ public class TweetController {
 	@RequestMapping("/showTweets")
 	public String showTweets(Model model, Principal principal) {
 				
-		// braucht man nicht mehr
+		// braucht man nicht mehr, das Model auch nicht mehr
 //		ArrayList<OutputTweet> tweets = (ArrayList<OutputTweet>) tweetService.getTweets(principal.getName());		
 //		model.addAttribute("tweets", tweets);
 

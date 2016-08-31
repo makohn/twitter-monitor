@@ -9,42 +9,46 @@ import org.hibernate.validator.constraints.NotBlank;
 import de.htwsaar.exception.model.UserException;
 import de.htwsaar.validator.model.UserValidator;
 
-
 /**
- * The User Class serves mainly as a data container for User Objects.
- * Each User has several attributes:
- *  - username, a distinct identifier for a user.
- *  - password, a password that authenticates a user.
- *  - email, the contact address of a user.
- *  - enabled, a switch to turn user accounts on and off.
- *  - authority, the user's role, e.g. admin
- *  
+ * The User Class serves mainly as a data container for User Objects. Each User
+ * has several attributes: - username, a distinct identifier for a user. -
+ * password, a password that authenticates a user. - email, the contact address
+ * of a user. - enabled, a switch to turn user accounts on and off. - authority,
+ * the user's role, e.g. admin
+ * 
  * @author Philipp Schaefer
  *
  */
 public class User {
-		
-	@NotBlank/*(message="Benutzername darf nicht leer sein.")*/
-	@Size(min=5, max=59)
-	@Pattern(regexp="^\\w{5,}$"/*, message="Benutzername darf nur aus Buchstaben, Zahlen und Unterstrich bestehen."*/)
+
+	@NotBlank /* (message="Benutzername darf nicht leer sein.") */
+	@Size(min = 5, max = 59)
+	@Pattern(regexp = "^\\w{5,}$"/* , message="Benutzername darf nur aus Buchstaben, Zahlen und Unterstrich bestehen." */)
 	private String username;
-	
-	@NotBlank/*(message="Das Passwort darf nicht leer sein.")*/
-	@Pattern(regexp="^\\S+"/*, message="Das Passwort darf keine Leerzeichen enthalten."*/)
-	@Size(min=8, max=15/*, message="Das Passwort muss zwischen 8 und 15 Zeichen lang sein."*/)
+
+	@NotBlank /* (message="Das Passwort darf nicht leer sein.") */
+	@Pattern(regexp = "^\\S+"/* , message="Das Passwort darf keine Leerzeichen enthalten." */)
+	@Size(min = 8, max = 15/*
+							 * ,
+							 * message="Das Passwort muss zwischen 8 und 15 Zeichen lang sein."
+							 */)
 	private String password;
-	
-	@NotBlank/*(message="Die Email-Adresse darf nicht leer sein")*/
-	@Email/*(message="Sie müssen eine gültige Email-Adresse angeben")*/
+
+	@NotBlank /* (message="Die Email-Adresse darf nicht leer sein") */
+	@Email /* (message="Sie müssen eine gültige Email-Adresse angeben") */
 	private String email;
-	
-	private boolean enabled = false;	
+
+	private boolean enabled = true;
 	private String authority;
-	
-	public User() {}
-	
+
+//	private boolean notificationsEnabled = false;
+//	private int notificationThreshold = 0;
+
+	public User() {
+	}
+
 	public User(String username, String password, String email, String authority) throws UserException {
-		
+
 		setUsername(username);
 		setAuthority(authority);
 		setEmail(email);
@@ -67,8 +71,8 @@ public class User {
 	public void setPassword(String password) throws UserException {
 		UserValidator.checkPassword(password);
 		this.password = password;
-	}	
-	
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -93,9 +97,26 @@ public class User {
 		this.authority = authority;
 	}
 
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + ", email=" + email
-				+ ", authority=" + authority + "]";
-	}	
+//	public int getNotificationThreshold() {
+//		return notificationThreshold;
+//	}
+//
+//	public void setNotificationThreshold(int notificationThreshold) {
+//		this.notificationThreshold = notificationThreshold;
+//	}
+//
+//	public boolean getNotificationsEnabled() {
+//		return notificationsEnabled;
+//	}
+//
+//	public void setNotificationsEnabled(boolean notificationsEnabled) {
+//		this.notificationsEnabled = notificationsEnabled;
+//	}
+
+//	@Override
+//	public String toString() {
+//		return "User [username=" + username + ", password=" + password + ", email=" + email + ", enabled=" + enabled
+//				+ ", authority=" + authority + ", notificationsEnabled=" + notificationsEnabled
+//				+ ", notificationThreshold=" + notificationThreshold + "]";
+//	}
 }

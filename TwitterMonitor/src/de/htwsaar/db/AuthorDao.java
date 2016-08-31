@@ -1,22 +1,16 @@
 package de.htwsaar.db;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
-import de.htwsaar.exception.model.AuthorException;
 import de.htwsaar.model.Author;
 
 /**
@@ -151,27 +145,27 @@ public class AuthorDao {
 		return paramSource;
 	}
 
-	/**
-	 * This class serves as a utility to create Author Objects out of a
-	 * ResultSet that is received from a database query.
-	 */
-	private class AuthorRowMapper implements RowMapper<Author> {
-
-		@Override
-		public Author mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-			Author author = new Author();
-
-			try {
-				author.setAuthorId(rs.getLong("authorId"));
-				author.setName(rs.getString("name"));
-				author.setName(rs.getString("screenName"));
-				author.setFollowerCount(rs.getInt("followerCount"));
-				author.setPictureUrl(rs.getString("pictureUrl"));
-			} catch (AuthorException e) {
-				e.printStackTrace();
-			}
-			return author;
-		}
-	}
+//	/**
+//	 * This class serves as a utility to create Author Objects out of a
+//	 * ResultSet that is received from a database query.
+//	 */
+//	private class AuthorRowMapper implements RowMapper<Author> {
+//
+//		@Override
+//		public Author mapRow(ResultSet rs, int rowNum) throws SQLException {
+//
+//			Author author = new Author();
+//
+//			try {
+//				author.setAuthorId(rs.getLong("authorId"));
+//				author.setName(rs.getString("name"));
+//				author.setName(rs.getString("screenName"));
+//				author.setFollowerCount(rs.getInt("followerCount"));
+//				author.setPictureUrl(rs.getString("pictureUrl"));
+//			} catch (AuthorException e) {
+//				e.printStackTrace();
+//			}
+//			return author;
+//		}
+//	}
 }

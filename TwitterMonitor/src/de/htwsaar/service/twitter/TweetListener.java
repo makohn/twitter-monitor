@@ -50,7 +50,7 @@ public class TweetListener implements StatusListener {
 
 	@Override
 	public void onScrubGeo(long arg0, long arg1) {
-		System.out.println("onScrunGeo: " + arg0 + ", " + arg1);
+		System.out.println("onScrubGeo: " + arg0 + ", " + arg1);
 	}
 
 	@Override

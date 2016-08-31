@@ -30,6 +30,14 @@ public class UserService {
 //		return userDao.getUsers();
 //	}
 	
+//	public void joinCategory(String username, String category) {
+//		userDao.joinCategory(username, category);
+//	}
+//	
+//	public void leaveCategory(String username, String category) {
+//		userDao.leaveCategory(username, category);
+//	}
+	
 	public void deleteUser(String username) {
 		userDao.deleteUser(username);
 	}
@@ -53,5 +61,20 @@ public class UserService {
 	public void switchActive(Keyword keyword) {
 		keyword.setActive(!keyword.getActive());
 		keywordDao.insertKeyword(keyword);		
+	}
+	
+//	public void setNotificationThreshold(String username, int threshold) {
+//		userDao.setNotificationThreshold(username, true, threshold)
+//	}
+	
+
+//	public void enableNotifications(String username, boolean enabled) {
+//		userDao.enableNotifications(username, enabled);
+//	}
+	
+	public void sendNotifications() {
+		
+		
+		
 	}
 }

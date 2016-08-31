@@ -112,16 +112,29 @@ public class TweetDao {
 
 		String query = "select *, get_personal_prio(tweets.tweetId, :username) prio from tweets, tweetAuthors, tweets_x_keywords, keywords "
 				+ "where tweets.authorId = tweetAuthors.authorId " + "and tweets.tweetId = tweets_x_keywords.tweetId "
-				+ "and tweets_x_keywords.keyword = keywords.keyword " + "and keywords.username = :username";
+				+ "and tweets_x_keywords.keyword = keywords.keyword "
+				+ "and active = 1 " + "and keywords.username = :username";
 		
 //		String query = "select *, get_personal_prio(tweets.tweetId, :username) prio "
 //				+ "from tweets, tweetAuthors, tweets_x_keywords, keywords "
 //				+ "where tweets.authorId = tweetAuthors.authorId and tweets.tweetId = tweets_x_keywords.tweetId "
 //				+ "and tweets_x_keywords.keyword = keywords.keyword and keywords.username = :username "
-//				+ "and positive = 1	and tweets.tweetId not in ("
+//				+ "and positive = 1	and active = 1 "
+//				+ "and tweets.tweetId not in ("
 //				+ "select tweets.tweetId from tweets, tweets_x_keywords, keywords "
 //		        + "where tweets.tweetId = tweets_x_keywords.tweetId and tweets_x_keywords.keyword = keywords.keyword "
-//		        + "and keywords.username = :username and positive = 0)";
+//		        + "and keywords.username = :username and positive = 0 and active = 1)";
+		
+//		String query = "select *, get_personal_prio(tweets.tweetId, :username) prio "
+//		+ "from tweets, tweetAuthors, tweets_x_keywords, keywords "
+//		+ "where tweets.authorId = tweetAuthors.authorId and tweets.tweetId = tweets_x_keywords.tweetId "
+//		+ "and tweets_x_keywords.keyword = keywords.keyword "
+//		+ "and (keywords.username = :username or keywords.username in "
+//		+ "(select category from users_x_categories where username = :username)) "
+//		+ "and positive = 1	and tweets.tweetId not in "
+//		+ "(select tweets.tweetId from tweets, tweets_x_keywords, keywords "
+//        + "where tweets.tweetId = tweets_x_keywords.tweetId and tweets_x_keywords.keyword = keywords.keyword "
+//        + "and keywords.username = :username and positive = 0)";
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("username", username);
