@@ -27,6 +27,7 @@ public class StreamService {
 	private static final String ACCESS_TOKEN_SECRET = "xPLvu603NO1l1GJzZtmUNNokKqsdj1obVhrVHsHNAa0l8";
 
 	private static final long ONE_MINUTE = 1 * 60 * 1000;
+	private static final long ONE_DAY = 1 * 24 * 60 * 60 * 1000;
 
 	private String[] keywordsArray;
 
@@ -89,21 +90,29 @@ public class StreamService {
 		stream.shutdown();
 	}
 
-	@Scheduled(fixedDelay = ONE_MINUTE)
+	@Scheduled(fixedDelay = ONE_DAY)
 	public void restartStream() {
+
+		stopStream();
+		startStream();
+
+	}
+
+	@Scheduled(fixedDelay = ONE_MINUTE)
+	public void restartStreamOnKeyword() {
 
 		String[] newKeywordsArray = keywordDao.getKeywords();
 
 		if (keywordsChanged(keywordsArray, newKeywordsArray)) {
 			keywordsArray = newKeywordsArray;
 			stopStream();
-			startStream();
+			startStream();		
 		}
 	}
 
 	private boolean keywordsChanged(String[] oldKeywords, String[] newKeywords) {
 
-		boolean changed = false;		
+		boolean changed = false;
 		if (oldKeywords.length != newKeywords.length) {
 			changed = true;
 		} else {

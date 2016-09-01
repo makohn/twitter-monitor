@@ -68,7 +68,7 @@ public class StatusService {
 			// Insert or Update Author and Tweet into the buffers.
 			authorBuffer.put(author.getAuthorId(), author);
 			tweetBuffer.put(tweet.getTweetId(), tweet);
-
+				
 		} catch (AuthorException e) {
 			e.printStackTrace();
 		} catch (TweetException e) {
