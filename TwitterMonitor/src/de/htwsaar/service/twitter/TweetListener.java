@@ -18,13 +18,13 @@ import twitter4j.StatusListener;
 @Component("tweetListener")
 public class TweetListener implements StatusListener {
 			
-	private TweetService tweetService;
+	private StatusService statusService;
 					
 	public TweetListener() {}
 	
 	@Autowired
-	public void setTweetService(TweetService tweetService) {
-		this.tweetService = tweetService;
+	public void setStatusService(StatusService statusService) {
+		this.statusService = statusService;
 	}
 
 
@@ -35,7 +35,7 @@ public class TweetListener implements StatusListener {
 	 */
 	@Override
 	public void onStatus(Status status) {
-		tweetService.insertStatus(status);
+		statusService.insertStatus(status);
 	}
 
 	@Override
