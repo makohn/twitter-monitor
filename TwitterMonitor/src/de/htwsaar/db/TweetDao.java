@@ -5,13 +5,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -19,7 +17,6 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import de.htwsaar.exception.model.TweetException;
-import de.htwsaar.model.Keyword;
 import de.htwsaar.model.OutputTweet;
 import de.htwsaar.model.Tweet;
 
@@ -51,7 +48,7 @@ public class TweetDao {
 	 * @return
 	 */
 	public List<OutputTweet> getTweets(String username) {
-
+		
 		String query = "select *, get_personal_prio(tweets.tweetId, :username) prio "
 				+ "from tweets, tweetAuthors, tweets_x_keywords, keywords "
 				+ "where tweets.authorId = tweetAuthors.authorId and tweets.tweetId = tweets_x_keywords.tweetId "
@@ -59,7 +56,8 @@ public class TweetDao {
 				+ "and positive = 1	and active = 1 " + "and tweets.tweetId not in ("
 				+ "select tweets.tweetId from tweets, tweets_x_keywords, keywords "
 				+ "where tweets.tweetId = tweets_x_keywords.tweetId and tweets_x_keywords.keyword = keywords.keyword "
-				+ "and keywords.username = :username and positive = 0 and active = 1)";
+				+ "and keywords.username = :username and positive = 0 and active = 1) "
+				+ "order by prio desc limit 100";
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("username", username);
