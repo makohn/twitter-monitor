@@ -217,10 +217,17 @@ function sort()
 function highlight(text,string)
 {
 		
-		var ustring = string.charAt(0).toUpperCase() + string.slice(1);
-		var highlighted = text.split(ustring).join("<span>".concat(ustring).concat("</span>"));
-		var lstring = string.charAt(0).toLowerCase() + string.slice(1);
-		highlighted = highlighted.split(lstring).join("<span>".concat(lstring).concat("</span>"));
+		var tempstring = string.charAt(0).toUpperCase() + string.slice(1);
+		var highlighted = text.split(tempstring).join("<span>".concat(tempstring).concat("</span>"));
+		
+		tempstring = string.charAt(0).toLowerCase() + string.slice(1);
+		highlighted = highlighted.split(tempstring).join("<span>".concat(tempstring).concat("</span>"));
+		
+		tempstring = tempstring.toLowerCase();
+		highlighted = highlighted.split(tempstring).join("<span>".concat(tempstring).concat("</span>"));
+		
+		tempstring = tempstring.toUpperCase();
+		highlighted = highlighted.split(tempstring).join("<span>".concat(tempstring).concat("</span>"));
 		return highlighted;
 	
 }
