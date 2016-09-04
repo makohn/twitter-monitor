@@ -94,7 +94,12 @@ function updateTweets(data) {
 		// create a tweet_text_div and passing Tweet_text from JSON
 		var tweet_text = document.createElement("div");
 		tweet_text.setAttribute("class", "tweet_text");
-		tweet_text.innerHTML = tweet.text;
+		var highlighted = tweet.text;
+		for (var k = 0; k < tweet.keywords.length; k++) {
+			highlighted = highlight(highlighted,tweet.keywords[k])
+			
+		}
+		tweet_text.innerHTML = highlighted;
 		tweet_div.appendChild(tweet_text);
 		
 		// create a tweet_text_div and passing Tweet_text from JSON
@@ -209,6 +214,16 @@ function sort()
 	updateTweets(searchfield);
 }
 
+function highlight(text,string)
+{
+		
+		var ustring = string.charAt(0).toUpperCase() + string.slice(1);
+		var highlighted = text.split(ustring).join("<span>".concat(ustring).concat("</span>"));
+		var lstring = string.charAt(0).toLowerCase() + string.slice(1);
+		highlighted = highlighted.split(lstring).join("<span>".concat(lstring).concat("</span>"));
+		return highlighted;
+	
+}
 //function checkTweets(data)
 //{
 //	if (data.count != count)

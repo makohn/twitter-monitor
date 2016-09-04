@@ -103,29 +103,3 @@ body {
 	cursor: pointer;
 }
 
-#sidebar {
-	clear:both;
-	float: left;
-	margin-left: 50px;
-	padding-left: 15px;
-	padding-top: 40px;
-	margin-top: 150px;
-	border-color: gray;
-	border-left-style: solid;
-	border-left-width: thin;
-	min-height: 400px;
-	min-width: 50%;
-	max-width: 100%;
-}
-
-@media screen and (min-width: 1340px) {
-
-	#sidebar {
-		margin-left: 0;
-		float: right;
-		min-width: 20%;
-		max-width: 20%;
-		clear:none;
-	}
-	
-}

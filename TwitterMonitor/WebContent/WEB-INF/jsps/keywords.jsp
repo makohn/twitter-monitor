@@ -57,7 +57,7 @@
 <div id="switch"></div>
 <div id="page">
 	
-		<div id="sidebar"></div>
+		
 		
 		<!--############# Load Keywords ####################-->
 		<div id="keywords_div"></div>

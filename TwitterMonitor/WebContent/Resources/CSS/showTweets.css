@@ -158,6 +158,9 @@ input[type=search], select {
 	box-sizing: border-box;
 }
 
+span {
+	color: red;
+}
 @media screen and (min-width: 1340px) {
 
 	#sidebar {
