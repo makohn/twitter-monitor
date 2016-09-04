@@ -14,9 +14,11 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
 	<link rel="stylesheet" type="text/css" href="Resources/CSS/keywords.css">
+	<link rel="stylesheet" type="text/css" href="Resources/CSS/header.css">
 	
 	<script type="text/javascript" src="Resources/JS/jquery-2.1.4.js"></script>
 	<script type="text/javascript" src="Resources/JS/keywords.js"></script>
+	<script type="text/javascript" src="Resources/JS/header.js"></script>
 	
 	<title>TwitterMonitor - Keywords</title>
 </head>
@@ -25,19 +27,34 @@
 <!-------------------------- HEADER ------------------------------------------------->
 <div id="header"></div>
 
+		<div id="header"></div>
+
 	<nav>
 		<div id="logo"></div>
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/showTweets">Tweets</a></li>
 			<li><a href="${pageContext.request.contextPath}/keywords">Keywords</a></li>
-			<li><a href="${pageContext.request.contextPath}/negKeywords">negative Keywords</a></li>
+			<li><a href="${pageContext.request.contextPath}/negKeywords">negative
+					Keywords</a></li>
 			<li><a href="${pageContext.request.contextPath}/settings">Einstellungen</a></li>
 			<li><a href="${pageContext.request.contextPath}/instructions">Anleitung</a></li>
 			<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 		</ul>
+	
+	
+		<ul2 id="ul2" onclick="showMenu()">
+			<li><a href="${pageContext.request.contextPath}/showTweets">Tweets</a></li>
+			<li><a href="${pageContext.request.contextPath}/keywords">Keywords</a></li>
+			<li><a href="${pageContext.request.contextPath}/negKeywords">negative
+					Keywords</a></li>
+			<li><a href="${pageContext.request.contextPath}/settings">Einstellungen</a></li>
+			<li><a href="${pageContext.request.contextPath}/instructions">Anleitung</a></li>
+			<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+		</ul2>
 	</nav>
 	
 <!-------------------------- BODY --------------------------------------------------->
+<div id="switch"></div>
 <div id="page">
 	
 		<div id="sidebar"></div>

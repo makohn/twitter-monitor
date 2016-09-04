@@ -1,91 +1,8 @@
-#header {
-    
-    background-color: #ffc50e;
-   
-    min-height: 50px;
-    
-}
+
 body{
             
 }
 
-#logo{
-                        float: left;
-                        background-image: url(../Picture/Hummingbird.png);
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        margin-top: 30px;
-                        margin-left: 30px;
-                        min-height: 80px;
-                        min-width: 250px;
-                    
-}
-nav                     {
-                        
-                        background-color: black;
-                        min-width: 100%;
-                        min-height: 140px;
-                        max-height: 40px;
-                        }
-
-
-
-nav ul li:hover > ul    {
-		                  display: block;
-                          
-                        }
-
-nav ul                  {
-                        background: rgba(0, 0, 0, 0); 
-                        padding: 0 0px;
-                        border-color: white;
-                        border-top-width:thin;
-                        border-top-style:outset;
-                        border-bottom-width:thin;
-                        border-bottom-style:outset;
-                        list-style: none;
-                        position: relative;
-                        display: inline-table;
-                        margin-left: 200px;
-                        margin-top: 70px;
-                        
-                        }
-
-nav ul:after            {
-		                  content: ""; clear: both; display: block; 
-            
-	                       }
-
-nav ul li               {
-                        z-index: 5;
-	                     float: left;
-                    
-    
-                        
-                        }
-
-
-nav ul li:hover a       {
-                        z-index: 4;
-			             color: #EED880;
-                        border-radius: 20px;
-		                }
-	
-nav ul li a             {
-                        z-index: 4;
-                            display: block; padding: 5px 40px;
-                            color: white; text-decoration: none;
-                        
-    
-                        }
-                                                            /* navigation end  */                                                                
-	
-
-
-a                       {
-                        color: #EED880;
-                        text-decoration: none;
-                        }
 
 #page                   {
                         
@@ -149,6 +66,7 @@ a                       {
 }
 
 #sidebar                {
+						clear:both;
                         float: right;
                        
                         padding-left: 15px;
@@ -196,3 +114,14 @@ input[type=search], select {
     box-sizing: border-box;
 }
 
+@media screen and (min-width: 1340px) {
+
+	#sidebar {
+		margin-left: 0;
+		float: right;
+		min-width: 20%;
+		max-width: 20%;
+		clear:none;
+	}
+	
+}
