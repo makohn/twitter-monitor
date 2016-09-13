@@ -181,7 +181,7 @@ function createNewKeyword() {
 	
 	var newKey = $('#newKeyword_text').val();
 	
-	if (isNewKeyWord(newKey))
+	if (isNewKeyWord(newKey) && (newKey.trim() != ""))
 		{
 	keyword_count++;
 	changePrio(newKey, 1, currentPrio.length);
