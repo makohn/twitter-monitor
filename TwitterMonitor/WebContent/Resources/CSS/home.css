@@ -125,9 +125,9 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     position: absolute;
-    min-height: 500px;
-    min-width: 400px;
-    max-width: 400px;
+    min-height: 300px;
+    min-width: 200px;
+    max-width: 250px;
     margin-top: 60px;
     margin-left: 120px;
     
@@ -139,28 +139,28 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     position: absolute;
-    min-height: 300px;
-    min-width: 300px;
+    min-height: 100px;
+    min-width: 100px;
     margin-top: 360px;
-    margin-left: 560px;
+    margin-left: 260px;
 }
 
 #text_comic{
     color: white;
     position: absolute;
     margin-top: 300px;
-    margin-left: 500px;
+    margin-left: 100px;
     font-size: 30px;
     font-family: sans-serif;
     font-weight: bold;
-    line-height: 10px;
+    line-height: 40px;
 }
 
 #createAccount{
 	display:none;
 	float:left;
 	margin-top:100px;
-	margin-left:200px;
+	margin-left:50px;
 	min-width:300px;
 	max-width:300px;
 	min-height: 400px;
@@ -245,9 +245,37 @@ footer{
     background-color: gainsboro;
 }
 
+@media screen and (min-width: 830px) {
+     #runningMail_pic{
+   
+    min-height: 300px;
+    min-width: 300px;
+    margin-top: 360px;
+    margin-left: 560px;
+    }
+    
+    #bird_pic{
+    
+    min-height: 500px;
+    min-width: 400px;
+    max-width: 400px;
+    
+    }
+    
+    #text_comic{
+    
+    margin-top: 300px;
+    margin-left: 500px;
+}
+}
 @media screen and (min-width: 700px) {
      #logo{
             display:block;
      }
- 
-}  
+}
+ @media screen and (min-width: 575px) {
+     #createAccount{
+	display:none;
+	margin-left:200px;
+}
+
