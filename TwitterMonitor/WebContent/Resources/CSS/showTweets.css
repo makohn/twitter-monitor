@@ -6,7 +6,16 @@ body {
 	font: normal 14px/14px Helvetica, Arial, sans-serif;
 }
 
-
+nav{
+	position:fixed;
+	margin-top:10px;
+	z-index: 10;
+}
+#header {
+	min-width:100%;
+	position: fixed;
+	z-index: 10;
+}
 
 #page {
 	min-height: 1000px;
