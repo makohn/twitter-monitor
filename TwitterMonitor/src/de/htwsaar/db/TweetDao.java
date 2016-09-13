@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DeadlockLoserDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -140,11 +141,16 @@ public class TweetDao {
 			paramSources[i] = paramSource;
 		}
 
-		try {
-			jdbc.batchUpdate(insert, paramSources);
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
+		boolean updateComplete = true;
+		do {			
+			try {
+				jdbc.batchUpdate(insert, paramSources);
+			} catch (DeadlockLoserDataAccessException e) {
+				updateComplete = false;
+			} catch (DataAccessException e) {
+				e.printStackTrace();
+			}
+		} while (!updateComplete);
 	}
 
 	private MapSqlParameterSource getTweetParamSource(Tweet tweet) {

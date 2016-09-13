@@ -5,6 +5,8 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DeadlockLoserDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -42,9 +44,17 @@ public class AuthorDao {
 			MapSqlParameterSource paramSource = getAuthorParameterSource(authors.get(i));
 			paramSources[i] = paramSource;
 		}
-
-		jdbc.batchUpdate(insert, paramSources);
-
+		
+		boolean updateComplete = true;
+		do {			
+			try {
+				jdbc.batchUpdate(insert, paramSources);
+			} catch (DeadlockLoserDataAccessException e) {
+				updateComplete = false;
+			} catch (DataAccessException e) {
+				e.printStackTrace();
+			}
+		} while (!updateComplete);
 	}
 
 	private MapSqlParameterSource getAuthorParameterSource(Author author) {
