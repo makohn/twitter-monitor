@@ -6,14 +6,18 @@ body {
 	font-size: 20px;
 }
 
-
-
 #page {
 	min-height: 1000px;
 	min-width: 100%;
 }
 
 #keywords_div {
+	float: left;
+	margin-left: 20px;
+	margin-top: 100px;
+}
+
+#blacklist_div {
 	float: left;
 	margin-left: 20px;
 	margin-top: 100px;
@@ -92,6 +96,34 @@ body {
 }
 
 #newKeyword_button {
+	float: left;
+	margin-left: 10px;
+	background-image: url(../Picture/addButton.png);
+	background-repeat: no-repeat;
+	background-size: auto;
+	min-width: 50px;
+	min-height: 50px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+#newBlacklistItem {
+	float: left;
+	clear: left;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+#newBlacklistItem_text {
+	float: left;
+	opacity: 1.0;
+	min-width: 330px;
+	line-height: 25px;
+	background-color: #edf8fd;
+	cursor: text;
+}
+
+#newBlacklistItem_button {
 	float: left;
 	margin-left: 10px;
 	background-image: url(../Picture/addButton.png);

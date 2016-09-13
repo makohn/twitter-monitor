@@ -51,11 +51,6 @@ public class KeywordController {
 		return "keywords";
 	}
 
-	@RequestMapping("/negKeywords")
-	public String loadNegKeywords() {
-		return "negKeywords";
-	}
-
 	/**
 	 * This method loads all the user-related keywords from the database sends
 	 * them to the frontend as a JSON Object

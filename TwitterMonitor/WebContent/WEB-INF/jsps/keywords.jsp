@@ -33,8 +33,6 @@
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/showTweets">Tweets</a></li>
 			<li><a href="${pageContext.request.contextPath}/keywords">Keywords</a></li>
-			<li><a href="${pageContext.request.contextPath}/negKeywords">negative
-					Keywords</a></li>
 			<li><a href="${pageContext.request.contextPath}/settings">Einstellungen</a></li>
 			<li><a href="${pageContext.request.contextPath}/instructions">Anleitung</a></li>
 			<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
@@ -44,7 +42,6 @@
 		<ul2 id="ul2" onclick="showMenu()">
 			<li><a href="${pageContext.request.contextPath}/showTweets">Tweets</a></li>
 			<li><a href="${pageContext.request.contextPath}/keywords">Keywords</a></li>
-			<li><a href="${pageContext.request.contextPath}/negKeywords">Blacklist</a></li>
 			<li><a href="${pageContext.request.contextPath}/settings">Einstellungen</a></li>
 			<li><a href="${pageContext.request.contextPath}/instructions">Anleitung</a></li>
 			<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
@@ -55,7 +52,7 @@
 <div id="switch"></div>
 <div id="page">
 	
-		
+	<!--############# POSITIVE KEYWORDS ####################-->
 		
 		<!--############# Load Keywords ####################-->
 		<div id="keywords_div"></div>
@@ -69,6 +66,25 @@
 		<div id="newKeyword">
 			<input type="text"  id="newKeyword_text">
 			<div id="newKeyword_button" onclick="createNewKeyword()" ></div>
+		</div>
+		
+		
+		<br><br><br><br><br>
+		
+	<!--############# BLACKLIST ####################-->
+	
+		<!--############# Load Keywords ####################-->
+		<div id="blacklist_div"></div>
+			<script type="text/javascript">
+				function loadBlacklist() {
+					$.getJSON("<c:url value="/getNegKeywords"/>", updateBlacklist);
+				} loadBlacklist();
+			</script>
+			
+		<!--############# Display Keyword Textfield ########-->	
+		<div id="newBlacklistItem">
+			<input type="text"  id="newBlacklistItem_text">
+			<div id="newBlacklistItem_button" onclick="createNewBlacklistItem()" ></div>
 		</div>
 		
 </div>

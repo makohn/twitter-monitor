@@ -131,8 +131,10 @@ function deleteKeyword(keyword){
     $(keyword_id).remove();
     
     keywordsfield = jQuery.grep(keywordsfield, function(value) {
-      return value != keywordsfield[keywordcount];
+//      return value != keywordsfield[keywordcount];
+        return value != keywordsfield[keyword-1];	//!!!
     });
+    keyword_count--;		//!!!
      
 }
 
@@ -181,12 +183,12 @@ function createNewKeyword() {
 	
 	var newKey = $('#newKeyword_text').val();
 	
-	if (isNewKeyWord(newKey) && (newKey.trim() != ""))
+	if (isNewKeyWord(newKey) && (newKey.trim() != "") && (keyword_count <=10))
 		{
-	keyword_count++;
-	changePrio(newKey, 1, currentPrio.length);
-	// Keyword-Textfeld ausblenden
-	$('#newKeyword').css('display','none');
+			keyword_count++;
+			changePrio(newKey, 1, currentPrio.length);
+			// Keyword-Textfeld ausblenden
+			$('#newKeyword').css('display','none');
 		}
 	
 }
@@ -205,8 +207,133 @@ function isNewKeyWord(newKey)
 	return true;
 }
 
+//###############
 
+var blacklist_count = 0;
+var blacklistfield = [];
         
-        
-        
+function updateBlacklist(data)
+{
+
+	// update blacklistfield
+	blacklistfield = data.keywords;
+	
+	// empty blacklist
+	$("#blacklist_div").html("");
+    
+    //for each keyword append panel
+	for(var k=0;k<data.keywords.length;k++) {
+		var keyword = data.keywords[k];	
+		  
+        blacklist_count++;
+		
+        createBlacklistDiv(keyword,blacklist_count);
+	}
+}
+
+function createBlacklistDiv(keyword,count)
+{
+	var keyword_div = document.createElement("div");
+    keyword_div.setAttribute("id","bl_"+count);
+	keyword_div.setAttribute("class","keyword_div");
+	$('#blacklist_div').append(keyword_div);
+	
+    //create a keyword label
+    var keyword_label = document.createElement("div");
+	 keyword_label.setAttribute("class","keyword_label");
+     keyword_label.innerHTML=keyword.keyword;
+	 keyword_div.appendChild(keyword_label);
+ 	        
+    //create a delete_cross
+    var delete_cross = document.createElement("div");
+    delete_cross.setAttribute("class","delete_cross");
+    delete_cross.setAttribute("style", deleteCross);
+    delete_cross.setAttribute("onClick","deleteBlacklistItem(".concat(blacklist_count).concat("\)"));	// sollte hier und oben nicht einfach nur count stehen statt keyword_count   
+	keyword_div.appendChild(delete_cross);
+}
+
+function deleteBlacklistItem(blacklistItem){
+	
+	var keyword_name = blacklistfield[blacklistItem-1].keyword;	
+	var keywordToDelete = {
+		       "keyword" : keyword_name
+		    }
+		    $.ajax({
+		       type: "POST",
+		       contentType : 'application/json; charset=utf-8',
+		       dataType : 'json',
+		       url: "/TwitterMonitor/deleteKeyword",
+		       data: JSON.stringify(keywordToDelete), 
+		       success :function (result) {}
+		   });
+	
+    var blacklist_id = "#bl_".concat(blacklistItem);
+    
+    $(blacklist_id).remove();
+    
+    blacklistfield = jQuery.grep(blacklistfield, function(value) {
+      return value != blacklistfield[blacklistItem-1];
+    });
+    blacklist_count--;
+     
+}
+
+function createNewBlacklistItem() {
+	
+	var newKey = $('#newBlacklistItem_text').val();
+	
+	if (isNewBlacklistItem(newKey))
+		{
+			
+			updateBlacklistItem(newKey);
+			// BlacklistItem-Textfeld ausblenden
+			$('#newBlacklistItem').css('display','none');
+		}	
+}
+
+function isNewBlacklistItem(newKey)
+{
+	for(var i=0;i<blacklistfield.length;i++) 
+	{		
+		if (newKey == blacklistfield[i].keyword)
+			{				
+			    return false;
+			}
+	}
+	return true;
+}
+
+function updateBlacklistItem(keywordName) {
+	
+	var prio = 1;
+	
+    var keyword = {
+       "keyword" : keywordName,
+       "priority" : prio,
+       "positive" : false
+    }
+    $.ajax({
+       type: "POST",
+       contentType : 'application/json; charset=utf-8',
+       dataType : 'json',
+       url: "/TwitterMonitor/changePriority",
+       data: JSON.stringify(keyword), 
+       success : function (result) {
+    	  if (isNewBlacklistItem(result.keyword))
+    		  {
+    		  	setLastBlacklistItem(result);
+    		  }
+       }
+   });
+   
+ }
+
+function setLastBlacklistItem(result)
+{
+	keyword_count++;
+	createBlacklistDiv(result,keyword_count);
+	blacklistfield.push(result);
+	$('#newBlacklistItem').css('display','block');
+	$('#newBlacklistItem_text').val("");
+}
 		
