@@ -1,8 +1,22 @@
 var deleteCross ="background-image: url(Resources/Picture/Delete_Cross.png);";
-var keyword_count = 0;
 var currentPrio = [];
 var keywordsfield = [];
 var stars = [ ];
+
+function updateKeywords(data)
+{
+	deleteKeywordList();
+	createKeywordList(data);
+}
+
+function deleteKeywordList()
+{
+	for(var i=0;i<keywordfield.length;i++) 
+	{		
+		 var keyword_id = "#key_".concat(i);
+		 $(keyword_id).remove();
+	}
+}
 
 /*
  * @description 	This method renders the keywords received from
@@ -14,31 +28,29 @@ var stars = [ ];
  * 
  * @author			Stefan Schloesser, Marek Kohn
  */
-
-function updateKeywords(data)
-	{
+function createKeywordList(data)
+{
 		keywordsfield = data.keywords;
 		
 		$("#Keywords_div").html("");
         
         //for each keyword
-		for(var k=0;k<data.keywords.length;k++) {
-			var keyword = data.keywords[k];	
+		for(var id=0; id<data.keywords.length; id++) {
+		
+			var keyword = data.keywords[id];	
+			 			
+			currentPrio[id] = keyword.priority;
+			stars[id] = [ ];
 			
-			//do 			
-			currentPrio[k] = keyword.priority;
-			stars[k] = [ ];    
-	        keyword_count++;
-			
-	        createPrioDiv(keyword,keyword_count,k);
+	        createPrioDiv(keyword, id);
 		}
 }
 
-function createPrioDiv(keyword,count,k)
+function createPrioDiv(keyword, id)
 {
-	stars[k] = [ ]; 
+//	stars[id] = [ ]; 
 	var keyword_div = document.createElement("div");
-    keyword_div.setAttribute("id",count);
+    keyword_div.setAttribute("id", "key_"+id);
 	keyword_div.setAttribute("class","keyword_div");
 	$('#keywords_div').append(keyword_div);
 	
@@ -61,38 +73,38 @@ function createPrioDiv(keyword,count,k)
 		  if(i < keyword.priority) {
 			  prio_star.classList.add('prio_star_filled');
 		  }
-		  prio_star.setAttribute("onClick","changePrio(".concat("\"").concat(keyword.keyword).concat("\"").concat(",").concat(i+1).concat(",").concat(k).concat("\)"));
-		  stars[k].push(prio_star);
+		  prio_star.setAttribute("onClick","changePrio(".concat("\"").concat(keyword.keyword).concat("\"").concat(",").concat(i+1).concat(",").concat(id).concat("\)"));
+		  stars[id].push(prio_star);
 		  prio_div.appendChild(prio_star);   
-		  attachStarEvents(prio_star, k);
+		  attachStarEvents(prio_star, id);
 	 }
 	 //add listeners to each priority star
-	 function attachStarEvents(star, k) {
-	      starMouseOver(star, k);
-	      starMouseOut(star, k);
+	 function attachStarEvents(star, id) {
+	      starMouseOver(star, id);
+	      starMouseOut(star, id);
 	 }
    
 	 //add a mouse over listener
-	 function starMouseOver(star, k) {
+	 function starMouseOver(star, id) {
 	      star.addEventListener('mouseover', function(e) {
-	        for (i = 0; i < stars[k].length; i++) {
+	        for (i = 0; i < stars[id].length; i++) {
 	          if (i <= star.getAttribute('data-index')) {
-	            stars[k][i].classList.add('prio_star_filled');
+	            stars[id][i].classList.add('prio_star_filled');
 	          } else {
-	            stars[k][i].classList.remove('prio_star_filled');
+	            stars[id][i].classList.remove('prio_star_filled');
 	          }
 	        }
 	      });
 	  }
 	 
 	 //add mouse out listener
-	 function starMouseOut(star, k) {
+	 function starMouseOut(star, id) {
 	      star.addEventListener('mouseout', function(e) {
-			for (i = 0; i < stars[k].length; i++) {
-				if (i < currentPrio[k]) {
-					stars[k][i].classList.add('prio_star_filled');
+			for (i = 0; i < stars[id].length; i++) {
+				if (i < currentPrio[id]) {
+					stars[id][i].classList.add('prio_star_filled');
 				} else {
-					stars[k][i].classList.remove('prio_star_filled');
+					stars[id][i].classList.remove('prio_star_filled');
 				}
 			}
 	      });
@@ -102,7 +114,7 @@ function createPrioDiv(keyword,count,k)
     var delete_cross = document.createElement("div");
     delete_cross.setAttribute("class","delete_cross");
     delete_cross.setAttribute("style", deleteCross);
-    delete_cross.setAttribute("onClick","deleteKeyword(".concat(keyword_count).concat("\)"));   
+    delete_cross.setAttribute("onClick","deleteKeyword(".concat(id).concat("\)"));   
 	keyword_div.appendChild(delete_cross);
 }
 
@@ -111,31 +123,28 @@ function createPrioDiv(keyword,count,k)
  * @description		This function removes a keyword from the view
  * @param			keyword The keyword that should be removed.
  */
-function deleteKeyword(keyword){
-	var keyword_name = keywordsfield[keyword-1].keyword;
-	var keywordToDelete = {
-		       "keyword" : keyword_name
-		    }
-		    $.ajax({
+function deleteKeyword(keyword_index){
+	
+	var keyword_name = keywordsfield[keyword_index].keyword;
+	
+	// remove from DB
+	var keywordToDelete = { "keyword" : keyword_name }
+		    
+		$.ajax({
 		       type: "POST",
 		       contentType : 'application/json; charset=utf-8',
 		       dataType : 'json',
 		       url: "/TwitterMonitor/deleteKeyword",
 		       data: JSON.stringify(keywordToDelete), 
-		       success :function (result) {
-		    	  
-		       }
-		   });
-    var keyword_id = "#".concat(keyword);
-    
-    $(keyword_id).remove();
-    
-    keywordsfield = jQuery.grep(keywordsfield, function(value) {
-//      return value != keywordsfield[keywordcount];
-        return value != keywordsfield[keyword-1];	//!!!
+		       success :function (result) {}
+			});
+	
+    // remove from array
+    newkeywordsfield = jQuery.grep(keywordsfield, function(value) {
+        return value != keywordsfield[keyword_index];
     });
-    keyword_count--;		//!!!
      
+    updateKeywords(newkeywordsfield);
 }
 
 /*
@@ -147,8 +156,9 @@ function deleteKeyword(keyword){
  * @param			k an internal keyword id, for rendering the 
  * 					priority stars immediately
  */
-function changePrio(keywordName,prio,k) {
-	currentPrio[k] = prio;
+function changePrio(keywordName,prio,id) {
+	
+	currentPrio[id] = prio;
 	
     var keyword = {
        "keyword" : keywordName,
@@ -161,46 +171,48 @@ function changePrio(keywordName,prio,k) {
        url: "/TwitterMonitor/changePriority",
        data: JSON.stringify(keyword), 
        success :function (result) {
-    	  if (isNewKeyWord(result.keyword))
+    	  if (isNewKeyword(result.keyword))
     		  {
-    	  setLastKeyword(result);
-    		  }
+    		  	$.getJSON("/TwitterMonitor/getKeywords/", updateKeywords);
+    		  }    	       	   
        }
-   });
-   
- }
-
-function setLastKeyword(result)
-{
-	createPrioDiv(result,keyword_count,currentPrio.length-1);
-	keywordsfield.push(result);
-	$('#newKeyword').css('display','block');
-	$('#newKeyword_text').val("");
+   });  
 }
+
+
+
+//function setLastKeyword(result)
+//{
+//	createPrioDiv(result,keyword_count,currentPrio.length-1);
+//	keywordsfield.push(result);
+//	$('#newKeyword').css('display','block');
+//	$('#newKeyword_text').val("");
+//}
 
 
 function createNewKeyword() {
 	
 	var newKey = $('#newKeyword_text').val();
 	
-	if (isNewKeyWord(newKey) && (newKey.trim() != "") && (keyword_count <=10))
+	if (isNewKeyword(newKey) && (newKey.trim() != "") && (keywordfield.length < 10))
 		{
-			keyword_count++;
 			changePrio(newKey, 1, currentPrio.length);
 			// Keyword-Textfeld ausblenden
 			$('#newKeyword').css('display','none');
 		}
 	
+	$('#newKeyword').css('display','block');
+	$('#newKeyword_text').val("");
+	
 }
 
-function isNewKeyWord(newKey)
+function isNewKeyword(newKey)
 {
 	for(var i=0;i<keywordsfield.length;i++) 
 	{
 		
 		if (newKey == keywordsfield[i].keyword)
-			{
-				
+			{				
 			    return false;
 			}
 	}
@@ -316,7 +328,7 @@ function updateBlacklistItem(keywordName) {
        url: "/TwitterMonitor/changePriority",
        data: JSON.stringify(keyword), 
        success : function (result) {
-    	  if (isNewBlacklistItem(result.keyword))
+    	  if (isNewKeyword(result.keyword))
     		  {
     		  	setLastBlacklistItem(result);
     		  }
