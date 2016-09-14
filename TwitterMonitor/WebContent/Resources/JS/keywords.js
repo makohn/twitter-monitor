@@ -257,7 +257,7 @@ function createBlacklistDiv(keyword,count)
     var delete_cross = document.createElement("div");
     delete_cross.setAttribute("class","delete_cross");
     delete_cross.setAttribute("style", deleteCross);
-    delete_cross.setAttribute("onClick","deleteBlacklistItem(".concat(blacklist_count).concat("\)"));	// sollte hier und oben nicht einfach nur count stehen statt keyword_count   
+    delete_cross.setAttribute("onClick","deleteBlacklistItem(".concat(count).concat("\)"));	// sollte hier und oben nicht einfach nur count stehen statt keyword_count   
 	keyword_div.appendChild(delete_cross);
 }
 
@@ -293,7 +293,7 @@ function createNewBlacklistItem() {
 	
 	if (isNewKeyword(newKey))
 		{
-			keyword_count++;
+			blacklist_count++;
 			updateBlacklistItem(newKey);
 			// BlacklistItem-Textfeld ausblenden
 			$('#newBlacklistItem').css('display','none');
@@ -327,7 +327,7 @@ function updateBlacklistItem(keywordName) {
 
 function setLastBlacklistItem(result)
 {
-	createBlacklistDiv(result,keyword_count);
+	createBlacklistDiv(result,blacklist_count);
 	blacklistfield.push(result);
 	$('#newBlacklistItem').css('display','block');
 	$('#newBlacklistItem_text').val("");
