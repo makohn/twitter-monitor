@@ -254,7 +254,7 @@ function createBlacklistDiv(keyword,count)
 
 function deleteBlacklistItem(blacklistItem){
 	
-	var keyword_name = blacklistfield[blacklistItem-1].keyword;	
+	var keyword_name = blacklistfield[blacklistItem-1].keyword;
 	var keywordToDelete = {
 		       "keyword" : keyword_name
 		    }
@@ -284,7 +284,7 @@ function createNewBlacklistItem() {
 	
 	if (isNewBlacklistItem(newKey))
 		{
-			
+			keyword_count++;
 			updateBlacklistItem(newKey);
 			// BlacklistItem-Textfeld ausblenden
 			$('#newBlacklistItem').css('display','none');
@@ -330,7 +330,6 @@ function updateBlacklistItem(keywordName) {
 
 function setLastBlacklistItem(result)
 {
-	keyword_count++;
 	createBlacklistDiv(result,keyword_count);
 	blacklistfield.push(result);
 	$('#newBlacklistItem').css('display','block');
