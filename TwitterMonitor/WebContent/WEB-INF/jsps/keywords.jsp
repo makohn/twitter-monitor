@@ -50,10 +50,13 @@
 	
 <!-------------------------- BODY --------------------------------------------------->
 <div id="switch"></div>
-<div id="page">
-	
+	<div id="page">
+	<div id="title_wrapper">
+		<div id="title_keyword">Keywords</div>
+		<div id="title_blacklist">Blacklist</div>
+	</div>
 	<!--############# POSITIVE KEYWORDS ####################-->
-		
+		<div id="keyword_wrapper">
 		<!--############# Load Keywords ####################-->
 		<div id="keywords_div"></div>
 			<script type="text/javascript">
@@ -63,16 +66,17 @@
 			</script>
 			
 		<!--############# Display Keyword Textfield ########-->	
+		
 		<div id="newKeyword">
 			<input type="text"  id="newKeyword_text">
 			<div id="newKeyword_button" onclick="createNewKeyword()" ></div>
 		</div>
+		</div>
 		
 		
-		<br><br><br><br><br>
 		
 	<!--############# BLACKLIST ####################-->
-	
+	<div id="blacklist_wrapper">
 		<!--############# Load Keywords ####################-->
 		<div id="blacklist_div"></div>
 			<script type="text/javascript">
@@ -86,7 +90,7 @@
 			<input type="text"  id="newBlacklistItem_text">
 			<div id="newBlacklistItem_button" onclick="createNewBlacklistItem()" ></div>
 		</div>
-		
+		</div>
 </div>
 <!----------------------------------------------------------------------------------->		
 </body>

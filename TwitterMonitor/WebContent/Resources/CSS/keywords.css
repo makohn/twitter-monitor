@@ -10,17 +10,43 @@ body {
 	min-height: 1000px;
 	min-width: 100%;
 }
+#title_wrapper{
+	font-size: 25px;
+	
+	float:left;
+	margin-top: 50px;
+	clear:both;
+	min-width:100%;
+	
+}
+#title_keyword{
+	float:left;
+	margin-left:70px;
+}
+#title_blacklist{
+	float:right;
+	margin-right:70px;
+}
+#keyword_wrapper{
+	float: left;
+	margin-left:20%;
+}
+#blacklist_wrapper{
+	float: right;
+	margin-right:20%;
+}
+
 
 #keywords_div {
 	float: left;
 	margin-left: 20px;
-	margin-top: 100px;
+	margin-top: 50px;
 }
 
 #blacklist_div {
-	float: left;
+	float: right;
 	margin-left: 20px;
-	margin-top: 100px;
+	margin-top: 50px;
 }
 
 .keyword_div {
@@ -108,8 +134,8 @@ body {
 }
 
 #newBlacklistItem {
-	float: left;
-	clear: left;
+	float: right;
+	clear: both;
 	margin-left: 20px;
 	margin-top: 20px;
 }
