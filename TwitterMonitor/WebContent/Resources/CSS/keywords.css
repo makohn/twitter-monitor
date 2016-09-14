@@ -12,7 +12,6 @@ body {
 }
 #title_wrapper{
 	font-size: 25px;
-	
 	float:left;
 	margin-top: 50px;
 	clear:both;
@@ -25,15 +24,15 @@ body {
 }
 #title_blacklist{
 	float:right;
-	margin-right:70px;
+	margin-right:370px;
 }
 #keyword_wrapper{
 	float: left;
-	margin-left:20%;
+	margin-left:50px;
 }
 #blacklist_wrapper{
 	float: right;
-	margin-right:20%;
+	margin-right:50px;
 }
 
 
