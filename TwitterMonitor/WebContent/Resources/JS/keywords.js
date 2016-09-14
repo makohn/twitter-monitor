@@ -204,6 +204,15 @@ function isNewKeyWord(newKey)
 			    return false;
 			}
 	}
+	
+	for(var i=0;i<blacklistfield.length;i++) 
+	{		
+		if (newKey == blacklistfield[i].keyword)
+			{				
+			    return false;
+			}
+	}
+	
 	return true;
 }
 
@@ -282,25 +291,13 @@ function createNewBlacklistItem() {
 	
 	var newKey = $('#newBlacklistItem_text').val();
 	
-	if (isNewBlacklistItem(newKey))
+	if (isNewKeyword(newKey))
 		{
 			keyword_count++;
 			updateBlacklistItem(newKey);
 			// BlacklistItem-Textfeld ausblenden
 			$('#newBlacklistItem').css('display','none');
 		}	
-}
-
-function isNewBlacklistItem(newKey)
-{
-	for(var i=0;i<blacklistfield.length;i++) 
-	{		
-		if (newKey == blacklistfield[i].keyword)
-			{				
-			    return false;
-			}
-	}
-	return true;
 }
 
 function updateBlacklistItem(keywordName) {
