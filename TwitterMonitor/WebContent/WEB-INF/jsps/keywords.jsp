@@ -61,7 +61,7 @@
 		<div id="keywords_div"></div>
 			<script type="text/javascript">
 				function onLoad() {
-					$.getJSON("<c:url value="/getKeywords"/>", updateKeywords);
+					$.getJSON("<c:url value="/getKeywords"/>", loadKeywords);
 				} onLoad();
 			</script>
 			

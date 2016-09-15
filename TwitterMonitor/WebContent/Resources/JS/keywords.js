@@ -5,10 +5,16 @@ var stars = [];
 
 var blacklist_field = [];
 
-function updateKeywords(data)
+function loadKeywords(data) {
+	keywords = data.keywords;
+	updateKeywords(keywords);
+}
+
+function updateKeywords(keywords)
 {
+//	alert("update");
 	deleteKeywordList();
-	createKeywordList(data);
+	createKeywordList(keywords);
 }
 
 function deleteKeywordList()
@@ -30,14 +36,14 @@ function deleteKeywordList()
  * 
  * @author			Stefan Schloesser, Marek Kohn
  */
-function createKeywordList(data)
+function createKeywordList(keywords)
 {
-		keywords_field = data.keywords;
+		keywords_field = keywords;
 		
 		$("#keywords_div").html("");
         
         //for each keyword
-		for(var id=0; id<data.keywords.length; id++) {			
+		for(var id=0; id<keywords.length; id++) {			
 			$('#keywords_div').append(createPrioDiv(id));
 		}
 }
@@ -120,7 +126,8 @@ function attachStarEvents(star, id) {
 
 function starClick(star, id) {
 	star.addEventListener('click', function() {
-		changePrio(star.getAttribute('data-index')+1, id);
+		var prio = parseInt(star.getAttribute('data-index'))+1;
+		changePrio(prio, id);
 	})
 }
 
@@ -179,13 +186,12 @@ function deleteKeyword(key_id){
 		success :function (result) {}
 	});
 	
-	$.getJSON("/TwitterMonitor/getKeywords/", updateKeywords);
-//    // remove from array [sollte eigentlich nur im Erfolgsfall gemacht werden !!!]
-//    var new_keywords_field = jQuery.grep(keywords_field, function(value) {
-//        return value != keywordsfield[key_id];
-//    });
-//     
-//    updateKeywords(new_keywords_field);
+//	$.getJSON("/TwitterMonitor/getKeywords/", loadKeywords);
+    // remove from array [sollte eigentlich nur im Erfolgsfall gemacht werden !!!]
+    keywords_field = jQuery.grep(keywords_field, function(value) {
+        return value != keywords_field[key_id];
+    });     
+    updateKeywords(keywords_field);
 }
 
 /*
@@ -198,6 +204,8 @@ function deleteKeyword(key_id){
  * 					priority stars immediately
  */
 function changePrio(prio, key_id) {
+	
+//	document.write("prio: " + prio + " key:" + key_id);
 	
 	keywordName = keywords_field[key_id].keyword;
 	
@@ -215,17 +223,17 @@ function changePrio(prio, key_id) {
    }); 
     
 
-    for (i = 0; i < 5; i++) {
-		if (i < keywords_field[key_id].priority) {
-			stars[key_id][i].classList.add('prio_star_filled');
-		} else {
-			stars[key_id][i].classList.remove('prio_star_filled');
-		}
-	}
+    setTimeout($.getJSON("/TwitterMonitor/getKeywords/", loadKeywords), 2000);
     
-//   if (isNewKeyword(keywordName)) {  
-//	   $.getJSON("/TwitterMonitor/getKeywords/", updateKeywords);
-//   }
+    
+//    for (i = 0; i < 5; i++) {
+//		if (i < keywords_field[key_id].priority) {
+//			stars[key_id][i].classList.add('prio_star_filled');
+//		} else {
+//			stars[key_id][i].classList.remove('prio_star_filled');
+//		}
+//	}
+    
 }
 
 //function setLastKeyword(result)
@@ -241,13 +249,13 @@ function createNewKeyword() {
 	
 	var newKey = $('#newKeyword_text').val();
 	
-	if (isNewKeyword(newKey) && (newKey.trim() != "") /*&& (keywords_field.length < 10) && (newKey.length() < 20)*/)
+	if (isNewKeyword(newKey) && (newKey.trim() != "") && (keywords_field.length < 10) && (newKey.length < 20))
 		{
 			// Keyword-Textfeld ausblenden
 			$('#newKeyword').css('display','none');
 		
 			var keyword = {
-					"keyword" : keywordName,
+					"keyword" : newKey,
 					"priority" : 1
 			}
 			
@@ -260,8 +268,10 @@ function createNewKeyword() {
 			       success :function (result) {}
 			   }); 
 					
-			$.getJSON("/TwitterMonitor/getKeywords/", updateKeywords);
+//			setTimeout($.getJSON("/TwitterMonitor/getKeywords/", updateKeywords), 2000);
 			
+			keywords_field.push(keyword);
+			updateKeywords(keywords_field);
 		}
 	
 	$('#newKeyword_text').val("");
@@ -359,7 +369,7 @@ function createBLDeleteCross(bl_id) {
 
 function deleteBlacklistItem(bl_id){
 	
-	var keyword_name = blacklistfield[bl_id].keyword;
+	var keyword_name = blacklist_field[bl_id].keyword;
 	var keywordToDelete = {
 		       "keyword" : keyword_name
 		    }
@@ -410,17 +420,17 @@ function updateBlacklistItem(keywordName) {
        url: "/TwitterMonitor/changePriority",
        data: JSON.stringify(keyword), 
        success : function (result) {
-    		  		setLastBlacklistItem(result);
+//    		  		setLastBlacklistItem(result);
        			}
    });
    
  }
 
-function setLastBlacklistItem(result)
-{
-	createBlacklistDiv(result,blacklist_count);
-	blacklistfield.push(result);
-	$('#newBlacklistItem').css('display','block');
-	$('#newBlacklistItem_text').val("");
-}
+//function setLastBlacklistItem(result)
+//{
+//	createBlacklistDiv(result,blacklist_count);
+//	blacklistfield.push(result);
+//	$('#newBlacklistItem').css('display','block');
+//	$('#newBlacklistItem_text').val("");
+//}
 		
