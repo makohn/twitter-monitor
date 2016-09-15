@@ -56,7 +56,7 @@
 		<div id="title_blacklist">Blacklist</div>
 	</div>
 	<!--############# POSITIVE KEYWORDS ####################-->
-		<div id="keyword_wrapper">
+	<div id="keyword_wrapper">
 		<!--############# Load Keywords ####################-->
 		<div id="keywords_div"></div>
 			<script type="text/javascript">
@@ -71,7 +71,7 @@
 			<input type="text"  id="newKeyword_text">
 			<div id="newKeyword_button" onclick="createNewKeyword()" ></div>
 		</div>
-		</div>
+	</div>
 		
 		
 		
