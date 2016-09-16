@@ -10,7 +10,7 @@ var searchfield;
  * @param data
  */
 function updateTweets(data) {
-
+	
 	if (first) {
 		tweetsfield = $.extend(true, [], data);
 		searchfield = $.extend(true, [], data);
@@ -150,9 +150,7 @@ function updateTweets(data) {
  * @returns
  */
 function getPicsUrls(pic_id) {
-
 	return tweetsfield.tweets[pic_id].urls;
-
 }
 
 function getPicUrl(pic_id) {
@@ -165,7 +163,7 @@ function getPicUrl(pic_id) {
 }
 
 function search() {
-		
+	
 	searchfield = null;
 	searchfield = $.extend(true, [], tweetsfield);
 	var keyString = $('#search').val();
@@ -231,8 +229,31 @@ function highlight(text,string)
 		return highlighted;
 	
 }
+
 //function checkTweets(data)
 //{
 //	if (data.count != count)
 //		document.getElementById("newTweetsButton").style.visibility = "visible"
+//}
+
+//function deepSearch() {
+//	
+//	var searchString = $('#search').val();
+//	
+//	if ( searchString.length > 3) {
+//		
+//		var keyword = { "keyword" : searchString }
+//	
+//		$.ajax({
+//			type: "POST",
+//			contentType : 'application/json; charset=utf-8',
+//	        dataType : 'json',
+//	        url: "/TwitterMonitor/deepSearch",
+//	        data: JSON.stringify(keyword), 
+//	        success :function (result) {
+////	    			   	alert(result);
+//	        			updateTweets(result);	    	   
+//	        		}
+//		});
+//	}
 //}

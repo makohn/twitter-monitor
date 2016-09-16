@@ -12,7 +12,6 @@ function loadKeywords(data) {
 
 function updateKeywords(keywords)
 {
-//	alert("update");
 	deleteKeywordList();
 	createKeywordList(keywords);
 }
@@ -65,8 +64,8 @@ function createPrioDiv(key_id)
 	keyword_div.appendChild(createKeywordLabel(key_id));
 	
 	// append a keyword priority div
-	keyword_div.appendChild(createPriorityDiv(key_id));  
-    
+	keyword_div.appendChild(createPriorityDiv(key_id));
+	
     // append a delete cross
 	keyword_div.appendChild(createDeleteCross(key_id));
  	        
@@ -220,29 +219,9 @@ function changePrio(prio, key_id) {
        success :function (result) {}
    }); 
     
-
-//    setTimeout($.getJSON("/TwitterMonitor/getKeywords/", loadKeywords), 2000);
-    
-    
-//    for (i = 0; i < 5; i++) {
-//		if (i < keywords_field[key_id].priority) {
-//			stars[key_id][i].classList.add('prio_star_filled');
-//		} else {
-//			stars[key_id][i].classList.remove('prio_star_filled');
-//		}
-//	}
-    
     updateKeywords(keywords_field);
     
 }
-
-//function setLastKeyword(result)
-//{
-//	createPrioDiv(result,keyword_count,currentPrio.length-1);
-//	keywordsfield.push(result);
-//	$('#newKeyword').css('display','block');
-//	$('#newKeyword_text').val("");
-//}
 
 
 function createNewKeyword() {
@@ -256,7 +235,8 @@ function createNewKeyword() {
 		
 			var keyword = {
 					"keyword" : newKey,
-					"priority" : 1
+					"priority" : 1,
+					"active" : true
 			}
 			
 			$.ajax({
@@ -267,8 +247,6 @@ function createNewKeyword() {
 			       data: JSON.stringify(keyword), 
 			       success :function (result) {}
 			   }); 
-					
-//			setTimeout($.getJSON("/TwitterMonitor/getKeywords/", updateKeywords), 2000);
 			
 			keywords_field.push(keyword);
 			updateKeywords(keywords_field);

@@ -125,4 +125,15 @@ public class KeywordController {
 
 		return keyword;
 	}
+	
+	@RequestMapping(value = "switchActive", method = RequestMethod.POST, headers = "Accept=application/json")
+	@ResponseBody
+	public Keyword switchActive(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal) throws KeywordException {
+		
+		String username = principal.getName();
+		keyword.setUsername(username);
+		userService.switchActive(keyword);
+		
+		return keyword;
+	}
 }

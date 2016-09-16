@@ -50,7 +50,12 @@
 	
 	<br>
 	<br>
-	
+	Passwort ändern
+	<br>
+	Email ändern
+	<br>
+	Benachrichtigungen aktivieren / deaktivieren
+	<br>	
 	<a href="${pageContext.request.contextPath}/deleteUser">Account loeschen</a>
 		
 </div>

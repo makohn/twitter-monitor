@@ -1,5 +1,6 @@
 package de.htwsaar.service.twitter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,19 @@ public class TweetService {
 	}
 
 	public List<OutputTweet> getTweets(String username) {		
-		return tweetDao.getTweets(username);
+		return tweetDao.getTweets(username, 100);
+	}
+
+	public List<OutputTweet> getTweetsWith(String keyword, String username) {
+		List<OutputTweet> tweets = tweetDao.getTweets(username, 0);
+		
+		List<OutputTweet> filteredTweets = new ArrayList<OutputTweet>();
+		for (OutputTweet tweet : tweets) {
+			if ( tweet.getText().contains(keyword) )
+				filteredTweets.add(tweet);
+		}
+		
+		return filteredTweets;
 	}
 	
 //	public int getTweetCount(String username) {

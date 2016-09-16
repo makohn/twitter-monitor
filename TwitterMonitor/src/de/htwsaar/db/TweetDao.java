@@ -48,7 +48,7 @@ public class TweetDao {
 	 * @param username
 	 * @return
 	 */
-	public List<OutputTweet> getTweets(String username) {
+	public List<OutputTweet> getTweets(String username, int limit) {
 		
 		String query = "select *, get_personal_prio(tweets.tweetId, :username) prio "
 				+ "from tweets, tweetAuthors, tweets_x_keywords, keywords "
@@ -58,10 +58,14 @@ public class TweetDao {
 				+ "select tweets.tweetId from tweets, tweets_x_keywords, keywords "
 				+ "where tweets.tweetId = tweets_x_keywords.tweetId and tweets_x_keywords.keyword = keywords.keyword "
 				+ "and keywords.username = :username and positive = 0 and active = 1) "
-				+ "order by prio desc limit 100";
+				+ "order by prio desc";
+		
+		if (limit > 0)
+			query += " limit :limit";
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("username", username);
+		paramSource.addValue("limit", limit);
 
 		// This query will get all Tweets for the user including one keyword per
 		// row.

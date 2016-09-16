@@ -76,7 +76,7 @@ public class StreamService {
 
 			// weitere Konfigurationen ...
 
-			stream.filter(filter);
+//			stream.filter(filter);
 		}
 	}
 
