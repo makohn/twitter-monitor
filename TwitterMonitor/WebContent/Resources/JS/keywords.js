@@ -156,6 +156,11 @@ function starMouseOut(star, id) {
      });
 }
 
+function pauseKeyword(key_id) {
+	keywords_field[key_id].active == false;
+	
+}
+
 function createDeleteCross(key_id) {
 	
     var delete_cross = document.createElement("div");

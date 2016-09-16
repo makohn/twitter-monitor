@@ -107,7 +107,7 @@ function updateTweets(data) {
 		tweet_prio.setAttribute("class", "tweet_prio");
 		tweet_prio.innerHTML = tweet.priority;
 		tweet_div.appendChild(tweet_prio);
-		
+				
 		count++;
 	}
 	

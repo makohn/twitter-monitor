@@ -55,7 +55,13 @@
 			<div id="username">Hallo ${pageContext.request.userPrincipal.name}</div>
 			<div id="welcome_text">Tweets werden geladen ...</div>
 
-			<button id="refreshButton" onclick="onLoad()">Tweets aktualisieren</button>
+			<button id="refreshButton" onclick="refresh()">Tweets aktualisieren</button>
+			<script>
+				function refresh() {
+					first=true;
+					onLoad();
+				}
+			</script>
 
 			<div>
 				<label for="search">Search</label> <input id="search"
@@ -65,11 +71,11 @@
 			<script>
 				function deep() {					
 					var searchString = $('#search').val();					
-					if ( searchString.length > 3) {						
+// 					if ( searchString.length > 3) {						
 						var requestString = "<c:url value="/deepSearch"/>" + "?search=" + searchString;
 						first=true;
 						$.getJSON(requestString, updateTweets);
-					}
+// 					}
 				}
 			</script>
 
