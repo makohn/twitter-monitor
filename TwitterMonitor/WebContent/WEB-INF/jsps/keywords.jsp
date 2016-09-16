@@ -81,7 +81,7 @@
 		<div id="blacklist_div"></div>
 			<script type="text/javascript">
 				function loadBlacklist() {
-					$.getJSON("<c:url value="/getNegKeywords"/>", updateBlacklist);
+					$.getJSON("<c:url value="/getNegKeywords"/>", loadBlacklist);
 				} loadBlacklist();
 			</script>
 			

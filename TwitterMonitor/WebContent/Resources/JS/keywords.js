@@ -185,8 +185,7 @@ function deleteKeyword(key_id){
 		data: JSON.stringify(keywordToDelete), 
 		success :function (result) {}
 	});
-	
-//	$.getJSON("/TwitterMonitor/getKeywords/", loadKeywords);
+
     // remove from array [sollte eigentlich nur im Erfolgsfall gemacht werden !!!]
     keywords_field = jQuery.grep(keywords_field, function(value) {
         return value != keywords_field[key_id];
@@ -205,8 +204,7 @@ function deleteKeyword(key_id){
  */
 function changePrio(prio, key_id) {
 	
-//	document.write("prio: " + prio + " key:" + key_id);
-	
+	keywords_field[key_id].priority = prio;
 	keywordName = keywords_field[key_id].keyword;
 	
     var keyword = {
@@ -223,7 +221,7 @@ function changePrio(prio, key_id) {
    }); 
     
 
-    setTimeout($.getJSON("/TwitterMonitor/getKeywords/", loadKeywords), 2000);
+//    setTimeout($.getJSON("/TwitterMonitor/getKeywords/", loadKeywords), 2000);
     
     
 //    for (i = 0; i < 5; i++) {
@@ -233,6 +231,8 @@ function changePrio(prio, key_id) {
 //			stars[key_id][i].classList.remove('prio_star_filled');
 //		}
 //	}
+    
+    updateKeywords(keywords_field);
     
 }
 
@@ -297,10 +297,15 @@ function isNewKeyword(newKey)
 
 //###############
 
-function updateBlacklist(data)
+function loadBlacklist(data) {
+	blacklist = data.keywords;
+	updateBlacklist(blacklist);
+}
+
+function updateBlacklist(blacklist)
 {
 	deleteBlacklist();
-	createBlacklist(data);
+	createBlacklist(blacklist);
 }
 
 function deleteBlacklist()
@@ -312,16 +317,16 @@ function deleteBlacklist()
 	}
 }
         
-function createBlacklist(data)
+function createBlacklist(blacklist)
 {
 	// update blacklistfield
-	blacklist_field = data.keywords;
+	blacklist_field = blacklist;
 	
 	// empty blacklist
 	$("#blacklist_div").html("");
     
     //for each keyword append panel
-	for(var id=0;id<data.keywords.length;id++) {
+	for(var id=0;id<blacklist.length;id++) {
         $('#blacklist_div').append(createBlacklistDiv(id));
     }
 }
@@ -339,13 +344,6 @@ function createBlacklistDiv(bl_id)
 	keyword_div.appendChild(createBLDeleteCross(bl_id));
 	
 	return keyword_div;
- 	        
-    //create a delete_cross
-    var delete_cross = document.createElement("div");
-    delete_cross.setAttribute("class","delete_cross");
-    delete_cross.setAttribute("style", deleteCross);
-    delete_cross.setAttribute("onClick","deleteBlacklistItem(".concat(count).concat("\)"));	// sollte hier und oben nicht einfach nur count stehen statt keyword_count   
-	keyword_div.appendChild(delete_cross);
 }
 
 function createBlacklistLabel(bl_id) {
@@ -382,14 +380,13 @@ function deleteBlacklistItem(bl_id){
 		       success :function (result) {}
 		   });
 	
-	$.getJSON("/TwitterMonitor/getNegKeywords/", updateBlacklist);
+//	$.getJSON("/TwitterMonitor/getNegKeywords/", updateBlacklist);
 	
-//    var blacklist_id = "#bl_".concat(bl_id);    
-//    $(blacklist_id).remove();
-//    
-//    blacklistfield = jQuery.grep(blacklistfield, function(value) {
-//      return value != blacklistfield[bl_id];
-//    });
+	// remove from array [sollte eigentlich nur im Erfolgsfall gemacht werden !!!]
+	blacklist_field = jQuery.grep(blacklist_field, function(value) {
+        return value != blacklist_field[bl_id];
+    });     
+    updateBlacklist(blacklist_field);
      
 }
 
@@ -404,6 +401,9 @@ function createNewBlacklistItem() {
 		
 			updateBlacklistItem(newKey);
 		}	
+	
+	$('#newBlacklistItem').css('display','block');
+	$('#newBlacklistItem_text').val("");
 }
 
 function updateBlacklistItem(keywordName) {
@@ -419,11 +419,12 @@ function updateBlacklistItem(keywordName) {
        dataType : 'json',
        url: "/TwitterMonitor/changePriority",
        data: JSON.stringify(keyword), 
-       success : function (result) {
-//    		  		setLastBlacklistItem(result);
-       			}
-   });
+       success : function (result) {}
+    });
    
+    blacklist_field.push(keyword);
+    updateBlacklist(blacklist_field);
+    
  }
 
 //function setLastBlacklistItem(result)
