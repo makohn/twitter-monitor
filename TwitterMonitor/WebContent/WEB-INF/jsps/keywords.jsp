@@ -80,9 +80,9 @@
 		<!--############# Load Keywords ####################-->
 		<div id="blacklist_div"></div>
 			<script type="text/javascript">
-				function loadBlacklist() {
+				function onLoadBlacklist() {
 					$.getJSON("<c:url value="/getNegKeywords"/>", loadBlacklist);
-				} loadBlacklist();
+				} onLoadBlacklist();
 			</script>
 			
 		<!--############# Display Keyword Textfield ########-->	

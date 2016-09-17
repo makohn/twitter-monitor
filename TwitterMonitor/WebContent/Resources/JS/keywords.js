@@ -1,4 +1,6 @@
 var deleteCross ="background-image: url(Resources/Picture/Delete_Cross.png);";
+var pauseButton ="background-image: url(Resources/Picture/pauseButton.png);";
+var playButton ="background-image: url(Resources/Picture/playButton.png);";
 
 var keywords_field = [];
 var stars = [];
@@ -65,6 +67,9 @@ function createPrioDiv(key_id)
 	
 	// append a keyword priority div
 	keyword_div.appendChild(createPriorityDiv(key_id));
+	
+	// append a pause/play-Button
+	keyword_div.appendChild(createPlayPauseButton(key_id));
 	
     // append a delete cross
 	keyword_div.appendChild(createDeleteCross(key_id));
@@ -156,9 +161,42 @@ function starMouseOut(star, id) {
      });
 }
 
-function pauseKeyword(key_id) {
-	keywords_field[key_id].active == false;
+function createPlayPauseButton(key_id) {
 	
+	var playPauseButton = document.createElement("div");
+	playPauseButton.setAttribute("class","delete_cross");
+	
+	if (keywords_field[key_id].active)
+		playPauseButton.setAttribute("style", pauseButton);
+	else
+		playPauseButton.setAttribute("style", playButton);
+	
+	playPauseButton.setAttribute("onClick","switchActive("+key_id+"\)");   
+    
+    return playPauseButton;
+}
+
+function switchActive(key_id) {
+		
+	// remove from DB
+	var keywordToSwitch = 	{ 
+								"keyword" : keywords_field[key_id].keyword,
+								"active" : keywords_field[key_id].active,
+								"priority" : keywords_field[key_id].priority,
+								"positive" : keywords_field[key_id].positive
+							}		    
+	$.ajax({
+		type: "POST",
+		contentType : 'application/json; charset=utf-8',
+		dataType : 'json',
+		url: "/TwitterMonitor/switchActive",
+		data: JSON.stringify(keywordToSwitch), 
+		success :function (result) {}
+	});
+
+    // switch im array [sollte eigentlich nur im Erfolgsfall gemacht werden !!!]
+    keywords_field[key_id].active = !keywords_field[key_id].active;
+    updateKeywords(keywords_field);
 }
 
 function createDeleteCross(key_id) {
@@ -208,11 +246,10 @@ function deleteKeyword(key_id){
  */
 function changePrio(prio, key_id) {
 	
-	keywords_field[key_id].priority = prio;
-	keywordName = keywords_field[key_id].keyword;
+	
 	
     var keyword = {
-       "keyword" : keywordName,
+       "keyword" : keywords_field[key_id].keyword,
        "priority" : prio
     }
     $.ajax({
@@ -224,6 +261,7 @@ function changePrio(prio, key_id) {
        success :function (result) {}
    }); 
     
+    keywords_field[key_id].priority = prio;
     updateKeywords(keywords_field);
     
 }
@@ -241,7 +279,8 @@ function createNewKeyword() {
 			var keyword = {
 					"keyword" : newKey,
 					"priority" : 1,
-					"active" : true
+					"active" : true,
+					"positive" : true
 			}
 			
 			$.ajax({
@@ -281,6 +320,7 @@ function isNewKeyword(newKey)
 //###############
 
 function loadBlacklist(data) {
+	
 	blacklist = data.keywords;
 	updateBlacklist(blacklist);
 }
@@ -323,6 +363,9 @@ function createBlacklistDiv(bl_id)
 	// append a keyword label
 	keyword_div.appendChild(createBlacklistLabel(bl_id));
     
+	// append a play/pause-Button
+	keyword_div.appendChild(createBlacklistPlayPauseButton(bl_id));
+	
     // append a delete cross
 	keyword_div.appendChild(createBLDeleteCross(bl_id));
 	
@@ -336,6 +379,44 @@ function createBlacklistLabel(bl_id) {
 	blacklist_label.innerHTML = blacklist_field[bl_id].keyword;
 	
     return blacklist_label;
+}
+
+function createBlacklistPlayPauseButton(bl_id) {
+	
+	var playPauseButton = document.createElement("div");
+	playPauseButton.setAttribute("class","delete_cross");
+	
+	if (blacklist_field[bl_id].active)
+		playPauseButton.setAttribute("style", pauseButton);
+	else
+		playPauseButton.setAttribute("style", playButton);
+	
+	playPauseButton.setAttribute("onClick","switchBlacklistActive("+bl_id+"\)");   
+    
+    return playPauseButton;
+}
+
+function switchBlacklistActive(bl_id) {
+	
+	// remove from DB
+	var keywordToSwitch = 	{ 
+								"keyword" : blacklist_field[bl_id].keyword,
+								"active" : blacklist_field[bl_id].active,
+								"priority" : blacklist_field[bl_id].priority,
+								"positive" : blacklist_field[bl_id].positive
+							}		    
+	$.ajax({
+		type: "POST",
+		contentType : 'application/json; charset=utf-8',
+		dataType : 'json',
+		url: "/TwitterMonitor/switchActive",
+		data: JSON.stringify(keywordToSwitch), 
+		success :function (result) {}
+	});
+
+    // switch im array [sollte eigentlich nur im Erfolgsfall gemacht werden !!!]
+	blacklist_field[bl_id].active = !blacklist_field[bl_id].active;
+    updateBlacklist(blacklist_field);
 }
 
 function createBLDeleteCross(bl_id) {
@@ -394,7 +475,8 @@ function updateBlacklistItem(keywordName) {
     var keyword = {
        "keyword" : keywordName,
        "priority" : 1,
-       "positive" : false
+       "positive" : false,
+       "active" : true
     }
     $.ajax({
        type: "POST",

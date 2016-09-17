@@ -131,7 +131,7 @@ public class KeywordController {
 	public Keyword switchActive(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal) throws KeywordException {
 		
 		String username = principal.getName();
-		keyword.setUsername(username);
+		keyword.setUsername(username);		
 		userService.switchActive(keyword);
 		
 		return keyword;

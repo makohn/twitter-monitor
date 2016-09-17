@@ -30,8 +30,7 @@ public class KeywordDao {
 
 	private NamedParameterJdbcTemplate jdbc;
 
-	public KeywordDao() {
-	}
+	public KeywordDao() {}
 
 	@Autowired
 	public KeywordDao(DataSource jdbc) {
