@@ -14,7 +14,7 @@ public class OutputTweet extends Tweet {
 	private float priority;
 	
 	// Keywords associated with the Tweet
-	private List<String> keywords;
+//	private List<String> keywords;
 	
 	// TweetAuthor-Info
 	private String name;
@@ -23,8 +23,7 @@ public class OutputTweet extends Tweet {
 	private String pictureUrl;
 		
 	public OutputTweet() {
-		
-		keywords = new ArrayList<String>();
+//		keywords = new ArrayList<String>();
 	}
 	
 	public float getPriority() {
@@ -33,16 +32,17 @@ public class OutputTweet extends Tweet {
 	public void setPriority(float priority) {
 		this.priority = priority;
 	}
-	public List<String> getKeywords() {
-		return keywords;
-	}
-	public void setKeywords(List<String> keywords) {
-		this.keywords = keywords;
-	}
 	
-	public void addKeyword(String keyword) {
-		keywords.add(keyword);
-	}
+//	public List<String> getKeywords() {
+//		return keywords;
+//	}
+//	public void setKeywords(List<String> keywords) {
+//		this.keywords = keywords;
+//	}
+	
+//	public void addKeyword(String keyword) {
+//		keywords.add(keyword);
+//	}
 	
 	public String getName() {
 		return name;
@@ -73,10 +73,17 @@ public class OutputTweet extends Tweet {
 	public String getCreatedAtFormatted() {
 		return CREATED_AT_FORMAT.format(createdAt);
 	}
-	
+
 	@Override
 	public String toString() {
-		return "OutputTweet [priority=" + priority + ", keywords=" + keywords + ", name=" + name + ", screenName="
-				+ screenName + ", followerCount=" + followerCount + ", pictureUrl=" + pictureUrl + "]";
+		return "OutputTweet [priority=" + priority + ", name=" + name + ", screenName=" + screenName
+				+ ", followerCount=" + followerCount + ", pictureUrl=" + pictureUrl + "]";
 	}
+	
+//	@Override
+//	public String toString() {
+//		return "OutputTweet [priority=" + priority + ", keywords=" + keywords + ", name=" + name + ", screenName="
+//				+ screenName + ", followerCount=" + followerCount + ", pictureUrl=" + pictureUrl + "]";
+//	}
+
 }

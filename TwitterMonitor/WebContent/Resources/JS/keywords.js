@@ -191,12 +191,14 @@ function switchActive(key_id) {
 		dataType : 'json',
 		url: "/TwitterMonitor/switchActive",
 		data: JSON.stringify(keywordToSwitch), 
-		success :function (result) {}
+		success :function (result) {
+			// switch im array
+			keywords_field[key_id].active = !keywords_field[key_id].active;
+			updateKeywords(keywords_field);
+		}
 	});
 
-    // switch im array [sollte eigentlich nur im Erfolgsfall gemacht werden !!!]
-    keywords_field[key_id].active = !keywords_field[key_id].active;
-    updateKeywords(keywords_field);
+    
 }
 
 function createDeleteCross(key_id) {
@@ -225,14 +227,14 @@ function deleteKeyword(key_id){
 		dataType : 'json',
 		url: "/TwitterMonitor/deleteKeyword",
 		data: JSON.stringify(keywordToDelete), 
-		success :function (result) {}
+		success :function (result) {
+			// remove from array
+		    keywords_field = jQuery.grep(keywords_field, function(value) {
+		        return value != keywords_field[key_id];
+		    });     
+		    updateKeywords(keywords_field);
+		}
 	});
-
-    // remove from array [sollte eigentlich nur im Erfolgsfall gemacht werden !!!]
-    keywords_field = jQuery.grep(keywords_field, function(value) {
-        return value != keywords_field[key_id];
-    });     
-    updateKeywords(keywords_field);
 }
 
 /*
@@ -258,12 +260,11 @@ function changePrio(prio, key_id) {
        dataType : 'json',
        url: "/TwitterMonitor/changePriority",
        data: JSON.stringify(keyword), 
-       success :function (result) {}
-   }); 
-    
-    keywords_field[key_id].priority = prio;
-    updateKeywords(keywords_field);
-    
+       success :function (result) {
+    	   keywords_field[key_id].priority = prio;
+    	    updateKeywords(keywords_field);
+       }
+   });    
 }
 
 
@@ -289,11 +290,11 @@ function createNewKeyword() {
 			       dataType : 'json',
 			       url: "/TwitterMonitor/changePriority",
 			       data: JSON.stringify(keyword), 
-			       success :function (result) {}
+			       success :function (result) {
+			    	   keywords_field.push(keyword);
+						updateKeywords(keywords_field);
+			       }
 			   }); 
-			
-			keywords_field.push(keyword);
-			updateKeywords(keywords_field);
 		}
 	
 	$('#newKeyword_text').val("");
@@ -411,12 +412,12 @@ function switchBlacklistActive(bl_id) {
 		dataType : 'json',
 		url: "/TwitterMonitor/switchActive",
 		data: JSON.stringify(keywordToSwitch), 
-		success :function (result) {}
+		success :function (result) {
+			// switch im array
+			blacklist_field[bl_id].active = !blacklist_field[bl_id].active;
+		    updateBlacklist(blacklist_field);
+		}
 	});
-
-    // switch im array [sollte eigentlich nur im Erfolgsfall gemacht werden !!!]
-	blacklist_field[bl_id].active = !blacklist_field[bl_id].active;
-    updateBlacklist(blacklist_field);
 }
 
 function createBLDeleteCross(bl_id) {
@@ -441,17 +442,14 @@ function deleteBlacklistItem(bl_id){
 		       dataType : 'json',
 		       url: "/TwitterMonitor/deleteKeyword",
 		       data: JSON.stringify(keywordToDelete), 
-		       success :function (result) {}
-		   });
-	
-//	$.getJSON("/TwitterMonitor/getNegKeywords/", updateBlacklist);
-	
-	// remove from array [sollte eigentlich nur im Erfolgsfall gemacht werden !!!]
-	blacklist_field = jQuery.grep(blacklist_field, function(value) {
-        return value != blacklist_field[bl_id];
-    });     
-    updateBlacklist(blacklist_field);
-     
+		       success :function (result) {
+		    	// remove from array
+		    		blacklist_field = jQuery.grep(blacklist_field, function(value) {
+		    	        return value != blacklist_field[bl_id];
+		    	    });     
+		    	    updateBlacklist(blacklist_field);
+		       }
+		   });     
 }
 
 function createNewBlacklistItem() {
@@ -484,11 +482,13 @@ function updateBlacklistItem(keywordName) {
        dataType : 'json',
        url: "/TwitterMonitor/changePriority",
        data: JSON.stringify(keyword), 
-       success : function (result) {}
+       success : function (result) {
+    	   blacklist_field.push(keyword);
+    	   updateBlacklist(blacklist_field);
+       }
     });
    
-    blacklist_field.push(keyword);
-    updateBlacklist(blacklist_field);
+    
     
  }
 

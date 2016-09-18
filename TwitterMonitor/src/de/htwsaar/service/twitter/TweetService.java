@@ -40,20 +40,31 @@ public class TweetService {
 //		authorBuffer = new HashMap<Long, Author>();
 	}
 
-	public List<OutputTweet> getTweets(String username) {		
-		return tweetDao.getTweets(username, 100);
+	public List<OutputTweet> getTweets(String username, String language) {		
+		return tweetDao.getTweets(username, 100, language);
 	}
 
-	public List<OutputTweet> getTweetsWith(String keyword, String username) {
-		List<OutputTweet> tweets = tweetDao.getTweets(username, 0);
+	public List<OutputTweet> getTweetsWith(String keyword, String username, String language) {
+		List<OutputTweet> tweets = tweetDao.getTweets(username, 0, language);
+		
+		if (keyword.isEmpty())
+			return tweets;
+		
+		String[] keywords = keyword.split(" ");
 		
 		List<OutputTweet> filteredTweets = new ArrayList<OutputTweet>();
-		for (OutputTweet tweet : tweets) {
-			if ( tweet.getText().contains(keyword) )
-				filteredTweets.add(tweet);
+		for (String k : keywords) {
+			for (OutputTweet tweet : tweets) {
+				if ( tweet.getText().contains(k) )
+					filteredTweets.add(tweet);
+			}
+			tweets = filteredTweets;
+			filteredTweets = new ArrayList<OutputTweet>();
+			if (tweets.isEmpty())
+				return tweets;
 		}
 		
-		return filteredTweets;
+		return tweets;
 	}
 	
 //	public int getTweetCount(String username) {

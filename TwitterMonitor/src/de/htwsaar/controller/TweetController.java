@@ -58,9 +58,9 @@ public class TweetController {
 	 */
 	@RequestMapping(value = "getTweets", method = RequestMethod.GET, headers = "Accept=application/json")
 	@ResponseBody
-	public Map<String, Object> getTweets(Principal principal) {
+	public Map<String, Object> getTweets(@RequestParam("lang") String language, Principal principal) {
 		
-		List<OutputTweet> tweets = tweetService.getTweets(principal.getName());
+		List<OutputTweet> tweets = tweetService.getTweets(principal.getName(), language);
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("tweets", tweets);
 		
@@ -80,9 +80,9 @@ public class TweetController {
 	
 	@RequestMapping(value = "deepSearch", method = RequestMethod.GET, headers = "Accept=application/json")
 	@ResponseBody
-	public Map<String, Object> deepSearch(@RequestParam("search") String search, HttpServletRequest request, Principal principal) throws KeywordException {
+	public Map<String, Object> deepSearch(@RequestParam("search") String search, @RequestParam("lang") String language, HttpServletRequest request, Principal principal) throws KeywordException {
 		
-		List<OutputTweet> tweets = tweetService.getTweetsWith(search, principal.getName());
+		List<OutputTweet> tweets = tweetService.getTweetsWith(search, principal.getName(), language);
 		
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("tweets", tweets);

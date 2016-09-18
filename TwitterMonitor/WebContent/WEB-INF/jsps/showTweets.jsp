@@ -64,18 +64,20 @@
 			</script>
 
 			<div>
-				<label for="search">Search</label> <input id="search"
-					onkeyup="search()" type="search">
+				<label for="search">Search</label>
+				<input id="search" onkeyup="search()" type="search">
 				<button id="deepSearchButton" onclick="deep()">Deep Search</button>
+<!-- 				<button id="search_button" style="background-image: url(Resources/Picture/search.png);" onclick="deep()" /> -->
 			</div>
 			<script>
 				function deep() {					
 					var searchString = $('#search').val();					
-// 					if ( searchString.length > 3) {						
-						var requestString = "<c:url value="/deepSearch"/>" + "?search=" + searchString;
+					if ( searchString.length > 3) {						
+// 						var requestString = "<c:url value="/deepSearch"/>" + "?search=" + searchString;
+						var requestString = "<c:url value="/deepSearch"/>" + "?search=" + searchString + "&lang=" + language;
 						first=true;
 						$.getJSON(requestString, updateTweets);
-// 					}
+					}
 				}
 			</script>
 
@@ -86,6 +88,19 @@
 					<option>Zeit</option>
 				</select>
 			</div>
+			
+			<div>
+				<label for="language">Language</label> <select id="languageOption" onChange="changeLanguage()">
+					<option>-Alle-</option>
+					<option>Englisch</option>
+					<option>Deutsch</option>
+				</select>
+			</div>
+
+			<div>
+				<button onClick="addSelectionAsKeyword()" >Keyword</button>
+				<button onClick="addSelectionToBlacklist()" >Blacklist</button>				
+			</div>
 
 		</div>
 
@@ -94,7 +109,16 @@
 
 		<script type="text/javascript">
 			function onLoad() {
-				$.getJSON("<c:url value="/getTweets"/>", updateTweets);
+				
+				$('#search').val("");
+				
+				$.getJSON("<c:url value="/getKeywords"/>", setKeywords);
+				$.getJSON("<c:url value="/getNegKeywords"/>", setBlacklist);
+				
+				var requestString = "<c:url value="/getTweets"/>" + "?lang=" + language;
+				$.getJSON(requestString, updateTweets);
+// 				$.getJSON("<c:url value="/getTweets"/>", updateTweets);
+				
 			}
 			onLoad();
 		</script>

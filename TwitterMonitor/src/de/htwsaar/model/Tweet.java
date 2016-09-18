@@ -16,6 +16,7 @@ public class Tweet {
 	private   int favoriteCount;
 	private   int retweetCount;
 	private   String image;
+	private	  String language;
 	protected Date createdAt; 
 	
 	public Tweet() {}
@@ -37,7 +38,8 @@ public class Tweet {
 		setPlace(status.getPlace());
 		setFavoriteCount(status.getFavoriteCount());
 		setRetweetCount(status.getRetweetCount());
-		setImage(status.getMediaEntities() );
+		setImage(status.getMediaEntities());
+		setLanguage(status.getLang());
 	}
 
 	public long getTweetId() {
@@ -135,6 +137,14 @@ public class Tweet {
 			setImage(mediaEntities[0].getMediaURL());
 	}
 	
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+	
 	@Override
 	public boolean equals(Object object) {
 		if ( object instanceof Tweet ) {
@@ -147,9 +157,8 @@ public class Tweet {
 
 	@Override
 	public String toString() {
-		return "Tweet [tweetId=" + tweetId + ", authorId=" + authorId + ", text=" + text + ", createdAt=" + createdAt
-				+ ", place=" + place + ", favoriteCount=" + favoriteCount + ", retweetCount=" + retweetCount
-				+ ", image=" + image + "]";
+		return "Tweet [tweetId=" + tweetId + ", authorId=" + authorId + ", text=" + text + ", place=" + place
+				+ ", favoriteCount=" + favoriteCount + ", retweetCount=" + retweetCount + ", image=" + image
+				+ ", language=" + language + ", createdAt=" + createdAt + "]";
 	}
-
 }

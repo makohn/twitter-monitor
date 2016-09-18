@@ -118,6 +118,20 @@ nav{
 	background-color: #dcdcdc;
 }
 
+/* #search_button { */
+/* 	float: left; */
+/* 	margin-left: 50px; */
+/* 	min-width: 30px; */
+/* 	min-height: 30px; */
+/* 	padding-left: 30px; */
+/* 	padding-top: 40px; */
+/* 	width: 100px; */
+/*   	height: 50px; */
+/* 	background-repeat: no-repeat; */
+/* 	background-size: contain; */
+	
+/* } */
+
 #sidebar {
 	clear:both;
 	float: left;

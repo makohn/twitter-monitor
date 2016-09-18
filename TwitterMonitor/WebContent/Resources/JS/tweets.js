@@ -3,6 +3,10 @@ var first = true;
 var tweetsfield;
 var searchfield;
 
+var language = "all";
+var keywords_field = [];
+var blacklist_field = [];
+
 /**
  * By passing an array of tweet objects this method creates a tweet-container for all tweets.
  * In addition, this method saves the array that is passed the first time during runtime 
@@ -95,9 +99,8 @@ function updateTweets(data) {
 		var tweet_text = document.createElement("div");
 		tweet_text.setAttribute("class", "tweet_text");
 		var highlighted = tweet.text;
-		for (var k = 0; k < tweet.keywords.length; k++) {
-			highlighted = highlight(highlighted,tweet.keywords[k])
-			
+		for (var k = 0; k < keywords_field.length; k++) {
+			highlighted = highlight(highlighted,keywords_field[k]);			
 		}
 		tweet_text.innerHTML = highlighted;
 		tweet_div.appendChild(tweet_text);
@@ -257,3 +260,104 @@ function highlight(text,string)
 //		});
 //	}
 //}
+
+function changeLanguage() {
+	
+	if ($( "#languageOption option:selected" ).text() == "-Alle-")
+		language = "all";
+	else if ($( "#languageOption option:selected" ).text() == "Deutsch")
+		language = "de";
+	else if ($( "#languageOption option:selected" ).text() == "Englisch")
+		language = "en";
+	
+	// das evtl nicht, dann müsste man selbst aktualisieren
+	var requestString = "/TwitterMonitor/getTweets" + "?lang=" + language;
+	first=true;
+	$.getJSON(requestString, updateTweets);
+	
+}
+
+function addSelectionAsKeyword() {
+	var newKey = window.getSelection().toString();
+	
+	if (isNewKeyword(newKey) && (newKey.trim() != "") && (keywords_field.length < 10) && (newKey.length < 20))
+	{	
+		var keyword = {
+				"keyword" : newKey,
+				"priority" : 1,
+				"active" : true,
+				"positive" : true
+		}
+		
+		$.ajax({
+		       type: "POST",
+		       contentType : 'application/json; charset=utf-8',
+		       dataType : 'json',
+		       url: "/TwitterMonitor/changePriority",
+		       data: JSON.stringify(keyword), 
+		       success :function (result) {
+		    		keywords_field.push(newKey);
+//		    	    var requestString = "/TwitterMonitor/getTweets" + "?lang=" + language;
+		    	   	var requestString = "/TwitterMonitor/getTweets";
+		    		first=true;
+		    		$.getJSON(requestString, updateTweets);
+		       }
+		   }); 
+	}
+}
+
+function setKeywords(data) {
+	for (i=0; i<data.keywords.length; i++) {
+		keywords_field.push(data.keywords[i].keyword);
+	}
+}
+
+function addSelectionToBlacklist() {
+	var newKey = window.getSelection().toString();
+	
+	if (isNewKeyword(newKey) && (newKey.trim() != "") && (keywords_field.length < 10) && (newKey.length < 20))
+	{	
+		var keyword = {
+				"keyword" : newKey,
+				"priority" : 1,
+				"active" : true,
+				"positive" : false
+		}
+		
+		$.ajax({
+		       type: "POST",
+		       contentType : 'application/json; charset=utf-8',
+		       dataType : 'json',
+		       url: "/TwitterMonitor/changePriority",
+		       data: JSON.stringify(keyword), 
+		       success :function (result) {
+		    		blacklist_field.push(newKey);
+//		    	    var requestString = "/TwitterMonitor/getTweets" + "?lang=" + language;
+		    	   	var requestString = "/TwitterMonitor/getTweets";
+		    		first=true;
+		    		$.getJSON(requestString, updateTweets);
+		       }
+		   }); 
+	}
+}
+
+function setBlacklist(data) {
+	for (i=0; i<data.keywords.length; i++) {
+		blacklist_field.push(data.keywords[i].keyword);
+	}
+}
+
+function isNewKeyword(newKey)
+{	
+	for(var i=0;i<keywords_field.length;i++)	{		
+		if (newKey == keywords_field[i].keyword) {				
+			    return false;
+		}
+	}	
+	for(var i=0;i<blacklist_field.length;i++) {		
+		if (newKey == blacklist_field[i].keyword) {				
+			    return false;
+			}
+	}	
+	return true;
+}

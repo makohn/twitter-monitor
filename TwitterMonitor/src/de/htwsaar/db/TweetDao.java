@@ -48,17 +48,21 @@ public class TweetDao {
 	 * @param username
 	 * @return
 	 */
-	public List<OutputTweet> getTweets(String username, int limit) {
+	public List<OutputTweet> getTweets(String username, int limit, String language) {
 		
-		String query = "select *, get_personal_prio(tweets.tweetId, :username) prio "
+		String query = "select distinct tweets.tweetId, tweetAuthors.authorId, tweets.text, tweets.createdAt, tweets.place, tweets.image, tweets.language, tweets.favoriteCount, tweets.retweetCount, tweetAuthors.screenName, tweetAuthors.name, tweetAuthors.pictureUrl, tweetAuthors.followerCount, get_personal_prio(tweets.tweetId, :username) prio "
 				+ "from tweets, tweetAuthors, tweets_x_keywords, keywords "
 				+ "where tweets.authorId = tweetAuthors.authorId and tweets.tweetId = tweets_x_keywords.tweetId "
 				+ "and tweets_x_keywords.keyword = keywords.keyword and keywords.username = :username "
 				+ "and positive = 1	and active = 1 " + "and tweets.tweetId not in ("
 				+ "select tweets.tweetId from tweets, tweets_x_keywords, keywords "
 				+ "where tweets.tweetId = tweets_x_keywords.tweetId and tweets_x_keywords.keyword = keywords.keyword "
-				+ "and keywords.username = :username and positive = 0 and active = 1) "
-				+ "order by prio desc";
+				+ "and keywords.username = :username and positive = 0 and active = 1) ";
+		
+		if ( (language != null) && (!language.isEmpty()) && (!language.equals("all")) )
+			query += "and language = :language ";
+		
+		query += "order by prio desc";
 		
 		if (limit > 0)
 			query += " limit :limit";
@@ -66,6 +70,7 @@ public class TweetDao {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("username", username);
 		paramSource.addValue("limit", limit);
+		paramSource.addValue("language", language);
 
 		// This query will get all Tweets for the user including one keyword per
 		// row.
@@ -85,15 +90,16 @@ public class TweetDao {
 		// a second, third ... time, the keyword will be added to the first
 		// tweets-list.
 		// The first appearances are stored in a HashMap.
-		HashMap<Long, OutputTweet> tweetMap = new HashMap<Long, OutputTweet>();
-		for (OutputTweet tweet : tweetList) {
-			if (tweetMap.containsKey(tweet.getTweetId()))
-				tweetMap.get(tweet.getTweetId()).addKeyword(tweet.getKeywords().get(0));
-			else
-				tweetMap.put(tweet.getTweetId(), tweet);
-		}
-
-		return new ArrayList<OutputTweet>(tweetMap.values());
+//		HashMap<Long, OutputTweet> tweetMap = new HashMap<Long, OutputTweet>();
+//		for (OutputTweet tweet : tweetList) {
+//			if (tweetMap.containsKey(tweet.getTweetId()))
+//				tweetMap.get(tweet.getTweetId()).addKeyword(tweet.getKeywords().get(0));
+//			else
+//				tweetMap.put(tweet.getTweetId(), tweet);
+//		}
+//
+//		return new ArrayList<OutputTweet>(tweetMap.values());
+		return tweetList;
 	}
 	
 //	public int getTweetCount(String username) {
@@ -134,13 +140,12 @@ public class TweetDao {
 	 */
 	public void insertTweets(List<Tweet> tweets) {
 
-		String insert = "insert into tweets (tweetId, authorId, text, favoriteCount, retweetCount, place, image, createdAt) "
-				+ "values (:tweetId, :authorId, :text, :favoriteCount, :retweetCount, :place, :image, :createdAt) "
+		String insert = "insert into tweets (tweetId, authorId, text, favoriteCount, retweetCount, place, image, language, createdAt) "
+				+ "values (:tweetId, :authorId, :text, :favoriteCount, :retweetCount, :place, :image, :language, :createdAt) "
 				+ "on duplicate key update favoriteCount=:favoriteCount, retweetCount=:retweetCount;";
 
 		SqlParameterSource[] paramSources = new MapSqlParameterSource[tweets.size()];
 		for (int i = 0; i < tweets.size(); i++) {
-
 			MapSqlParameterSource paramSource = getTweetParamSource(tweets.get(i));
 			paramSources[i] = paramSource;
 		}
@@ -168,6 +173,7 @@ public class TweetDao {
 		paramSource.addValue("retweetCount", tweet.getRetweetCount());
 		paramSource.addValue("place", tweet.getPlace());
 		paramSource.addValue("image", tweet.getImage());
+		paramSource.addValue("language", tweet.getLanguage());
 		paramSource.addValue("createdAt", tweet.getCreatedAt());
 
 		return paramSource;
@@ -190,6 +196,7 @@ public class TweetDao {
 				tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 				tweet.setPlace(rs.getString("place"));
 				tweet.setImage(rs.getString("image"));
+				tweet.setLanguage(rs.getString("language"));
 				tweet.setFavoriteCount(rs.getInt("favoriteCount"));
 				tweet.setRetweetCount(rs.getInt("retweetCount"));
 				tweet.setFollowerCount(rs.getInt("followerCount"));
@@ -198,9 +205,9 @@ public class TweetDao {
 				tweet.setScreenName(rs.getString("screenName"));
 				tweet.setPictureUrl(rs.getString("pictureUrl"));
 
-				List<String> keywords = new ArrayList<String>();
-				keywords.add(rs.getString("keyword"));
-				tweet.setKeywords(keywords);
+//				List<String> keywords = new ArrayList<String>();
+//				keywords.add(rs.getString("keyword"));
+//				tweet.setKeywords(keywords);
 
 				// List<Keyword> keywords = new ArrayList<Keyword>();
 				// Keyword keyword = new Keyword();
