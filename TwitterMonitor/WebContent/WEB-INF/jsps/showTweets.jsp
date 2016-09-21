@@ -55,31 +55,13 @@
 			<div id="username">Hallo ${pageContext.request.userPrincipal.name}</div>
 			<div id="welcome_text">Tweets werden geladen ...</div>
 
-			<button id="refreshButton" onclick="refresh()">Tweets aktualisieren</button>
-			<script>
-				function refresh() {
-					first=true;
-					onLoad();
-				}
-			</script>
+			<button id="refreshButton" onclick="onLoad()">Tweets aktualisieren</button>
 
 			<div>
 				<label for="search">Search</label>
 				<input id="search" onkeyup="search()" type="search">
 				<button id="deepSearchButton" onclick="deep()">Deep Search</button>
-<!-- 				<button id="search_button" style="background-image: url(Resources/Picture/search.png);" onclick="deep()" /> -->
 			</div>
-			<script>
-				function deep() {					
-					var searchString = $('#search').val();					
-					if ( searchString.length > 3) {						
-// 						var requestString = "<c:url value="/deepSearch"/>" + "?search=" + searchString;
-						var requestString = "<c:url value="/deepSearch"/>" + "?search=" + searchString + "&lang=" + language;
-						first=true;
-						$.getJSON(requestString, updateTweets);
-					}
-				}
-			</script>
 
 			<div>
 				<label for="sort">Sort</label> <select id="sortOption" onChange="sort()">
@@ -110,6 +92,8 @@
 		<script type="text/javascript">
 			function onLoad() {
 				
+				first=true;
+				
 				$('#search').val("");
 				
 				$.getJSON("<c:url value="/getKeywords"/>", setKeywords);
@@ -117,7 +101,6 @@
 				
 				var requestString = "<c:url value="/getTweets"/>" + "?lang=" + language;
 				$.getJSON(requestString, updateTweets);
-// 				$.getJSON("<c:url value="/getTweets"/>", updateTweets);
 				
 			}
 			onLoad();

@@ -5,18 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import de.htwsaar.exception.model.KeywordException;
-import de.htwsaar.model.Keyword;
 import de.htwsaar.model.OutputTweet;
 import de.htwsaar.service.twitter.TweetService;
 
@@ -67,20 +63,9 @@ public class TweetController {
 		return data;
 	}
 	
-//	@RequestMapping(value = "getTweetCount", method = RequestMethod.GET, headers = "Accept=application/json")
-//	@ResponseBody
-//	public Map<String, Object> getTweetCount(Principal principal) {
-//		
-//		int count = tweetService.getTweetCount(principal.getName());
-//		Map<String, Object> data = new HashMap<String, Object>();
-//		data.put("count", count);
-//		
-//		return data;
-//	}
-	
 	@RequestMapping(value = "deepSearch", method = RequestMethod.GET, headers = "Accept=application/json")
 	@ResponseBody
-	public Map<String, Object> deepSearch(@RequestParam("search") String search, @RequestParam("lang") String language, HttpServletRequest request, Principal principal) throws KeywordException {
+	public Map<String, Object> deepSearch(@RequestParam("search") String search, @RequestParam("lang") String language, Principal principal) throws KeywordException {
 		
 		List<OutputTweet> tweets = tweetService.getTweetsWith(search, principal.getName(), language);
 		

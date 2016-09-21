@@ -46,4 +46,16 @@ public class UserService {
 		keyword.setActive(!keyword.getActive());
 		keywordDao.insertKeyword(keyword);
 	}
+
+	public void changePassword(String username, String password) {
+		userDao.changePassword(username, password);		
+	}
+
+	public void changeEmail(String username, String newEmail) {
+		userDao.changeEmail(username, newEmail);		
+	}
+
+	public String getEmail(String username) {
+		return userDao.getUser(username).getEmail();
+	}
 }

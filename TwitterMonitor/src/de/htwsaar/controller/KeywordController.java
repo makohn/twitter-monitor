@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -96,7 +94,7 @@ public class KeywordController {
 	 */
 	@RequestMapping(value = "changePriority", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
-	public Keyword changePriority(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal) throws KeywordException {
+	public Keyword changePriority(@RequestBody Keyword keyword, Principal principal) throws KeywordException {
 		
 		String username = principal.getName();
 		keyword.setUsername(username);
@@ -117,7 +115,7 @@ public class KeywordController {
 	 */
 	@RequestMapping(value = "deleteKeyword", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
-	public Keyword deleteKeyword(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal) throws KeywordException {
+	public Keyword deleteKeyword(@RequestBody Keyword keyword, Principal principal) throws KeywordException {
 		
 		String username = principal.getName();
 		keyword.setUsername(username);
@@ -128,7 +126,7 @@ public class KeywordController {
 	
 	@RequestMapping(value = "switchActive", method = RequestMethod.POST, headers = "Accept=application/json")
 	@ResponseBody
-	public Keyword switchActive(@RequestBody Keyword keyword, HttpServletRequest request, Principal principal) throws KeywordException {
+	public Keyword switchActive(@RequestBody Keyword keyword, Principal principal) throws KeywordException {
 		
 		String username = principal.getName();
 		keyword.setUsername(username);		

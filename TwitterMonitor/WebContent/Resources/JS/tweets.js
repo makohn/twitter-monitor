@@ -105,11 +105,11 @@ function updateTweets(data) {
 		tweet_text.innerHTML = highlighted;
 		tweet_div.appendChild(tweet_text);
 		
-		// create a tweet_text_div and passing Tweet_text from JSON
-		var tweet_prio = document.createElement("div");
-		tweet_prio.setAttribute("class", "tweet_prio");
-		tweet_prio.innerHTML = tweet.priority;
-		tweet_div.appendChild(tweet_prio);
+//		// create a tweet_prio_div and passing Tweet_text from JSON
+//		var tweet_prio = document.createElement("div");
+//		tweet_prio.setAttribute("class", "tweet_prio");
+//		tweet_prio.innerHTML = tweet.priority;
+//		tweet_div.appendChild(tweet_prio);
 				
 		count++;
 	}
@@ -118,34 +118,6 @@ function updateTweets(data) {
 	document.getElementById("welcome_text").innerHTML=welcome_text;
 	
 }
-
-//function slidePic(div_id) {
-//
-//	var id = String(div_id).substring(3);
-//
-//	var pics = getPicsUrls(id);
-//
-//	var oldpic;
-//	for (var i = 0; i < pics.length; i++) {
-//
-//		if (pics[i] == getPicUrl(div_id)) {
-//
-//			if (i + 1 < pics.length) {
-//				document.getElementById(div_id).setAttribute(
-//						"style",
-//						'display:block;background-image:url(' + pics[i + 1]
-//								+ ')');
-//				return;
-//			} else if (i + 1 == pics.length) {
-//				document.getElementById(div_id).setAttribute("style",
-//						'display:block;background-image:url(' + pics[0] + ')');
-//				return;
-//			}
-//		}
-//
-//	}
-//
-//}
 
 /**
  * 
@@ -233,33 +205,23 @@ function highlight(text,string)
 	
 }
 
-//function checkTweets(data)
-//{
-//	if (data.count != count)
-//		document.getElementById("newTweetsButton").style.visibility = "visible"
-//}
-
-//function deepSearch() {
-//	
-//	var searchString = $('#search').val();
-//	
-//	if ( searchString.length > 3) {
-//		
-//		var keyword = { "keyword" : searchString }
-//	
-//		$.ajax({
-//			type: "POST",
-//			contentType : 'application/json; charset=utf-8',
-//	        dataType : 'json',
-//	        url: "/TwitterMonitor/deepSearch",
-//	        data: JSON.stringify(keyword), 
-//	        success :function (result) {
-////	    			   	alert(result);
-//	        			updateTweets(result);	    	   
-//	        		}
-//		});
-//	}
-//}
+function deep() {	
+	
+	var searchString = $('#search').val();	
+	
+	if ( searchString.length > 0) {						
+		var requestString = "/TwitterMonitor/deepSearch" + "?search=" + searchString + "&lang=" + language;
+		first=true;
+		$.getJSON(requestString, updateTweets);
+	}
+	else {
+		if ( confirm("Wollen Sie wirklich alle Tweets holen ?") ) {
+			var requestString = "/TwitterMonitor/deepSearch" + "?search=" + "&lang=" + language;
+			first=true;
+			$.getJSON(requestString, updateTweets);
+		}
+	}
+}
 
 function changeLanguage() {
 	
@@ -270,7 +232,6 @@ function changeLanguage() {
 	else if ($( "#languageOption option:selected" ).text() == "Englisch")
 		language = "en";
 	
-	// das evtl nicht, dann müsste man selbst aktualisieren
 	var requestString = "/TwitterMonitor/getTweets" + "?lang=" + language;
 	first=true;
 	$.getJSON(requestString, updateTweets);
@@ -297,8 +258,7 @@ function addSelectionAsKeyword() {
 		       data: JSON.stringify(keyword), 
 		       success :function (result) {
 		    		keywords_field.push(newKey);
-//		    	    var requestString = "/TwitterMonitor/getTweets" + "?lang=" + language;
-		    	   	var requestString = "/TwitterMonitor/getTweets";
+		    	   	var requestString = "/TwitterMonitor/getTweets" + "?lang=" + language;
 		    		first=true;
 		    		$.getJSON(requestString, updateTweets);
 		       }
@@ -332,8 +292,7 @@ function addSelectionToBlacklist() {
 		       data: JSON.stringify(keyword), 
 		       success :function (result) {
 		    		blacklist_field.push(newKey);
-//		    	    var requestString = "/TwitterMonitor/getTweets" + "?lang=" + language;
-		    	   	var requestString = "/TwitterMonitor/getTweets";
+		    	   	var requestString = "/TwitterMonitor/getTweets" + "?lang=" + language;
 		    		first=true;
 		    		$.getJSON(requestString, updateTweets);
 		       }

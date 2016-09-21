@@ -3,7 +3,6 @@ package de.htwsaar.db;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -72,64 +71,16 @@ public class TweetDao {
 		paramSource.addValue("limit", limit);
 		paramSource.addValue("language", language);
 
-		// This query will get all Tweets for the user including one keyword per
-		// row.
-		// So if there are multiple Keywords associated with a Tweet, there will
-		// be multiple identical rows
-		// only with different keywords.
 		List<OutputTweet> tweetList = null;
 		try {
-			tweetList = jdbc.query(query, paramSource, new TweetKeywordRowMapper());
+			tweetList = jdbc.query(query, paramSource, new TweetRowMapper());
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			tweetList = new ArrayList<OutputTweet>();
 		}
 
-		// Here the tweetList of the query is worked through. If a tweet shows
-		// up
-		// a second, third ... time, the keyword will be added to the first
-		// tweets-list.
-		// The first appearances are stored in a HashMap.
-//		HashMap<Long, OutputTweet> tweetMap = new HashMap<Long, OutputTweet>();
-//		for (OutputTweet tweet : tweetList) {
-//			if (tweetMap.containsKey(tweet.getTweetId()))
-//				tweetMap.get(tweet.getTweetId()).addKeyword(tweet.getKeywords().get(0));
-//			else
-//				tweetMap.put(tweet.getTweetId(), tweet);
-//		}
-//
-//		return new ArrayList<OutputTweet>(tweetMap.values());
 		return tweetList;
 	}
-	
-//	public int getTweetCount(String username) {
-//		
-//		String query = "select count(*) "
-//				+ "from tweets, tweetAuthors, tweets_x_keywords, keywords "
-//				+ "where tweets.authorId = tweetAuthors.authorId and tweets.tweetId = tweets_x_keywords.tweetId "
-//				+ "and tweets_x_keywords.keyword = keywords.keyword and keywords.username = :username "
-//				+ "and positive = 1	and active = 1 " + "and tweets.tweetId not in ("
-//				+ "select tweets.tweetId from tweets, tweets_x_keywords, keywords "
-//				+ "where tweets.tweetId = tweets_x_keywords.tweetId and tweets_x_keywords.keyword = keywords.keyword "
-//				+ "and keywords.username = :username and positive = 0 and active = 1)";
-//
-//		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-//		paramSource.addValue("username", username);
-//		
-//		int count = 0;
-//		try {
-//			count = (int) jdbc.queryForObject(query, paramSource, new RowMapper<Integer>() {
-//				@Override
-//				public Integer mapRow(ResultSet rs,int rowNum) throws SQLException {
-//					return rs.getInt(0);
-//				}				
-//			});
-//		} catch (DataAccessException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return count;
-//	}
 
 	/**
 	 * This method inserts a list of multiple tweets at once into the database.
@@ -183,7 +134,7 @@ public class TweetDao {
 	 * This class serves as a utility to create Tweet Objects out of a ResultSet
 	 * that is received from a database query.
 	 */
-	private class TweetKeywordRowMapper implements RowMapper<OutputTweet> {
+	private class TweetRowMapper implements RowMapper<OutputTweet> {
 
 		@Override
 		public OutputTweet mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -204,20 +155,6 @@ public class TweetDao {
 				tweet.setName(rs.getString("name"));
 				tweet.setScreenName(rs.getString("screenName"));
 				tweet.setPictureUrl(rs.getString("pictureUrl"));
-
-//				List<String> keywords = new ArrayList<String>();
-//				keywords.add(rs.getString("keyword"));
-//				tweet.setKeywords(keywords);
-
-				// List<Keyword> keywords = new ArrayList<Keyword>();
-				// Keyword keyword = new Keyword();
-				// keyword.setKeyword(rs.getString("keyword"));
-				// keyword.setUsername(rs.getString("username"));
-				// keyword.setPriority(rs.getInt("priority"));
-				// keyword.setPositive(rs.getBoolean("positive"));
-				// keyword.setActive(rs.getBoolean("active"));
-				// keywords.add(keyword);
-				// tweet.setKeywords(keywords);
 
 			} catch (TweetException e) {
 				e.printStackTrace();

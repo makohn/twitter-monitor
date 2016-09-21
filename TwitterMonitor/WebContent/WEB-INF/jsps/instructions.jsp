@@ -10,17 +10,17 @@
 
 <!------------------------- META TAGS ---------------------------------------------->
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	
-	<link rel="stylesheet" type="text/css" href="Resources/CSS/keywords.css">
-	<link rel="stylesheet" type="text/css" href="Resources/CSS/header.css">
-	
-	<script type="text/javascript" src="Resources/JS/header.js"></script>
-	<title>TwitterMonitor - Anleitung</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<link rel="stylesheet" type="text/css" href="Resources/CSS/keywords.css">
+<link rel="stylesheet" type="text/css" href="Resources/CSS/header.css">
+
+<script type="text/javascript" src="Resources/JS/header.js"></script>
+<title>TwitterMonitor - Anleitung</title>
 </head>
 
 <body style="margin: 0 auto;">
-<!-------------------------- HEADER ------------------------------------------------->
+	<!-------------------------- HEADER ------------------------------------------------->
 	<div id="header"></div>
 
 	<nav>
@@ -32,76 +32,118 @@
 			<li><a href="${pageContext.request.contextPath}/instructions">Anleitung</a></li>
 			<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 		</ul>
-	
-	
+
+
 		<ul2 id="ul2" onclick="showMenu()">
-			<li><a href="${pageContext.request.contextPath}/showTweets">Tweets</a></li>
-			<li><a href="${pageContext.request.contextPath}/keywords">Keywords</a></li>
-			<li><a href="${pageContext.request.contextPath}/settings">Einstellungen</a></li>
-			<li><a href="${pageContext.request.contextPath}/instructions">Anleitung</a></li>
-			<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+		<li><a href="${pageContext.request.contextPath}/showTweets">Tweets</a></li>
+		<li><a href="${pageContext.request.contextPath}/keywords">Keywords</a></li>
+		<li><a href="${pageContext.request.contextPath}/settings">Einstellungen</a></li>
+		<li><a href="${pageContext.request.contextPath}/instructions">Anleitung</a></li>
+		<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 		</ul2>
 	</nav>
+
+	<!-------------------------- BODY --------------------------------------------------->
+	<div id="page">
+
+		Anleitung
+		<ol>
+			KEYWORDS
+			<br>
+			
+			<li>Wählen Sie bis zu 10 Keywords aus
+				<ul>
+					<li>es werden für Sie die Tweets gesammelt, die diese Keywords enthalten</li>
+					<li>dabei handelt es sich um eine sehr weite Suche
+						<ul> z.B. 'trump' findet alle Tweets mit:
+							<li>trump</li>
+							<li>Trump</li>
+							<li>tRuMp</li>
+							<li>#trump</li>
+							<li>Strumpf</li>
+						</ul>
+					</li>
+					<li>Sie können auch mehrere Keywords eingeben, wenn alle Wörter im Tweet vorkommen sollen
+						<ul>z.B. 'fußball bundesliga'</ul>
+					</li>					
+				</ul>
+			</li>
+			
+			<br>
+			
+			<li>Geben Sie jedem Keyword eine Priorität von 1 bis 5
+				<ul>
+					<li>jeder angezeigte Tweet erhält eine Priorität, die sich ergibt aus
+						<ul>
+							<li>allgemeinen Faktoren (Retweets, Likes, Follower)</li>
+							<li>Ihrer privaten Priorität</li>
+						</ul>
+					</li>
+					<li>Tweets mit mehreren Ihrer Keywords erhalten eine höhere Priorität</li>
+				</ul>
+			</li>
+			
+			<br>
+			
+			<li>Setzen Sie unliebsame Themen auf Ihre Blacklist
+				<ul>
+					<li>Sie können beliebig viele Keywords auf die Blacklist setzen</li>
+					<li>Tweets mit Keywords von der Blacklist werden nicht angezeigt</li>
+					<li>die Blacklist-Keywords beachten Groß- und Kleinschreibung
+						<ul>z.B. 'trump' filtert nur 'trump', aber nicht 'Trump'</ul>
+					</li>
+				</ul>
+			</li>
+			
+			<br>
+			TWEETS
+			<br>
+			
+			<li>Es werden Ihnen zunächst bis zu 100 Tweets angezeigt
+				<ul>
+					<li>dabei handelt es sich um die interessantesten Tweets (höchste Priorität)</li>
+					<li>klicken Sie auf "Tweets aktualisieren", um die neuesten Tweets zu laden</li>
+				</ul>
+			</li> 
+			
+			<br>
+			
+			<li>Sortieren Sie die angezeigten Tweets
+				<ul>
+					<li>nach der Priorität der Tweets</li>
+					<li>nach dem Entstehungszeitpunkt der Tweets</li>
+				</ul>
+			</li>
+			
+			<br>
+			
+			<li>Filtern Sie die angezeigten Tweets hinsichtlich eines beliebigen Stichworts</li>
+			
+			<br>
+			
+			<li>Stellen Sie eine Sprache ein
+				<ul>
+					<li>es können Deutsch, Englisch und Alle gewählt werden</li>
+					<li>nicht alle Tweets sind mit einer Sprache markiert</li>
+				</ul>
+			</li>
+			
+			<br>
+			
+			<li>DeepSearch
+				<ul>
+					<li>durchsuchen Sie alle für Sie gesammelten Tweets</li>
+					<li>das Ergebnis kann sehr groß werden</li>
+					<li>bei der Eingabe von mehreren Stichwörtern müssen diese alle in einem Tweet enthalten sein</li>
+					<li>eine DeepSearch mit leerem Suchwort liefert alle vorhandenen Tweets</li>
+					<li>das Ergebnis der Suche kann danach weitergefiltert und -sortiert werden</li> 
+				</ul>
+			</li>
 	
-<!-------------------------- BODY --------------------------------------------------->
-<div id="page">
-	
-		Anleitung<br>
+		</ol>
 		<br>
-		<br>
-		KEYWORDS<br>
-		<br>
-		1)	Wählen Sie bis zu 10 Keywords aus<br>
-		<br>
-			- es werden für Sie die Tweets gesammelt, die diese Keywords enthalten<br>
-			<br>
-			- von den gesammelten Tweets werden Ihnen bis zu 100 angezeigt<br>
-			<br>
-			- dabei handelt es sich um eine sehr weite Suche<br>
-			<br>
-				z.B.: "trump"		findet alle Tweets mit	"trump"<br>
-															"Trump"<br>
-															"tRuMp"<br>
-															"#trump"<br>
-															"Strumpf"<br>
-			<br>
-			- Sie können auch mehrere Keywords eingeben<br>
-			<br>
-				z.B.: "fußball bundesliga"<br>
-			<br>
-		2) Geben Sie jedem Keyword eine Priorität von 1 bis 5<br>
-		<br>
-			- jeder angezeigte Tweet erhält eine Priorität, die sich aus<br>
-			<br>
-					a)	allgemeinen Faktoren (Retweets, Likes, Follower)<br>
-					<br>
-				und	b)	Ihrer privaten Priorität 				ergibt<br>
-				<br>
-			- Tweets mit mehreren Ihrer Keywords erhalten eine höhere Priorität<br>
-			<br>
-		3) Setzen Sie unliebsame Themen auf Ihre Blacklist<br>
-		<br>
-			- Sie können beliebig viele Keywords auf die Blacklist setzen<br>
-		<br>
-			- Tweets mit Keywords von der Blacklist werden nicht angezeigt<br>
-			<br>
-			- die Blacklist-Keywords sind case-sensitive<br> 
-			<br>
-				z.B.:	"trump"			filtert nur		"trump"<br>
-										aber nicht		"Trump"<br>
-				<br>
-		TWEETS<br>
-					<br>					
-		4) Sortieren Sie die angezeigten Tweets<br>
-		<br>
-				a) nach der Priorität der Tweets<br>
-				<br>
-				b) nach dem Entstehungszeitpunkt der Tweets<br>
-				<br>
-		5) Filtern Sie die angezeigten Tweets hinsichtlich eines beliebigen Stichworts<br>
-<br>
-		
-</div>
-<!----------------------------------------------------------------------------------->		
+
+	</div>
+	<!----------------------------------------------------------------------------------->
 </body>
 </html>

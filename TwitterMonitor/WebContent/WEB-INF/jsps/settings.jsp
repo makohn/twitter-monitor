@@ -15,7 +15,10 @@
 	<link rel="stylesheet" type="text/css" href="Resources/CSS/keywords.css">
 	<link rel="stylesheet" type="text/css" href="Resources/CSS/header.css">
 	
+	<script type="text/javascript" src="Resources/JS/jquery-2.1.4.js"></script>
 	<script type="text/javascript" src="Resources/JS/header.js"></script>
+	<script type="text/javascript" src="Resources/JS/settings.js"></script>
+	
 	<title>TwitterMonitor - Einstellungen</title>
 </head>
 
@@ -46,18 +49,26 @@
 <!-------------------------- BODY --------------------------------------------------->
 <div id="page">
 	
-	Einstellungen		
-	
+	<h2>Einstellungen</h2>
 	<br>
-	<br>
-	Passwort ändern
-	<br>
-	Email ändern
-	<br>
-	Benachrichtigungen aktivieren / deaktivieren
+		<h3>Accountdaten</h3>
+		<div id="username">Username: ${username}</div>
+		<div id="email">Email: ${email}</div>
 	<br>	
-	<a href="${pageContext.request.contextPath}/deleteUser">Account loeschen</a>
-		
+	<div>
+		<input id="newPassword">
+		<button id="changePasswordButton" onClick="changePassword()">Passwort ändern</button>
+	</div>
+	<br>
+	<div>
+		<input id="newEmail">
+		<button id="changeEmailButton" onClick="changeEmail()">Email ändern</button>
+	</div>
+	<br><br>
+	<button>Benachrichtigungen aktivieren / deaktivieren</button>
+	<br><br>
+	<button id="deleteAccountButton" onClick="deleteAccount()">Account löschen</button>
+	
 </div>
 <!----------------------------------------------------------------------------------->		
 </body>

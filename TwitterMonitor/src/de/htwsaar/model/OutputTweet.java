@@ -1,8 +1,6 @@
 package de.htwsaar.model;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,18 +11,13 @@ public class OutputTweet extends Tweet {
 	// Final priority of the tweets = global Prio * private Prio
 	private float priority;
 	
-	// Keywords associated with the Tweet
-//	private List<String> keywords;
-	
 	// TweetAuthor-Info
 	private String name;
 	private String screenName;
 	private int followerCount;
 	private String pictureUrl;
 		
-	public OutputTweet() {
-//		keywords = new ArrayList<String>();
-	}
+	public OutputTweet() {}
 	
 	public float getPriority() {
 		return priority;
@@ -32,17 +25,6 @@ public class OutputTweet extends Tweet {
 	public void setPriority(float priority) {
 		this.priority = priority;
 	}
-	
-//	public List<String> getKeywords() {
-//		return keywords;
-//	}
-//	public void setKeywords(List<String> keywords) {
-//		this.keywords = keywords;
-//	}
-	
-//	public void addKeyword(String keyword) {
-//		keywords.add(keyword);
-//	}
 	
 	public String getName() {
 		return name;
@@ -79,11 +61,4 @@ public class OutputTweet extends Tweet {
 		return "OutputTweet [priority=" + priority + ", name=" + name + ", screenName=" + screenName
 				+ ", followerCount=" + followerCount + ", pictureUrl=" + pictureUrl + "]";
 	}
-	
-//	@Override
-//	public String toString() {
-//		return "OutputTweet [priority=" + priority + ", keywords=" + keywords + ", name=" + name + ", screenName="
-//				+ screenName + ", followerCount=" + followerCount + ", pictureUrl=" + pictureUrl + "]";
-//	}
-
 }
