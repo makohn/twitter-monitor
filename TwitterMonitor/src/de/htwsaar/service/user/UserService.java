@@ -14,12 +14,12 @@ import de.htwsaar.model.User;
 public class UserService {
 
 	private UserDao userDao;
-	private KeywordDao keywordDao;
+//	private KeywordDao keywordDao;
 
 	@Autowired
-	public UserService(UserDao userDao, KeywordDao keywordDao) {
+	public UserService(UserDao userDao/*, KeywordDao keywordDao*/) {
 		this.userDao = userDao;
-		this.keywordDao = keywordDao;
+//		this.keywordDao = keywordDao;
 	}
 
 	public void insertUser(User user) {
@@ -29,24 +29,7 @@ public class UserService {
 	public void deleteUser(String username) {
 		userDao.deleteUser(username);
 	}
-
-	public void insertKeyword(Keyword keyword) {
-		keywordDao.insertKeyword(keyword);
-	}
-
-	public void deleteKeyword(Keyword keyword) {
-		keywordDao.deleteKeyword(keyword);
-	}
-
-	public List<Keyword> getKeywords(String username, boolean positive) {
-		return keywordDao.getKeywords(username, positive);
-	}
-
-	public void switchActive(Keyword keyword) {
-		keyword.setActive(!keyword.getActive());
-		keywordDao.insertKeyword(keyword);
-	}
-
+	
 	public void changePassword(String username, String password) {
 		userDao.changePassword(username, password);		
 	}
@@ -58,4 +41,21 @@ public class UserService {
 	public String getEmail(String username) {
 		return userDao.getUser(username).getEmail();
 	}
+
+//	public void insertKeyword(Keyword keyword) {
+//		keywordDao.insertKeyword(keyword);
+//	}
+//
+//	public void deleteKeyword(Keyword keyword) {
+//		keywordDao.deleteKeyword(keyword);
+//	}
+//
+//	public List<Keyword> getKeywords(String username, boolean positive) {
+//		return keywordDao.getKeywords(username, positive);
+//	}
+//
+//	public void switchActive(Keyword keyword) {
+//		keyword.setActive(!keyword.getActive());
+//		keywordDao.insertKeyword(keyword);
+//	}
 }

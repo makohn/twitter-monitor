@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import de.htwsaar.exception.model.KeywordException;
 import de.htwsaar.model.Keyword;
-import de.htwsaar.service.user.UserService;
+import de.htwsaar.service.user.KeywordService;
 
 /**
  * The KeywordController Class is the communication interface between
@@ -29,11 +29,11 @@ import de.htwsaar.service.user.UserService;
 @Controller
 public class KeywordController {
 
-	private UserService userService;
+	private KeywordService keywordService;
 
 	@Autowired
-	public void setUserService(UserService userService) {
-		this.userService = userService;
+	public void setKeywordService(KeywordService keywordService) {
+		this.keywordService = keywordService;
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class KeywordController {
 	public Map<String, Object> getKeywords(Principal principal) {
 
 		String username = principal.getName();
-		List<Keyword> keywords = userService.getKeywords(username, true);
+		List<Keyword> keywords = keywordService.getKeywords(username, true);
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("keywords", keywords);
 
@@ -75,7 +75,7 @@ public class KeywordController {
 	public Map<String, Object> getNegKeywords(Principal principal) {
 				
 		String username = principal.getName();
-		List<Keyword> keywords = userService.getKeywords(username, false);
+		List<Keyword> keywords = keywordService.getKeywords(username, false);
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("keywords", keywords);
 
@@ -98,7 +98,7 @@ public class KeywordController {
 		
 		String username = principal.getName();
 		keyword.setUsername(username);
-		userService.insertKeyword(keyword);
+		keywordService.insertKeyword(keyword);
 
 		return keyword;
 	}
@@ -119,7 +119,7 @@ public class KeywordController {
 		
 		String username = principal.getName();
 		keyword.setUsername(username);
-		userService.deleteKeyword(keyword);
+		keywordService.deleteKeyword(keyword);
 
 		return keyword;
 	}
@@ -130,7 +130,7 @@ public class KeywordController {
 		
 		String username = principal.getName();
 		keyword.setUsername(username);		
-		userService.switchActive(keyword);
+		keywordService.switchActive(keyword);
 		
 		return keyword;
 	}

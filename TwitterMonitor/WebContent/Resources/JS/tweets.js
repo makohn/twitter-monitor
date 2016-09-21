@@ -235,7 +235,6 @@ function changeLanguage() {
 	var requestString = "/TwitterMonitor/getTweets" + "?lang=" + language;
 	first=true;
 	$.getJSON(requestString, updateTweets);
-	
 }
 
 function addSelectionAsKeyword() {
