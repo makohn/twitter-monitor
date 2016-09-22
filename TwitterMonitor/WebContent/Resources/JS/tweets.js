@@ -138,7 +138,7 @@ function getPicUrl(pic_id) {
 }
 
 function search() {
-	
+		
 	searchfield = null;
 	searchfield = $.extend(true, [], tweetsfield);
 	var keyString = $('#search').val();
@@ -154,11 +154,12 @@ function search() {
 			}
 		}
 		
-		updateTweets(searchfield);
+		sort();
+//		updateTweets(searchfield);
 
 	} else {
-		
-		updateTweets(tweetsfield);
+		sort();
+//		updateTweets(tweetsfield);
 	}
 }
 
@@ -189,7 +190,6 @@ function sort()
 
 function highlight(text,string)
 {
-		
 		var tempstring = string.charAt(0).toUpperCase() + string.slice(1);
 		var highlighted = text.split(tempstring).join("<span>".concat(tempstring).concat("</span>"));
 		
@@ -202,7 +202,6 @@ function highlight(text,string)
 		tempstring = tempstring.toUpperCase();
 		highlighted = highlighted.split(tempstring).join("<span>".concat(tempstring).concat("</span>"));
 		return highlighted;
-	
 }
 
 function deep() {	
@@ -212,13 +211,13 @@ function deep() {
 	if ( searchString.length > 0) {						
 		var requestString = "/TwitterMonitor/deepSearch" + "?search=" + searchString + "&lang=" + language;
 		first=true;
-		$.getJSON(requestString, updateTweets);
+		$.getJSON(requestString, preLoad);
 	}
 	else {
 		if ( confirm("Wollen Sie wirklich alle Tweets holen ?") ) {
 			var requestString = "/TwitterMonitor/deepSearch" + "?search=" + "&lang=" + language;
 			first=true;
-			$.getJSON(requestString, updateTweets);
+			$.getJSON(requestString, preLoad);
 		}
 	}
 }
@@ -234,7 +233,13 @@ function changeLanguage() {
 	
 	var requestString = "/TwitterMonitor/getTweets" + "?lang=" + language;
 	first=true;
-	$.getJSON(requestString, updateTweets);
+	$.getJSON(requestString,preLoad);
+}
+
+function preLoad(data) {
+	updateTweets(data);
+	search();
+	sort();
 }
 
 function addSelectionAsKeyword() {
@@ -259,7 +264,7 @@ function addSelectionAsKeyword() {
 		    		keywords_field.push(newKey);
 		    	   	var requestString = "/TwitterMonitor/getTweets" + "?lang=" + language;
 		    		first=true;
-		    		$.getJSON(requestString, updateTweets);
+		    		$.getJSON(requestString, preLoad);
 		       }
 		   }); 
 	}
@@ -293,7 +298,7 @@ function addSelectionToBlacklist() {
 		    		blacklist_field.push(newKey);
 		    	   	var requestString = "/TwitterMonitor/getTweets" + "?lang=" + language;
 		    		first=true;
-		    		$.getJSON(requestString, updateTweets);
+		    		$.getJSON(requestString, preLoad);
 		       }
 		   }); 
 	}
