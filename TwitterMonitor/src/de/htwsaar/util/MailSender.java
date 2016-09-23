@@ -26,7 +26,7 @@ public class MailSender {
 		//props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		//props.put("mail.smtp.socketFactory.fallback", "true");
 		
-		SecurityManager security = System.getSecurityManager();
+//		SecurityManager security = System.getSecurityManager();
 		try {
 			Authenticator auth = new SMTPAuthenticator();
 			Session session = Session.getInstance(props, auth);

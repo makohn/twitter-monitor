@@ -1,13 +1,9 @@
 package de.htwsaar.service.user;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import de.htwsaar.db.KeywordDao;
 import de.htwsaar.db.UserDao;
-import de.htwsaar.model.Keyword;
 import de.htwsaar.model.User;
 
 @Service
