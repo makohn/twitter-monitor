@@ -1,0 +1,66 @@
+
+body {
+	min-width: 520px;
+	background-color: #edf8fd;
+	font-family: "Segoe UI", sans-serif; 
+	font-size: 20px;
+}
+
+#page {
+	min-height: 1000px;
+	min-width: 100%;
+}
+
+#title{
+	font-size: 50px;
+	font-weight: bolder;
+	line-height: 60px;
+	padding:50px;
+	min-height: 50px;
+}
+
+.section {
+	clear:both;
+	font-size: 25px;
+	font-weight: bolder;
+	line-height: 60px;
+}
+
+ol li {
+	
+	clear:both;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 60px;
+	margin-left: 50px;
+}
+ol li ul {
+	display:none;
+	clear:both;
+	font-size: 16px;
+	line-height: 20px;
+	margin-left: 5px;
+}
+
+ol li ul li {
+	clear:both;
+	font-size: 18px;
+	line-height: 26px;
+	margin-left: 15px;
+}
+
+ol li ul li ul {
+	display:block;
+	clear:both;
+	font-size: 14px;
+	line-height: 25px;
+	margin-left: 15px;
+}
+ol li ul li ul li {
+	clear:both;
+	font-size: 15px;
+	line-height: 22px;
+	margin-left: 15px;
+}
+
+

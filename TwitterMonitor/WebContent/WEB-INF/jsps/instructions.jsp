@@ -12,10 +12,12 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<link rel="stylesheet" type="text/css" href="Resources/CSS/keywords.css">
+<link rel="stylesheet" type="text/css" href="Resources/CSS/instruction.css">
 <link rel="stylesheet" type="text/css" href="Resources/CSS/header.css">
 
+<script type="text/javascript" src="Resources/JS/jquery-2.1.4.js"></script>
 <script type="text/javascript" src="Resources/JS/header.js"></script>
+<script type="text/javascript" src="Resources/JS/instruction.js"></script>
 <title>TwitterMonitor - Anleitung</title>
 </head>
 
@@ -45,14 +47,14 @@
 
 	<!-------------------------- BODY --------------------------------------------------->
 	<div id="page">
-
-		Anleitung
+		
+		<div id="title">Anleitung</div>
 		<ol>
-			KEYWORDS
-			<br>
+			<div class="section">KEYWORDS</div>
 			
-			<li>Wählen Sie bis zu 10 Keywords aus
-				<ul>
+			
+			<li  onclick="display(1)">Wählen Sie bis zu 10 Keywords aus
+				<ul class="slide">
 					<li>es werden für Sie die Tweets gesammelt, die diese Keywords enthalten</li>
 					<li>dabei handelt es sich um eine sehr weite Suche
 						<ul> z.B. 'trump' findet alle Tweets mit:
@@ -69,24 +71,24 @@
 				</ul>
 			</li>
 			
-			<br>
 			
-			<li>Geben Sie jedem Keyword eine Priorität von 1 bis 5
-				<ul>
-					<li>jeder angezeigte Tweet erhält eine Priorität, die sich ergibt aus
+			
+			<li onclick="display(2)">Geben Sie jedem Keyword eine Priorität von 1 bis 5
+				<ul class="slide">
+					<li ">jeder angezeigte Tweet erhält eine Priorität, die sich ergibt aus
 						<ul>
-							<li>allgemeinen Faktoren (Retweets, Likes, Follower)</li>
-							<li>Ihrer privaten Priorität</li>
+							<li ">allgemeinen Faktoren (Retweets, Likes, Follower)</li>
+							<li ">Ihrer privaten Priorität</li>
 						</ul>
 					</li>
 					<li>Tweets mit mehreren Ihrer Keywords erhalten eine höhere Priorität</li>
 				</ul>
 			</li>
 			
-			<br>
 			
-			<li>Setzen Sie unliebsame Themen auf Ihre Blacklist
-				<ul>
+			
+			<li  onclick="display(3)">Setzen Sie unliebsame Themen auf Ihre Blacklist
+				<ul class="slide">
 					<li>Sie können beliebig viele Keywords auf die Blacklist setzen</li>
 					<li>Tweets mit Keywords von der Blacklist werden nicht angezeigt</li>
 					<li>die Blacklist-Keywords beachten Groß- und Kleinschreibung
@@ -96,20 +98,22 @@
 			</li>
 			
 			<br>
-			TWEETS
-			<br>
+			</ol>
+			<ol>
+			<div class="section"> TWEETS </div>
 			
-			<li>Es werden Ihnen zunächst bis zu 100 Tweets angezeigt
-				<ul>
+			
+			<li  onclick="display(4)">Es werden Ihnen zunächst bis zu 100 Tweets angezeigt
+				<ul class="slide">
 					<li>dabei handelt es sich um die interessantesten Tweets (höchste Priorität)</li>
-					<li>klicken Sie auf "Tweets aktualisieren", um die neuesten Tweets zu laden</li>
+					<li >klicken Sie auf "Tweets aktualisieren", um die neuesten Tweets zu laden</li>
 				</ul>
 			</li> 
 			
-			<br>
 			
-			<li>Sortieren Sie die angezeigten Tweets
-				<ul>
+			
+			<li  onclick="display(5)">Sortieren Sie die angezeigten Tweets
+				<ul class="slide">
 					<li>nach der Priorität der Tweets</li>
 					<li>nach dem Entstehungszeitpunkt der Tweets</li>
 				</ul>
@@ -117,12 +121,12 @@
 			
 			<br>
 			
-			<li>Filtern Sie die angezeigten Tweets hinsichtlich eines beliebigen Stichworts</li>
+			<li >Filtern Sie die angezeigten Tweets hinsichtlich eines beliebigen Stichworts</li>
 			
-			<br>
 			
-			<li>Stellen Sie eine Sprache ein
-				<ul>
+			
+			<li  onclick="display(6)" >Stellen Sie eine Sprache ein
+				<ul class="slide">
 					<li>es können Deutsch, Englisch und Alle gewählt werden</li>
 					<li>nicht alle Tweets sind mit einer Sprache markiert</li>
 				</ul>
@@ -130,8 +134,8 @@
 			
 			<br>
 			
-			<li>DeepSearch
-				<ul>
+			<li  onclick="display(7)" >DeepSearch
+				<ul class="slide">
 					<li>durchsuchen Sie alle für Sie gesammelten Tweets</li>
 					<li>das Ergebnis kann sehr groß werden</li>
 					<li>bei der Eingabe von mehreren Stichwörtern müssen diese alle in einem Tweet enthalten sein</li>
