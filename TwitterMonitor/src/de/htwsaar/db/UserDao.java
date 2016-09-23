@@ -80,7 +80,7 @@ public class UserDao {
 		
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("username", username);
-		paramSource.addValue("password", password);
+		paramSource.addValue("password", passwordEncoder.encode(password));
 		
 		try {
 			jdbc.update(changePassword, paramSource);
