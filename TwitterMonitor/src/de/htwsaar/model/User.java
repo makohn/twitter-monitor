@@ -19,7 +19,7 @@ import de.htwsaar.validator.model.UserValidator;
  *  - enabled, a switch to turn user accounts on and off.
  *  - authority, the user's role, e.g. admin
  *  
- * @author Philipp Schaefer
+ * @author Philipp Schaefer, Niko Kleer, Martin Feick
  *
  */
 public class User {
@@ -31,7 +31,7 @@ public class User {
 	
 	@NotBlank/*(message="Das Passwort darf nicht leer sein.")*/
 	@Pattern(regexp="^\\S+"/*, message="Das Passwort darf keine Leerzeichen enthalten."*/)
-	@Size(min=8, max=15/*, message="Das Passwort muss zwischen 8 und 15 Zeichen lang sein."*/)
+	//@Size(min=8, max=15/*, message="Das Passwort muss zwischen 8 und 15 Zeichen lang sein."*/)
 	private String password;
 	
 	@NotBlank/*(message="Die Email-Adresse darf nicht leer sein")*/

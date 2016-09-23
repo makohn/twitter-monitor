@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import de.htwsaar.exception.model.UserException;
@@ -19,13 +20,16 @@ import de.htwsaar.model.User;
  * The UserDao Class encapsulates the database access for the user entity.
  * It provides methods for loading and storing User Objects.
  * 
- * @author Philipp Schaefer 
+ * @author Philipp Schaefer, Niko Kleer, Martin Feick
  *
  */
 @Component("userDao")
 public class UserDao {
 
 	private NamedParameterJdbcTemplate jdbc;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public UserDao() {
 	}
@@ -124,7 +128,7 @@ public class UserDao {
 		paramSource.addValue("username", user.getUsername());
 		paramSource.addValue("enabled", user.getEnabled());
 		paramSource.addValue("email", user.getEmail());
-		paramSource.addValue("password", user.getPassword());
+		paramSource.addValue("password", passwordEncoder.encode(user.getPassword()));
 		paramSource.addValue("authority", user.getAuthority());
 
 		return paramSource;
