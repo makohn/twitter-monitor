@@ -30,7 +30,7 @@ CREATE TABLE `keywords` (
 
 CREATE TABLE `tweetAuthors` (
   `authorId` bigint NOT NULL,
-  `name` varchar(15) NOT NULL,
+  `name` varchar(20) NOT NULL,
   `screenName` varchar(20),
   `followerCount` int(11),
   `pictureUrl` varchar(100),

@@ -1,7 +1,7 @@
 DELIMITER $$
 drop function if exists get_tweet_html;
 create function get_tweet_html(
-	p_tweet_text text, p_author_name varchar(15), p_author_picture_url varchar(100), p_tweet_datum datetime, p_tweet_image varchar(100)
+	p_tweet_text text, p_author_name varchar(20), p_author_picture_url varchar(100), p_tweet_datum datetime, p_tweet_image varchar(100)
 ) returns text
 begin
 	declare l_body text default '';
@@ -107,7 +107,7 @@ begin
 	declare l_tweet_image varchar(100);
 	declare l_tweet_text varchar(200);
 	declare l_tweet_datum datetime;
-	declare l_author_name varchar(15);
+	declare l_author_name varchar(20);
 	declare l_author_picture_url varchar(100);
 	declare l_body text default '';
   	declare done int default 0;

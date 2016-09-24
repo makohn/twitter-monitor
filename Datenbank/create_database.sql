@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `keywords` (
 -- Struktur von Tabelle twitter-monitor.tweetAuthors
 CREATE TABLE IF NOT EXISTS `tweetAuthors` (
   `authorId` bigint NOT NULL,
-  `name` varchar(15) NOT NULL,
+  `name` varchar(20) NOT NULL,
   `screenName` varchar(20),
   `followerCount` int(11),
   `pictureUrl` varchar(100),
