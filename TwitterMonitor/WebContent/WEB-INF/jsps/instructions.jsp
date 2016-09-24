@@ -53,7 +53,7 @@
 			<div class="section">KEYWORDS</div>
 			
 			
-			<li  onclick="display(0)">Wählen Sie bis zu 10 Keywords aus
+			<li  class="first" onclick="display(0)">Wählen Sie bis zu 10 Keywords aus
 				<ul class="slide">
 					<li>es werden für Sie die Tweets gesammelt, die diese Keywords enthalten</li>
 					<li>dabei handelt es sich um eine sehr weite Suche
@@ -97,13 +97,13 @@
 				</ul>
 			</li>
 			
-			<br>
+			
 			</ol>
 			<ol>
 			<div class="section"> TWEETS </div>
 			
 			
-			<li  onclick="display(3)">Es werden Ihnen zunächst bis zu 100 Tweets angezeigt
+			<li class="first"  onclick="display(3)">Es werden Ihnen zunächst bis zu 100 Tweets angezeigt
 				<ul class="slide">
 					<li>dabei handelt es sich um die interessantesten Tweets (höchste Priorität)</li>
 					<li >klicken Sie auf "Tweets aktualisieren", um die neuesten Tweets zu laden</li>
@@ -119,7 +119,7 @@
 				</ul>
 			</li>
 			
-			<br>
+			
 			
 			<li >Filtern Sie die angezeigten Tweets hinsichtlich eines beliebigen Stichworts</li>
 			
@@ -132,7 +132,7 @@
 				</ul>
 			</li>
 			
-			<br>
+			
 			
 			<li  onclick="display(6)" >DeepSearch
 				<ul class="slide">

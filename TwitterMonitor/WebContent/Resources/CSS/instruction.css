@@ -20,6 +20,9 @@ body {
 }
 
 .section {
+	background: linear-gradient(to right, #00284d, #99ffff);
+	padding-left:30px;
+	color: white;
 	clear:both;
 	font-size: 25px;
 	font-weight: bolder;
@@ -30,11 +33,17 @@ ol li {
 	
 	clear:both;
 	font-size: 20px;
+	
 	font-weight: bold;
 	line-height: 60px;
-	margin-left: 50px;
+	margin-left: 60px;
 	cursor: pointer;
 }
+ol li:hover {
+	color: darkred;
+
+	}
+
 ol li ul {
 	display:none;
 	clear:both;
@@ -62,6 +71,10 @@ ol li ul li ul li {
 	font-size: 15px;
 	line-height: 22px;
 	margin-left: 15px;
+}
+
+.first{
+	margin-top:20px;
 }
 
 
