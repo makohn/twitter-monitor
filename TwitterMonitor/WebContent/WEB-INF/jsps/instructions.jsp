@@ -53,7 +53,7 @@
 			<div class="section">KEYWORDS</div>
 			
 			
-			<li  onclick="display(1)">Wählen Sie bis zu 10 Keywords aus
+			<li  onclick="display(0)">Wählen Sie bis zu 10 Keywords aus
 				<ul class="slide">
 					<li>es werden für Sie die Tweets gesammelt, die diese Keywords enthalten</li>
 					<li>dabei handelt es sich um eine sehr weite Suche
@@ -73,7 +73,7 @@
 			
 			
 			
-			<li onclick="display(2)">Geben Sie jedem Keyword eine Priorität von 1 bis 5
+			<li onclick="display(1)">Geben Sie jedem Keyword eine Priorität von 1 bis 5
 				<ul class="slide">
 					<li ">jeder angezeigte Tweet erhält eine Priorität, die sich ergibt aus
 						<ul>
@@ -87,7 +87,7 @@
 			
 			
 			
-			<li  onclick="display(3)">Setzen Sie unliebsame Themen auf Ihre Blacklist
+			<li  onclick="display(2)">Setzen Sie unliebsame Themen auf Ihre Blacklist
 				<ul class="slide">
 					<li>Sie können beliebig viele Keywords auf die Blacklist setzen</li>
 					<li>Tweets mit Keywords von der Blacklist werden nicht angezeigt</li>
@@ -103,7 +103,7 @@
 			<div class="section"> TWEETS </div>
 			
 			
-			<li  onclick="display(4)">Es werden Ihnen zunächst bis zu 100 Tweets angezeigt
+			<li  onclick="display(3)">Es werden Ihnen zunächst bis zu 100 Tweets angezeigt
 				<ul class="slide">
 					<li>dabei handelt es sich um die interessantesten Tweets (höchste Priorität)</li>
 					<li >klicken Sie auf "Tweets aktualisieren", um die neuesten Tweets zu laden</li>
@@ -112,7 +112,7 @@
 			
 			
 			
-			<li  onclick="display(5)">Sortieren Sie die angezeigten Tweets
+			<li  onclick="display(4)">Sortieren Sie die angezeigten Tweets
 				<ul class="slide">
 					<li>nach der Priorität der Tweets</li>
 					<li>nach dem Entstehungszeitpunkt der Tweets</li>
@@ -125,7 +125,7 @@
 			
 			
 			
-			<li  onclick="display(6)" >Stellen Sie eine Sprache ein
+			<li  onclick="display(5)" >Stellen Sie eine Sprache ein
 				<ul class="slide">
 					<li>es können Deutsch, Englisch und Alle gewählt werden</li>
 					<li>nicht alle Tweets sind mit einer Sprache markiert</li>
@@ -134,7 +134,7 @@
 			
 			<br>
 			
-			<li  onclick="display(7)" >DeepSearch
+			<li  onclick="display(6)" >DeepSearch
 				<ul class="slide">
 					<li>durchsuchen Sie alle für Sie gesammelten Tweets</li>
 					<li>das Ergebnis kann sehr groß werden</li>
