@@ -88,7 +88,7 @@ public class NotificationDao {
 
 			try {
 				notification.setEmail(rs.getString("email"));
-				notification.setNotificationID(rs.getLong("notification"));
+				notification.setNotificationID(rs.getLong("notificationId"));
 				notification.setUsername(rs.getString("username"));
 				notification.setType(rs.getString("type"));
 				notification.setBody(rs.getString("body"));
