@@ -1,5 +1,25 @@
+
+function showNewEmail()
+{
+	$('#subtitle').css("display","none");
+	$('#username').css("display","none");
+	$('#email').css("display","none");
+	$('#change_email').css("display","none");
+	
+	$('#newEmail_wrapper').css("display","block");
+}
+
+function hideNewEmail(){
+	$('#subtitle').css("display","block");
+	$('#username').css("display","block");
+	$('#email').css("display","block");
+	$('#change_email').css("display","block");
+	
+	$('#newEmail_wrapper').css("display","none");
+}
+
 function changePassword() {
-	if (confirm("Wollen Sie Ihr Passwort wirklich ändern ?")) {
+	if (confirm("Wollen Sie Ihr Passwort wirklich ändern ?") ) {
 		var newPassword = $('#newPassword').val();
 		$.ajax({
 			type: "POST",
@@ -14,7 +34,7 @@ function changePassword() {
 }
 
 function changeEmail() {
-	if (confirm("Wollen Sie Ihre Email-Adresse wirklich ändern")) {
+	if (confirm("Wollen Sie Ihre Email-Adresse wirklich ändern") && ($('#newEmail').val() == $('#newEmail2').val())) {
 		var newEmail = $('#newEmail').val();
 		$.ajax({
 			type: "POST",
@@ -27,6 +47,7 @@ function changeEmail() {
 			}
 		});
 		$('#newEmail').val("");
+		hideNewEmail();
 	}
 }
 

@@ -12,7 +12,7 @@
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-	<link rel="stylesheet" type="text/css" href="Resources/CSS/keywords.css">
+	<link rel="stylesheet" type="text/css" href="Resources/CSS/setting.css">
 	<link rel="stylesheet" type="text/css" href="Resources/CSS/header.css">
 	
 	<script type="text/javascript" src="Resources/JS/jquery-2.1.4.js"></script>
@@ -49,11 +49,15 @@
 <!-------------------------- BODY --------------------------------------------------->
 <div id="page">
 	
-	<h2>Einstellungen</h2>
+	<div id="title">Einstellungen</div>
 	<br>
-		<h3>Accountdaten</h3>
+		<div id="subtitle">Accountdaten</div>
 		<div id="username">Username: ${username}</div>
 		<div id="email">Email: ${email}</div>
+<<<<<<< HEAD
+		<div id="change_email" onclick="showNewEmail()"> ändern</div>
+		
+=======
 	<br>	
 	<div>
 		<input id="newPassword">
@@ -71,7 +75,20 @@
 	</div>
 	<br><br>
 	<button id="deleteAccountButton" onClick="deleteAccount()">Account löschen</button>
+>>>>>>> branch 'master' of https://github.com/makohn/twitter-monitor.git
 	
+	<div id="newEmail_wrapper">
+	<label for="new_email">Neue Email</label>
+	<input  name="new_email" type="text"/>
+	<label for="new_email2">Bestätigen</label>
+	<input  name="new_email2" type="text"/>
+	<input value="Email ändern" type="submit" onClick="changeEmail()"/>
+	</div>
+	
+	
+	
+	
+
 </div>
 <!----------------------------------------------------------------------------------->		
 </body>
