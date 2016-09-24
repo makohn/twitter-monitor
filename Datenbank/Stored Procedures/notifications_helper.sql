@@ -118,6 +118,8 @@ begin
 			   and x.keyword = k.keyword
 			   and t.authorId = a.authorId
 			   and k.username = p_username
+			   and k.active = 1
+			   and k.positive = 1
 			   and date_add(t.createdAt, interval 720 minute) > sysdate()
 		   order by personal_prio desc
 			limit 5;
