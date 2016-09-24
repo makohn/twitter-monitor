@@ -65,7 +65,10 @@
 		<button id="changeEmailButton" onClick="changeEmail()">Email ändern</button>
 	</div>
 	<br><br>
-	<button>Benachrichtigungen aktivieren / deaktivieren</button>
+	<div>
+	<button id="enableNotifications" onClick="enableNotifications()">
+								Benachrichtigungen aktivieren / deaktivieren</button>
+	</div>
 	<br><br>
 	<button id="deleteAccountButton" onClick="deleteAccount()">Account löschen</button>
 	

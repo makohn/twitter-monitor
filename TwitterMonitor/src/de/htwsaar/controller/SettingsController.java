@@ -54,4 +54,10 @@ public class SettingsController {
 		userService.changeEmail(principal.getName(), newEmail);
 		return newEmail;
 	}
+	
+	@RequestMapping("/enableNotifications")
+	public void enableNotifications(/*@RequestBody boolean enabled,*/ Principal principal) {
+		userService.enableNotifications(principal.getName(), true);
+	}
+
 }

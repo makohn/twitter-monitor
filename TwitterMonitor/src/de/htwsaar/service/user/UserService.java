@@ -37,6 +37,10 @@ public class UserService {
 	public String getEmail(String username) {
 		return userDao.getUser(username).getEmail();
 	}
+	
+	public void enableNotifications(String username, boolean enabled) {
+		userDao.enableNotifications(username, enabled);
+	}
 
 //	public void insertKeyword(Keyword keyword) {
 //		keywordDao.insertKeyword(keyword);

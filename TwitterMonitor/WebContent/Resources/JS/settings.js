@@ -30,6 +30,11 @@ function changeEmail() {
 	}
 }
 
+function enableNotifications() {
+	request = "/TwitterMonitor/enableNotifications";
+	window.location = request;
+}
+
 function deleteAccount() {
 	if (confirm("Wollen Sie Ihren Account wirklich löschen")) {
 		request = "/TwitterMonitor/deleteUser";
