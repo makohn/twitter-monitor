@@ -54,28 +54,11 @@
 		<div id="subtitle">Accountdaten</div>
 		<div id="username">Username: ${username}</div>
 		<div id="email">Email: ${email}</div>
-<<<<<<< HEAD
-		<div id="change_email" onclick="showNewEmail()"> ändern</div>
-		
-=======
-	<br>	
-	<div>
-		<input id="newPassword">
-		<button id="changePasswordButton" onClick="changePassword()">Passwort ändern</button>
-	</div>
-	<br>
-	<div>
-		<input id="newEmail">
-		<button id="changeEmailButton" onClick="changeEmail()">Email ändern</button>
-	</div>
-	<br><br>
-	<div>
-	<button id="enableNotifications" onClick="enableNotifications()">
-								Benachrichtigungen aktivieren / deaktivieren</button>
-	</div>
-	<br><br>
-	<button id="deleteAccountButton" onClick="deleteAccount()">Account löschen</button>
->>>>>>> branch 'master' of https://github.com/makohn/twitter-monitor.git
+
+		<div id="change_email" onclick="showNewEmail()"> Email ändern</div>
+		<div id="change_password" onclick="showNewPassword()"> Password ändern</div>
+
+	
 	
 	<div id="newEmail_wrapper">
 	<label for="new_email">Neue Email</label>
@@ -83,10 +66,24 @@
 	<label for="new_email2">Bestätigen</label>
 	<input  name="new_email2" type="text"/>
 	<input value="Email ändern" type="submit" onClick="changeEmail()"/>
+	<div class="back" onclick="hideNewEmail()"> zurück</div>
 	</div>
 	
-	
-	
+	<div id="newPassword_wrapper">
+	<label for="new_password">Neues Passwort</label>
+	<input  name="new_password" type="password"/>
+	<label for="new_password2">Bestätigen</label>
+	<input  name="new_password2" type="password"/>
+	<input value="Password ändern" type="submit" onClick="changePassword()"/>
+	<div class="back" onclick="hideNewPassword()"> zurück</div>
+	</div>
+	<div id="message_wrapper">
+	<div id="message_label">Möchten Sie per Email benachrichtigt werden?</div>
+	<input type="radio" id="Message_Service" name="Message_Service" value="Yes">
+    <label for="Message_Service"> Yes</label><br> 
+	<input type="radio" id="Message_Service" name="Message_Service" value="No">
+    <label for="Message_Service"> No&nbsp;</label><br> 
+	</div>
 	
 
 </div>

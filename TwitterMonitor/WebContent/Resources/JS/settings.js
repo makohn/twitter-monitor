@@ -5,7 +5,8 @@ function showNewEmail()
 	$('#username').css("display","none");
 	$('#email').css("display","none");
 	$('#change_email').css("display","none");
-	
+	$('#change_password').css("display","none");
+	$('#message_wrapper').css("display","none");
 	$('#newEmail_wrapper').css("display","block");
 }
 
@@ -14,10 +15,31 @@ function hideNewEmail(){
 	$('#username').css("display","block");
 	$('#email').css("display","block");
 	$('#change_email').css("display","block");
-	
+	$('#change_password').css("display","block");
+	$('#message_wrapper').css("display","block");
 	$('#newEmail_wrapper').css("display","none");
 }
 
+function showNewPassword()
+{
+	$('#subtitle').css("display","none");
+	$('#username').css("display","none");
+	$('#email').css("display","none");
+	$('#change_email').css("display","none");
+	$('#change_password').css("display","none");
+	$('#message_wrapper').css("display","none");
+	$('#newPassword_wrapper').css("display","block");
+}
+
+function hideNewPassword(){
+	$('#subtitle').css("display","block");
+	$('#username').css("display","block");
+	$('#email').css("display","block");
+	$('#change_email').css("display","block");
+	$('#change_password').css("display","block");
+	$('#message_wrapper').css("display","block");
+	$('#newPassword_wrapper').css("display","none");
+}
 function changePassword() {
 	if (confirm("Wollen Sie Ihr Passwort wirklich ändern ?") ) {
 		var newPassword = $('#newPassword').val();
@@ -30,6 +52,7 @@ function changePassword() {
 			success :function (result) {}
 		});
 		$('#newPassword').val("");
+		hideNewPassword();
 	}
 }
 

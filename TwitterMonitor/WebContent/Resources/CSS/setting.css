@@ -43,17 +43,55 @@ body {
 	line-height: 30px;
 }
 #change_email{
+	clear:both;
 	float:left;
-	margin-top:5px;
-	margin-left:15px;
-	padding:4px;
-	color: white;
-	background-color:black;
-	font-size:10px;
+	background-color: #4CAF50;
+    color: white;
+    font-size: 12px;
+    padding: 5px 17px;
+    margin-left: 90px ;
+    margin-top: 30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 	
 }
 
+#change_password{
+	clear:both;
+	float:left;
+	background-color: #4CAF50;
+    color: white;
+    font-size: 12px;
+    padding: 5px 6px;
+    margin-left: 90px ;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+	
+}
 
+.back{
+	clear:both;
+	float:left;
+	background-color: #4CAF50;
+    color: white;
+    font-size: 12px;
+    padding: 5px 6px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+#newPassword_wrapper{
+	display: none;
+	margin-top:30px;
+	margin-left:150px;
+	max-width: 300px;
+}
 
 #newEmail_wrapper{
 	display: none;
@@ -71,18 +109,8 @@ input, select {
     box-sizing: border-box;
 }
 
-input[id=newEmailText1],select{
-	clear:both;
-	float:left;
-	width: 200px;
-   	padding: 5px 5px;
-    margin-left:5px;
-    margin-top:20px;
-    display: block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;	
-}
+
+
 
 input[type=submit] {
     width: 100%;
@@ -98,3 +126,31 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: #45a049;
 }
+
+#message_wrapper{
+	float:left;
+	clear:both;
+	margin-left: 90px;
+	margin-top: 30px;
+}
+#message_label{
+	float:left;
+	min-width:100%;
+	clear:both;
+	font-size: 16px;
+	line-height: 30px;
+	
+}
+
+input[type=radio] {
+   margin-top:10px;
+    max-width: 20px;
+}
+label[for=Message_Service]{
+	float:left;
+	padding-right: 10px;
+	clear: none;
+	font-size: 16px;
+	line-height: 30px;
+
+	}
