@@ -55,8 +55,8 @@
 		<div id="username">Username: ${username}</div>
 		<div id="email">Email: ${email}</div>
 
-		<div id="change_email" onclick="showNewEmail()"> Email ändern</div>
-		<div id="change_password" onclick="showNewPassword()"> Password ändern</div>
+		<div id="change_email" class="button_hover" onclick="showNewEmail()"> Email ändern</div>
+		<div id="change_password" class="button_hover" onclick="showNewPassword()"> Password ändern</div>
 
 	
 	
@@ -84,6 +84,8 @@
 	<input type="radio" id="Message_Service" name="Message_Service" value="No">
     <label for="Message_Service"> No&nbsp;</label><br> 
 	</div>
+	
+	<div id="delete_account" onclick="deleteAccount()"> Account löschen</div>
 	
 
 </div>

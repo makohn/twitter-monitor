@@ -5,6 +5,7 @@ function showNewEmail()
 	$('#username').css("display","none");
 	$('#email').css("display","none");
 	$('#change_email').css("display","none");
+	$('#delete_account').css("display","none");
 	$('#change_password').css("display","none");
 	$('#message_wrapper').css("display","none");
 	$('#newEmail_wrapper').css("display","block");
@@ -17,6 +18,7 @@ function hideNewEmail(){
 	$('#change_email').css("display","block");
 	$('#change_password').css("display","block");
 	$('#message_wrapper').css("display","block");
+	$('#delete_account').css("display","block");
 	$('#newEmail_wrapper').css("display","none");
 }
 
@@ -24,6 +26,7 @@ function showNewPassword()
 {
 	$('#subtitle').css("display","none");
 	$('#username').css("display","none");
+	$('#delete_account').css("display","none");
 	$('#email').css("display","none");
 	$('#change_email').css("display","none");
 	$('#change_password').css("display","none");
@@ -38,6 +41,7 @@ function hideNewPassword(){
 	$('#change_email').css("display","block");
 	$('#change_password').css("display","block");
 	$('#message_wrapper').css("display","block");
+	$('#delete_account').css("display","block");
 	$('#newPassword_wrapper').css("display","none");
 }
 function changePassword() {
