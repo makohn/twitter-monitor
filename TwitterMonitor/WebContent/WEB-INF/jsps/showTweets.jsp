@@ -55,12 +55,12 @@
 			<div id="username">Hallo ${pageContext.request.userPrincipal.name}</div>
 			<div id="welcome_text">Tweets werden geladen ...</div>
 
-			<button id="refreshButton" onclick="onLoad()">Tweets aktualisieren</button>
+			<input type="button" id="refreshinput" onclick="onLoad()" value="Tweets aktualisieren">
 
 			<div>
 				<label for="search">Search</label>
-				<input id="search" onkeyup="search()" type="search">
-				<button id="deepSearchButton" onclick="deep()">Deep Search</button>
+				<input  id="search" onkeyup="search()" type="search">
+				<input type="button" id="deepSearchinput" onclick="deep()" value="Deep Search">
 			</div>
 
 			<div>
@@ -80,8 +80,9 @@
 			</div>
 
 			<div>
-				<button onClick="addSelectionAsKeyword()" >Keyword</button>
-				<button onClick="addSelectionToBlacklist()" >Blacklist</button>				
+				<!--  <input type="button" onClick="addSelectionAsKeyword()" value="Keyword" >
+				<input type="button" onClick="addSelectionToBlacklist()" value="Blacklist" >	
+				-->			
 			</div>
 
 		</div>
