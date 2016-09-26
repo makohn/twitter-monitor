@@ -23,16 +23,22 @@ body {
 	margin-left:70px;
 }
 #title_blacklist{
-	float:right;
-	margin-right:370px;
+	clear: both;
+	font-size: 25px;
+	margin-top:50px;
+	margin-left:50px;
+	clear:both;
+	float:left;
+	
 }
 #keyword_wrapper{
 	float: left;
 	margin-left:50px;
 }
 #blacklist_wrapper{
-	float: right;
-	margin-right:50px;
+	float: left;
+	margin-left:50px;
+	clear: both;
 }
 
 
@@ -158,5 +164,32 @@ body {
 	min-height: 50px;
 	border-radius: 10px;
 	cursor: pointer;
+}
+@media screen and (min-width: 1050px) {
+     #title_blacklist{
+     float:right;
+	clear:none;
+	margin-top:-25px;
+	margin-right:370px;
+	
+     }
+     #blacklist_wrapper{
+	float:right;
+	clear: none;
+	margin-right:50px;
+}
+}
+@media screen and (min-width: 1562px) {
+     #title_blacklist{
+     float:right;
+	clear:none;
+	margin-top:-25px;
+	margin-right:370px;
+	
+     }
+     #blacklist_wrapper{
+	
+	margin-left:450px;
+}
 }
 

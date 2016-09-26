@@ -53,7 +53,7 @@
 	<div id="page">
 	<div id="title_wrapper">
 		<div id="title_keyword">Keywords</div>
-		<div id="title_blacklist">Blacklist</div>
+		
 	</div>
 	<!--############# POSITIVE KEYWORDS ####################-->
 	<div id="keyword_wrapper">
@@ -74,7 +74,7 @@
 	</div>
 		
 		
-		
+	<div id="title_blacklist">Blacklist</div>	
 	<!--############# BLACKLIST ####################-->
 	<div id="blacklist_wrapper">
 		<!--############# Load Keywords ####################-->
