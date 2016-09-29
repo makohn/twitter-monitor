@@ -78,10 +78,9 @@
 					<option>Deutsch</option>
 				</select>
 			</div>
-
-			<div>
-				<input type="button" onClick="addSelectionAsKeyword()" value="Keyword" >
-				<input type="button" onClick="addSelectionToBlacklist()" value="Blacklist" >			
+			<div id="wrapper">
+			<input type="button" onClick="addSelectionAsKeyword()" value="Keyword">
+			<input type="button" onClick="addSelectionToBlacklist()" value="Blacklist">	
 			</div>
 
 		</div>
