@@ -121,11 +121,23 @@
 			
 			
 			
-			<li >Filtern Sie die angezeigten Tweets hinsichtlich eines beliebigen Stichworts</li>
+			<li onclick="display(5)">Filtern Sie die angezeigten Tweets hinsichtlich eines beliebigen Stichworts
+				<ul class="slide">
+					<li>geben Sie den Suchbegriff in das Textfeld ein</li>
+					<li>die Suche beachtet die genaue Schreibweise</li>
+				</ul>
+			</li>
 			
 			
+			<li onclick="display(6)">Verfeinern Sie Ihre Suche anhand der angezeigten Tweets
+				<ul class="slide">
+					<li>fügen Sie Begriffe aus den Tweets auf Ihre Keyword- oder Blacklist hinzu</li>
+					<li>markieren Sie dazu einen Begriff und klicken Sie auf den entsprechenden Button</li>
+				</ul>
+			</li>			
 			
-			<li  onclick="display(5)" >Stellen Sie eine Sprache ein
+			
+			<li  onclick="display(7)" >Stellen Sie eine Sprache ein
 				<ul class="slide">
 					<li>es können Deutsch, Englisch und Alle gewählt werden</li>
 					<li>nicht alle Tweets sind mit einer Sprache markiert</li>
@@ -134,7 +146,7 @@
 			
 			
 			
-			<li  onclick="display(6)" >DeepSearch
+			<li  onclick="display(8)" >DeepSearch
 				<ul class="slide">
 					<li>durchsuchen Sie alle für Sie gesammelten Tweets</li>
 					<li>das Ergebnis kann sehr groß werden</li>
