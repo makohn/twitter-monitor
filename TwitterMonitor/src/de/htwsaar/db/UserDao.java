@@ -64,14 +64,14 @@ public class UserDao {
 
 		String insertUsers = "insert into users (username, email, password, enabled) values (:username, :email, :password, :enabled)";
 		String insertAuthorities = "insert into authorities (username, authority) values (:username, :authority)";
-		String insertPreferences = "insert into user_x_preferences (username, preferenceType, value) values (:username, 'not', 0)";
+	//	String insertPreferences = "insert into user_x_preferences (username, preferenceType, value) values (:username, 'not', 0)";
 		
 		MapSqlParameterSource paramSource = getUserParameterSource(user);
 
 		try {
 			jdbc.update(insertUsers, paramSource);
 			jdbc.update(insertAuthorities, paramSource);
-			jdbc.update(insertPreferences, paramSource);
+		//	jdbc.update(insertPreferences, paramSource);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
@@ -137,6 +137,21 @@ public class UserDao {
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean isNotificationEnabled(String username) {
+		String query = "select value from user_x_preferences where username = :username and preferenceType = 'not'";
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue("username", username);
+		
+		Integer isEnabled = 0;
+		try {
+			isEnabled = jdbc.queryForObject(query, paramSource, Integer.class);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return (isEnabled.intValue() == 1);
 	}
 	
 	private MapSqlParameterSource getUserParameterSource(User user) {

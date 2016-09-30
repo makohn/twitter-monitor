@@ -41,6 +41,10 @@ public class UserService {
 	public void enableNotifications(String username, boolean enabled) {
 		userDao.enableNotifications(username, enabled);
 	}
+	
+	public boolean isNotificationEnabled(String username) {
+		return userDao.isNotificationEnabled(username);
+	}
 
 //	public void insertKeyword(Keyword keyword) {
 //		keywordDao.insertKeyword(keyword);

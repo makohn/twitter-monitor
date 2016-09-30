@@ -28,6 +28,7 @@ public class SettingsController {
 		
 		model.addAttribute("username", principal.getName());
 		model.addAttribute("email", userService.getEmail(principal.getName()));
+		model.addAttribute("enableNotifications", userService.isNotificationEnabled(principal.getName()));
 		
 		return "settings";
 	}
@@ -55,9 +56,12 @@ public class SettingsController {
 		return newEmail;
 	}
 	
-	@RequestMapping("/enableNotifications")
-	public void enableNotifications(/*@RequestBody boolean enabled,*/ Principal principal) {
-		userService.enableNotifications(principal.getName(), true);
+	@RequestMapping(value = "enableNotifications", method = RequestMethod.POST)
+	@ResponseBody
+	public String enableNotifications(@RequestBody boolean enabled, Principal principal) {
+		System.out.println(enabled);
+		userService.enableNotifications(principal.getName(), enabled);
+		return null;
 	}
 
 }

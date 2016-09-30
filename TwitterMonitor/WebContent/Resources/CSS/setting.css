@@ -54,7 +54,20 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-	
+}
+
+#enable_notifications{
+	clear:both;
+	float:left;
+	background-color: #4CAF50;
+    color: white;
+    font-size: 12px;
+    padding: 5px 17px;
+    margin-left: 0px ;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 #change_password{

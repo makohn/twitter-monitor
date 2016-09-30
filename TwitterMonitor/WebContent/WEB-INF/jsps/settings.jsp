@@ -57,8 +57,6 @@
 
 		<div id="change_email" class="button_hover" onclick="showNewEmail()"> Email ändern</div>
 		<div id="change_password" class="button_hover" onclick="showNewPassword()"> Password ändern</div>
-
-	
 	
 	<div id="newEmail_wrapper">
 	<label for="new_email">Neue Email</label>
@@ -79,10 +77,13 @@
 	</div>
 	<div id="message_wrapper">
 	<div id="message_label">Möchten Sie per Email benachrichtigt werden?</div>
-	<input type="radio" id="Message_Service" name="Message_Service" value="Yes">
-    <label for="Message_Service"> Yes</label><br> 
-	<input type="radio" id="Message_Service" name="Message_Service" value="No">
-    <label for="Message_Service"> No&nbsp;</label><br> 
+	<input type="radio" id="Message_Service" name="Message_Service" value="Ja"  
+		${enableNotifications == 'true' ? 'checked' : ''}>
+    <label for="Message_Service"> Ja&nbsp;&nbsp;&nbsp;&nbsp;</label><br> 
+	<input type="radio" id="Message_Service" name="Message_Service" value="Nein"
+		${enableNotifications == 'false' ? 'checked' : ''}>
+    <label for="Message_Service"> Nein&nbsp;</label><br> 
+    <div id="enable_notifications" class="button_hover" onclick="enableNotifications()"> Bestätigen</div>
 	</div>
 	
 	<div id="delete_account" onclick="deleteAccount()"> Account löschen</div>

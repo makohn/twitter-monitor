@@ -79,8 +79,21 @@ function changeEmail() {
 }
 
 function enableNotifications() {
-	request = "/TwitterMonitor/enableNotifications";
-	window.location = request;
+	var enabled = $("input[name=Message_Service]:checked").val() == 'Ja' ? 'true' : 'false';
+	if(enabled == 'true') {
+		alert('Sie werden nun per E-Mail über interessante Tweets benachrichtigt.');
+	} else {
+		alert('Benachrichtigungen wurden deaktiviert.');
+	}
+	
+	$.ajax({
+		type: "POST",
+		contentType : 'application/json',
+		dataType : 'json',
+		url: "/TwitterMonitor/enableNotifications",
+		data: enabled, 
+		success :function (result) {}
+	});
 }
 
 function deleteAccount() {
