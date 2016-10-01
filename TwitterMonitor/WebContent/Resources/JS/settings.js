@@ -46,7 +46,7 @@ function hideNewPassword(){
 }
 function changePassword() {
 	if (confirm("Wollen Sie Ihr Passwort wirklich ändern ?") ) {
-		var newPassword = $('#newPassword').val();
+		var newPassword = $("input[name=new_password]").val();
 		$.ajax({
 			type: "POST",
 			contentType : 'text/plain; charset=utf-8',
@@ -55,14 +55,14 @@ function changePassword() {
 			data: newPassword, 
 			success :function (result) {}
 		});
-		$('#newPassword').val("");
+		$("input[name=new_password]").val("");
 		hideNewPassword();
 	}
 }
 
 function changeEmail() {
 	if (confirm("Wollen Sie Ihre Email-Adresse wirklich ändern") && ($('#newEmail').val() == $('#newEmail2').val())) {
-		var newEmail = $('#newEmail').val();
+		var newEmail = $("input[name=new_email]").val();
 		$.ajax({
 			type: "POST",
 			contentType : 'text/plain; charset=utf-8',
@@ -73,7 +73,7 @@ function changeEmail() {
 				window.location = "/TwitterMonitor/settings"
 			}
 		});
-		$('#newEmail').val("");
+		$("input[name=new_email]").val("");
 		hideNewEmail();
 	}
 }

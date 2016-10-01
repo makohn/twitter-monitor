@@ -60,7 +60,7 @@
 	
 	<div id="newEmail_wrapper">
 	<label for="new_email">Neue Email</label>
-	<input  name="new_email" type="text"/>
+	<input name="new_email" type="text"/>
 	<label for="new_email2">Bestätigen</label>
 	<input  name="new_email2" type="text"/>
 	<input value="Email ändern" type="submit" onClick="changeEmail()"/>

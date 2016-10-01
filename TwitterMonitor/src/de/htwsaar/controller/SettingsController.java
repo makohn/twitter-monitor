@@ -59,7 +59,6 @@ public class SettingsController {
 	@RequestMapping(value = "enableNotifications", method = RequestMethod.POST)
 	@ResponseBody
 	public String enableNotifications(@RequestBody boolean enabled, Principal principal) {
-		System.out.println(enabled);
 		userService.enableNotifications(principal.getName(), enabled);
 		return null;
 	}
