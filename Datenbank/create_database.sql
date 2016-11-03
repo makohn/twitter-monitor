@@ -103,5 +103,5 @@ CREATE TABLE IF NOT EXISTS `tweets_x_keywords` (
   FOREIGN KEY (`tweetId`) REFERENCES `tweets` (`tweetId`) ON DELETE CASCADE
 );
 
-INSERT INTO `notificationtype` (`type`, `descr`) VALUES ('ema', 'E-Mail');
+INSERT INTO `notificationType` (`type`, `descr`) VALUES ('ema', 'E-Mail');
 INSERT INTO `preferences` (`preferenceType`, `descr`, `defaultValue`) VALUES ('not', 'Schalter um Benutzer über Top-Tweets zu informieren', 0);
