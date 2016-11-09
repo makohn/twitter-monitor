@@ -113,7 +113,7 @@ begin
   	declare done int default 0;
 	declare cur cursor for 
 		select get_personal_prio(t.tweetId, p_username) personal_prio, t.text, a.name, a.pictureUrl, t.createdAt, t.image
-		   from tweets t, tweets_x_keywords x, keywords k, tweetauthors a
+		   from tweets t, tweets_x_keywords x, keywords k, tweetAuthors a
 		   where t.tweetId = x.tweetId
 			   and x.keyword = k.keyword
 			   and t.authorId = a.authorId
