@@ -110,31 +110,59 @@ begin
 	declare l_author_name varchar(20);
 	declare l_author_picture_url varchar(100);
 	declare l_body text default '';
-  	declare done int default 0;
-	declare cur cursor for 
-		select get_personal_prio(t.tweetId, p_username) personal_prio, t.text, a.name, a.pictureUrl, t.createdAt, t.image
-		   from tweets t, tweets_x_keywords x, keywords k, tweetAuthors a
-		   where t.tweetId = x.tweetId
-			   and x.keyword = k.keyword
-			   and t.authorId = a.authorId
-			   and k.username = p_username
-			   and k.active = 1
-			   and k.positive = 1
-			   and date_add(t.createdAt, interval 720 minute) > sysdate()
-		   order by personal_prio desc
-			limit 5;
-	declare continue handler for not found set done = 1;
-
-  	open cur;
-		repeat
+	declare l_keyword varchar(50);
+  	declare tweets_done int default 0;
+  	declare keywords_done int default 0;
+  	declare l_anz int default 0;
+  	
+  	declare cur_keywords cursor for
+  		select keyword from keywords where username = p_username and active = 1 and positive = 1 order by priority desc;
+  	declare continue handler for not found set keywords_done = true;
+  	
+  	open cur_keywords;
+  	cur_keywords_loop: loop
+  	fetch cur_keywords into l_keyword;
+  		
+  		if keywords_done then
+  			close cur_keywords;
+  			leave cur_keywords_loop;
+  		end if;
+  		set l_body = concat(l_body, '<div style="margin-bottom: 40px;"><h3>', l_keyword, '</h3>');
+  		
+  		block2: begin
+  			declare cur cursor for 
+			  	select get_personal_prio(t.tweetId, p_username) personal_prio, t.text, a.name, a.pictureUrl, t.createdAt, t.image
+			   from tweets t, tweets_x_keywords x, keywords k, tweetAuthors a
+			   where t.tweetId = x.tweetId
+				   and x.keyword = k.keyword
+				   and t.authorId = a.authorId
+				   and k.username = p_username
+				   and k.active = 1
+				   and k.positive = 1
+				   and k.keyword = l_keyword
+				   and date_add(t.createdAt, interval 720 minute) > sysdate()
+			   order by personal_prio desc
+				limit 3;
+			declare continue handler for not found set tweets_done = 1;
+			
+			open cur;
+			cur_tweets_loop: loop
 			fetch cur into l_personal_prio, l_tweet_text, l_author_name, l_author_picture_url, l_tweet_datum, l_tweet_image;
-			if not done then
-				set l_body = concat(l_body, get_tweet_html(l_tweet_text, l_author_name, l_author_picture_url, l_tweet_datum, l_tweet_image));
+			if tweets_done then
+				set tweets_done = false;
+				close cur;
+				leave cur_tweets_loop;
 			end if;
-		until done end repeat;
-	close cur;
+			
+			set l_body = concat(l_body, get_tweet_html(l_tweet_text, l_author_name, l_author_picture_url, l_tweet_datum, l_tweet_image));
+			set l_anz = l_anz + 1;
+		end loop cur_tweets_loop;
+		end block2;
+		
+		set l_body = concat(l_body, '</div>');
+	end loop cur_keywords_loop;
 	
-	if l_body = '' then
+	if l_anz = 0 then
 		set l_body = 'Es wurden keine Tweets für dich aus den letzten 12 Stunden gefunden';
 	end if;
 		
